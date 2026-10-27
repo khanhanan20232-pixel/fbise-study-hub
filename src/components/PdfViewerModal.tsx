@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { X, Download, ExternalLink, ZoomIn, ZoomOut, Maximize2, FileText, CheckCircle2 } from 'lucide-react';
+import React from 'react';
+import { X, Download, ExternalLink, FileText, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 
 interface PdfViewerModalProps {
@@ -23,8 +23,6 @@ export default function PdfViewerModal({
   subject,
   classGrade,
 }: PdfViewerModalProps) {
-  const [zoom, setZoom] = useState(100);
-
   if (!isOpen) return null;
 
   const handleDownload = () => {
@@ -93,40 +91,47 @@ export default function PdfViewerModal({
           </div>
         </div>
 
-        {/* PDF Viewer Body */}
-        <div className="flex-1 bg-slate-200 dark:bg-slate-950 p-2 sm:p-4 overflow-auto flex justify-center items-start">
-          <div
-            className="w-full h-full bg-white dark:bg-slate-900 rounded-xl shadow-lg overflow-hidden transition-all duration-200"
-            style={{ maxWidth: `${zoom}%` }}
-          >
-            <iframe
-              src={`${fileUrl}#toolbar=1&navpanes=0&scrollbar=1`}
-              title={title}
-              className="w-full h-full border-0"
-            />
+        {/* Paper open panel — the document itself is hosted on the official
+            FBISE website, which does not allow embedding inside other pages,
+            so the paper opens in a new browser tab instead of an iframe. */}
+        <div className="flex-1 bg-slate-200 dark:bg-slate-950 p-4 sm:p-8 overflow-auto flex items-center justify-center">
+          <div className="w-full max-w-lg bg-white dark:bg-slate-900 rounded-2xl shadow-lg p-6 sm:p-8 text-center space-y-5">
+            <div className="mx-auto w-16 h-16 rounded-2xl bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-400 flex items-center justify-center">
+              <FileText className="w-8 h-8" />
+            </div>
+            <div className="space-y-1.5">
+              <h4 className="text-lg font-extrabold text-slate-900 dark:text-white">{title}</h4>
+              <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                This is an official Federal Board document. It opens in a new tab on the
+                FBISE website, where you can read it or save it to your device.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1">
+              <a
+                href={fileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-3 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-sm shadow transition-colors"
+              >
+                <ExternalLink className="w-4 h-4" />
+                <span>Open Paper</span>
+              </a>
+              <button
+                onClick={handleDownload}
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 font-bold text-sm transition-colors"
+              >
+                <Download className="w-4 h-4" />
+                <span>Download PDF</span>
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Bottom Status bar */}
-        <div className="px-4 py-2 bg-slate-100 dark:bg-slate-800/80 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between text-xs text-slate-500">
+        <div className="px-4 py-2 bg-slate-100 dark:bg-slate-800/80 border-t border-slate-200 dark:border-slate-700 flex items-center text-xs text-slate-500">
           <div className="flex items-center space-x-2">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
             <span>Verified Official FBISE Paper Document</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={() => setZoom((prev) => Math.max(70, prev - 10))}
-              className="px-2 py-0.5 rounded bg-white dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 border border-slate-300 dark:border-slate-600"
-            >
-              Zoom -
-            </button>
-            <span className="font-mono text-xs">{zoom}%</span>
-            <button
-              onClick={() => setZoom((prev) => Math.min(130, prev + 10))}
-              className="px-2 py-0.5 rounded bg-white dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 border border-slate-300 dark:border-slate-600"
-            >
-              Zoom +
-            </button>
           </div>
         </div>
       </div>
