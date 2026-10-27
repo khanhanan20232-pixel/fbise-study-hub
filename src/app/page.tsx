@@ -100,6 +100,58 @@ export default function HomePage() {
         </div>
       )}
 
+      {/* Photo Banner — FBISE-style homepage pictures */}
+      <section className="bg-slate-50 dark:bg-slate-950 pt-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-800">
+            <img
+              src="/hero-building.webp"
+              alt="Federal Board of Intermediate and Secondary Education, Islamabad"
+              className="w-full h-56 sm:h-72 lg:h-96 object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-emerald-950/90 via-emerald-950/40 to-transparent px-5 pb-4 pt-14">
+              <div className="text-white font-extrabold text-lg sm:text-2xl leading-tight">
+                Federal Board of Intermediate &amp; Secondary Education
+              </div>
+              <div className="text-amber-300 text-xs sm:text-sm font-semibold">
+                H-8/4, Islamabad • SSC &amp; HSSC Annual Examinations
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6 pb-2">
+            <Link
+              href="/past-papers"
+              className="group relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800 block"
+            >
+              <img
+                src="/hero-exam.webp"
+                alt="Students writing their board examination"
+                className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
+                <div className="text-white font-bold text-base">Board Examinations</div>
+                <div className="text-emerald-200 text-xs">Past papers, model papers &amp; date sheets</div>
+              </div>
+            </Link>
+            <Link
+              href="/leaderboard"
+              className="group relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800 block"
+            >
+              <img
+                src="/hero-students.webp"
+                alt="Students celebrating their board results"
+                className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
+                <div className="text-white font-bold text-base">Results &amp; Top Achievers</div>
+                <div className="text-emerald-200 text-xs">Daily quizzes, streaks &amp; leaderboard</div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-emerald-950 via-emerald-900 to-slate-950 text-white pt-16 pb-20 lg:pt-24 lg:pb-32">
         {/* Background Decorative Pattern */}
