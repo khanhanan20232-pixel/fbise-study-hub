@@ -122,6 +122,20 @@ model Bookmark {
   @@unique([userId, paperId])
 }
 
+model PageView {
+  id        String   @id @default(cuid())
+  path      String
+  visitorId String
+  referrer  String   @default("")
+  device    String   @default("Desktop") // "Mobile", "Tablet", "Desktop"
+  browser   String   @default("Other")
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([visitorId])
+  @@index([path])
+}
+
 model Announcement {
   id        String   @id @default(cuid())
   title     String
