@@ -42,7 +42,7 @@ export default function HomePage() {
       name: 'Class 9',
       sub: 'SSC Part 1',
       desc: 'Physics, Chemistry, Biology, Mathematics, Computer Science, English, Urdu & Pak Studies.',
-      color: 'from-emerald-700 to-emerald-900',
+      color: 'from-fbise-700 to-fbise-900',
       badge: 'Matric Part 1',
     },
     {
@@ -51,7 +51,7 @@ export default function HomePage() {
       name: 'Class 10',
       sub: 'SSC Part 2',
       desc: 'SLO-aligned board papers, model examinations, and chapter-wise daily quizzes.',
-      color: 'from-teal-700 to-teal-900',
+      color: 'from-fbise-700 to-fbise-900',
       badge: 'Matric Part 2',
     },
     {
@@ -60,7 +60,7 @@ export default function HomePage() {
       name: '1st Year',
       sub: 'HSSC Part 1 (Class 11)',
       desc: 'Pre-Medical, Pre-Engineering, and ICS comprehensive preparation & AI grading.',
-      color: 'from-green-800 to-emerald-950',
+      color: 'from-green-800 to-fbise-950',
       badge: 'Intermediate Part 1',
     },
     {
@@ -69,7 +69,7 @@ export default function HomePage() {
       name: '2nd Year',
       sub: 'HSSC Part 2 (Class 12)',
       desc: 'Final board examination papers, model marking schemes, and high-yield numerical quizzes.',
-      color: 'from-emerald-900 to-slate-900',
+      color: 'from-fbise-900 to-slate-900',
       badge: 'Intermediate Part 2',
     },
   ];
@@ -109,7 +109,7 @@ export default function HomePage() {
               alt="Federal Board of Intermediate and Secondary Education, Islamabad"
               className="w-full h-56 sm:h-72 lg:h-96 object-cover"
             />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-emerald-950/90 via-emerald-950/40 to-transparent px-5 pb-4 pt-14">
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-fbise-950/90 via-fbise-950/40 to-transparent px-5 pb-4 pt-14">
               <div className="text-white font-extrabold text-lg sm:text-2xl leading-tight">
                 Federal Board of Intermediate &amp; Secondary Education
               </div>
@@ -131,7 +131,7 @@ export default function HomePage() {
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
                 <div className="text-white font-bold text-base">Board Examinations</div>
-                <div className="text-emerald-200 text-xs">Past papers, model papers &amp; date sheets</div>
+                <div className="text-fbise-200 text-xs">Past papers, model papers &amp; date sheets</div>
               </div>
             </Link>
             <Link
@@ -145,7 +145,7 @@ export default function HomePage() {
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
                 <div className="text-white font-bold text-base">Results &amp; Top Achievers</div>
-                <div className="text-emerald-200 text-xs">Daily quizzes, streaks &amp; leaderboard</div>
+                <div className="text-fbise-200 text-xs">Daily quizzes, streaks &amp; leaderboard</div>
               </div>
             </Link>
           </div>
@@ -153,16 +153,16 @@ export default function HomePage() {
       </section>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-emerald-950 via-emerald-900 to-slate-950 text-white pt-16 pb-20 lg:pt-24 lg:pb-32">
+      <section className="relative overflow-hidden bg-gradient-to-b from-fbise-950 via-fbise-900 to-slate-950 text-white pt-16 pb-20 lg:pt-24 lg:pb-32">
         {/* Background Decorative Pattern */}
         <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:24px_24px]"></div>
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-fbise-500/10 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-10 left-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto space-y-6">
             {/* Tagline Badge */}
-            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-800/60 border border-amber-400/30 text-amber-300 text-xs sm:text-sm font-semibold backdrop-blur-sm shadow-inner">
+            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-fbise-800/60 border border-amber-400/30 text-amber-300 text-xs sm:text-sm font-semibold backdrop-blur-sm shadow-inner">
               <Sparkles className="w-4 h-4 text-amber-400" />
               <span>Federal Board Islamabad • Official Preparation Portal</span>
             </div>
@@ -177,7 +177,7 @@ export default function HomePage() {
             </h1>
 
             {/* Description */}
-            <p className="text-base sm:text-lg text-emerald-100/90 leading-relaxed font-normal max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-fbise-100/90 leading-relaxed font-normal max-w-2xl mx-auto">
               The premier platform designed specifically for FBISE Matric & Intermediate students.
               Access authentic past papers, test your skills with daily chapter quizzes, and get your solved
               answer sheets graded by our instant AI paper assessment system.
@@ -196,7 +196,7 @@ export default function HomePage() {
                   </Link>
                   <Link
                     href="/ai-paper-check"
-                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-emerald-800/80 hover:bg-emerald-700/80 border border-emerald-600/50 backdrop-blur-sm transition-all flex items-center justify-center space-x-2 text-base"
+                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-fbise-800/80 hover:bg-fbise-700/80 border border-fbise-600/50 backdrop-blur-sm transition-all flex items-center justify-center space-x-2 text-base"
                   >
                     <Sparkles className="w-5 h-5 text-amber-400" />
                     <span>Check a Solved Paper</span>
@@ -213,7 +213,7 @@ export default function HomePage() {
                   </Link>
                   <Link
                     href="/login"
-                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-emerald-800/80 hover:bg-emerald-700/80 border border-emerald-600/50 backdrop-blur-sm transition-all flex items-center justify-center space-x-2 text-base"
+                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-fbise-800/80 hover:bg-fbise-700/80 border border-fbise-600/50 backdrop-blur-sm transition-all flex items-center justify-center space-x-2 text-base"
                   >
                     <span>Sign In</span>
                   </Link>
@@ -225,25 +225,25 @@ export default function HomePage() {
             <div className="pt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center max-w-2xl mx-auto">
               <div className="p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
                 <div className="font-extrabold text-2xl text-amber-400">100%</div>
-                <div className="text-[11px] text-emerald-200 uppercase tracking-wider font-semibold">
+                <div className="text-[11px] text-fbise-200 uppercase tracking-wider font-semibold">
                   FBISE Syllabus
                 </div>
               </div>
               <div className="p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
                 <div className="font-extrabold text-2xl text-white">4 Classes</div>
-                <div className="text-[11px] text-emerald-200 uppercase tracking-wider font-semibold">
+                <div className="text-[11px] text-fbise-200 uppercase tracking-wider font-semibold">
                   SSC 1 & 2 • HSSC 1 & 2
                 </div>
               </div>
               <div className="p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
                 <div className="font-extrabold text-2xl text-amber-400">Daily</div>
-                <div className="text-[11px] text-emerald-200 uppercase tracking-wider font-semibold">
+                <div className="text-[11px] text-fbise-200 uppercase tracking-wider font-semibold">
                   Chapter MCQs
                 </div>
               </div>
               <div className="p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
                 <div className="font-extrabold text-2xl text-white">AI Graded</div>
-                <div className="text-[11px] text-emerald-200 uppercase tracking-wider font-semibold">
+                <div className="text-[11px] text-fbise-200 uppercase tracking-wider font-semibold">
                   Marking Scheme Rubric
                 </div>
               </div>
@@ -256,7 +256,7 @@ export default function HomePage() {
       <section className="py-16 lg:py-24 bg-slate-50 dark:bg-slate-950 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-700 dark:text-emerald-400">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-fbise-700 dark:text-fbise-400">
               Select Your Academic Level
             </span>
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
@@ -280,7 +280,7 @@ export default function HomePage() {
 
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-400 border border-emerald-200/50 dark:border-emerald-800/40">
+                    <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-fbise-50 dark:bg-fbise-950/60 text-fbise-800 dark:text-fbise-400 border border-fbise-200/50 dark:border-fbise-800/40">
                       {cls.badge}
                     </span>
                     <span className="text-xs font-mono font-bold text-slate-400">
@@ -288,7 +288,7 @@ export default function HomePage() {
                     </span>
                   </div>
 
-                  <h3 className="text-2xl font-black text-slate-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
+                  <h3 className="text-2xl font-black text-slate-900 dark:text-white group-hover:text-fbise-700 dark:group-hover:text-fbise-400 transition-colors">
                     {cls.name}
                   </h3>
                   <p className="text-xs font-semibold text-amber-600 dark:text-amber-400 mb-3">
@@ -299,7 +299,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-emerald-700 dark:text-emerald-400 group-hover:translate-x-1 transition-transform">
+                <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-fbise-700 dark:text-fbise-400 group-hover:translate-x-1 transition-transform">
                   <span>Enter Class Portal</span>
                   <ArrowRight className="w-4 h-4" />
                 </div>
@@ -313,7 +313,7 @@ export default function HomePage() {
       <section className="bg-slate-50 dark:bg-slate-950 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-700 dark:text-emerald-400">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-fbise-700 dark:text-fbise-400">
               Tap a Picture to Explore
             </span>
             <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
@@ -336,7 +336,7 @@ export default function HomePage() {
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
                 <div className="text-white font-bold text-base">Past Papers</div>
-                <div className="text-emerald-200 text-xs">Har subject ke asal FBISE papers</div>
+                <div className="text-fbise-200 text-xs">Har subject ke asal FBISE papers</div>
               </div>
             </Link>
             <Link
@@ -350,7 +350,7 @@ export default function HomePage() {
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
                 <div className="text-white font-bold text-base">Daily Quizzes</div>
-                <div className="text-emerald-200 text-xs">Roz naye MCQs — touch karo, quiz shuru</div>
+                <div className="text-fbise-200 text-xs">Roz naye MCQs — touch karo, quiz shuru</div>
               </div>
             </Link>
             <Link
@@ -364,7 +364,7 @@ export default function HomePage() {
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
                 <div className="text-white font-bold text-base">AI Paper Checker</div>
-                <div className="text-emerald-200 text-xs">Apna solved paper check karwao</div>
+                <div className="text-fbise-200 text-xs">Apna solved paper check karwao</div>
               </div>
             </Link>
             <Link
@@ -378,7 +378,7 @@ export default function HomePage() {
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
                 <div className="text-white font-bold text-base">Leaderboard</div>
-                <div className="text-emerald-200 text-xs">Top students ki list dekho</div>
+                <div className="text-fbise-200 text-xs">Top students ki list dekho</div>
               </div>
             </Link>
           </div>
@@ -404,7 +404,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Feature 1: Past Papers */}
             <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-400 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-fbise-100 dark:bg-fbise-950/70 text-fbise-800 dark:text-fbise-400 flex items-center justify-center">
                 <BookOpen className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 dark:text-white">
@@ -416,7 +416,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/past-papers"
-                className="inline-flex items-center space-x-1.5 text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline pt-2"
+                className="inline-flex items-center space-x-1.5 text-xs font-bold text-fbise-700 dark:text-fbise-400 hover:underline pt-2"
               >
                 <span>Browse Past Papers</span>
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -449,7 +449,7 @@ export default function HomePage() {
 
             {/* Feature 3: Daily Quizzes */}
             <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-teal-100 dark:bg-teal-950/70 text-teal-800 dark:text-teal-400 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-fbise-100 dark:bg-fbise-950/70 text-fbise-800 dark:text-fbise-400 flex items-center justify-center">
                 <Flame className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 dark:text-white">
@@ -461,7 +461,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/quizzes"
-                className="inline-flex items-center space-x-1.5 text-xs font-bold text-teal-700 dark:text-teal-400 hover:underline pt-2"
+                className="inline-flex items-center space-x-1.5 text-xs font-bold text-fbise-700 dark:text-fbise-400 hover:underline pt-2"
               >
                 <span>Take Today&apos;s Quiz</span>
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -470,7 +470,7 @@ export default function HomePage() {
 
             {/* Feature 4: Model Papers */}
             <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/70 text-blue-800 dark:text-blue-400 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-fbise-100 dark:bg-fbise-950/70 text-fbise-800 dark:text-fbise-400 flex items-center justify-center">
                 <FileText className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 dark:text-white">
@@ -482,7 +482,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/model-papers"
-                className="inline-flex items-center space-x-1.5 text-xs font-bold text-blue-700 dark:text-blue-400 hover:underline pt-2"
+                className="inline-flex items-center space-x-1.5 text-xs font-bold text-fbise-700 dark:text-fbise-400 hover:underline pt-2"
               >
                 <span>Explore Model Papers</span>
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -491,7 +491,7 @@ export default function HomePage() {
 
             {/* Feature 5: Leaderboard */}
             <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-950/70 text-purple-800 dark:text-purple-400 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-fbise-100 dark:bg-fbise-950/70 text-fbise-800 dark:text-fbise-400 flex items-center justify-center">
                 <Trophy className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 dark:text-white">
@@ -503,7 +503,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/leaderboard"
-                className="inline-flex items-center space-x-1.5 text-xs font-bold text-purple-700 dark:text-purple-400 hover:underline pt-2"
+                className="inline-flex items-center space-x-1.5 text-xs font-bold text-fbise-700 dark:text-fbise-400 hover:underline pt-2"
               >
                 <span>View Leaderboard</span>
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -512,7 +512,7 @@ export default function HomePage() {
 
             {/* Feature 6: Dashboard */}
             <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-950/70 text-indigo-800 dark:text-indigo-400 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-fbise-100 dark:bg-fbise-950/70 text-fbise-800 dark:text-fbise-400 flex items-center justify-center">
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 dark:text-white">
@@ -524,7 +524,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/dashboard"
-                className="inline-flex items-center space-x-1.5 text-xs font-bold text-indigo-700 dark:text-indigo-400 hover:underline pt-2"
+                className="inline-flex items-center space-x-1.5 text-xs font-bold text-fbise-700 dark:text-fbise-400 hover:underline pt-2"
               >
                 <span>Open Dashboard</span>
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -535,7 +535,7 @@ export default function HomePage() {
       </section>
 
       {/* Banner / Developer Credit callout */}
-      <section className="py-12 bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-950 text-white">
+      <section className="py-12 bg-gradient-to-r from-fbise-900 via-fbise-800 to-fbise-950 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-center md:text-left">
             <div className="text-xs font-bold tracking-widest text-amber-400 uppercase">
@@ -544,7 +544,7 @@ export default function HomePage() {
             <h3 className="text-2xl font-black">
               Built specifically for Pakistan&apos;s FBISE scholars.
             </h3>
-            <p className="text-xs text-emerald-200">
+            <p className="text-xs text-fbise-200">
               Developed by Team Khan Hanan — empowering the next generation of top board achievers.
             </p>
           </div>
