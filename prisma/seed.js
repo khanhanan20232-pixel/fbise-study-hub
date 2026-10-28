@@ -122,7 +122,7 @@ async function generateSamplePdf(filePath, title, subject, classGrade, year, ses
       '      A) Velocity        B) Force        C) Electric Current        D) Acceleration',
       '  (ii) The rate of change of momentum is equal to:',
       '      A) Torque          B) Applied Force C) Kinetic Energy         D) Impulse',
-      '  (iii) According to Boyle's Law, at constant temperature, pressure is inversely proportional to:',
+      '  (iii) According to Boyle\'s Law, at constant temperature, pressure is inversely proportional to:',
       '      A) Mass            B) Volume       C) Density                 D) Molecular weight',
     ];
 
@@ -159,10 +159,10 @@ async function generateSamplePdf(filePath, title, subject, classGrade, year, ses
     const sampleShorts = [
       'Q2. (i) Differentiate between vector and scalar quantities with two FBISE syllabus examples.',
       '    (ii) Derive the second equation of motion s = vit + 1/2 at^2 using a speed-time graph.',
-      '    (iii) State Newton's Third Law of Motion. Why do action and reaction forces not cancel each other?',
+      '    (iii) State Newton\'s Third Law of Motion. Why do action and reaction forces not cancel each other?',
       '    (iv) What is meant by centripetal force? Write down its mathematical formula and SI unit.',
       '    (v) Calculate the work done in lifting a 50 kg mass vertically through a height of 10 meters.',
-      '    (vi) State Pascal's principle and illustrate its application in hydraulic brake systems.',
+      '    (vi) State Pascal\'s principle and illustrate its application in hydraulic brake systems.',
     ];
 
     currentY -= 16;
@@ -592,13 +592,13 @@ async function main() {
           explanation: 'Electric flux Φ = E · A = (N/C) × m^2 = N·m^2/C (or Volt-meters).',
         },
         {
-          question: 'According to Gauss's Law, the total electric flux through any closed surface is equal to:',
+          question: 'According to Gauss\'s Law, the total electric flux through any closed surface is equal to:',
           optionA: 'Q / ε0',
           optionB: 'Q × ε0',
           optionC: 'E / Q',
           optionD: '4πε0 / Q',
           correctOption: 'A',
-          explanation: 'Gauss's Law states that Φe = 1/ε0 × (total charge enclosed Q).',
+          explanation: 'Gauss\'s Law states that Φe = 1/ε0 × (total charge enclosed Q).',
         },
         {
           question: 'The electric field intensity inside a hollow charged spherical conductor is:',
@@ -795,9 +795,9 @@ async function main() {
     totalObtainedMarks: 44.5,
     percentage: 89,
     grade: 'A+',
-    overallRemarks: 'Outstanding paper presentation! Your conceptual clarity on Newton's laws, vector resolution, and kinetic equations matches FBISE distinction criteria.',
+    overallRemarks: 'Outstanding paper presentation! Your conceptual clarity on Newton\'s laws, vector resolution, and kinetic equations matches FBISE distinction criteria.',
     strongAreas: [
-      'Precise statement of Newton's Second and Third Laws with vector notation',
+      'Precise statement of Newton\'s Second and Third Laws with vector notation',
       'Accurate graphical velocity-time deduction for 2nd equation of motion',
       'Proper SI base units in all intermediate calculation steps',
     ],
