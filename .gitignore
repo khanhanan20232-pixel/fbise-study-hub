@@ -27,3 +27,4 @@ cloudflared.exe
 
 # Uploads directory (keep directory, ignore uploaded files except sample seed files)
 /public/uploads/student-submissions/*
+.env
