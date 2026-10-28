@@ -60,7 +60,7 @@ export default function HomePage() {
       name: '1st Year',
       sub: 'HSSC Part 1 (Class 11)',
       desc: 'Pre-Medical, Pre-Engineering, and ICS comprehensive preparation & AI grading.',
-      color: 'from-green-800 to-fbise-950',
+      color: 'from-fbise-800 to-fbise-950',
       badge: 'Intermediate Part 1',
     },
     {
