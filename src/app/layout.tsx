@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import AnalyticsTracker from '@/components/AnalyticsTracker';
 import { AuthProvider } from '@/context/AuthContext';
 
 export const metadata: Metadata = {
@@ -35,6 +36,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-emerald-700 selection:text-white">
         <AuthProvider>
+          <AnalyticsTracker />
           <Header />
           <main className="flex-1 flex flex-col">{children}</main>
           <Footer />
