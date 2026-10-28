@@ -9,21 +9,49 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // FBISE board identity — anchored on the official fbise.edu.pk
-        // brand green #007b5e (sampled from the live site's own styles),
-        // deepened to #002a20 for header bands and the footer.
+        // FBISE board identity — the board's classic BLUE & WHITE theme:
+        // deep board blue header bands on white, gold kept only as accent.
         fbise: {
-          50: '#eefaf4',
-          100: '#d8f3e5',
-          200: '#b0e6cd',
-          300: '#7dd1ad',
-          400: '#43b588',
-          500: '#1f9d6c',
-          600: '#007b5e',
-          700: '#00644c',
-          800: '#00523f',
-          900: '#003e30',
-          950: '#002a20',
+          50: '#eef5fc',
+          100: '#d8eaf9',
+          200: '#b0d3f2',
+          300: '#7db3e8',
+          400: '#4a90d9',
+          500: '#2273c4',
+          600: '#0b5fa5',
+          700: '#0a4c84',
+          800: '#093d6b',
+          900: '#072f52',
+          950: '#051f38',
+        },
+        // The whole app was built on emerald/teal utility classes; remap
+        // both palettes onto the same board blue so every surface follows
+        // the blue & white board theme consistently.
+        emerald: {
+          50: '#eef5fc',
+          100: '#d8eaf9',
+          200: '#b0d3f2',
+          300: '#7db3e8',
+          400: '#4a90d9',
+          500: '#2273c4',
+          600: '#0b5fa5',
+          700: '#0a4c84',
+          800: '#093d6b',
+          900: '#072f52',
+          950: '#051f38',
+        },
+        teal: {
+          50: '#eef5fc',
+          100: '#d8eaf9',
+          200: '#b0d3f2',
+          300: '#7db3e8',
+          400: '#4a90d9',
+          500: '#2273c4',
+          600: '#0b5fa5',
+          700: '#0a4c84',
+          800: '#093d6b',
+          900: '#072f52',
+          950: '#051f38',
         },
         gold: {
           50: '#fffbeb',
