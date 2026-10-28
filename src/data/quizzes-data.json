@@ -1,0 +1,542 @@
+[
+  {
+    "title": "Daily Quiz: Chemistry Class 9 — Fundamentals of Chemistry",
+    "classGrade": "9",
+    "subject": "Chemistry",
+    "chapter": "Unit 1: Fundamentals of Chemistry",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "The branch of chemistry that deals with carbon compounds is called:", "optionA": "Inorganic Chemistry", "optionB": "Organic Chemistry", "optionC": "Physical Chemistry", "optionD": "Analytical Chemistry", "correctOption": "B", "explanation": "Organic Chemistry is the study of carbon compounds (other than oxides, carbonates etc.).", "marks": 1 },
+      { "question": "The chemical symbol for Sodium is:", "optionA": "S", "optionB": "So", "optionC": "Na", "optionD": "N", "correctOption": "C", "explanation": "Na comes from the Latin name Natrium for sodium.", "marks": 1 },
+      { "question": "The smallest particle of an element that can take part in a chemical reaction is:", "optionA": "Molecule", "optionB": "Atom", "optionC": "Ion", "optionD": "Radical", "correctOption": "B", "explanation": "An atom is the smallest particle of an element that takes part in a chemical reaction.", "marks": 1 },
+      { "question": "The molecular mass of water (H2O) is:", "optionA": "16 amu", "optionB": "17 amu", "optionC": "18 amu", "optionD": "20 amu", "correctOption": "C", "explanation": "H2O = 2(1) + 16 = 18 amu.", "marks": 1 },
+      { "question": "The empirical formula of glucose (C6H12O6) is:", "optionA": "CHO", "optionB": "CH2O", "optionC": "C2H4O2", "optionD": "CHO2", "correctOption": "B", "explanation": "Dividing all subscripts by 6 gives the simplest ratio CH2O.", "marks": 1 },
+      { "question": "Avogadro's number is equal to:", "optionA": "6.022 x 10^22", "optionB": "6.022 x 10^23", "optionC": "6.022 x 10^24", "optionD": "1.6 x 10^-19", "correctOption": "B", "explanation": "One mole of any substance contains 6.022 x 10^23 particles.", "marks": 1 },
+      { "question": "The mass of one mole of oxygen gas (O2) is:", "optionA": "16 g", "optionB": "8 g", "optionC": "32 g", "optionD": "64 g", "correctOption": "C", "explanation": "O2 has molar mass 2 x 16 = 32 g/mol.", "marks": 1 },
+      { "question": "Which of the following is a mixture?", "optionA": "Distilled water", "optionB": "Common salt", "optionC": "Air", "optionD": "Oxygen gas", "correctOption": "C", "explanation": "Air is a homogeneous mixture of many gases (N2, O2, CO2 etc.).", "marks": 1 },
+      { "question": "The chemical formula of common salt is:", "optionA": "KCl", "optionB": "NaCl", "optionC": "CaCl2", "optionD": "Na2CO3", "correctOption": "B", "explanation": "Common salt is sodium chloride, NaCl.", "marks": 1 },
+      { "question": "The percentage by mass of oxygen in CO2 is approximately:", "optionA": "27.3%", "optionB": "50%", "optionC": "72.7%", "optionD": "60%", "correctOption": "C", "explanation": "Mass of O in CO2 = 32 out of 44, so 32/44 x 100 = 72.7%.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Biology Class 9 — Biodiversity",
+    "classGrade": "9",
+    "subject": "Biology",
+    "chapter": "Unit 1: Biodiversity",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "The branch of biology that deals with the study of plants is:", "optionA": "Zoology", "optionB": "Botany", "optionC": "Microbiology", "optionD": "Ecology", "correctOption": "B", "explanation": "Botany is the study of plants; zoology is the study of animals.", "marks": 1 },
+      { "question": "Binomial nomenclature was introduced by:", "optionA": "Charles Darwin", "optionB": "Carolus Linnaeus", "optionC": "Robert Whittaker", "optionD": "Aristotle", "correctOption": "B", "explanation": "Swedish botanist Carolus Linnaeus introduced the two-name (binomial) system of naming organisms.", "marks": 1 },
+      { "question": "The scientific name of human beings is:", "optionA": "Homo erectus", "optionB": "Homo sapiens", "optionC": "Panthera leo", "optionD": "Felis domestica", "correctOption": "B", "explanation": "Modern humans are Homo sapiens (genus Homo, species sapiens).", "marks": 1 },
+      { "question": "The basic structural and functional unit of life is the:", "optionA": "Tissue", "optionB": "Organ", "optionC": "Cell", "optionD": "Molecule", "correctOption": "C", "explanation": "The cell is the smallest unit that can perform all life processes.", "marks": 1 },
+      { "question": "Biodiversity means:", "optionA": "Variety of plants only", "optionB": "Variety of animals only", "optionC": "Variety of all forms of life on Earth", "optionD": "Number of forests in a country", "correctOption": "C", "explanation": "Biodiversity is the variety of living organisms at genetic, species and ecosystem levels.", "marks": 1 },
+      { "question": "In the five-kingdom system, bacteria are placed in the kingdom:", "optionA": "Protista", "optionB": "Fungi", "optionC": "Monera", "optionD": "Plantae", "correctOption": "C", "explanation": "Prokaryotic organisms like bacteria belong to kingdom Monera.", "marks": 1 },
+      { "question": "A species is a group of organisms that can:", "optionA": "Live in the same area", "optionB": "Interbreed and produce fertile offspring", "optionC": "Eat the same food", "optionD": "Look exactly alike", "correctOption": "B", "explanation": "By definition, members of a species interbreed in nature and produce fertile offspring.", "marks": 1 },
+      { "question": "In binomial nomenclature, the first name (genus) always begins with a:", "optionA": "Small letter", "optionB": "Capital letter", "optionC": "Number", "optionD": "Symbol", "correctOption": "B", "explanation": "The genus name is capitalized; the species name starts with a small letter.", "marks": 1 },
+      { "question": "The national animal of Pakistan is:", "optionA": "Snow leopard", "optionB": "Markhor", "optionC": "Indus dolphin", "optionD": "Chakor", "correctOption": "B", "explanation": "The Markhor (Capra falconeri) is the national animal of Pakistan.", "marks": 1 },
+      { "question": "Viruses are not placed in any of the five kingdoms because they are:", "optionA": "Too small to study", "optionB": "Non-cellular and show living traits only inside a host", "optionC": "Found only in water", "optionD": "Always harmful", "correctOption": "B", "explanation": "Viruses are acellular particles that reproduce only inside living host cells, so they sit between living and non-living.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Mathematics Class 9 — Matrices and Determinants",
+    "classGrade": "9",
+    "subject": "Mathematics",
+    "chapter": "Unit 1: Matrices and Determinants",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "The order of a matrix having 2 rows and 3 columns is:", "optionA": "3 x 2", "optionB": "2 x 3", "optionC": "6", "optionD": "5", "correctOption": "B", "explanation": "Order is written as rows x columns, so 2 rows and 3 columns give order 2 x 3.", "marks": 1 },
+      { "question": "A matrix with an equal number of rows and columns is called a:", "optionA": "Row matrix", "optionB": "Column matrix", "optionC": "Square matrix", "optionD": "Null matrix", "correctOption": "C", "explanation": "A square matrix has the same number of rows and columns.", "marks": 1 },
+      { "question": "The additive identity of a matrix is the:", "optionA": "Identity matrix", "optionB": "Null (zero) matrix", "optionC": "Transpose matrix", "optionD": "Scalar matrix", "correctOption": "B", "explanation": "Adding a zero matrix of the same order leaves any matrix unchanged.", "marks": 1 },
+      { "question": "The determinant of the matrix [[1, 2], [3, 4]] is:", "optionA": "2", "optionB": "-2", "optionC": "10", "optionD": "-10", "correctOption": "B", "explanation": "|A| = (1)(4) - (2)(3) = 4 - 6 = -2.", "marks": 1 },
+      { "question": "A square matrix is called singular if its determinant is:", "optionA": "1", "optionB": "-1", "optionC": "0", "optionD": "Positive", "correctOption": "C", "explanation": "A matrix with |A| = 0 is singular and has no inverse.", "marks": 1 },
+      { "question": "The additive inverse of a matrix A is obtained by:", "optionA": "Taking its transpose", "optionB": "Changing the sign of every element", "optionC": "Squaring each element", "optionD": "Swapping rows and columns", "correctOption": "B", "explanation": "-A is formed by multiplying every element of A by -1, so A + (-A) = 0.", "marks": 1 },
+      { "question": "Two matrices are equal if they have the same order and:", "optionA": "Same determinant", "optionB": "Corresponding elements are equal", "optionC": "Same number of zeros", "optionD": "Same diagonal", "correctOption": "B", "explanation": "Equality of matrices requires equal order and equality of all corresponding elements.", "marks": 1 },
+      { "question": "A matrix in which all elements except the principal diagonal are zero is called a:", "optionA": "Scalar matrix", "optionB": "Diagonal matrix", "optionC": "Row matrix", "optionD": "Symmetric matrix", "correctOption": "B", "explanation": "In a diagonal matrix, all off-diagonal elements are zero.", "marks": 1 },
+      { "question": "The product AB of matrices A and B is possible only when:", "optionA": "Both are square", "optionB": "Columns of A = Rows of B", "optionC": "Rows of A = Columns of B", "optionD": "Both have the same order", "correctOption": "B", "explanation": "Matrix multiplication requires the number of columns of A to equal the number of rows of B.", "marks": 1 },
+      { "question": "The transpose of a 2 x 3 matrix has order:", "optionA": "2 x 3", "optionB": "3 x 2", "optionC": "3 x 3", "optionD": "2 x 2", "correctOption": "B", "explanation": "Transposing interchanges rows and columns, so a 2 x 3 matrix becomes 3 x 2.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Computer Science Class 9 — Computer Systems",
+    "classGrade": "9",
+    "subject": "Computer Science",
+    "chapter": "Unit 1: Computer Systems",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "CPU stands for:", "optionA": "Central Processing Unit", "optionB": "Computer Personal Unit", "optionC": "Central Program Unit", "optionD": "Control Processing Unit", "correctOption": "A", "explanation": "CPU (Central Processing Unit) is the brain of the computer that executes instructions.", "marks": 1 },
+      { "question": "One byte is equal to:", "optionA": "4 bits", "optionB": "8 bits", "optionC": "16 bits", "optionD": "1024 bits", "correctOption": "B", "explanation": "1 byte = 8 bits.", "marks": 1 },
+      { "question": "Which of the following is an input device?", "optionA": "Monitor", "optionB": "Printer", "optionC": "Keyboard", "optionD": "Speaker", "correctOption": "C", "explanation": "A keyboard is used to input data into the computer; the others are output devices.", "marks": 1 },
+      { "question": "Which memory loses its data when the computer is switched off?", "optionA": "ROM", "optionB": "RAM", "optionC": "Hard disk", "optionD": "SSD", "correctOption": "B", "explanation": "RAM is volatile memory; its contents are erased when power is removed.", "marks": 1 },
+      { "question": "The binary equivalent of decimal 5 is:", "optionA": "100", "optionB": "101", "optionC": "110", "optionD": "111", "correctOption": "B", "explanation": "5 = 4 + 1 = (101) in base 2.", "marks": 1 },
+      { "question": "Which of the following is system software?", "optionA": "MS Word", "optionB": "Operating System", "optionC": "Photo editor", "optionD": "Web browser game", "correctOption": "B", "explanation": "An operating system is system software that manages hardware and other programs.", "marks": 1 },
+      { "question": "First-generation computers used:", "optionA": "Transistors", "optionB": "Integrated circuits", "optionC": "Vacuum tubes", "optionD": "Microprocessors", "correctOption": "C", "explanation": "First-generation computers (1940s-50s) were built with vacuum tubes.", "marks": 1 },
+      { "question": "The ALU of the CPU performs:", "optionA": "Only storage", "optionB": "Arithmetic and logic operations", "optionC": "Only printing tasks", "optionD": "Internet connections", "correctOption": "B", "explanation": "ALU (Arithmetic Logic Unit) performs calculations and logical comparisons.", "marks": 1 },
+      { "question": "Which storage device is an optical medium?", "optionA": "Hard disk", "optionB": "USB flash drive", "optionC": "DVD", "optionD": "RAM", "correctOption": "C", "explanation": "CDs and DVDs store data optically and are read by laser.", "marks": 1 },
+      { "question": "The physical parts of a computer that we can touch are called:", "optionA": "Software", "optionB": "Hardware", "optionC": "Firmware data", "optionD": "Programs", "correctOption": "B", "explanation": "All tangible components of a computer system are its hardware.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: English Class 9 — Parts of Speech & Tenses",
+    "classGrade": "9",
+    "subject": "English",
+    "chapter": "Grammar: Parts of Speech & Tenses",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "In the sentence 'Honesty is the best policy', the word 'Honesty' is a:", "optionA": "Verb", "optionB": "Adjective", "optionC": "Noun", "optionD": "Adverb", "correctOption": "C", "explanation": "Honesty names a quality, so it is an (abstract) noun.", "marks": 1 },
+      { "question": "Which sentence is in the Present Continuous tense?", "optionA": "She reads a book.", "optionB": "She is reading a book.", "optionC": "She has read a book.", "optionD": "She read a book.", "correctOption": "B", "explanation": "Present Continuous uses is/am/are + verb-ing: 'She is reading a book.'", "marks": 1 },
+      { "question": "The past tense of the verb 'go' is:", "optionA": "Goed", "optionB": "Gone only", "optionC": "Went", "optionD": "Going", "correctOption": "C", "explanation": "'Go' is an irregular verb: go - went - gone.", "marks": 1 },
+      { "question": "In 'The fast car won the race', the adjective is:", "optionA": "Car", "optionB": "Fast", "optionC": "Won", "optionD": "Race", "correctOption": "B", "explanation": "'Fast' describes the noun 'car', so it is an adjective.", "marks": 1 },
+      { "question": "Choose the correct sentence:", "optionA": "He do not like tea.", "optionB": "He does not likes tea.", "optionC": "He does not like tea.", "optionD": "He not like tea.", "correctOption": "C", "explanation": "With he/she/it we use 'does not' + base verb: 'He does not like tea.'", "marks": 1 },
+      { "question": "The synonym of 'begin' is:", "optionA": "End", "optionB": "Start", "optionC": "Stop", "optionD": "Delay", "correctOption": "B", "explanation": "'Begin' and 'start' have the same meaning.", "marks": 1 },
+      { "question": "The antonym of 'ancient' is:", "optionA": "Old", "optionB": "Antique", "optionC": "Modern", "optionD": "Historic", "correctOption": "C", "explanation": "Ancient (very old) is the opposite of modern (new, of the present time).", "marks": 1 },
+      { "question": "Fill in the blank: 'The book is ___ the table.'", "optionA": "In", "optionB": "On", "optionC": "At", "optionD": "Of", "correctOption": "B", "explanation": "For something resting on a surface we use the preposition 'on'.", "marks": 1 },
+      { "question": "The passive voice of 'She writes a letter' is:", "optionA": "A letter is written by her.", "optionB": "A letter was written by her.", "optionC": "A letter is being written by she.", "optionD": "A letter writes by her.", "correctOption": "A", "explanation": "Present Simple passive: object + is + past participle + by + subject.", "marks": 1 },
+      { "question": "Fill in the blank with the correct article: '___ sun rises in the east.'", "optionA": "A", "optionB": "An", "optionC": "The", "optionD": "No article", "correctOption": "C", "explanation": "Unique things (the sun, the moon) take the definite article 'the'.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Urdu Class 9 — Qawaid",
+    "classGrade": "9",
+    "subject": "Urdu",
+    "chapter": "Qawaid: Ism, Fail, Harf",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "کسی شخص، جگہ یا چیز کے نام کو کیا کہتے ہیں؟", "optionA": "فعل", "optionB": "اسم", "optionC": "حرف", "optionD": "ضمیر", "correctOption": "B", "explanation": "کسی شخص، جگہ یا چیز کے نام کو اسم کہتے ہیں، جیسے علی، لاہور، کتاب۔", "marks": 1 },
+      { "question": "جملہ 'علی اسکول گیا' میں فاعل کون ہے؟", "optionA": "اسکول", "optionB": "گیا", "optionC": "علی", "optionD": "ان میں سے کوئی نہیں", "correctOption": "C", "explanation": "کام کرنے والے کو فاعل کہتے ہیں؛ اس جملے میں کام کرنے والا 'علی' ہے۔", "marks": 1 },
+      { "question": "درج ذیل میں سے حرفِ جر کون سا ہے؟", "optionA": "اور", "optionB": "سے", "optionC": "بھی", "optionD": "تھا", "correctOption": "B", "explanation": "'سے، میں، پر، کو، تک' وغیرہ حروفِ جر ہیں جو اسم کا تعلق فعل سے جوڑتے ہیں۔", "marks": 1 },
+      { "question": "'کتاب' کی جمع کیا ہے؟", "optionA": "کتابوں", "optionB": "کتابیں", "optionC": "کتبا", "optionD": "کتابی", "correctOption": "B", "explanation": "'کتاب' کی جمع 'کتابیں' ہے۔", "marks": 1 },
+      { "question": "'روشنی' کا متضاد لفظ کون سا ہے؟", "optionA": "اجالا", "optionB": "نور", "optionC": "تاریکی", "optionD": "چمک", "correctOption": "C", "explanation": "روشنی کا متضاد تاریکی (اندھیرا) ہے۔", "marks": 1 },
+      { "question": "'آب' کس لفظ کا مترادف ہے؟", "optionA": "آگ", "optionB": "پانی", "optionC": "ہوا", "optionD": "مٹی", "correctOption": "B", "explanation": "'آب' فارسی زبان میں پانی کو کہتے ہیں اور اردو میں پانی کا مترادف ہے۔", "marks": 1 },
+      { "question": "'لڑکا' کا مؤنث کیا ہے؟", "optionA": "لڑکی", "optionB": "عورت", "optionC": "بچی", "optionD": "خاتون", "correctOption": "A", "explanation": "'لڑکا' مذکر ہے اور اس کا مؤنث 'لڑکی' ہے۔", "marks": 1 },
+      { "question": "وہ کلمہ جس سے کسی کام کا کرنا یا ہونا کسی زمانے کے ساتھ ظاہر ہو، کہلاتا ہے:", "optionA": "اسم", "optionB": "حرف", "optionC": "فعل", "optionD": "صفت", "correctOption": "C", "explanation": "کام کے کرنے یا ہونے کو زمانے کے ساتھ ظاہر کرنے والا کلمہ فعل کہلاتا ہے، جیسے کھایا، جائے گا۔", "marks": 1 },
+      { "question": "محاورہ 'نو دو گیارہ ہونا' کا مطلب ہے:", "optionA": "غصہ کرنا", "optionB": "بھاگ جانا", "optionC": "رونا شروع کرنا", "optionD": "لڑائی کرنا", "correctOption": "B", "explanation": "'نو دو گیارہ ہونا' کا مطلب ہے چپکے سے بھاگ جانا۔", "marks": 1 },
+      { "question": "جملہ 'یہ اچھا لڑکا ہے' میں اسمِ صفت کون سا ہے؟", "optionA": "یہ", "optionB": "لڑکا", "optionC": "اچھا", "optionD": "ہے", "correctOption": "C", "explanation": "'اچھا' لڑکے کی خوبی بیان کر رہا ہے، اس لیے یہ اسمِ صفت ہے۔", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Islamiat Class 9 — Aqaid o Ibadat",
+    "classGrade": "9",
+    "subject": "Islamiat",
+    "chapter": "Aqaid o Ibadat",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "پہلی وحی کس غار میں نازل ہوئی؟", "optionA": "غارِ ثور", "optionB": "غارِ حرا", "optionC": "غارِ کہف", "optionD": "غارِ حراء کے علاوہ", "correctOption": "B", "explanation": "پہلی وحی غارِ حرا میں نازل ہوئی جو مکہ مکرمہ کے قریب جبلِ نور میں واقع ہے۔", "marks": 1 },
+      { "question": "پہلی وحی میں قرآن مجید کی کون سی سورت نازل ہوئی؟", "optionA": "سورۃ الفاتحہ", "optionB": "سورۃ العلق", "optionC": "سورۃ البقرہ", "optionD": "سورۃ الکوثر", "correctOption": "B", "explanation": "پہلی وحی میں سورۃ العلق کی ابتدائی آیات 'اقرأ باسم ربک' نازل ہوئیں۔", "marks": 1 },
+      { "question": "اسلام کے بنیادی ارکان کتنے ہیں؟", "optionA": "چار", "optionB": "پانچ", "optionC": "چھ", "optionD": "سات", "correctOption": "B", "explanation": "اسلام کے پانچ ارکان ہیں: شہادت، نماز، زکاۃ، روزہ اور حج۔", "marks": 1 },
+      { "question": "توحید کا مطلب ہے:", "optionA": "اللہ تعالیٰ کو ایک ماننا", "optionB": "نماز پڑھنا", "optionC": "روزہ رکھنا", "optionD": "نیکی کرنا", "correctOption": "A", "explanation": "توحید کا لغوی و اصطلاحی مطلب اللہ تعالیٰ کو اس کی ذات و صفات میں ایک اور یکتا ماننا ہے۔", "marks": 1 },
+      { "question": "وحی لانے والے سب سے بڑے فرشتے کا نام ہے:", "optionA": "حضرت میکائیل علیہ السلام", "optionB": "حضرت اسرافیل علیہ السلام", "optionC": "حضرت جبرائیل علیہ السلام", "optionD": "حضرت عزرائیل علیہ السلام", "correctOption": "C", "explanation": "حضرت جبرائیل علیہ السلام اللہ کا پیغام انبیاء کرام تک پہنچاتے تھے۔", "marks": 1 },
+      { "question": "زبور کس پیغمبر پر نازل ہوئی؟", "optionA": "حضرت موسیٰ علیہ السلام", "optionB": "حضرت داؤد علیہ السلام", "optionC": "حضرت عیسیٰ علیہ السلام", "optionD": "حضرت ابراہیم علیہ السلام", "correctOption": "B", "explanation": "زبور حضرت داؤد علیہ السلام پر نازل ہونے والی آسمانی کتاب ہے۔", "marks": 1 },
+      { "question": "تورات کس پیغمبر پر نازل ہوئی؟", "optionA": "حضرت داؤد علیہ السلام", "optionB": "حضرت موسیٰ علیہ السلام", "optionC": "حضرت یوسف علیہ السلام", "optionD": "حضرت نوح علیہ السلام", "correctOption": "B", "explanation": "تورات حضرت موسیٰ علیہ السلام پر نازل ہوئی۔", "marks": 1 },
+      { "question": "چاندی کے نصابِ زکاۃ کی مقدار ہے:", "optionA": "ساڑھے سات تولے", "optionB": "ساڑھے باون تولے", "optionC": "چالیس تولے", "optionD": "ایک سو تولے", "correctOption": "B", "explanation": "چاندی کا نصاب ساڑھے باون تولے ہے؛ اس مقدار کے مالک پر زکاۃ فرض ہوتی ہے۔", "marks": 1 },
+      { "question": "حج کس اسلامی مہینے میں ادا کیا جاتا ہے؟", "optionA": "رمضان", "optionB": "شوال", "optionC": "ذوالحجہ", "optionD": "محرم", "correctOption": "C", "explanation": "حج ذوالحجہ کے مہینے میں، خاص طور پر 9 ذوالحجہ کو وقوفِ عرفات کے ساتھ ادا کیا جاتا ہے۔", "marks": 1 },
+      { "question": "نمازِ جمعہ کس دن اور کس نماز کے وقت ادا کی جاتی ہے؟", "optionA": "پیر، فجر کے وقت", "optionB": "جمعہ، ظہر کے وقت", "optionC": "ہفتہ، عصر کے وقت", "optionD": "اتوار، مغرب کے وقت", "correctOption": "B", "explanation": "جمعہ کے دن ظہر کی نماز کی جگہ نمازِ جمعہ باجماعت ادا کی جاتی ہے۔", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Pakistan Studies Class 9 — Ideology of Pakistan",
+    "classGrade": "9",
+    "subject": "Pakistan Studies",
+    "chapter": "Ideological Basis of Pakistan",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "The ideology of Pakistan is based on the:", "optionA": "One-Nation Theory", "optionB": "Two-Nation Theory", "optionC": "Socialism", "optionD": "Secularism", "correctOption": "B", "explanation": "Pakistan was demanded on the basis of the Two-Nation Theory: Muslims and Hindus are two separate nations.", "marks": 1 },
+      { "question": "The Two-Nation Theory was first clearly presented by:", "optionA": "Allama Iqbal", "optionB": "Sir Syed Ahmad Khan", "optionC": "Liaquat Ali Khan", "optionD": "Aga Khan", "correctOption": "B", "explanation": "After the Urdu-Hindi controversy of 1867, Sir Syed Ahmad Khan concluded that Hindus and Muslims were two separate nations.", "marks": 1 },
+      { "question": "The Urdu-Hindi controversy took place in the year:", "optionA": "1857", "optionB": "1867", "optionC": "1906", "optionD": "1940", "correctOption": "B", "explanation": "The Urdu-Hindi controversy of 1867 in Banaras changed Sir Syed's thinking about Hindu-Muslim unity.", "marks": 1 },
+      { "question": "The All India Muslim League was founded in 1906 at:", "optionA": "Lahore", "optionB": "Delhi", "optionC": "Dhaka", "optionD": "Karachi", "correctOption": "C", "explanation": "The Muslim League was founded on 30 December 1906 at Dhaka.", "marks": 1 },
+      { "question": "The Pakistan Resolution was passed on:", "optionA": "23 March 1940", "optionB": "14 August 1947", "optionC": "11 September 1948", "optionD": "3 June 1947", "correctOption": "A", "explanation": "The Lahore (Pakistan) Resolution was adopted on 23 March 1940 at Minto Park, Lahore.", "marks": 1 },
+      { "question": "The name 'Pakistan' was proposed by:", "optionA": "Quaid-e-Azam", "optionB": "Chaudhry Rahmat Ali", "optionC": "Allama Iqbal", "optionD": "Sir Syed Ahmad Khan", "correctOption": "B", "explanation": "Chaudhry Rahmat Ali proposed the name 'Pakistan' in his 1933 pamphlet 'Now or Never'.", "marks": 1 },
+      { "question": "Pakistan came into being on:", "optionA": "27 Ramadan, 13 August 1947", "optionB": "14 August 1947", "optionC": "15 August 1947", "optionD": "23 March 1947", "correctOption": "B", "explanation": "Pakistan emerged as an independent state on 14 August 1947 (27 Ramadan 1366 AH).", "marks": 1 },
+      { "question": "The first Governor-General of Pakistan was:", "optionA": "Liaquat Ali Khan", "optionB": "Khawaja Nazimuddin", "optionC": "Quaid-e-Azam Muhammad Ali Jinnah", "optionD": "Iskander Mirza", "correctOption": "C", "explanation": "Quaid-e-Azam Muhammad Ali Jinnah became the first Governor-General of Pakistan.", "marks": 1 },
+      { "question": "The Objectives Resolution was passed in:", "optionA": "1947", "optionB": "1949", "optionC": "1956", "optionD": "1973", "correctOption": "B", "explanation": "The Objectives Resolution was passed by the Constituent Assembly on 12 March 1949.", "marks": 1 },
+      { "question": "Allama Iqbal presented his famous Allahabad Address in:", "optionA": "1928", "optionB": "1930", "optionC": "1938", "optionD": "1942", "correctOption": "B", "explanation": "In his 1930 Allahabad Address, Allama Iqbal demanded a separate homeland for the Muslims of the subcontinent.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Chemistry Class 10 — Chemical Equilibrium",
+    "classGrade": "10",
+    "subject": "Chemistry",
+    "chapter": "Unit 1: Chemical Equilibrium",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "A reversible reaction is represented by the symbol:", "optionA": "→", "optionB": "⇌", "optionC": "=", "optionD": "↑", "correctOption": "B", "explanation": "The double half-arrow ⇌ shows that a reaction proceeds in both directions.", "marks": 1 },
+      { "question": "At dynamic equilibrium, the rates of the forward and reverse reactions are:", "optionA": "Both zero", "optionB": "Equal", "optionC": "Forward is faster", "optionD": "Reverse is faster", "correctOption": "B", "explanation": "At equilibrium both reactions continue at equal rates, so concentrations stay constant.", "marks": 1 },
+      { "question": "The Law of Mass Action was given by:", "optionA": "Le Chatelier", "optionB": "Guldberg and Waage", "optionC": "Dalton", "optionD": "Avogadro", "correctOption": "B", "explanation": "Norwegian chemists Guldberg and Waage proposed the Law of Mass Action in 1864.", "marks": 1 },
+      { "question": "According to Le Chatelier's principle, when a system at equilibrium is disturbed, it:", "optionA": "Stops reacting", "optionB": "Shifts to oppose the change", "optionC": "Always shifts to products", "optionD": "Decomposes completely", "correctOption": "B", "explanation": "The system adjusts itself in the direction that reduces the effect of the disturbance.", "marks": 1 },
+      { "question": "Increasing pressure on a gaseous equilibrium shifts it towards the side with:", "optionA": "More gas moles", "optionB": "Fewer gas moles", "optionC": "Equal moles", "optionD": "No change ever", "correctOption": "B", "explanation": "Higher pressure favours the side with fewer gas molecules (smaller volume).", "marks": 1 },
+      { "question": "A catalyst at equilibrium:", "optionA": "Shifts equilibrium to products", "optionB": "Shifts equilibrium to reactants", "optionC": "Only speeds up reaching equilibrium, without shifting it", "optionD": "Changes the value of Kc strongly", "correctOption": "C", "explanation": "A catalyst speeds up forward and reverse reactions equally, so the position of equilibrium is unchanged.", "marks": 1 },
+      { "question": "Dynamic equilibrium can only be established in a:", "optionA": "Open system", "optionB": "Closed system", "optionC": "Vacuum", "optionD": "Beaker without lid at boiling", "correctOption": "B", "explanation": "In an open system products escape, so a closed system is required for equilibrium.", "marks": 1 },
+      { "question": "For the reaction N2 + 3H2 ⇌ 2NH3, the Kc expression is:", "optionA": "[NH3] / ([N2][H2])", "optionB": "[NH3]^2 / ([N2][H2]^3)", "optionC": "([N2][H2]^3) / [NH3]^2", "optionD": "[NH3]^3 / ([N2][H2]^2)", "correctOption": "B", "explanation": "Kc = [products]^coefficients / [reactants]^coefficients = [NH3]^2 / ([N2][H2]^3).", "marks": 1 },
+      { "question": "If the forward reaction is exothermic, increasing the temperature will shift the equilibrium:", "optionA": "Towards products", "optionB": "Towards reactants", "optionC": "Nowhere", "optionD": "Towards more heat release", "correctOption": "B", "explanation": "Added heat is absorbed by the endothermic (reverse) direction, so equilibrium shifts towards reactants.", "marks": 1 },
+      { "question": "A very large value of Kc indicates that at equilibrium:", "optionA": "Reactants dominate", "optionB": "Products dominate", "optionC": "Reaction never started", "optionD": "Only catalyst is present", "correctOption": "B", "explanation": "Large Kc means the equilibrium mixture contains mostly products.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Biology Class 10 — Gaseous Exchange",
+    "classGrade": "10",
+    "subject": "Biology",
+    "chapter": "Chapter 10: Gaseous Exchange",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "In fish, gaseous exchange takes place through the:", "optionA": "Lungs", "optionB": "Skin", "optionC": "Gills", "optionD": "Tracheae", "correctOption": "C", "explanation": "Fish absorb dissolved oxygen from water through their feathery gills.", "marks": 1 },
+      { "question": "In humans, the actual site of gaseous exchange in the lungs is the:", "optionA": "Bronchi", "optionB": "Alveoli", "optionC": "Trachea", "optionD": "Larynx", "correctOption": "B", "explanation": "Millions of tiny air sacs called alveoli provide the surface where O2 and CO2 are exchanged with blood capillaries.", "marks": 1 },
+      { "question": "The voice box of humans is called the:", "optionA": "Pharynx", "optionB": "Larynx", "optionC": "Trachea", "optionD": "Glottis", "correctOption": "B", "explanation": "The larynx (voice box) contains the vocal cords that produce sound.", "marks": 1 },
+      { "question": "During inhalation, the diaphragm:", "optionA": "Relaxes and becomes dome-shaped", "optionB": "Contracts and flattens", "optionC": "Stops moving", "optionD": "Moves upward", "correctOption": "B", "explanation": "Contraction flattens the diaphragm, enlarging the chest cavity so air rushes in.", "marks": 1 },
+      { "question": "The percentage of oxygen in exhaled air is about:", "optionA": "21%", "optionB": "16%", "optionC": "4%", "optionD": "0.04%", "correctOption": "B", "explanation": "Inhaled air has ~21% O2; exhaled air still contains about 16% O2 (and ~4% CO2).", "marks": 1 },
+      { "question": "In leaves, gaseous exchange occurs through tiny pores called:", "optionA": "Lenticels", "optionB": "Stomata", "optionC": "Xylem", "optionD": "Chloroplasts", "correctOption": "B", "explanation": "Stomata, controlled by guard cells, allow CO2 in and O2 and water vapour out.", "marks": 1 },
+      { "question": "The products of aerobic respiration are:", "optionA": "Lactic acid and energy", "optionB": "CO2, water and energy", "optionC": "Alcohol and CO2", "optionD": "Only oxygen", "correctOption": "B", "explanation": "Glucose + oxygen → carbon dioxide + water + energy (ATP) in aerobic respiration.", "marks": 1 },
+      { "question": "The normal breathing rate of an adult human at rest is about:", "optionA": "5-8 times per minute", "optionB": "16-20 times per minute", "optionC": "40-50 times per minute", "optionD": "70-80 times per minute", "correctOption": "B", "explanation": "A resting adult breathes roughly 16-20 times per minute.", "marks": 1 },
+      { "question": "The trachea is also commonly known as the:", "optionA": "Food pipe", "optionB": "Windpipe", "optionC": "Voice box", "optionD": "Nasal passage", "correctOption": "B", "explanation": "The trachea (windpipe) carries air from the larynx to the bronchi and is supported by C-shaped cartilage rings.", "marks": 1 },
+      { "question": "Asthma is a respiratory disorder in which the following become narrow and inflamed:", "optionA": "Alveoli", "optionB": "Bronchi and bronchioles", "optionC": "Nostrils", "optionD": "Diaphragm", "correctOption": "B", "explanation": "In asthma the airways (bronchi/bronchioles) swell and narrow, making breathing difficult.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Computer Science Class 10 — Programming Fundamentals in C",
+    "classGrade": "10",
+    "subject": "Computer Science",
+    "chapter": "Unit 1: Programming Fundamentals in C",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "The C programming language was developed by:", "optionA": "Bjarne Stroustrup", "optionB": "Dennis Ritchie", "optionC": "James Gosling", "optionD": "Charles Babbage", "correctOption": "B", "explanation": "Dennis Ritchie developed C at Bell Laboratories in the early 1970s.", "marks": 1 },
+      { "question": "The extension of a C source code file is:", "optionA": ".cpp", "optionB": ".java", "optionC": ".c", "optionD": ".txt", "correctOption": "C", "explanation": "C program files are saved with the .c extension.", "marks": 1 },
+      { "question": "Which of the following is a valid keyword in C?", "optionA": "integer", "optionB": "int", "optionC": "number", "optionD": "real", "correctOption": "B", "explanation": "'int' is the C keyword used to declare integer variables.", "marks": 1 },
+      { "question": "In C, the printf() function is used for:", "optionA": "Reading input", "optionB": "Displaying output", "optionC": "Declaring variables", "optionD": "Ending the program", "correctOption": "B", "explanation": "printf() prints formatted output on the screen; scanf() is used for input.", "marks": 1 },
+      { "question": "The modulus operator in C, which gives the remainder of a division, is:", "optionA": "/", "optionB": "*", "optionC": "%", "optionD": "#", "correctOption": "C", "explanation": "The % operator returns the remainder, e.g. 10 % 3 = 1.", "marks": 1 },
+      { "question": "Which loop checks its condition at the end of the loop body?", "optionA": "for loop", "optionB": "while loop", "optionC": "do-while loop", "optionD": "if statement", "correctOption": "C", "explanation": "A do-while loop executes the body at least once before testing the condition.", "marks": 1 },
+      { "question": "A single-line comment in C begins with:", "optionA": "#", "optionB": "//", "optionC": "--", "optionD": "**", "correctOption": "B", "explanation": "// starts a single-line comment; /* ... */ is used for multi-line comments.", "marks": 1 },
+      { "question": "Which data type is used to store decimal (fractional) numbers in C?", "optionA": "int", "optionB": "char", "optionC": "float", "optionD": "void", "correctOption": "C", "explanation": "float (and double) store real numbers with fractional parts.", "marks": 1 },
+      { "question": "In C, array indexing starts from:", "optionA": "1", "optionB": "0", "optionC": "-1", "optionD": "Any value", "correctOption": "B", "explanation": "The first element of a C array is at index 0.", "marks": 1 },
+      { "question": "Every C program starts execution from the function named:", "optionA": "start()", "optionB": "begin()", "optionC": "main()", "optionD": "run()", "correctOption": "C", "explanation": "main() is the entry point of every C program.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: English Class 10 — Tenses & Voice",
+    "classGrade": "10",
+    "subject": "English",
+    "chapter": "Grammar: Tenses & Voice",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "Which sentence is in the Past Perfect tense?", "optionA": "She finished her work.", "optionB": "She had finished her work before he arrived.", "optionC": "She has finished her work.", "optionD": "She will finish her work.", "correctOption": "B", "explanation": "Past Perfect uses 'had + past participle' for an action completed before another past action.", "marks": 1 },
+      { "question": "The passive voice of 'They built a house' is:", "optionA": "A house is built by them.", "optionB": "A house was built by them.", "optionC": "A house has being built by them.", "optionD": "A house built by them.", "correctOption": "B", "explanation": "Past Simple passive: was/were + past participle — 'A house was built by them.'", "marks": 1 },
+      { "question": "The active voice of 'The letter was posted by Ali' is:", "optionA": "Ali posts the letter.", "optionB": "Ali posted the letter.", "optionC": "Ali has posted the letter.", "optionD": "Ali is posting the letter.", "correctOption": "B", "explanation": "'Was posted' is Past Simple passive, so the active form is 'Ali posted the letter.'", "marks": 1 },
+      { "question": "Choose the correct sentence:", "optionA": "Neither of the boys were present.", "optionB": "Neither of the boys was present.", "optionC": "Neither of the boys are present yesterday.", "optionD": "Neither of boys was present.", "correctOption": "B", "explanation": "'Neither' is singular, so it takes the singular verb 'was'.", "marks": 1 },
+      { "question": "The synonym of 'rapid' is:", "optionA": "Slow", "optionB": "Fast", "optionC": "Weak", "optionD": "Late", "correctOption": "B", "explanation": "Rapid means happening quickly — fast.", "marks": 1 },
+      { "question": "The antonym of 'scarce' is:", "optionA": "Rare", "optionB": "Abundant", "optionC": "Costly", "optionD": "Little", "correctOption": "B", "explanation": "Scarce (in short supply) is the opposite of abundant (plentiful).", "marks": 1 },
+      { "question": "Choose the correct indirect speech of: He said, 'I am busy.'", "optionA": "He said that he is busy.", "optionB": "He said that he was busy.", "optionC": "He said that I am busy.", "optionD": "He says he was busy.", "correctOption": "B", "explanation": "In reported speech after a past reporting verb, 'am' changes to 'was' and 'I' to 'he'.", "marks": 1 },
+      { "question": "Fill in the blank: 'If it rains, we ___ at home.'", "optionA": "Would stayed", "optionB": "Will stay", "optionC": "Stayed yesterday", "optionD": "Stays", "correctOption": "B", "explanation": "First conditional: If + Present Simple, will + base verb — 'we will stay at home.'", "marks": 1 },
+      { "question": "In the sentence 'He ran quickly', the adverb is:", "optionA": "He", "optionB": "Ran", "optionC": "Quickly", "optionD": "None", "correctOption": "C", "explanation": "'Quickly' describes how he ran, so it is an adverb of manner.", "marks": 1 },
+      { "question": "The future indefinite tense of 'He plays cricket' is:", "optionA": "He played cricket.", "optionB": "He will play cricket.", "optionC": "He is playing cricket.", "optionD": "He has played cricket.", "correctOption": "B", "explanation": "Future Indefinite uses will/shall + base verb: 'He will play cricket.'", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Urdu Class 10 — Qawaid o Insha",
+    "classGrade": "10",
+    "subject": "Urdu",
+    "chapter": "Qawaid o Insha",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "'دن' کا متضاد لفظ ہے:", "optionA": "صبح", "optionB": "رات", "optionC": "شام", "optionD": "سورج", "correctOption": "B", "explanation": "دن کا متضاد رات ہے۔", "marks": 1 },
+      { "question": "محاورہ 'آگ بگولا ہونا' کا مطلب ہے:", "optionA": "خوش ہونا", "optionB": "بہت غصے میں آنا", "optionC": "بھوک لگنا", "optionD": "تھک جانا", "correctOption": "B", "explanation": "'آگ بگولا ہونا' کا مطلب ہے شدید غصے میں آ جانا۔", "marks": 1 },
+      { "question": "درست جملہ منتخب کریں:", "optionA": "مجھ کو سردی لگ رہی ہے زیادہ", "optionB": "مجھے سردی لگ رہی ہے", "optionC": "میں کو سردی لگ رہی ہے", "optionD": "مجھے نے سردی لگ رہی ہے", "correctOption": "B", "explanation": "درست اور فصیح جملہ ہے: 'مجھے سردی لگ رہی ہے۔'", "marks": 1 },
+      { "question": "درج ذیل میں سے اسمِ معرفہ کون سا ہے؟", "optionA": "شہر", "optionB": "لاہور", "optionC": "لڑکا", "optionD": "کتاب", "correctOption": "B", "explanation": "'لاہور' کسی خاص شہر کا نام ہے، اس لیے اسمِ معرفہ ہے؛ باقی اسمِ نکرہ ہیں۔", "marks": 1 },
+      { "question": "ضرب المثل 'اونچی دکان پھیکا پکوان' کا مطلب ہے:", "optionA": "محنت کا پھل میٹھا ہوتا ہے", "optionB": "دکھاوا زیادہ، حقیقت کم", "optionC": "مہنگی چیز اچھی ہوتی ہے", "optionD": "دکان دار ایماندار ہے", "correctOption": "B", "explanation": "یہ ضرب المثل اس موقع پر استعمال ہوتی ہے جہاں شان و شوکت زیادہ ہو مگر اصل معیار کم ہو۔", "marks": 1 },
+      { "question": "'دریا' کون سی جنس ہے؟", "optionA": "مؤنث", "optionB": "مذکر", "optionC": "دونوں", "optionD": "کوئی نہیں", "correctOption": "B", "explanation": "اردو قواعد میں 'دریا' مذکر استعمال ہوتا ہے، جیسے 'دریا بہہ رہا ہے'۔", "marks": 1 },
+      { "question": "لفظ 'نااہل' میں سابقہ کون سا ہے؟", "optionA": "اہل", "optionB": "نا", "optionC": "ل", "optionD": "کوئی سابقہ نہیں", "correctOption": "B", "explanation": "کسی لفظ کے شروع میں لگنے والا جز سابقہ کہلاتا ہے؛ 'نااہل' میں 'نا' سابقہ ہے۔", "marks": 1 },
+      { "question": "لفظ 'قلم دان' میں لاحقہ کون سا ہے؟", "optionA": "قلم", "optionB": "دان", "optionC": "م", "optionD": "کوئی لاحقہ نہیں", "correctOption": "B", "explanation": "لفظ کے آخر میں لگنے والا جز لاحقہ کہلاتا ہے؛ 'قلم دان' میں 'دان' لاحقہ ہے۔", "marks": 1 },
+      { "question": "غالب کا اصل نام کیا تھا؟", "optionA": "مرزا محمد رفیع", "optionB": "مرزا اسد اللہ خان", "optionC": "نواب محسن الملک", "optionD": "میر محمد تقی", "correctOption": "B", "explanation": "مرزا غالب کا اصل نام مرزا اسد اللہ خان بیگ تھا اور 'اسد' پھر 'غالب' ان کا تخلص رہا۔", "marks": 1 },
+      { "question": "رسمی خط کے آخر میں عموماً لکھا جاتا ہے:", "optionA": "تمہارا دوست", "optionB": "والسلام / آپ کا مخلص", "optionC": "اللہ حافظ ہمیشہ", "optionD": "تمہارا بھائی", "correctOption": "B", "explanation": "رسمی و دفتری خطوط کا اختتام 'والسلام' یا 'آپ کا مخلص' جیسے باوقار الفاظ سے کیا جاتا ہے۔", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Pakistan Studies Class 10 — Constitutional Development",
+    "classGrade": "10",
+    "subject": "Pakistan Studies",
+    "chapter": "Pakistan Movement & Constitutional Development",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "The Lucknow Pact between Congress and Muslim League was signed in:", "optionA": "1906", "optionB": "1916", "optionC": "1919", "optionD": "1929", "correctOption": "B", "explanation": "The Lucknow Pact (1916) was the only agreement between Congress and the Muslim League; separate electorates were accepted.", "marks": 1 },
+      { "question": "The Khilafat Movement was launched in:", "optionA": "1919", "optionB": "1905", "optionC": "1930", "optionD": "1942", "correctOption": "A", "explanation": "The Khilafat Movement began in 1919 to protect the Ottoman Caliphate after World War I.", "marks": 1 },
+      { "question": "The Nehru Report was published in:", "optionA": "1919", "optionB": "1928", "optionC": "1935", "optionD": "1946", "correctOption": "B", "explanation": "The Nehru Report (1928) rejected separate electorates, disappointing the Muslims.", "marks": 1 },
+      { "question": "Quaid-e-Azam presented his famous Fourteen Points in:", "optionA": "1927", "optionB": "1929", "optionC": "1931", "optionD": "1940", "correctOption": "B", "explanation": "The Fourteen Points (1929) were Jinnah's response to the Nehru Report, listing Muslim demands.", "marks": 1 },
+      { "question": "The first Constitution of Pakistan was enforced in:", "optionA": "1949", "optionB": "1956", "optionC": "1962", "optionD": "1973", "correctOption": "B", "explanation": "Pakistan's first constitution came into force on 23 March 1956, making Pakistan a republic.", "marks": 1 },
+      { "question": "The first President of Pakistan (under the 1956 Constitution) was:", "optionA": "Ayub Khan", "optionB": "Iskander Mirza", "optionC": "Ghulam Muhammad", "optionD": "Yahya Khan", "correctOption": "B", "explanation": "Major General Iskander Mirza became the first President of the Islamic Republic of Pakistan in 1956.", "marks": 1 },
+      { "question": "The 'One Unit' scheme in West Pakistan was established in:", "optionA": "1948", "optionB": "1955", "optionC": "1962", "optionD": "1970", "correctOption": "B", "explanation": "One Unit was created in 1955 by merging all West Pakistan provinces into a single province.", "marks": 1 },
+      { "question": "The 1962 Constitution of Pakistan was given by:", "optionA": "Iskander Mirza", "optionB": "Ayub Khan", "optionC": "Zulfikar Ali Bhutto", "optionD": "Liaquat Ali Khan", "correctOption": "B", "explanation": "Field Marshal Ayub Khan promulgated the presidential Constitution of 1962.", "marks": 1 },
+      { "question": "The Tashkent Declaration between Pakistan and India was signed in:", "optionA": "1965", "optionB": "1966", "optionC": "1971", "optionD": "1972", "correctOption": "B", "explanation": "After the 1965 war, the Tashkent Declaration was signed on 10 January 1966.", "marks": 1 },
+      { "question": "East Pakistan separated to become Bangladesh in:", "optionA": "1965", "optionB": "1970", "optionC": "1971", "optionD": "1974", "correctOption": "C", "explanation": "After the 1971 war, East Pakistan emerged as the independent state of Bangladesh in December 1971.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Chemistry 1st Year — Stoichiometry",
+    "classGrade": "11",
+    "subject": "Chemistry",
+    "chapter": "Chapter 1: Stoichiometry",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "Stoichiometry is the study of:", "optionA": "Rates of reactions", "optionB": "Quantitative relationships between reactants and products", "optionC": "Shapes of molecules", "optionD": "Energy changes only", "correctOption": "B", "explanation": "Stoichiometry calculates amounts of reactants and products from balanced chemical equations.", "marks": 1 },
+      { "question": "The molar mass of carbon dioxide (CO2) is:", "optionA": "28 g/mol", "optionB": "44 g/mol", "optionC": "12 g/mol", "optionD": "32 g/mol", "correctOption": "B", "explanation": "CO2 = 12 + 2(16) = 44 g/mol.", "marks": 1 },
+      { "question": "The number of moles in 36 g of water (H2O, M = 18 g/mol) is:", "optionA": "1 mol", "optionB": "2 mol", "optionC": "0.5 mol", "optionD": "18 mol", "correctOption": "B", "explanation": "Moles = mass / molar mass = 36 / 18 = 2 mol.", "marks": 1 },
+      { "question": "The limiting reactant in a chemical reaction is the one that:", "optionA": "Is present in excess", "optionB": "Is consumed first and limits the amount of product", "optionC": "Acts as a catalyst", "optionD": "Has the largest mass", "correctOption": "B", "explanation": "The limiting reactant runs out first and decides the maximum possible yield.", "marks": 1 },
+      { "question": "The volume occupied by one mole of an ideal gas at STP is:", "optionA": "22.4 dm3", "optionB": "24 dm3", "optionC": "11.2 dm3", "optionD": "1 dm3", "correctOption": "A", "explanation": "At STP (273 K, 1 atm), one mole of any ideal gas occupies 22.4 dm3 (litres).", "marks": 1 },
+      { "question": "The number of formula units in 0.5 mole of NaCl is:", "optionA": "6.022 x 10^23", "optionB": "3.011 x 10^23", "optionC": "1.5 x 10^23", "optionD": "12.04 x 10^23", "correctOption": "B", "explanation": "0.5 x 6.022 x 10^23 = 3.011 x 10^23 formula units.", "marks": 1 },
+      { "question": "The molecular formula of a compound tells us:", "optionA": "Only the simplest ratio of atoms", "optionB": "The actual number of atoms of each element in a molecule", "optionC": "Only the molar mass", "optionD": "The structure of the molecule", "correctOption": "B", "explanation": "The molecular formula gives the exact count of each atom; the empirical formula gives only the simplest ratio.", "marks": 1 },
+      { "question": "Percentage yield is calculated as:", "optionA": "Theoretical / Actual x 100", "optionB": "Actual yield / Theoretical yield x 100", "optionC": "Actual - Theoretical x 100", "optionD": "Theoretical x Actual / 100", "correctOption": "B", "explanation": "% yield = (actual yield / theoretical yield) x 100.", "marks": 1 },
+      { "question": "The mass of 2 moles of sulphuric acid (H2SO4, M = 98 g/mol) is:", "optionA": "98 g", "optionB": "49 g", "optionC": "196 g", "optionD": "294 g", "correctOption": "C", "explanation": "Mass = moles x molar mass = 2 x 98 = 196 g.", "marks": 1 },
+      { "question": "In the reaction CH4 + 2O2 → CO2 + 2H2O, the moles of O2 needed to burn 2 moles of CH4 are:", "optionA": "2 mol", "optionB": "3 mol", "optionC": "4 mol", "optionD": "8 mol", "correctOption": "C", "explanation": "The equation ratio CH4 : O2 is 1 : 2, so 2 mol CH4 needs 4 mol O2.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Biology 1st Year — Enzymes",
+    "classGrade": "11",
+    "subject": "Biology",
+    "chapter": "Chapter 1: Biological Molecules & Enzymes",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "Chemically, almost all enzymes are:", "optionA": "Carbohydrates", "optionB": "Lipids", "optionC": "Globular proteins", "optionD": "Nucleic acids", "correctOption": "C", "explanation": "Enzymes are globular proteins that catalyse biochemical reactions.", "marks": 1 },
+      { "question": "The 'lock and key' model of enzyme action was proposed by:", "optionA": "Daniel Koshland", "optionB": "Emil Fischer", "optionC": "Charles Darwin", "optionD": "Robert Brown", "correctOption": "B", "explanation": "Emil Fischer (1894) suggested the rigid lock-and-key fit between enzyme and substrate.", "marks": 1 },
+      { "question": "The 'induced fit' model was proposed by:", "optionA": "Emil Fischer", "optionB": "Daniel Koshland", "optionC": "Watson and Crick", "optionD": "Louis Pasteur", "correctOption": "B", "explanation": "Koshland (1959) proposed that the active site changes shape slightly to fit the substrate.", "marks": 1 },
+      { "question": "The substrate binds to the enzyme at the:", "optionA": "Allosteric site", "optionB": "Active site", "optionC": "Ribosome", "optionD": "Cell membrane", "correctOption": "B", "explanation": "The active site is the specific region of the enzyme where the substrate binds and reacts.", "marks": 1 },
+      { "question": "Most human enzymes work best at about:", "optionA": "0°C", "optionB": "25°C", "optionC": "37°C", "optionD": "100°C", "correctOption": "C", "explanation": "Human enzymes have an optimum temperature near normal body temperature, about 37°C.", "marks": 1 },
+      { "question": "A competitive inhibitor reduces enzyme activity because it:", "optionA": "Destroys the enzyme", "optionB": "Resembles the substrate and blocks the active site", "optionC": "Changes the pH", "optionD": "Removes the substrate", "correctOption": "B", "explanation": "Competitive inhibitors have a shape similar to the substrate and compete for the active site.", "marks": 1 },
+      { "question": "Which of the following can act as an inorganic cofactor for enzymes?", "optionA": "Vitamins", "optionB": "Metal ions like Mg2+ and Zn2+", "optionC": "Glucose", "optionD": "Amino acids", "correctOption": "B", "explanation": "Many enzymes need metal ions (cofactors) such as Mg2+, Zn2+ or Fe2+ for activity.", "marks": 1 },
+      { "question": "The enzyme amylase digests:", "optionA": "Proteins", "optionB": "Fats", "optionC": "Starch", "optionD": "Vitamins", "correctOption": "C", "explanation": "Amylase (in saliva and pancreatic juice) breaks starch into sugars.", "marks": 1 },
+      { "question": "Enzyme activity is affected by:", "optionA": "Temperature", "optionB": "pH", "optionC": "Substrate concentration", "optionD": "All of these", "correctOption": "D", "explanation": "Temperature, pH, enzyme and substrate concentration all influence the rate of enzyme action.", "marks": 1 },
+      { "question": "At very high temperature an enzyme stops working because it:", "optionA": "Evaporates", "optionB": "Becomes denatured", "optionC": "Turns into a substrate", "optionD": "Freezes", "correctOption": "B", "explanation": "High heat breaks the bonds maintaining the enzyme's shape, denaturing it and destroying the active site.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Mathematics 1st Year — Complex Numbers",
+    "classGrade": "11",
+    "subject": "Mathematics",
+    "chapter": "Chapter 1: Complex Numbers",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "The value of i^2 (where i = sqrt(-1)) is:", "optionA": "1", "optionB": "-1", "optionC": "i", "optionD": "0", "correctOption": "B", "explanation": "By definition i^2 = -1.", "marks": 1 },
+      { "question": "The conjugate of 3 + 4i is:", "optionA": "3 - 4i", "optionB": "-3 + 4i", "optionC": "-3 - 4i", "optionD": "4 + 3i", "correctOption": "A", "explanation": "The conjugate changes the sign of the imaginary part only: 3 - 4i.", "marks": 1 },
+      { "question": "The modulus of 3 - 4i is:", "optionA": "7", "optionB": "5", "optionC": "25", "optionD": "1", "correctOption": "B", "explanation": "|3 - 4i| = sqrt(3^2 + 4^2) = sqrt(25) = 5.", "marks": 1 },
+      { "question": "The value of i^13 is:", "optionA": "-i", "optionB": "1", "optionC": "i", "optionD": "-1", "correctOption": "C", "explanation": "i^13 = i^(12) x i = (i^4)^3 x i = 1 x i = i.", "marks": 1 },
+      { "question": "The real part of (2 + 3i)(1 - i) is:", "optionA": "2", "optionB": "5", "optionC": "-1", "optionD": "6", "correctOption": "B", "explanation": "(2 + 3i)(1 - i) = 2 - 2i + 3i - 3i^2 = 5 + i, so the real part is 5.", "marks": 1 },
+      { "question": "The additive inverse of 2 - 5i is:", "optionA": "2 + 5i", "optionB": "-2 + 5i", "optionC": "-2 - 5i", "optionD": "5 - 2i", "correctOption": "B", "explanation": "Negating both parts: -(2 - 5i) = -2 + 5i.", "marks": 1 },
+      { "question": "De Moivre's theorem is used to find:", "optionA": "Sums of complex numbers", "optionB": "Powers and roots of complex numbers", "optionC": "Conjugates only", "optionD": "Real solutions of equations", "correctOption": "B", "explanation": "(cos θ + i sin θ)^n = cos nθ + i sin nθ gives powers (and roots) of complex numbers.", "marks": 1 },
+      { "question": "On an Argand diagram, a complex number is represented as a:", "optionA": "Line", "optionB": "Point in a plane", "optionC": "Circle always", "optionD": "Volume", "correctOption": "B", "explanation": "In the Argand plane, a + bi is plotted as the point (a, b).", "marks": 1 },
+      { "question": "If |z| = 0 for z = a + bi, then:", "optionA": "a = 0, b = 1", "optionB": "a = b = 0", "optionC": "a = 1, b = 0", "optionD": "a = -b", "correctOption": "B", "explanation": "sqrt(a^2 + b^2) = 0 only when both a and b are zero.", "marks": 1 },
+      { "question": "The value of i^100 is:", "optionA": "i", "optionB": "-i", "optionC": "1", "optionD": "-1", "correctOption": "C", "explanation": "i^100 = (i^4)^25 = 1^25 = 1.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Computer Science 1st Year — Number Systems",
+    "classGrade": "11",
+    "subject": "Computer Science",
+    "chapter": "Chapter 1: Computer Basics & Number Systems",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "The base of the hexadecimal number system is:", "optionA": "8", "optionB": "10", "optionC": "16", "optionD": "2", "correctOption": "C", "explanation": "Hexadecimal uses 16 symbols: 0-9 and A-F.", "marks": 1 },
+      { "question": "The octal equivalent of binary 111 is:", "optionA": "3", "optionB": "7", "optionC": "11", "optionD": "17", "correctOption": "B", "explanation": "Binary 111 = 4 + 2 + 1 = 7 in decimal and octal.", "marks": 1 },
+      { "question": "One kilobyte (KB) is equal to:", "optionA": "1000 bytes", "optionB": "1024 bytes", "optionC": "512 bytes", "optionD": "2048 bytes", "correctOption": "B", "explanation": "In computing, 1 KB = 2^10 = 1024 bytes.", "marks": 1 },
+      { "question": "The ASCII code of the capital letter 'A' is:", "optionA": "97", "optionB": "65", "optionC": "48", "optionD": "90", "correctOption": "B", "explanation": "Uppercase A has ASCII value 65 (lowercase a is 97).", "marks": 1 },
+      { "question": "Decimal 15 is represented in hexadecimal as:", "optionA": "E", "optionB": "F", "optionC": "15", "optionD": "A", "correctOption": "B", "explanation": "In hex, 10=A, 11=B, 12=C, 13=D, 14=E and 15=F.", "marks": 1 },
+      { "question": "The output of a NOT gate for input 1 is:", "optionA": "1", "optionB": "0", "optionC": "2", "optionD": "Undefined", "correctOption": "B", "explanation": "A NOT gate inverts its input: NOT 1 = 0.", "marks": 1 },
+      { "question": "An AND gate gives output 1 only when:", "optionA": "Any input is 1", "optionB": "Both inputs are 1", "optionC": "Both inputs are 0", "optionD": "Inputs are different", "correctOption": "B", "explanation": "AND output is 1 only if all inputs are 1.", "marks": 1 },
+      { "question": "BCD stands for:", "optionA": "Binary Coded Decimal", "optionB": "Basic Computer Data", "optionC": "Binary Counting Device", "optionD": "Byte Coded Data", "correctOption": "A", "explanation": "BCD (Binary Coded Decimal) represents each decimal digit in 4 bits.", "marks": 1 },
+      { "question": "Two's complement representation is mainly used to store:", "optionA": "Decimal fractions", "optionB": "Negative integers", "optionC": "Characters", "optionD": "Images", "correctOption": "B", "explanation": "Two's complement allows computers to represent and subtract negative integers easily.", "marks": 1 },
+      { "question": "Which of the following is system software?", "optionA": "Spreadsheet", "optionB": "Operating system", "optionC": "Antivirus game", "optionD": "Photo editor", "correctOption": "B", "explanation": "An operating system is the core system software managing hardware resources.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: English 1st Year — Grammar & Vocabulary",
+    "classGrade": "11",
+    "subject": "English",
+    "chapter": "Grammar & Vocabulary",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "The synonym of 'transparent' is:", "optionA": "Opaque", "optionB": "Clear", "optionC": "Rough", "optionD": "Fragile", "correctOption": "B", "explanation": "Transparent means allowing light through — clear.", "marks": 1 },
+      { "question": "The antonym of 'victory' is:", "optionA": "Success", "optionB": "Defeat", "optionC": "Glory", "optionD": "Honour", "correctOption": "B", "explanation": "Victory (winning) is the opposite of defeat (losing).", "marks": 1 },
+      { "question": "Choose the correct sentence:", "optionA": "One of my friends are coming.", "optionB": "One of my friends is coming.", "optionC": "One of my friend is coming.", "optionD": "One of my friends were coming yesterday now.", "correctOption": "B", "explanation": "'One of...' takes a singular verb because the subject is 'one'.", "marks": 1 },
+      { "question": "The idiom 'to break the ice' means:", "optionA": "To break something cold", "optionB": "To start a conversation in a social setting", "optionC": "To become angry", "optionD": "To end a friendship", "correctOption": "B", "explanation": "'Break the ice' means to ease initial awkwardness and start talking.", "marks": 1 },
+      { "question": "One word substitution: 'A person who speaks many languages' is a:", "optionA": "Linguistic teacher", "optionB": "Polyglot", "optionC": "Orator", "optionD": "Bilingual only", "correctOption": "B", "explanation": "A polyglot knows or uses several languages.", "marks": 1 },
+      { "question": "The passive voice of 'The teacher punished the boy' is:", "optionA": "The boy is punished by the teacher.", "optionB": "The boy was punished by the teacher.", "optionC": "The boy punished the teacher.", "optionD": "The boy has punish by the teacher.", "correctOption": "B", "explanation": "Past Simple passive: was + past participle — 'The boy was punished by the teacher.'", "marks": 1 },
+      { "question": "Choose the correct indirect speech of: Ali said, 'I will go.'", "optionA": "Ali said that he will go.", "optionB": "Ali said that he would go.", "optionC": "Ali said that I will go.", "optionD": "Ali says that he would went.", "correctOption": "B", "explanation": "In reported speech 'will' changes to 'would' after a past reporting verb.", "marks": 1 },
+      { "question": "Fill in the blank: 'He is fond ___ music.'", "optionA": "Of", "optionB": "With", "optionC": "For", "optionD": "At", "correctOption": "A", "explanation": "The adjective 'fond' is followed by the preposition 'of'.", "marks": 1 },
+      { "question": "The plural of 'criterion' is:", "optionA": "Criterions", "optionB": "Criteria", "optionC": "Criterion", "optionD": "Criterias", "correctOption": "B", "explanation": "'Criterion' is a Greek-origin word whose plural is 'criteria'.", "marks": 1 },
+      { "question": "Choose the correct sentence:", "optionA": "She is good in Mathematics.", "optionB": "She is good at Mathematics.", "optionC": "She is good for Mathematics.", "optionD": "She is good with Mathematics subject the.", "correctOption": "B", "explanation": "We say 'good at' a subject or skill.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Urdu 1st Year — Adab o Qawaid",
+    "classGrade": "11",
+    "subject": "Urdu",
+    "chapter": "Adab o Qawaid",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "'بابائے اردو' کس شخصیت کو کہا جاتا ہے؟", "optionA": "سرسید احمد خان", "optionB": "مولوی عبد الحق", "optionC": "علامہ اقبال", "optionD": "میر تقی میر", "correctOption": "B", "explanation": "اردو زبان و ادب کی خدمات کی بنا پر مولوی عبد الحق کو 'بابائے اردو' کہا جاتا ہے۔", "marks": 1 },
+      { "question": "مرزا غالب کا اصل نام کیا تھا؟", "optionA": "مرزا اسد اللہ خان بیگ", "optionB": "میر محمد تقی", "optionC": "نواب مرزا داغ", "optionD": "مرزا محمد رفیع سودا", "correctOption": "A", "explanation": "غالب کا اصل نام مرزا اسد اللہ خان بیگ تھا؛ 'اسد' اور بعد میں 'غالب' ان کے تخلص رہے۔", "marks": 1 },
+      { "question": "علامہ اقبال کا پہلا اردو شعری مجموعہ کون سا ہے؟", "optionA": "بالِ جبریل", "optionB": "بانگِ درا", "optionC": "ضربِ کلیم", "optionD": "ارمغانِ حجاز", "correctOption": "B", "explanation": "'بانگِ درا' 1924ء میں شائع ہونے والا اقبال کا پہلا اردو مجموعہ کلام ہے۔", "marks": 1 },
+      { "question": "ایک چیز کو کسی دوسری چیز جیسی قرار دینا کیا کہلاتا ہے؟", "optionA": "استعارہ", "optionB": "تشبیہ", "optionC": "کنایہ", "optionD": "مجاز مرسل", "correctOption": "B", "explanation": "جب کسی چیز کو مشترک صفت کی بنا پر دوسری چیز جیسی کہا جائے تو اسے تشبیہ کہتے ہیں۔", "marks": 1 },
+      { "question": "انیس و دبیر کس صنفِ سخن کے لیے سب سے زیادہ مشہور ہیں؟", "optionA": "غزل", "optionB": "قصیدہ", "optionC": "مرثیہ", "optionD": "رباعی", "correctOption": "C", "explanation": "میر انیس اور مرزا دبیر اردو مرثیہ نگاری کے سب سے بڑے نام ہیں۔", "marks": 1 },
+      { "question": "'مقدمہ شعر و شاعری' کے مصنف کون ہیں؟", "optionA": "الطاف حسین حالی", "optionB": "شبلی نعمانی", "optionC": "محمد حسین آزاد", "optionD": "نذیر احمد", "correctOption": "A", "explanation": "مولانا الطاف حسین حالی نے 'مقدمہ شعر و شاعری' لکھ کر اردو تنقید کی بنیاد رکھی۔", "marks": 1 },
+      { "question": "قصیدے میں شاعر عموماً کیا کرتا ہے؟", "optionA": "کسی کی مدح (تعریف)", "optionB": "غم کا اظہار", "optionC": "طنز و مزاح", "optionD": "خط لکھتا ہے", "correctOption": "A", "explanation": "قصیدہ کسی شخصیت کی مدح و ستائش میں کہی جانے والی نظم ہے۔", "marks": 1 },
+      { "question": "مرثیہ زیادہ تر کس موضوع پر لکھا جاتا ہے؟", "optionA": "جنگ کی فتح پر", "optionB": "واقعۂ کربلا اور شہداء کے غم پر", "optionC": "موسمِ بہار کی تعریف پر", "optionD": "شادی کی خوشی پر", "correctOption": "B", "explanation": "مرثیہ حضرت امام حسینؓ اور شہدائے کربلا کے مصائب و فضائل بیان کرنے والی نظم ہے۔", "marks": 1 },
+      { "question": "سرسید احمد خان کا مشہور رسالہ کون سا تھا؟", "optionA": "تہذیب الاخلاق", "optionB": "مخزن", "optionC": "اردوئے معلیٰ", "optionD": "ادبی دنیا", "correctOption": "A", "explanation": "سرسید نے 1870ء میں رسالہ 'تہذیب الاخلاق' جاری کیا جس سے اردو نثر و صحافت کو نئی روح ملی۔", "marks": 1 },
+      { "question": "استعارے اور تشبیہ میں بنیادی فرق کیا ہے؟", "optionA": "استعارے میں اداتِ تشبیہ اور وجہِ تشبیہ حذف ہوتی ہے", "optionB": "استعارہ صرف نثر میں ہوتا ہے", "optionC": "تشبیہ صرف عربی میں ہوتی ہے", "optionD": "دونوں ایک ہی چیز ہیں", "correctOption": "A", "explanation": "استعارے میں مشبہ یا مشبہ بہ میں سے ایک اور اداتِ تشبیہ حذف کر کے لفظ کو اس کے غیر حقیقی معنی میں استعمال کیا جاتا ہے۔", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Chemistry 2nd Year — s and p Block Elements",
+    "classGrade": "12",
+    "subject": "Chemistry",
+    "chapter": "Chapter 2: s and p Block Elements",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "The alkali metals belong to which group of the periodic table?", "optionA": "Group 1", "optionB": "Group 2", "optionC": "Group 17", "optionD": "Group 18", "correctOption": "A", "explanation": "Group 1 elements (Li, Na, K...) are the alkali metals of the s-block.", "marks": 1 },
+      { "question": "The most electronegative element in the periodic table is:", "optionA": "Oxygen", "optionB": "Chlorine", "optionC": "Fluorine", "optionD": "Nitrogen", "correctOption": "C", "explanation": "Fluorine has the highest electronegativity (about 4.0 on the Pauling scale).", "marks": 1 },
+      { "question": "Which pair of elements shows a diagonal relationship?", "optionA": "Na and K", "optionB": "Li and Mg", "optionC": "Be and B", "optionD": "C and Si", "correctOption": "B", "explanation": "Lithium resembles magnesium because of their similar ionic sizes and charge density.", "marks": 1 },
+      { "question": "Across a period from left to right, atomic radius generally:", "optionA": "Increases", "optionB": "Decreases", "optionC": "Stays constant", "optionD": "First increases then decreases", "correctOption": "B", "explanation": "Increasing nuclear charge pulls electrons closer, shrinking the atomic radius across a period.", "marks": 1 },
+      { "question": "Across a period, ionization energy generally:", "optionA": "Decreases", "optionB": "Increases", "optionC": "Remains zero", "optionD": "Becomes negative", "correctOption": "B", "explanation": "Smaller size and greater nuclear charge make electrons harder to remove across a period.", "marks": 1 },
+      { "question": "The halogens are placed in group:", "optionA": "Group 16", "optionB": "Group 17", "optionC": "Group 18", "optionD": "Group 1", "correctOption": "B", "explanation": "F, Cl, Br and I are the halogens of Group 17 in the p-block.", "marks": 1 },
+      { "question": "The noble (inert) gases belong to group:", "optionA": "Group 17", "optionB": "Group 2", "optionC": "Group 18", "optionD": "Group 13", "correctOption": "C", "explanation": "Group 18 contains the noble gases with completely filled outer shells.", "marks": 1 },
+      { "question": "Which of the following oxides is amphoteric?", "optionA": "Na2O", "optionB": "MgO", "optionC": "Al2O3", "optionD": "CO2", "correctOption": "C", "explanation": "Aluminium oxide reacts with both acids and bases, so it is amphoteric.", "marks": 1 },
+      { "question": "Down a group, metallic character of elements:", "optionA": "Decreases", "optionB": "Increases", "optionC": "Becomes zero", "optionD": "Remains exactly constant", "correctOption": "B", "explanation": "Atoms get larger down a group, lose electrons more easily, and become more metallic.", "marks": 1 },
+      { "question": "Magnesium burns in air with a bright white flame forming mainly:", "optionA": "MgCl2", "optionB": "MgO", "optionC": "Mg(OH)2", "optionD": "MgCO3", "correctOption": "B", "explanation": "2Mg + O2 → 2MgO; magnesium oxide is the white ash formed (some Mg3N2 also forms).", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Biology 2nd Year — Homeostasis",
+    "classGrade": "12",
+    "subject": "Biology",
+    "chapter": "Chapter 15: Homeostasis",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "Homeostasis is the maintenance of a:", "optionA": "Constant external environment", "optionB": "Constant internal environment", "optionC": "Constant body size", "optionD": "Constant food intake", "correctOption": "B", "explanation": "Homeostasis keeps internal conditions (temperature, water, glucose etc.) stable despite external changes.", "marks": 1 },
+      { "question": "The main excretory organ in human beings is the:", "optionA": "Liver", "optionB": "Kidney", "optionC": "Skin", "optionD": "Lung", "correctOption": "B", "explanation": "The kidneys filter blood and remove nitrogenous wastes as urine.", "marks": 1 },
+      { "question": "The structural and functional unit of the kidney is the:", "optionA": "Neuron", "optionB": "Alveolus", "optionC": "Nephron", "optionD": "Villus", "correctOption": "C", "explanation": "Each kidney contains about a million nephrons that filter blood and form urine.", "marks": 1 },
+      { "question": "Antidiuretic hormone (ADH) mainly controls:", "optionA": "Blood glucose level", "optionB": "Reabsorption of water in the collecting duct", "optionC": "Heart beat rate", "optionD": "Calcium level in blood", "correctOption": "B", "explanation": "ADH (vasopressin) increases water reabsorption, producing concentrated urine when the body is short of water.", "marks": 1 },
+      { "question": "Diabetes insipidus is caused by the deficiency of:", "optionA": "Insulin", "optionB": "ADH (vasopressin)", "optionC": "Thyroxine", "optionD": "Adrenaline", "correctOption": "B", "explanation": "Lack of ADH causes excretion of large volumes of dilute urine — diabetes insipidus.", "marks": 1 },
+      { "question": "In mammals, toxic ammonia is converted into urea in the:", "optionA": "Kidney", "optionB": "Liver", "optionC": "Spleen", "optionD": "Pancreas", "correctOption": "B", "explanation": "The liver converts ammonia to less toxic urea through the ornithine (urea) cycle.", "marks": 1 },
+      { "question": "The temperature-regulating centre of the human brain is located in the:", "optionA": "Cerebrum", "optionB": "Cerebellum", "optionC": "Hypothalamus", "optionD": "Medulla", "correctOption": "C", "explanation": "The hypothalamus acts as the body's thermostat and triggers sweating or shivering.", "marks": 1 },
+      { "question": "Sweating helps the body by:", "optionA": "Warming the skin", "optionB": "Cooling the body through evaporation", "optionC": "Removing urea only", "optionD": "Increasing blood pressure", "correctOption": "B", "explanation": "Evaporation of sweat from the skin surface removes heat and cools the body.", "marks": 1 },
+      { "question": "Ultrafiltration of blood in the nephron takes place in the:", "optionA": "Loop of Henle", "optionB": "Glomerulus and Bowman's capsule", "optionC": "Collecting duct", "optionD": "Ureter", "correctOption": "B", "explanation": "High pressure in the glomerulus forces water and small molecules into Bowman's capsule.", "marks": 1 },
+      { "question": "Birds and desert reptiles excrete nitrogenous waste mainly as:", "optionA": "Ammonia", "optionB": "Urea", "optionC": "Uric acid", "optionD": "Amino acids", "correctOption": "C", "explanation": "Uric acid needs very little water for excretion, an adaptation for water conservation and flight.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Mathematics 2nd Year — Differentiation",
+    "classGrade": "12",
+    "subject": "Mathematics",
+    "chapter": "Chapter 2: Differentiation",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "The derivative of x^5 with respect to x is:", "optionA": "5x^4", "optionB": "x^4", "optionC": "5x^5", "optionD": "x^5 / 5", "correctOption": "A", "explanation": "By the power rule d/dx (x^n) = n x^(n-1), so d/dx (x^5) = 5x^4.", "marks": 1 },
+      { "question": "d/dx (sin x) equals:", "optionA": "-sin x", "optionB": "cos x", "optionC": "-cos x", "optionD": "tan x", "correctOption": "B", "explanation": "The derivative of sin x is cos x.", "marks": 1 },
+      { "question": "d/dx (e^x) equals:", "optionA": "x e^(x-1)", "optionB": "e^x", "optionC": "e^x / x", "optionD": "ln x", "correctOption": "B", "explanation": "e^x is its own derivative.", "marks": 1 },
+      { "question": "The derivative of a constant (7) is:", "optionA": "7", "optionB": "1", "optionC": "0", "optionD": "Undefined", "correctOption": "C", "explanation": "A constant does not change, so its rate of change (derivative) is zero.", "marks": 1 },
+      { "question": "d/dx (ln x) equals:", "optionA": "x", "optionB": "1/x", "optionC": "e^x", "optionD": "1", "correctOption": "B", "explanation": "The derivative of the natural logarithm ln x is 1/x.", "marks": 1 },
+      { "question": "To differentiate y = x^2 sin x, we use the:", "optionA": "Quotient rule", "optionB": "Product rule", "optionC": "Chain rule only on sin", "optionD": "No rule is needed", "correctOption": "B", "explanation": "y is a product of two functions of x, so (uv)' = u v' + v u' (product rule) applies.", "marks": 1 },
+      { "question": "d/dθ (tan θ) equals:", "optionA": "sec^2 θ", "optionB": "-sec^2 θ", "optionC": "cot θ", "optionD": "cosec^2 θ", "correctOption": "A", "explanation": "The derivative of tan θ is sec^2 θ.", "marks": 1 },
+      { "question": "The slope of the curve y = x^2 at x = 1 is:", "optionA": "1", "optionB": "2", "optionC": "0", "optionD": "4", "correctOption": "B", "explanation": "dy/dx = 2x; at x = 1 the slope is 2.", "marks": 1 },
+      { "question": "If y = 3x^2 + 2x, then dy/dx at x = 1 is:", "optionA": "5", "optionB": "8", "optionC": "6", "optionD": "10", "correctOption": "B", "explanation": "dy/dx = 6x + 2; at x = 1, 6 + 2 = 8.", "marks": 1 },
+      { "question": "The chain rule is used to differentiate:", "optionA": "Sums of functions", "optionB": "Composite functions (a function of a function)", "optionC": "Only polynomials", "optionD": "Constants", "correctOption": "B", "explanation": "For y = f(g(x)), dy/dx = f'(g(x)) x g'(x) — the chain rule.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Computer Science 2nd Year — Object-Oriented Programming in C++",
+    "classGrade": "12",
+    "subject": "Computer Science",
+    "chapter": "Object-Oriented Programming in C++",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "Hiding the internal implementation details and showing only the necessary features is called:", "optionA": "Inheritance", "optionB": "Abstraction", "optionC": "Polymorphism", "optionD": "Compilation", "correctOption": "B", "explanation": "Abstraction shows essential features while hiding background implementation details.", "marks": 1 },
+      { "question": "A class in C++ is best described as a:", "optionA": "Built-in data type only", "optionB": "Blueprint or template for creating objects", "optionC": "Loop structure", "optionD": "Header file", "correctOption": "B", "explanation": "A class defines the data and functions; objects are its instances, just as a house is built from a blueprint.", "marks": 1 },
+      { "question": "A constructor is a special member function that:", "optionA": "Destroys objects", "optionB": "Has the same name as the class and initializes objects", "optionC": "Prints output", "optionD": "Is written outside the class always", "correctOption": "B", "explanation": "Constructors have the same name as the class, no return type, and run automatically when an object is created.", "marks": 1 },
+      { "question": "Inheritance in OOP mainly provides:", "optionA": "Code reusability", "optionB": "Slower programs", "optionC": "More syntax errors", "optionD": "Automatic documentation", "correctOption": "A", "explanation": "A derived class reuses the properties and methods of its base class, avoiding rewriting code.", "marks": 1 },
+      { "question": "The '::' operator in C++ is called the:", "optionA": "Scope resolution operator", "optionB": "Pointer operator", "optionC": "Stream operator", "optionD": "Assignment operator", "correctOption": "A", "explanation": "'::' is the scope resolution operator, used to define member functions outside the class or access global scope.", "marks": 1 },
+      { "question": "Function overloading is an example of:", "optionA": "Runtime polymorphism", "optionB": "Compile-time polymorphism", "optionC": "Inheritance", "optionD": "Encapsulation", "correctOption": "B", "explanation": "Overloaded functions are resolved by the compiler from argument lists — compile-time (static) polymorphism.", "marks": 1 },
+      { "question": "A destructor in C++ is identified by the symbol:", "optionA": "#", "optionB": "~ (tilde) before the class name", "optionC": "!", "optionD": "$", "correctOption": "B", "explanation": "A destructor has the same name as the class prefixed with a tilde, e.g. ~Student().", "marks": 1 },
+      { "question": "In C++, 'cout' is an object of which class?", "optionA": "istream", "optionB": "ostream", "optionC": "fstream", "optionD": "iostream file class", "correctOption": "B", "explanation": "cout is a predefined object of the ostream class used with the insertion operator << for output.", "marks": 1 },
+      { "question": "In C++, a class is defined using the keyword:", "optionA": "struct only", "optionB": "class", "optionC": "object", "optionD": "define", "correctOption": "B", "explanation": "The 'class' keyword declares a user-defined type grouping data and functions.", "marks": 1 },
+      { "question": "Wrapping data and the functions that work on it into a single unit is called:", "optionA": "Abstraction", "optionB": "Encapsulation", "optionC": "Inheritance", "optionD": "Polymorphism", "correctOption": "B", "explanation": "Encapsulation binds data members and member functions together inside a class and protects data via access specifiers.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: English 2nd Year — Grammar & Vocabulary",
+    "classGrade": "12",
+    "subject": "English",
+    "chapter": "Grammar & Vocabulary",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "Choose the correct sentence:", "optionA": "I am waiting since morning.", "optionB": "I have been waiting since morning.", "optionC": "I has been waiting since morning.", "optionD": "I waiting since morning.", "correctOption": "B", "explanation": "For an action continuing from a past point of time we use Present Perfect Continuous with since/for.", "marks": 1 },
+      { "question": "The synonym of 'abandon' is:", "optionA": "Keep", "optionB": "Give up", "optionC": "Build", "optionD": "Cherish", "correctOption": "B", "explanation": "To abandon something means to give it up completely.", "marks": 1 },
+      { "question": "The antonym of 'transparent' is:", "optionA": "Clear", "optionB": "Opaque", "optionC": "Bright", "optionD": "Smooth", "correctOption": "B", "explanation": "Transparent (see-through) is the opposite of opaque (not see-through).", "marks": 1 },
+      { "question": "The idiom 'once in a blue moon' means:", "optionA": "Every night", "optionB": "Very rarely", "optionC": "In the evening", "optionD": "Very quickly", "correctOption": "B", "explanation": "'Once in a blue moon' describes something that happens extremely rarely.", "marks": 1 },
+      { "question": "The passive voice of 'Someone stole my watch' is:", "optionA": "My watch is stolen by someone.", "optionB": "My watch was stolen.", "optionC": "My watch has stole.", "optionD": "My watch was being steal.", "correctOption": "B", "explanation": "Past Simple passive with an unknown agent: 'My watch was stolen.' (agent usually omitted).", "marks": 1 },
+      { "question": "Choose the correct indirect speech of: She said, 'I have seen the film.'", "optionA": "She said that she has seen the film.", "optionB": "She said that she had seen the film.", "optionC": "She said that I have seen the film.", "optionD": "She says she had saw the film.", "correctOption": "B", "explanation": "Present Perfect in direct speech changes to Past Perfect in reported speech: 'had seen'.", "marks": 1 },
+      { "question": "Fill in the blank: 'He is senior ___ me.'", "optionA": "Than", "optionB": "To", "optionC": "From", "optionD": "By", "correctOption": "B", "explanation": "Adjectives like senior, junior, superior and prefer take 'to', not 'than'.", "marks": 1 },
+      { "question": "One word substitution: 'A place where birds are kept' is an:", "optionA": "Apiary", "optionB": "Aviary", "optionC": "Aquarium", "optionD": "Stable", "correctOption": "B", "explanation": "An aviary is a large enclosure for keeping birds (apiary is for bees).", "marks": 1 },
+      { "question": "Choose the correctly spelt word:", "optionA": "Occurence", "optionB": "Occurrence", "optionC": "Ocurrence", "optionD": "Occurrance", "correctOption": "B", "explanation": "The correct spelling is 'occurrence' — double c and double r.", "marks": 1 },
+      { "question": "The past participle of 'write' is:", "optionA": "Wrote", "optionB": "Writing", "optionC": "Written", "optionD": "Writes", "correctOption": "C", "explanation": "Write - wrote - written; the third form (past participle) is 'written'.", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Urdu 2nd Year — Adab o Qawaid",
+    "classGrade": "12",
+    "subject": "Urdu",
+    "chapter": "Adab o Qawaid",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "جدید اردو نثر کی بنیاد رکھنے میں سب سے اہم کردار کس تحریک کا ہے؟", "optionA": "علی گڑھ تحریک", "optionB": "رومی تحریک", "optionC": "ترقی پسند تحریک", "optionD": "خلافت تحریک", "correctOption": "A", "explanation": "سرسید احمد خان کی علی گڑھ تحریک نے جدید اردو نثر، مضمون نویسی اور صحافت کی بنیاد رکھی۔", "marks": 1 },
+      { "question": "'شاہنامہ اسلام' کے مصنف کون ہیں؟", "optionA": "حفیظ جالندھری", "optionB": "جوش ملیح آبادی", "optionC": "فیض احمد فیض", "optionD": "احمد ندیم قاسمی", "correctOption": "A", "explanation": "حفیظ جالندھری نے اسلامی تاریخ پر مشہور طویل نظم 'شاہنامہ اسلام' لکھی؛ وہ قومی ترانے کے خالق بھی ہیں۔", "marks": 1 },
+      { "question": "میر تقی میر کو کس لقب سے یاد کیا جاتا ہے؟", "optionA": "بابائے اردو", "optionB": "خدائے سخن", "optionC": "شاعرِ مشرق", "optionD": "لسان الغیب", "correctOption": "B", "explanation": "میر تقی میر کو اردو غزل کی عظمت کی بنا پر 'خدائے سخن' کہا جاتا ہے۔", "marks": 1 },
+      { "question": "مثنوی 'سحر البیان' کے شاعر کون ہیں؟", "optionA": "میر حسن", "optionB": "دیا شنکر نسیم", "optionC": "مرزا شوق", "optionD": "انشا اللہ خان", "correctOption": "A", "explanation": "میر حسن کی مثنوی 'سحر البیان' اردو کی مشہور ترین مثنویوں میں شمار ہوتی ہے۔", "marks": 1 },
+      { "question": "'آبِ حیات' کے مصنف کون ہیں؟", "optionA": "محمد حسین آزاد", "optionB": "رتن ناتھ سرشار", "optionC": "نذیر احمد", "optionD": "عبد الحلیم شرر", "correctOption": "A", "explanation": "محمد حسین آزاد کی 'آبِ حیات' اردو شعراء کے تذکرے اور تنقید کی بنیادی کتاب ہے۔", "marks": 1 },
+      { "question": "حالی کی مشہور مسدس کا اصل نام کیا ہے؟", "optionA": "مدوجزر اسلام", "optionB": "شکوہ", "optionC": "مسدس بد حالی", "optionD": "مدحِ حالی", "correctOption": "A", "explanation": "'مسدس حالی' کا اصل عنوان 'مدوجزر اسلام' ہے جو 1879ء میں شائع ہوئی۔", "marks": 1 },
+      { "question": "ترقی پسند ادبی تحریک کا آغاز کس سن میں ہوا؟", "optionA": "1919ء", "optionB": "1936ء", "optionC": "1947ء", "optionD": "1857ء", "correctOption": "B", "explanation": "ترقی پسند مصنفین کی پہلی کانفرنس 1936ء میں لکھنؤ میں ہوئی جس سے تحریک کا باقاعدہ آغاز ہوا۔", "marks": 1 },
+      { "question": "اردو افسانے کے بانیوں میں سب سے نمایاں نام کس کا ہے؟", "optionA": "پریم چند", "optionB": "سعادت حسن منٹو", "optionC": "کرشن چندر", "optionD": "اشفاق احمد", "correctOption": "A", "explanation": "پریم چند کو اردو (اور ہندی) افسانے کا بانی اور سب سے بڑا افسانہ نگار مانا جاتا ہے۔", "marks": 1 },
+      { "question": "غالب کے خطوط کی سب سے بڑی خصوصیت کیا ہے؟", "optionA": "طویل مذہبی بحث", "optionB": "خط کتابت کو مکالمے اور ادبی رنگ دینا", "optionC": "صرف کاروباری باتیں", "optionD": "فارسی اشعار کی بھرمار", "correctOption": "B", "explanation": "غالب نے اردو خطوط کو رسمی انداز سے نکال کر بے تکلف مکالماتی اور ادبی اسلوب دیا۔", "marks": 1 },
+      { "question": "'شاعرِ مشرق' کس کا لقب ہے؟", "optionA": "علامہ محمد اقبال", "optionB": "مرزا غالب", "optionC": "میر انیس", "optionD": "جوش ملیح آبادی", "correctOption": "A", "explanation": "علامہ محمد اقبال کو 'شاعرِ مشرق'، 'مفکرِ پاکستان' اور 'حکیم الامت' کے القاب سے یاد کیا جاتا ہے۔", "marks": 1 }
+    ]
+  },
+  {
+    "title": "Daily Quiz: Pakistan Studies Class 12 — Constitutional Development of Pakistan",
+    "classGrade": "12",
+    "subject": "Pakistan Studies",
+    "chapter": "Constitution & Political Development",
+    "timeLimit": 600,
+    "isDaily": true,
+    "questions": [
+      { "question": "The present Constitution of Pakistan was adopted in:", "optionA": "1956", "optionB": "1962", "optionC": "1973", "optionD": "1985", "correctOption": "C", "explanation": "The unanimous Constitution of 1973 was adopted on 10 April 1973 and enforced on 14 August 1973.", "marks": 1 },
+      { "question": "The first woman Prime Minister of Pakistan was:", "optionA": "Fatima Jinnah", "optionB": "Benazir Bhutto", "optionC": "Hina Rabbani Khar", "optionD": "Asma Jahangir", "correctOption": "B", "explanation": "Benazir Bhutto became Prime Minister in 1988 — the first woman to lead a Muslim-majority country as PM.", "marks": 1 },
+      { "question": "Pakistan became a member of the United Nations in:", "optionA": "1947", "optionB": "1950", "optionC": "1955", "optionD": "1960", "correctOption": "A", "explanation": "Pakistan joined the UN on 30 September 1947, weeks after independence.", "marks": 1 },
+      { "question": "The Simla Agreement between Pakistan and India was signed in:", "optionA": "1966", "optionB": "1972", "optionC": "1974", "optionD": "1999", "correctOption": "B", "explanation": "The Simla Agreement was signed on 2 July 1972 after the 1971 war.", "marks": 1 },
+      { "question": "The first Martial Law in Pakistan was imposed in:", "optionA": "1953", "optionB": "1958", "optionC": "1969", "optionD": "1977", "correctOption": "B", "explanation": "On 7 October 1958, President Iskander Mirza abrogated the constitution and imposed martial law; Ayub Khan soon took over.", "marks": 1 },
+      { "question": "The Objectives Resolution became a substantive part of the Constitution as Article 2-A in:", "optionA": "1973", "optionB": "1979", "optionC": "1985", "optionD": "2010", "correctOption": "C", "explanation": "Through the Revival of Constitution Order 1985, the Objectives Resolution was inserted as Article 2-A.", "marks": 1 },
+      { "question": "Under Article 251 of the 1973 Constitution, the national language of Pakistan is:", "optionA": "English", "optionB": "Urdu", "optionC": "Punjabi", "optionD": "Arabic", "correctOption": "B", "explanation": "Article 251 declares Urdu the national language of Pakistan.", "marks": 1 },
+      { "question": "The term (duration) of the National Assembly of Pakistan is:", "optionA": "4 years", "optionB": "5 years", "optionC": "6 years", "optionD": "3 years", "correctOption": "B", "explanation": "The National Assembly is elected for a term of five years unless dissolved earlier.", "marks": 1 },
+      { "question": "Geographically, Pakistan is located in the region of:", "optionA": "Central Asia", "optionB": "South Asia", "optionC": "Far East", "optionD": "Middle East", "correctOption": "B", "explanation": "Pakistan lies in South Asia, bordered by Iran, Afghanistan, China and India.", "marks": 1 },
+      { "question": "The China-Pakistan Economic Corridor (CPEC) agreements were formally launched in:", "optionA": "2013", "optionB": "2015", "optionC": "2018", "optionD": "2020", "correctOption": "B", "explanation": "CPEC agreements worth billions of dollars were signed during the Chinese President's visit to Pakistan in April 2015.", "marks": 1 }
+    ]
+  }
+]
