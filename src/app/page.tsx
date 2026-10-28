@@ -309,22 +309,62 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Photo row with the text sections */}
-      <section className="bg-slate-50 dark:bg-slate-950 pb-4">
+      {/* Explore Tiles — every picture is a button to its section */}
+      <section className="bg-slate-50 dark:bg-slate-950 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-700 dark:text-emerald-400">
+              Tap a Picture to Explore
+            </span>
+            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
+              Explore Study Hub
+            </h2>
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
+              Har picture aik button hai — jis section mein jana hai, us ki picture ko touch karo.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Link
+              href="/past-papers"
+              className="group relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800 block"
+            >
+              <img
+                src="/tile-papers.webp"
+                alt="Stacks of board exam past papers"
+                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
+                <div className="text-white font-bold text-base">Past Papers</div>
+                <div className="text-emerald-200 text-xs">Har subject ke asal FBISE papers</div>
+              </div>
+            </Link>
             <Link
               href="/quizzes"
               className="group relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800 block"
             >
               <img
-                src="/smart-class.webp"
-                alt="Students learning in a smart classroom"
-                className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+                src="/tile-quiz.webp"
+                alt="Students taking a daily quiz"
+                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
-                <div className="text-white font-bold text-base">Smart Classes</div>
-                <div className="text-emerald-200 text-xs">Daily quizzes &amp; chapter-wise practice</div>
+                <div className="text-white font-bold text-base">Daily Quizzes</div>
+                <div className="text-emerald-200 text-xs">Roz naye MCQs — touch karo, quiz shuru</div>
+              </div>
+            </Link>
+            <Link
+              href="/ai-paper-check"
+              className="group relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800 block"
+            >
+              <img
+                src="/tile-checking.webp"
+                alt="A paper being checked with a red pen"
+                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
+                <div className="text-white font-bold text-base">AI Paper Checker</div>
+                <div className="text-emerald-200 text-xs">Apna solved paper check karwao</div>
               </div>
             </Link>
             <Link
@@ -332,13 +372,13 @@ export default function HomePage() {
               className="group relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800 block"
             >
               <img
-                src="/awards.webp"
-                alt="Top students receiving awards and certificates"
-                className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+                src="/tile-trophy.webp"
+                alt="Students celebrating with a trophy"
+                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
-                <div className="text-white font-bold text-base">Award Winners</div>
-                <div className="text-emerald-200 text-xs">Meet the board toppers &amp; achievers</div>
+                <div className="text-white font-bold text-base">Leaderboard</div>
+                <div className="text-emerald-200 text-xs">Top students ki list dekho</div>
               </div>
             </Link>
           </div>
@@ -348,17 +388,6 @@ export default function HomePage() {
       {/* Core Platform Highlights: 4 Major Pillars */}
       <section className="py-16 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800 mb-12">
-            <img
-              src="/study-library.webp"
-              alt="Students studying together in a library"
-              className="w-full h-52 sm:h-64 object-cover"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-emerald-950/85 to-transparent px-5 pb-3 pt-12">
-              <div className="text-white font-bold text-base sm:text-lg">Study Together, Achieve Together</div>
-              <div className="text-emerald-200 text-xs">Notes, papers &amp; quizzes — everything in one place</div>
-            </div>
-          </div>
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs font-extrabold uppercase tracking-widest text-amber-600 dark:text-amber-400">
               Complete Preparation Ecosystem
