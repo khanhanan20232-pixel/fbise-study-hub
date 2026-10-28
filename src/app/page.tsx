@@ -309,9 +309,56 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Photo row with the text sections */}
+      <section className="bg-slate-50 dark:bg-slate-950 pb-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <Link
+              href="/quizzes"
+              className="group relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800 block"
+            >
+              <img
+                src="/smart-class.webp"
+                alt="Students learning in a smart classroom"
+                className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
+                <div className="text-white font-bold text-base">Smart Classes</div>
+                <div className="text-emerald-200 text-xs">Daily quizzes &amp; chapter-wise practice</div>
+              </div>
+            </Link>
+            <Link
+              href="/leaderboard"
+              className="group relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800 block"
+            >
+              <img
+                src="/awards.webp"
+                alt="Top students receiving awards and certificates"
+                className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
+                <div className="text-white font-bold text-base">Award Winners</div>
+                <div className="text-emerald-200 text-xs">Meet the board toppers &amp; achievers</div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Core Platform Highlights: 4 Major Pillars */}
       <section className="py-16 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800 mb-12">
+            <img
+              src="/study-library.webp"
+              alt="Students studying together in a library"
+              className="w-full h-52 sm:h-64 object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-emerald-950/85 to-transparent px-5 pb-3 pt-12">
+              <div className="text-white font-bold text-base sm:text-lg">Study Together, Achieve Together</div>
+              <div className="text-emerald-200 text-xs">Notes, papers &amp; quizzes — everything in one place</div>
+            </div>
+          </div>
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs font-extrabold uppercase tracking-widest text-amber-600 dark:text-amber-400">
               Complete Preparation Ecosystem
