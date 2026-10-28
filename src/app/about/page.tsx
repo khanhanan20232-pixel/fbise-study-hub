@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { GraduationCap, Award, BookOpen, Sparkles, Heart, Shield, CheckCircle2, ArrowRight } from 'lucide-react';
+import { GraduationCap, Award, BookOpen, Sparkles, Heart, Shield, CheckCircle2, ArrowRight, Target } from 'lucide-react';
 
 export default function AboutPage() {
   return (
@@ -21,6 +21,28 @@ export default function AboutPage() {
             The premier educational platform crafted specifically to empower students appearing for
             Federal Board of Intermediate and Secondary Education (FBISE) Islamabad examinations.
           </p>
+        </div>
+
+        {/* Our Goal */}
+        <div className="p-8 sm:p-10 rounded-3xl bg-fbise-600 text-white shadow-xl space-y-5">
+          <div className="flex items-center space-x-3">
+            <span className="inline-flex w-11 h-11 rounded-xl bg-white/15 items-center justify-center">
+              <Target className="w-6 h-6 text-amber-300" />
+            </span>
+            <h2 className="text-xl sm:text-2xl font-black">Our Goal</h2>
+          </div>
+          <p className="text-sm sm:text-base text-emerald-50 leading-relaxed">
+            The goal of FBISE Study Hub is simple: to give <strong>every Federal Board student</strong> —
+            in Islamabad, the cantonments, and overseas — <strong>completely free</strong> access to
+            authentic board past papers, SLO-based model papers, daily practice quizzes, and AI-powered
+            paper checking, all in one place, so that no student is ever held back by expensive tuition
+            or unreliable study material.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-semibold">
+            <div className="rounded-xl bg-white/10 px-4 py-3">100% free for every student</div>
+            <div className="rounded-xl bg-white/10 px-4 py-3">Authentic FBISE material in one place</div>
+            <div className="rounded-xl bg-white/10 px-4 py-3">Better marks through daily practice &amp; instant feedback</div>
+          </div>
         </div>
 
         {/* Mission & Purpose */}
@@ -70,13 +92,17 @@ export default function AboutPage() {
           </div>
 
           <h2 className="text-2xl sm:text-3xl font-black text-white">
-            Developed by Team Khan Hanan
+            Developed by Team Hanan Khan
           </h2>
+          <p className="text-sm sm:text-base font-bold text-amber-300">
+            FG Science Degree College for Men, Wah Cantt
+          </p>
 
           <p className="text-xs sm:text-sm text-emerald-100/90 max-w-xl mx-auto leading-relaxed">
-            FBISE Study Hub was architected and built by <strong>Team Khan Hanan</strong> as an
-            independent educational innovation project dedicated to improving academic outcomes,
-            conceptual learning, and digital access for Pakistani secondary and intermediate students.
+            FBISE Study Hub was architected and built by <strong>Team Hanan Khan</strong> of
+            <strong> FG Science Degree College for Men, Wah Cantt</strong>, as an educational
+            innovation project dedicated to improving academic outcomes, conceptual learning,
+            and digital access for Pakistani secondary and intermediate students.
           </p>
 
           <div className="pt-4 flex items-center justify-center space-x-2 text-xs text-amber-300 font-semibold">
