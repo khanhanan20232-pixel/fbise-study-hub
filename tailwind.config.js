@@ -9,18 +9,21 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // FBISE board identity — anchored on the official fbise.edu.pk
+        // brand green #007b5e (sampled from the live site's own styles),
+        // deepened to #002a20 for header bands and the footer.
         fbise: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#064e3b',
-          950: '#022c22',
+          50: '#eefaf4',
+          100: '#d8f3e5',
+          200: '#b0e6cd',
+          300: '#7dd1ad',
+          400: '#43b588',
+          500: '#1f9d6c',
+          600: '#007b5e',
+          700: '#00644c',
+          800: '#00523f',
+          900: '#003e30',
+          950: '#002a20',
         },
         gold: {
           50: '#fffbeb',
