@@ -108,7 +108,7 @@ Instructions:
             ],
             generationConfig: {
               responseMimeType: 'application/json',
-              temperature: 0.2,
+              temperature: 0.2, thinkingConfig: { thinkingBudget: 0 },
             },
           }),
         }
@@ -116,9 +116,9 @@ Instructions:
 
       if (response.ok) {
         const data = await response.json();
-        const jsonText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        const parts = data.candidates?.[0]?.content?.parts || []; const jsonText = parts.filter((p: any) => p && typeof p.text === 'string' && !p.thought).map((p: any) => p.text).join('');
         if (jsonText) {
-          const parsed = JSON.parse(jsonText);
+          const parsed = JSON.parse(jsonText.replace(/```json|```/g, '').trim());
           return parsed;
         }
       }
