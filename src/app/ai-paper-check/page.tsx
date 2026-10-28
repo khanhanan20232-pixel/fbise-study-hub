@@ -19,8 +19,10 @@ import {
   HelpCircle,
   ChevronDown,
   Info,
+  Eye,
 } from 'lucide-react';
 import { PaperEvaluationReport } from '@/lib/ai-checker';
+import PdfViewerModal from '@/components/PdfViewerModal';
 
 function AiPaperCheckerContent() {
   const router = useRouter();
@@ -35,6 +37,20 @@ function AiPaperCheckerContent() {
   // Form State
   const [classGrade, setClassGrade] = useState<string>(queryClass);
   const [subject, setSubject] = useState<string>(querySubject);
+
+  // Paper Selection State — selecting a paper OPENS it so the student can
+  // read the questions before writing answers.
+  const [availablePapers, setAvailablePapers] = useState<any[]>([]);
+  const [papersLoading, setPapersLoading] = useState<boolean>(false);
+  const [selectedPaperId, setSelectedPaperId] = useState<string>(queryPaperId);
+  const [pdfModalOpen, setPdfModalOpen] = useState<boolean>(false);
+  const [selectedPdf, setSelectedPdf] = useState<{
+    title: string;
+    fileUrl: string;
+    paperId?: string;
+    subject?: string;
+    classGrade?: string;
+  } | null>(null);
   const [submissionType, setSubmissionType] = useState<'TYPED' | 'FILE_UPLOAD'>('TYPED');
   const [typedAnswers, setTypedAnswers] = useState<string>('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -61,6 +77,57 @@ function AiPaperCheckerContent() {
       fetchExistingReport(queryReportId);
     }
   }, [queryReportId, user]);
+
+  // Load the papers available for the chosen class + subject
+  useEffect(() => {
+    if (!user) return;
+    let cancelled = false;
+    setPapersLoading(true);
+    fetch(`/api/papers?classGrade=${classGrade}&subject=${encodeURIComponent(subject)}`)
+      .then((res) => (res.ok ? res.json() : { papers: [] }))
+      .then((data) => {
+        if (cancelled) return;
+        const list = data.papers || [];
+        setAvailablePapers(list);
+        // Keep the paper that was passed in the URL selected (without forcing
+        // the viewer open — the student already came from that paper).
+        if (queryPaperId && list.some((p: any) => p.id === queryPaperId)) {
+          setSelectedPaperId(queryPaperId);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setAvailablePapers([]);
+      })
+      .finally(() => {
+        if (!cancelled) setPapersLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [classGrade, subject, user, queryPaperId]);
+
+  const openPaperInViewer = (paper: any) => {
+    if (!paper) return;
+    // fileUrl is a /uploads/papers/*.pdf path; next.config.js redirects it to
+    // the official FBISE PDF, and PdfViewerModal opens it through that URL.
+    setSelectedPdf({
+      title: paper.title,
+      fileUrl: paper.fileUrl,
+      paperId: paper.id,
+      subject: paper.subject,
+      classGrade: paper.classGrade,
+    });
+    setPdfModalOpen(true);
+  };
+
+  // Selecting a paper immediately opens it for reading.
+  const handlePaperSelect = (paperId: string) => {
+    setSelectedPaperId(paperId);
+    const paper = availablePapers.find((p) => p.id === paperId);
+    if (paper) openPaperInViewer(paper);
+  };
+
+  const selectedPaper = availablePapers.find((p) => p.id === selectedPaperId) || null;
 
   const fetchExistingReport = async (id: string) => {
     setIsEvaluating(true);
@@ -155,7 +222,8 @@ s = 1 * 100 = 100 meters.`
       formData.append('subject', subject);
       formData.append('classGrade', classGrade);
       formData.append('submissionType', submissionType);
-      if (queryPaperId) formData.append('paperId', queryPaperId);
+      const paperIdToSubmit = selectedPaperId || queryPaperId;
+      if (paperIdToSubmit) formData.append('paperId', paperIdToSubmit);
 
       if (submissionType === 'TYPED') {
         formData.append('typedAnswers', typedAnswers);
@@ -203,13 +271,14 @@ s = 1 * 100 = 100 meters.`
     setReportMeta(null);
     setTypedAnswers('');
     setSelectedFile(null);
+    setSelectedPaperId('');
   };
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Banner */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-950 via-slate-900 to-amber-950 text-white p-6 sm:p-10 shadow-xl border border-amber-500/30">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-fbise-950 via-slate-900 to-amber-950 text-white p-6 sm:p-10 shadow-xl border border-amber-500/30">
           <div className="relative z-10 max-w-3xl space-y-3">
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold bg-amber-400 text-slate-950 shadow-sm">
               <Sparkles className="w-3.5 h-3.5" />
@@ -255,6 +324,20 @@ s = 1 * 100 = 100 meters.`
           </div>
         )}
 
+        {/* Paper Viewer — opens the selected paper through its
+            /uploads/papers/*.pdf URL (redirected to the official FBISE PDF) */}
+        {selectedPdf && (
+          <PdfViewerModal
+            isOpen={pdfModalOpen}
+            onClose={() => setPdfModalOpen(false)}
+            title={selectedPdf.title}
+            fileUrl={selectedPdf.fileUrl}
+            paperId={selectedPdf.paperId}
+            subject={selectedPdf.subject}
+            classGrade={selectedPdf.classGrade}
+          />
+        )}
+
         {/* REPORT VIEW (When Evaluation is Complete) */}
         {report ? (
           <div className="space-y-6">
@@ -271,7 +354,7 @@ s = 1 * 100 = 100 meters.`
               <div className="flex items-center space-x-3 w-full sm:w-auto">
                 <Link
                   href="/dashboard"
-                  className="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold text-xs hover:bg-emerald-100 flex items-center justify-center space-x-1"
+                  className="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-fbise-50 dark:bg-fbise-950 text-fbise-800 dark:text-fbise-300 font-bold text-xs hover:bg-fbise-100 flex items-center justify-center space-x-1"
                 >
                   <CheckCircle2 className="w-4 h-4" />
                   <span>Saved to Dashboard</span>
@@ -279,7 +362,7 @@ s = 1 * 100 = 100 meters.`
 
                 <button
                   onClick={handlePrint}
-                  className="flex-1 sm:flex-none px-5 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs flex items-center justify-center space-x-1.5 shadow-sm transition-colors"
+                  className="flex-1 sm:flex-none px-5 py-2 rounded-xl bg-fbise-800 hover:bg-fbise-900 text-white font-bold text-xs flex items-center justify-center space-x-1.5 shadow-sm transition-colors"
                 >
                   <Printer className="w-4 h-4" />
                   <span>Print / Save PDF Report</span>
@@ -290,8 +373,8 @@ s = 1 * 100 = 100 meters.`
             {/* PRINTABLE ASSESSMENT REPORT DOCUMENT */}
             <div className="p-6 sm:p-10 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl space-y-8 print:border-none print:shadow-none print:p-0">
               {/* Document Official Header */}
-              <div className="border-b-2 border-emerald-900/20 dark:border-emerald-500/30 pb-6 text-center space-y-2">
-                <div className="text-xs uppercase tracking-widest font-extrabold text-emerald-800 dark:text-emerald-400">
+              <div className="border-b-2 border-fbise-900/20 dark:border-fbise-500/30 pb-6 text-center space-y-2">
+                <div className="text-xs uppercase tracking-widest font-extrabold text-fbise-800 dark:text-fbise-400">
                   Federal Board of Intermediate and Secondary Education, Islamabad
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
@@ -309,28 +392,28 @@ s = 1 * 100 = 100 meters.`
               </div>
 
               {/* Total Marks & Grade Banner */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-6 rounded-2xl bg-gradient-to-r from-emerald-900 to-slate-900 text-white shadow-md">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-6 rounded-2xl bg-gradient-to-r from-fbise-900 to-slate-900 text-white shadow-md">
                 <div className="text-center sm:text-left space-y-1">
-                  <p className="text-xs uppercase tracking-wider text-emerald-200 font-bold">Marks Awarded</p>
+                  <p className="text-xs uppercase tracking-wider text-fbise-200 font-bold">Marks Awarded</p>
                   <p className="text-3xl sm:text-4xl font-black text-amber-400">
                     {report.totalObtainedMarks} <span className="text-lg text-white font-normal">/ {report.totalMaxMarks}</span>
                   </p>
                 </div>
 
                 <div className="text-center space-y-1 border-t sm:border-t-0 sm:border-x border-white/10 pt-3 sm:pt-0">
-                  <p className="text-xs uppercase tracking-wider text-emerald-200 font-bold">Percentage</p>
+                  <p className="text-xs uppercase tracking-wider text-fbise-200 font-bold">Percentage</p>
                   <p className="text-3xl sm:text-4xl font-black text-white">{report.percentage}%</p>
                 </div>
 
                 <div className="text-center sm:text-right space-y-1 border-t sm:border-t-0 border-white/10 pt-3 sm:pt-0">
-                  <p className="text-xs uppercase tracking-wider text-emerald-200 font-bold">FBISE Letter Grade</p>
+                  <p className="text-xs uppercase tracking-wider text-fbise-200 font-bold">FBISE Letter Grade</p>
                   <p className="text-3xl sm:text-4xl font-black text-amber-400">{report.grade}</p>
                 </div>
               </div>
 
               {/* Assessor Remarks */}
               <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1.5">
-                <span className="font-bold text-xs uppercase tracking-wider text-emerald-800 dark:text-emerald-400">
+                <span className="font-bold text-xs uppercase tracking-wider text-fbise-800 dark:text-fbise-400">
                   Chief Examiner Overall Remarks:
                 </span>
                 <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
@@ -348,11 +431,11 @@ s = 1 * 100 = 100 meters.`
                     <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 space-y-2">
                       <div className="flex justify-between text-xs font-bold">
                         <span className="text-slate-700 dark:text-slate-300">Conceptual Clarity</span>
-                        <span className="text-emerald-700 dark:text-emerald-400">{report.rubricsEvaluation.conceptualClarity}/10</span>
+                        <span className="text-fbise-700 dark:text-fbise-400">{report.rubricsEvaluation.conceptualClarity}/10</span>
                       </div>
                       <div className="h-2 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-emerald-600 rounded-full"
+                          className="h-full bg-fbise-600 rounded-full"
                           style={{ width: `${report.rubricsEvaluation.conceptualClarity * 10}%` }}
                         ></div>
                       </div>
@@ -361,7 +444,7 @@ s = 1 * 100 = 100 meters.`
                     <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 space-y-2">
                       <div className="flex justify-between text-xs font-bold">
                         <span className="text-slate-700 dark:text-slate-300">Diagrams & Presentation</span>
-                        <span className="text-emerald-700 dark:text-emerald-400">{report.rubricsEvaluation.presentationAndDiagrams}/10</span>
+                        <span className="text-fbise-700 dark:text-fbise-400">{report.rubricsEvaluation.presentationAndDiagrams}/10</span>
                       </div>
                       <div className="h-2 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
                         <div
@@ -374,11 +457,11 @@ s = 1 * 100 = 100 meters.`
                     <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 space-y-2">
                       <div className="flex justify-between text-xs font-bold">
                         <span className="text-slate-700 dark:text-slate-300">FBISE Keyword Adherence</span>
-                        <span className="text-emerald-700 dark:text-emerald-400">{report.rubricsEvaluation.fbiseKeywordAdherence}/10</span>
+                        <span className="text-fbise-700 dark:text-fbise-400">{report.rubricsEvaluation.fbiseKeywordAdherence}/10</span>
                       </div>
                       <div className="h-2 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-teal-600 rounded-full"
+                          className="h-full bg-fbise-600 rounded-full"
                           style={{ width: `${report.rubricsEvaluation.fbiseKeywordAdherence * 10}%` }}
                         ></div>
                       </div>
@@ -387,7 +470,7 @@ s = 1 * 100 = 100 meters.`
                     <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 space-y-2">
                       <div className="flex justify-between text-xs font-bold">
                         <span className="text-slate-700 dark:text-slate-300">Mathematical Steps & Structure</span>
-                        <span className="text-emerald-700 dark:text-emerald-400">{report.rubricsEvaluation.timeAndStructureEfficiency}/10</span>
+                        <span className="text-fbise-700 dark:text-fbise-400">{report.rubricsEvaluation.timeAndStructureEfficiency}/10</span>
                       </div>
                       <div className="h-2 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
                         <div
@@ -403,7 +486,7 @@ s = 1 * 100 = 100 meters.`
               {/* Question-Wise Breakdown */}
               <div className="space-y-4">
                 <h3 className="font-extrabold text-lg text-slate-900 dark:text-white flex items-center space-x-2">
-                  <FileText className="w-5 h-5 text-emerald-700 dark:text-emerald-400" />
+                  <FileText className="w-5 h-5 text-fbise-700 dark:text-fbise-400" />
                   <span>Question-by-Question Marking Breakdown</span>
                 </h3>
 
@@ -415,14 +498,14 @@ s = 1 * 100 = 100 meters.`
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
-                          <span className="px-2.5 py-1 rounded-md bg-emerald-800 text-white font-bold text-xs font-mono">
+                          <span className="px-2.5 py-1 rounded-md bg-fbise-800 text-white font-bold text-xs font-mono">
                             {q.questionNumber}
                           </span>
                           <span className="font-bold text-slate-800 dark:text-white text-sm">
                             {q.questionTitle}
                           </span>
                         </div>
-                        <span className="px-3 py-1 rounded-full text-xs font-black bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300">
+                        <span className="px-3 py-1 rounded-full text-xs font-black bg-fbise-100 dark:bg-fbise-950 text-fbise-800 dark:text-fbise-300">
                           {q.obtainedMarks} / {q.maxMarks} Marks
                         </span>
                       </div>
@@ -464,9 +547,9 @@ s = 1 * 100 = 100 meters.`
 
               {/* Strengths & Weaknesses Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-5 rounded-2xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40 space-y-2">
-                  <h4 className="font-bold text-xs uppercase tracking-wider text-emerald-800 dark:text-emerald-400 flex items-center space-x-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <div className="p-5 rounded-2xl bg-fbise-50/50 dark:bg-fbise-950/20 border border-fbise-200 dark:border-fbise-800/40 space-y-2">
+                  <h4 className="font-bold text-xs uppercase tracking-wider text-fbise-800 dark:text-fbise-400 flex items-center space-x-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-fbise-600" />
                     <span>Key Strengths Observed</span>
                   </h4>
                   <ul className="list-disc pl-4 text-xs text-slate-700 dark:text-slate-300 space-y-1">
@@ -550,7 +633,7 @@ s = 1 * 100 = 100 meters.`
                   <select
                     value={classGrade}
                     onChange={(e) => setClassGrade(e.target.value)}
-                    className="w-full py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700"
+                    className="w-full py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-fbise-700"
                   >
                     <option value="9">Class 9 (SSC Part 1)</option>
                     <option value="10">Class 10 (SSC Part 2)</option>
@@ -566,7 +649,7 @@ s = 1 * 100 = 100 meters.`
                   <select
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
-                    className="w-full py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700"
+                    className="w-full py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-fbise-700"
                   >
                     <option value="Physics">Physics</option>
                     <option value="Chemistry">Chemistry</option>
@@ -581,6 +664,54 @@ s = 1 * 100 = 100 meters.`
                 </div>
               </div>
 
+              {/* Paper Picker — selecting a paper opens it right away */}
+              <div className="p-4 rounded-2xl bg-fbise-50 dark:bg-fbise-950/30 border border-fbise-200 dark:border-fbise-800/50 space-y-3">
+                <div className="flex items-center space-x-2">
+                  <BookOpen className="w-4 h-4 text-fbise-700 dark:text-fbise-400" />
+                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                    Select Paper to Attempt (paper select karte hi paper khul jayega)
+                  </label>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <select
+                    value={selectedPaperId}
+                    onChange={(e) => handlePaperSelect(e.target.value)}
+                    className="flex-1 py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-fbise-600"
+                  >
+                    <option value="">
+                      {papersLoading
+                        ? 'Loading papers...'
+                        : availablePapers.length > 0
+                        ? '— Choose a paper —'
+                        : `No ${subject} paper for Class ${classGrade} yet`}
+                    </option>
+                    {availablePapers.map((p) => (
+                      <option key={p.id} value={p.id}>
+                        {p.title} ({p.paperType === 'MODEL_PAPER' ? 'Model Paper' : 'Past Paper'} • {p.year})
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    type="button"
+                    disabled={!selectedPaper}
+                    onClick={() => selectedPaper && openPaperInViewer(selectedPaper)}
+                    className="px-5 py-2.5 rounded-xl bg-fbise-600 hover:bg-fbise-700 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold text-xs sm:text-sm flex items-center justify-center space-x-2 shadow-sm transition-colors flex-shrink-0"
+                  >
+                    <Eye className="w-4 h-4" />
+                    <span>Open Paper</span>
+                  </button>
+                </div>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                  Pehle paper khol kar sawal parh lo, phir neeche apne answers likho ya answer sheet
+                  upload karo — AI unhi sawalon ke hisaab se checking karega.
+                </p>
+                {selectedPaper && (
+                  <p className="text-[11px] font-semibold text-fbise-800 dark:text-fbise-300">
+                    Selected: {selectedPaper.title}
+                  </p>
+                )}
+              </div>
+
               {/* Mode Toggle Tabs */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
@@ -592,11 +723,11 @@ s = 1 * 100 = 100 meters.`
                     onClick={() => setSubmissionType('TYPED')}
                     className={`p-3.5 rounded-2xl border text-center font-bold text-xs sm:text-sm transition-all flex items-center justify-center space-x-2 ${
                       submissionType === 'TYPED'
-                        ? 'border-emerald-700 bg-emerald-50 dark:bg-emerald-950 text-emerald-900 dark:text-emerald-100 shadow-sm ring-1 ring-emerald-700'
-                        : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:border-emerald-600'
+                        ? 'border-fbise-700 bg-fbise-50 dark:bg-fbise-950 text-fbise-900 dark:text-fbise-100 shadow-sm ring-1 ring-fbise-700'
+                        : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:border-fbise-600'
                     }`}
                   >
-                    <FileText className="w-4 h-4 text-emerald-700" />
+                    <FileText className="w-4 h-4 text-fbise-700" />
                     <span>Type / Paste Answers</span>
                   </button>
 
@@ -605,8 +736,8 @@ s = 1 * 100 = 100 meters.`
                     onClick={() => setSubmissionType('FILE_UPLOAD')}
                     className={`p-3.5 rounded-2xl border text-center font-bold text-xs sm:text-sm transition-all flex items-center justify-center space-x-2 ${
                       submissionType === 'FILE_UPLOAD'
-                        ? 'border-emerald-700 bg-emerald-50 dark:bg-emerald-950 text-emerald-900 dark:text-emerald-100 shadow-sm ring-1 ring-emerald-700'
-                        : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:border-emerald-600'
+                        ? 'border-fbise-700 bg-fbise-50 dark:bg-fbise-950 text-fbise-900 dark:text-fbise-100 shadow-sm ring-1 ring-fbise-700'
+                        : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:border-fbise-600'
                     }`}
                   >
                     <Upload className="w-4 h-4 text-amber-500" />
@@ -631,7 +762,7 @@ s = 1 * 100 = 100 meters.`
                     value={typedAnswers}
                     onChange={(e) => setTypedAnswers(e.target.value)}
                     placeholder="Question 1: Define inertia and give two practical examples...&#10;Answer: Inertia is the property of a body due to which it resists any change in its state of rest or uniform motion...&#10;&#10;Question 2: Derive second equation of motion...&#10;Answer: Let initial velocity be vi..."
-                    className="w-full p-4 rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700 font-mono leading-relaxed"
+                    className="w-full p-4 rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-fbise-700 font-mono leading-relaxed"
                   />
                 </div>
               ) : (
