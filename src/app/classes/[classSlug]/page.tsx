@@ -117,6 +117,8 @@ export default function ClassSectionPage() {
   const [papers, setPapers] = useState<any[]>([]);
   const [quizzes, setQuizzes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [reloadKey, setReloadKey] = useState(0);
 
   // PDF Viewer Modal
   const [pdfModalOpen, setPdfModalOpen] = useState(false);
@@ -136,35 +138,47 @@ export default function ClassSectionPage() {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
+      setLoadError(null);
       try {
         const [papersRes, quizzesRes] = await Promise.all([
           fetch(`/api/papers?classGrade=${config.grade}&subject=${encodeURIComponent(selectedSubject)}`),
           fetch(`/api/quizzes?classGrade=${config.grade}&subject=${encodeURIComponent(selectedSubject)}`),
         ]);
 
+        if (!papersRes.ok && !quizzesRes.ok) {
+          throw new Error('Both class data requests failed');
+        }
         if (papersRes.ok) {
           const pData = await papersRes.json();
           setPapers(pData.papers || []);
+        } else {
+          setPapers([]);
         }
         if (quizzesRes.ok) {
           const qData = await quizzesRes.json();
           setQuizzes(qData.quizzes || []);
+        } else {
+          setQuizzes([]);
         }
       } catch (err) {
         console.error('Failed to load class section data:', err);
+        // Previously this failure was silent, so the page just sat empty and
+        // looked broken. Now the visitor sees a clear message and can retry.
+        setPapers([]);
+        setQuizzes([]);
+        setLoadError('Class ka data load nahi ho saka. Internet check karke dobara koshish karein.');
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [config.grade, selectedSubject]);
+  }, [config.grade, selectedSubject, reloadKey]);
 
   const handleOpenPdf = (paper: any) => {
-    if (!user) {
-      router.push(`/login?redirect=/classes/${classSlug}`);
-      return;
-    }
+    // Papers are public study material: guests must be able to OPEN and read
+    // a paper. Previously guests were bounced to /login from here, which made
+    // the whole Classes section look broken ("kaam nahi kar raha").
     setSelectedPdf({
       title: paper.title,
       fileUrl: paper.fileUrl,
@@ -197,13 +211,13 @@ export default function ClassSectionPage() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Class Banner */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-950 via-emerald-900 to-slate-900 text-white p-6 sm:p-10 shadow-xl border border-emerald-800/40">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-fbise-950 via-fbise-900 to-slate-900 text-white p-6 sm:p-10 shadow-xl border border-fbise-800/40">
           <div className="relative z-10 max-w-3xl space-y-3">
             <div className="flex items-center space-x-2">
               <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-400 text-slate-950 shadow-sm">
                 {config.badge}
               </span>
-              <span className="text-xs font-semibold text-emerald-200">
+              <span className="text-xs font-semibold text-fbise-200">
                 FBISE Federal Board Curriculum
               </span>
             </div>
@@ -214,13 +228,26 @@ export default function ClassSectionPage() {
             <p className="text-sm sm:text-base font-medium text-amber-300">
               {config.subtitle}
             </p>
-            <p className="text-xs sm:text-sm text-emerald-100/90 leading-relaxed pt-1">
+            <p className="text-xs sm:text-sm text-fbise-100/90 leading-relaxed pt-1">
               {config.description}
             </p>
           </div>
 
-          <div className="absolute -right-6 -bottom-6 w-56 h-56 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+          <div className="absolute -right-6 -bottom-6 w-56 h-56 bg-fbise-500/10 rounded-full blur-2xl pointer-events-none"></div>
         </div>
+
+        {/* Load Error Banner (with retry) */}
+        {loadError && !loading && (
+          <div className="p-4 rounded-2xl bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p className="text-xs sm:text-sm font-semibold text-red-700 dark:text-red-300">{loadError}</p>
+            <button
+              onClick={() => setReloadKey((k) => k + 1)}
+              className="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs font-bold flex-shrink-0"
+            >
+              Dobara Koshish Karein (Retry)
+            </button>
+          </div>
+        )}
 
         {/* Subjects Filter Bar */}
         <div className="space-y-3">
@@ -228,7 +255,7 @@ export default function ClassSectionPage() {
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Select Subject ({config.subjects.length} FBISE Subjects)
             </h3>
-            <span className="text-xs text-emerald-700 dark:text-emerald-400 font-semibold">
+            <span className="text-xs text-fbise-700 dark:text-fbise-400 font-semibold">
               Currently viewing: <strong className="text-slate-900 dark:text-white">{selectedSubject}</strong>
             </span>
           </div>
@@ -240,8 +267,8 @@ export default function ClassSectionPage() {
                 onClick={() => setSelectedSubject(subj)}
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all shadow-sm ${
                   selectedSubject === subj
-                    ? 'bg-emerald-800 text-white shadow-emerald-900/20'
-                    : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-emerald-600'
+                    ? 'bg-fbise-800 text-white shadow-fbise-900/20'
+                    : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-fbise-600'
                 }`}
               >
                 {subj}
@@ -251,7 +278,7 @@ export default function ClassSectionPage() {
         </div>
 
         {/* Action Link: Run AI Checker for this Subject & Class */}
-        <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-50 to-emerald-50 dark:from-amber-950/20 dark:to-emerald-950/20 border border-amber-200/60 dark:border-amber-800/40 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-50 to-fbise-50 dark:from-amber-950/20 dark:to-fbise-950/20 border border-amber-200/60 dark:border-amber-800/40 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-3 text-center sm:text-left">
             <div className="w-10 h-10 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold flex-shrink-0">
               <Sparkles className="w-5 h-5" />
@@ -267,7 +294,7 @@ export default function ClassSectionPage() {
           </div>
           <Link
             href={`/ai-paper-check?subject=${encodeURIComponent(selectedSubject)}&classGrade=${config.grade}`}
-            className="px-5 py-2.5 rounded-xl bg-slate-950 dark:bg-white text-white dark:text-slate-950 font-bold text-xs hover:bg-emerald-900 transition-colors flex items-center space-x-1.5 flex-shrink-0"
+            className="px-5 py-2.5 rounded-xl bg-slate-950 dark:bg-white text-white dark:text-slate-950 font-bold text-xs hover:bg-fbise-900 transition-colors flex items-center space-x-1.5 flex-shrink-0"
           >
             <span>Run AI Paper Check</span>
             <ArrowRight className="w-4 h-4" />
@@ -279,7 +306,7 @@ export default function ClassSectionPage() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-xl font-extrabold text-slate-900 dark:text-white flex items-center space-x-2">
-                <BookOpen className="w-5 h-5 text-emerald-700 dark:text-emerald-400" />
+                <BookOpen className="w-5 h-5 text-fbise-700 dark:text-fbise-400" />
                 <span>{selectedSubject} Past Papers</span>
               </h2>
               <p className="text-xs text-slate-500">
@@ -288,7 +315,7 @@ export default function ClassSectionPage() {
             </div>
             <Link
               href={`/past-papers?classGrade=${config.grade}&subject=${encodeURIComponent(selectedSubject)}`}
-              className="text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline flex items-center space-x-1"
+              className="text-xs font-bold text-fbise-700 dark:text-fbise-400 hover:underline flex items-center space-x-1"
             >
               <span>See Full Library</span>
               <ChevronRight className="w-3.5 h-3.5" />
@@ -306,7 +333,7 @@ export default function ClassSectionPage() {
                 >
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300">
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-fbise-50 dark:bg-fbise-950 text-fbise-800 dark:text-fbise-300">
                         {paper.session} {paper.year}
                       </span>
                       <button
@@ -335,7 +362,7 @@ export default function ClassSectionPage() {
                   <div className="flex items-center space-x-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                     <button
                       onClick={() => handleOpenPdf(paper)}
-                      className="flex-1 py-1.5 px-3 rounded-lg bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs flex items-center justify-center space-x-1"
+                      className="flex-1 py-1.5 px-3 rounded-lg bg-fbise-800 hover:bg-fbise-900 text-white font-bold text-xs flex items-center justify-center space-x-1"
                     >
                       <Eye className="w-3.5 h-3.5" />
                       <span>View PDF</span>
@@ -353,8 +380,18 @@ export default function ClassSectionPage() {
               ))}
             </div>
           ) : (
-            <div className="p-8 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 text-xs text-slate-500">
-              No past papers uploaded yet for {selectedSubject} {config.title}. Admin can upload new papers from the Admin Panel.
+            <div className="p-8 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 text-xs text-slate-500 space-y-3">
+              <p>
+                {selectedSubject} {config.title} ke past papers is section mein jald aa rahe hain. Tab tak
+                mukammal library mein maujood papers dekhein:
+              </p>
+              <Link
+                href={`/past-papers?classGrade=${config.grade}`}
+                className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-lg bg-fbise-600 hover:bg-fbise-700 text-white font-bold"
+              >
+                <span>{config.title} Past Papers Library</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
           )}
         </div>
@@ -431,7 +468,7 @@ export default function ClassSectionPage() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-xl font-extrabold text-slate-900 dark:text-white flex items-center space-x-2">
-                <Flame className="w-5 h-5 text-teal-600 dark:text-teal-400" />
+                <Flame className="w-5 h-5 text-fbise-600 dark:text-fbise-400" />
                 <span>{selectedSubject} Daily Chapter Quizzes</span>
               </h2>
               <p className="text-xs text-slate-500">
@@ -440,7 +477,7 @@ export default function ClassSectionPage() {
             </div>
             <Link
               href="/quizzes"
-              className="text-xs font-bold text-teal-700 dark:text-teal-400 hover:underline flex items-center space-x-1"
+              className="text-xs font-bold text-fbise-700 dark:text-fbise-400 hover:underline flex items-center space-x-1"
             >
               <span>All Quizzes</span>
               <ChevronRight className="w-3.5 h-3.5" />
@@ -455,7 +492,7 @@ export default function ClassSectionPage() {
                   className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between gap-4"
                 >
                   <div className="space-y-1">
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-teal-50 dark:bg-teal-950 text-teal-800 dark:text-teal-300">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-fbise-50 dark:bg-fbise-950 text-fbise-800 dark:text-fbise-300">
                       {quiz.chapter}
                     </span>
                     <h4 className="font-bold text-slate-900 dark:text-white text-sm">
@@ -468,7 +505,7 @@ export default function ClassSectionPage() {
                       {quiz.userLatestAttempt && (
                         <>
                           <span>•</span>
-                          <span className="font-bold text-emerald-600">
+                          <span className="font-bold text-fbise-600">
                             Latest: {quiz.userLatestAttempt.percentage}%
                           </span>
                         </>
@@ -478,7 +515,7 @@ export default function ClassSectionPage() {
 
                   <Link
                     href={`/quizzes/${quiz.id}`}
-                    className="px-4 py-2 rounded-xl bg-teal-800 hover:bg-teal-900 text-white font-bold text-xs whitespace-nowrap shadow-sm flex items-center space-x-1"
+                    className="px-4 py-2 rounded-xl bg-fbise-800 hover:bg-fbise-900 text-white font-bold text-xs whitespace-nowrap shadow-sm flex items-center space-x-1"
                   >
                     <span>{quiz.userLatestAttempt ? 'Retake' : 'Start'}</span>
                     <ChevronRight className="w-3.5 h-3.5" />
@@ -487,8 +524,18 @@ export default function ClassSectionPage() {
               ))}
             </div>
           ) : (
-            <div className="p-6 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 text-xs text-slate-500">
-              No active quizzes for {selectedSubject} today. Check back tomorrow morning!
+            <div className="p-6 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 text-xs text-slate-500 space-y-3">
+              <p>
+                {selectedSubject} {config.title} ka quiz is waqt tayyar ho raha hai. Baqi subjects ke
+                quizzes yahan se shuru karein:
+              </p>
+              <Link
+                href="/quizzes"
+                className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-lg bg-fbise-600 hover:bg-fbise-700 text-white font-bold"
+              >
+                <span>All Daily Quizzes</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
           )}
         </div>
