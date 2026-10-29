@@ -15,7 +15,14 @@ import {
   Smartphone,
   FileText,
   AlertCircle,
+  Clock,
 } from 'lucide-react';
+
+function fmtHour(h: number) {
+  const hh = ((h % 24) + 24) % 24;
+  const hour12 = hh % 12 === 0 ? 12 : hh % 12;
+  return `${hour12} ${hh < 12 ? 'AM' : 'PM'}`;
+}
 
 interface AnalyticsData {
   generatedAt: string;
@@ -24,6 +31,7 @@ interface AnalyticsData {
   last7Days: { pageViews: number; uniqueVisitors: number };
   last30Days: { pageViews: number; uniqueVisitors: number; newStudents: number };
   daily: { date: string; views: number; visitors: number }[];
+  hourlyToday: { hour: number; views: number; visitors: number }[];
   topPages: { path: string; views: number; percentage: number }[];
   devices: { name: string; count: number; percentage: number }[];
   browsers: { name: string; count: number; percentage: number }[];
@@ -151,6 +159,8 @@ export default function AdminAnalyticsPage() {
   if (!data) return null;
 
   const maxDailyViews = Math.max(1, ...data.daily.map((d) => d.views));
+  const activeHours = (data.hourlyToday || []).filter((h) => h.views > 0);
+  const maxHourViews = Math.max(1, ...activeHours.map((h) => h.views));
 
   return (
     <div className="max-w-6xl mx-auto w-full px-4 py-8">
@@ -222,6 +232,40 @@ export default function AdminAnalyticsPage() {
             </div>
           ))}
         </div>
+      </div>
+
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm mb-8">
+        <div className="flex items-center gap-2 font-semibold text-slate-900 dark:text-white mb-1">
+          <Clock className="w-5 h-5 text-emerald-700 dark:text-emerald-400" />
+          <span>Today by Hour — Kis Time Kitne Visitors Aaye</span>
+        </div>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
+          Sirf wohi ghantay dikhaye gaye hain jin mein koi visit hua hai (Pakistan time).
+        </p>
+        {activeHours.length === 0 ? (
+          <p className="text-sm text-slate-500">Aaj abhi tak koi visit record nahi hua.</p>
+        ) : (
+          <ul className="space-y-3">
+            {activeHours.map((h) => (
+              <li key={h.hour}>
+                <div className="flex justify-between text-sm">
+                  <span className="text-slate-700 dark:text-slate-300 font-medium">
+                    {fmtHour(h.hour)} – {fmtHour(h.hour + 1)}
+                  </span>
+                  <span className="text-slate-500 dark:text-slate-400 whitespace-nowrap">
+                    {h.visitors} visitors · {h.views} views
+                  </span>
+                </div>
+                <div className="mt-1 h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                  <div
+                    className="h-full bg-emerald-600 rounded-full"
+                    style={{ width: `${(h.views / maxHourViews) * 100}%` }}
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       <div className="grid md:grid-cols-2 gap-4 mb-8">
