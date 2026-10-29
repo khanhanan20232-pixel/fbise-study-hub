@@ -28,6 +28,10 @@ export const metadata: Metadata = {
     'Team Khan Hanan',
   ],
   authors: [{ name: 'Team Khan Hanan' }],
+  icons: {
+    icon: '/logo-icon.png',
+    apple: '/logo-icon.png',
+  },
 };
 
 export default function RootLayout({
