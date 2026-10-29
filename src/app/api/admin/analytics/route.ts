@@ -65,6 +65,15 @@ export async function GET(req: NextRequest) {
       daily.push({ date: key, views: dayRows.length, visitors: uniqueOf(dayRows) });
     }
 
+    // Today by hour (Pakistan time) — kis time kitne visitors aaye
+    const pktHour = (d: Date) =>
+      parseInt(d.toLocaleString('en-US', { timeZone: 'Asia/Karachi', hour: 'numeric', hour12: false }), 10) % 24;
+    const hourlyToday: { hour: number; views: number; visitors: number }[] = [];
+    for (let h = 0; h < 24; h++) {
+      const hourRows = rowsToday.filter((r) => pktHour(r.createdAt) === h);
+      hourlyToday.push({ hour: h, views: hourRows.length, visitors: uniqueOf(hourRows) });
+    }
+
     const topPages = toSortedList(countBy(rows30, (r) => r.path), rows30.length, 10).map((p) => ({
       path: p.name,
       views: p.count,
@@ -93,6 +102,7 @@ export async function GET(req: NextRequest) {
         newStudents: newStudents30,
       },
       daily,
+      hourlyToday,
       topPages,
       devices: toSortedList(countBy(rows30, (r) => r.device), rows30.length, 5),
       browsers: toSortedList(countBy(rows30, (r) => r.browser), rows30.length, 6),
