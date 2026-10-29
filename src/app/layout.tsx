@@ -6,6 +6,9 @@ import AnalyticsTracker from '@/components/AnalyticsTracker';
 import { AuthProvider } from '@/context/AuthContext';
 
 export const metadata: Metadata = {
+  verification: {
+    google: 'i4hAmyTbmRvq117GDckb4pcpZcOFeACphugKJMkiSak',
+  },
   title: 'FBISE Study Hub — Prepare Smart. Practice Better. Achieve More.',
   description:
     'The official comprehensive educational platform for FBISE (Federal Board Islamabad) students. Access past papers, model papers, daily chapter-wise quizzes, and AI paper checking with instant marking scheme evaluation.',
