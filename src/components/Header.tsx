@@ -155,19 +155,21 @@ export default function Header() {
               {/* Quick links — About & Contact always visible in the header bar */}
               <nav className="hidden lg:flex items-center gap-1 ml-3 flex-shrink-0">
                 <Link
-                    href="/about"
+                  href="/about"
                   className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
-                      pathname.startsWith('/about') ? 'bg-white/20' : 'hover:bg-white/15'
+                    pathname.startsWith('/about') ? 'bg-white/20' : 'hover:bg-white/15'
                   }`}
-                  >
-                  About Us</Link>
-                  <Link
-                      href="/contact"
-                    className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
-                        pathname.startsWith('/contact') ? 'bg-white/20' : 'hover:bg-white/15'
-                    }`}
-                    >
-                    Contact</Link>
+                >
+                  About Us
+                </Link>
+                <Link
+                  href="/contact"
+                  className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
+                    pathname.startsWith('/contact') ? 'bg-white/20' : 'hover:bg-white/15'
+                  }`}
+                >
+                    Contact
+                </Link>
               </nav>
 
               {/* Right-side actions */}
