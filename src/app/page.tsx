@@ -129,9 +129,14 @@ export default function HomePage() {
                 alt="Students writing their board examination"
                 className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10 transition-opacity duration-300 group-hover:opacity-0">
                 <div className="text-white font-bold text-base">Board Examinations</div>
                 <div className="text-fbise-200 text-xs">Past papers, model papers &amp; date sheets</div>
+              </div>
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-4 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-fbise-600 text-white text-xs font-bold shadow-lg">
+                  Go to Past Papers <ArrowRight className="w-3.5 h-3.5" />
+                </span>
               </div>
             </Link>
             <Link
@@ -143,9 +148,14 @@ export default function HomePage() {
                 alt="Students celebrating their board results"
                 className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10 transition-opacity duration-300 group-hover:opacity-0">
                 <div className="text-white font-bold text-base">Results &amp; Top Achievers</div>
                 <div className="text-fbise-200 text-xs">Daily quizzes, streaks &amp; leaderboard</div>
+              </div>
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-4 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-fbise-600 text-white text-xs font-bold shadow-lg">
+                  Go to Leaderboard <ArrowRight className="w-3.5 h-3.5" />
+                </span>
               </div>
             </Link>
           </div>
@@ -299,9 +309,16 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-fbise-700 dark:text-fbise-400 group-hover:translate-x-1 transition-transform">
+                <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-fbise-700 dark:text-fbise-400 group-hover:opacity-0 transition-opacity">
                   <span>Enter Class Portal</span>
                   <ArrowRight className="w-4 h-4" />
+                </div>
+
+                {/* Hover reveal — "Go to Class" pill rises at the bottom center, like the original FBISE cards */}
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-5 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                  <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-fbise-600 text-white text-xs font-bold shadow-lg">
+                    Go to Class <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
                 </div>
               </Link>
             ))}
@@ -334,9 +351,14 @@ export default function HomePage() {
                 alt="Stacks of board exam past papers"
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10 transition-opacity duration-300 group-hover:opacity-0">
                 <div className="text-white font-bold text-base">Past Papers</div>
                 <div className="text-fbise-200 text-xs">Har subject ke asal FBISE papers</div>
+              </div>
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-4 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-fbise-600 text-white text-xs font-bold shadow-lg">
+                  Go to Past Papers <ArrowRight className="w-3.5 h-3.5" />
+                </span>
               </div>
             </Link>
             <Link
@@ -348,9 +370,14 @@ export default function HomePage() {
                 alt="Students taking a daily quiz"
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10 transition-opacity duration-300 group-hover:opacity-0">
                 <div className="text-white font-bold text-base">Daily Quizzes</div>
                 <div className="text-fbise-200 text-xs">Roz naye MCQs — touch karo, quiz shuru</div>
+              </div>
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-4 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-fbise-600 text-white text-xs font-bold shadow-lg">
+                  Go to Daily Quizzes <ArrowRight className="w-3.5 h-3.5" />
+                </span>
               </div>
             </Link>
             <Link
@@ -362,9 +389,14 @@ export default function HomePage() {
                 alt="A paper being checked with a red pen"
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10 transition-opacity duration-300 group-hover:opacity-0">
                 <div className="text-white font-bold text-base">AI Paper Checker</div>
                 <div className="text-fbise-200 text-xs">Apna solved paper check karwao</div>
+              </div>
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-4 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-fbise-600 text-white text-xs font-bold shadow-lg">
+                  Go to AI Paper Checker <ArrowRight className="w-3.5 h-3.5" />
+                </span>
               </div>
             </Link>
             <Link
@@ -376,9 +408,14 @@ export default function HomePage() {
                 alt="Students celebrating with a trophy"
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10 transition-opacity duration-300 group-hover:opacity-0">
                 <div className="text-white font-bold text-base">Leaderboard</div>
                 <div className="text-fbise-200 text-xs">Top students ki list dekho</div>
+              </div>
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-4 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-fbise-600 text-white text-xs font-bold shadow-lg">
+                  Go to Leaderboard <ArrowRight className="w-3.5 h-3.5" />
+                </span>
               </div>
             </Link>
           </div>
