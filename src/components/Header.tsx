@@ -139,8 +139,8 @@ export default function Header() {
 
               {/* Logo + Title (kept compact so it never overlaps anything) */}
               <Link href="/" className="flex items-center gap-2.5 min-w-0 group">
-                <span className="w-9 h-9 rounded-lg bg-white/15 border border-white/30 flex items-center justify-center flex-shrink-0">
-                  <GraduationCap className="w-5 h-5 text-amber-300" />
+                <span className="w-9 h-9 rounded-lg bg-white border border-white/30 flex items-center justify-center flex-shrink-0 overflow-hidden p-0.5">
+                  <img src="/logo-symbol.png" alt="FBISE Study Hub logo" className="w-full h-full object-contain" />
                 </span>
                 <span className="min-w-0 leading-tight">
                   <span className="block font-extrabold text-base sm:text-lg tracking-tight truncate">
