@@ -41,6 +41,12 @@ export default function QuizEnginePage() {
 
   const [quiz, setQuiz] = useState<any>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
+  // Options are shuffled for every attempt (Abdul's requirement: the correct
+  // answer must not sit on the same letter every time). displayQuestions holds
+  // the shuffled copies the student sees; answerMap translates a displayed
+  // letter back to the original letter so server-side marking stays correct.
+  const [displayQuestions, setDisplayQuestions] = useState<Question[]>([]);
+  const [answerMap, setAnswerMap] = useState<Record<string, Record<string, string>>>({});
   const [loading, setLoading] = useState(true);
 
   // Quiz state
@@ -66,8 +72,39 @@ export default function QuizEnginePage() {
         if (res.ok) {
           const data = await res.json();
           setQuiz(data.quiz);
-          setQuestions(data.quiz.questions || []);
+          const rawQuestions: Question[] = data.quiz.questions || [];
+          setQuestions(rawQuestions);
           setTimeLeft(data.quiz.timeLimit || 600);
+
+          // Shuffle each question's 4 options (Fisher-Yates)
+          const shuffled: Question[] = [];
+          const map: Record<string, Record<string, string>> = {};
+          for (const q of rawQuestions) {
+            const originals = ['A', 'B', 'C', 'D'] as const;
+            const order = [...originals];
+            for (let i = order.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [order[i], order[j]] = [order[j], order[i]];
+            }
+            const textOf = (letter: string) =>
+              letter === 'A' ? q.optionA : letter === 'B' ? q.optionB : letter === 'C' ? q.optionC : q.optionD;
+            const displayLetters = ['A', 'B', 'C', 'D'];
+            const perQuestion: Record<string, string> = {};
+            displayLetters.forEach((displayLetter, idx) => {
+              perQuestion[displayLetter] = order[idx];
+            });
+            map[q.id] = perQuestion;
+            shuffled.push({
+              ...q,
+              optionA: textOf(order[0]),
+              optionB: textOf(order[1]),
+              optionC: textOf(order[2]),
+              optionD: textOf(order[3]),
+              correctOption: displayLetters[order.indexOf(q.correctOption as (typeof originals)[number])] || q.correctOption,
+            });
+          }
+          setDisplayQuestions(shuffled);
+          setAnswerMap(map);
         }
       } catch (err) {
         console.error('Failed to load quiz:', err);
@@ -109,12 +146,19 @@ export default function QuizEnginePage() {
 
     const timeTaken = quiz ? (quiz.timeLimit || 600) - timeLeft : 0;
 
+    // Translate displayed (shuffled) letters back to the original letters
+    // before submitting, so the server marks against the stored answers.
+    const originalAnswers: Record<string, string> = {};
+    for (const [questionId, displayLetter] of Object.entries(selectedAnswers)) {
+      originalAnswers[questionId] = answerMap[questionId]?.[displayLetter] || displayLetter;
+    }
+
     try {
       const res = await fetch(`/api/quizzes/${quizId}/attempt`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          userAnswers: selectedAnswers,
+          userAnswers: originalAnswers,
           timeTakenSeconds: timeTaken,
         }),
       });
@@ -385,8 +429,8 @@ export default function QuizEnginePage() {
   }
 
   // ACTIVE QUIZ INTERFACE: ONE QUESTION AT A TIME
-  const currentQ = questions[currentIndex];
-  const progressPercent = Math.round(((currentIndex + 1) / questions.length) * 100);
+  const currentQ = displayQuestions[currentIndex];
+  const progressPercent = Math.round(((currentIndex + 1) / displayQuestions.length) * 100);
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
   const isTimeLow = timeLeft < 120; // less than 2 minutes
@@ -525,7 +569,7 @@ export default function QuizEnginePage() {
 
         {/* Question Palette */}
         <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-center gap-2 flex-wrap">
-          {questions.map((q, idx) => {
+          {displayQuestions.map((q, idx) => {
             const answered = Boolean(selectedAnswers[q.id]);
             const isCurrent = idx === currentIndex;
 
