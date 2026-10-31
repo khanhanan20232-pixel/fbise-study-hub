@@ -11,7 +11,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
 
     const quizId = params.id;
     const body = await req.json();
-    const { userAnswers, timeTakenSeconds } = body; // userAnswers: { [questionId: string]: string }
+    const { userAnswers, timeTakenSeconds, questionIds } = body; // userAnswers: { [questionId: string]: string }
 
     if (!userAnswers) {
       return NextResponse.json({ error: 'Answers must be provided' }, { status: 400 });
@@ -26,11 +26,20 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
       return NextResponse.json({ error: 'Quiz not found' }, { status: 404 });
     }
 
+    // For Full/Half Book quizzes the student only saw a random subset of the
+    // pool — score only the questions that were actually served.
+    let questionsToScore = quiz.questions;
+    if (Array.isArray(questionIds) && questionIds.length > 0) {
+      const servedIds = new Set(questionIds);
+      const filtered = quiz.questions.filter((q) => servedIds.has(q.id));
+      if (filtered.length > 0) questionsToScore = filtered;
+    }
+
     let score = 0;
-    const totalQuestions = quiz.questions.length;
+    const totalQuestions = questionsToScore.length;
     const reviewList = [];
 
-    for (const q of quiz.questions) {
+    for (const q of questionsToScore) {
       const selected = userAnswers[q.id];
       const isCorrect = selected && selected.toUpperCase() === q.correctOption.toUpperCase();
       if (isCorrect) {
