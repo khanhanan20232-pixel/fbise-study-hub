@@ -252,13 +252,13 @@ export default function HomePage() {
                   SSC 1 & 2 • HSSC 1 & 2
                 </div>
               </div>
-              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700 shadow-sm">
-                <div className="font-extrabold text-2xl text-slate-900 dark:text-white">Daily</div>
+              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
+                <div className="font-extrabold text-2xl text-fbise-700 dark:text-fbise-300">Daily</div>
                 <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
                   Chapter MCQs
                 </div>
               </div>
-              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700 shadow-sm">
+              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
                 <div className="font-extrabold text-2xl text-slate-900 dark:text-white">AI Graded</div>
                 <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
                   Marking Scheme Rubric
