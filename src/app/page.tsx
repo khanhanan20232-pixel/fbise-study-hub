@@ -170,7 +170,8 @@ export default function HomePage() {
         <div className="absolute bottom-10 left-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto space-y-6">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+          <div className="text-center lg:text-left space-y-6">
             {/* Tagline Badge */}
             <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-fbise-200 dark:border-slate-700 text-fbise-800 dark:text-fbise-300 text-xs sm:text-sm font-semibold shadow-sm">
               <Sparkles className="w-4 h-4 text-amber-500" />
@@ -194,7 +195,7 @@ export default function HomePage() {
             </p>
 
             {/* CTA Buttons */}
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               {user ? (
                 <>
                   <Link
@@ -258,6 +259,16 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Books image — original FBISE style (Abdul ki pasand: Sample 2) */}
+          <div className="relative">
+            <img
+              src="/hero-books.webp"
+              alt="Graduation cap on a stack of books"
+              className="w-full h-72 sm:h-96 lg:h-[28rem] object-cover rounded-3xl shadow-xl border border-fbise-100 dark:border-slate-800"
+            />
+          </div>
           </div>
         </div>
       </section>
