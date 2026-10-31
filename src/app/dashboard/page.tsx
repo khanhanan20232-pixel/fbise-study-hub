@@ -20,6 +20,8 @@ import {
   Trash2,
   ArrowRight,
   TrendingUp,
+  TrendingDown,
+  Minus,
   BarChart3,
   Calendar,
   AlertCircle,
@@ -103,6 +105,35 @@ export default function StudentDashboardPage() {
   }
 
   const { stats, quizAttempts, checkedPapers, bookmarks } = dashboardData;
+
+  // ---- Subject-wise Progress algorithm ----
+  // Har subject ke attempts purane → naye ki taraf lagao. Progress line aik
+  // smoothed line hai (EMA): naya point = 0.55 × pichli line + 0.45 × naya score.
+  // Test acha ho to line oper uthti hai, bura ho to neeche girti hai — aik
+  // achanak fluke se poori line nahi hilti, lekin asal trend saaf dikhta hai.
+  const subjectProgress = (() => {
+    const bySubject = new Map<string, any[]>();
+    for (const a of quizAttempts) {
+      if (!bySubject.has(a.subject)) bySubject.set(a.subject, []);
+      bySubject.get(a.subject)!.push(a);
+    }
+    const result: { subject: string; tests: number; points: number[]; current: number; trend: number }[] = [];
+    for (const [subject, list] of Array.from(bySubject.entries())) {
+      const chronological = [...list].sort(
+        (x, y) => new Date(x.completedAt).getTime() - new Date(y.completedAt).getTime()
+      );
+      const points: number[] = [];
+      for (const a of chronological) {
+        const pct = Math.round(a.percentage);
+        points.push(points.length === 0 ? pct : Math.round(0.55 * points[points.length - 1] + 0.45 * pct));
+      }
+      const shown = points.slice(-12);
+      const current = shown[shown.length - 1];
+      const trend = shown.length > 1 ? current - shown[shown.length - 2] : 0;
+      result.push({ subject, tests: list.length, points: shown, current, trend });
+    }
+    return result.sort((a, b) => a.subject.localeCompare(b.subject));
+  })();
 
   const handleOpenPdf = (paper: any) => {
     setSelectedPdf({
@@ -213,6 +244,101 @@ export default function StudentDashboardPage() {
               <h3 className="text-2xl font-black text-slate-900 dark:text-white">{stats.totalBookmarks}</h3>
             </div>
           </div>
+        </div>
+
+        {/* Subject-wise Progress — har subject ka apna graph: acha test → line oper, bura test → line neeche */}
+        <div className="space-y-4">
+          <div>
+            <h2 className="text-lg font-extrabold text-slate-900 dark:text-white">Subject-wise Progress</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Har subject ka graph usi subject ke tests se banta hai — score acha aaye to line oper jati hai,
+              kam aaye to neeche aa jati hai.
+            </p>
+          </div>
+
+          {subjectProgress.length === 0 ? (
+            <div className="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center">
+              <BarChart3 className="w-10 h-10 text-slate-300 mx-auto mb-2" />
+              <p className="text-sm font-bold text-slate-700 dark:text-slate-200">Abhi koi quiz attempt nahi hua</p>
+              <p className="text-xs text-slate-500 mt-1">
+                Pehla quiz do — har subject ka progress graph yahin banna shuru ho jayega.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {subjectProgress.map((sp) => {
+                const n = sp.points.length;
+                const coords = sp.points.map((v, i) => {
+                  const x = n === 1 ? 150 : 10 + (i * 280) / (n - 1);
+                  const y = 90 - (v / 100) * 76;
+                  return { x, y, v };
+                });
+                const linePoints = coords.map((c) => `${c.x},${c.y}`).join(' ');
+                const areaPoints = `${linePoints} ${coords[coords.length - 1].x},96 ${coords[0].x},96`;
+                const stroke = sp.trend > 0 ? '#059669' : sp.trend < 0 ? '#dc2626' : '#64748b';
+                const scoreColor =
+                  sp.current >= 60
+                    ? 'text-emerald-600 dark:text-emerald-400'
+                    : sp.current >= 40
+                      ? 'text-amber-600 dark:text-amber-400'
+                      : 'text-red-600 dark:text-red-400';
+                return (
+                  <div
+                    key={sp.subject}
+                    className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3"
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <h3 className="font-bold text-slate-900 dark:text-white text-sm">{sp.subject}</h3>
+                        <p className="text-[11px] text-slate-500 font-semibold">
+                          {sp.tests} test{sp.tests === 1 ? '' : 's'} diye
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <div className={`text-2xl font-black leading-none ${scoreColor}`}>{sp.current}%</div>
+                        <div
+                          className={`flex items-center justify-end gap-1 text-[11px] font-bold mt-1 ${
+                            sp.trend > 0
+                              ? 'text-emerald-600 dark:text-emerald-400'
+                              : sp.trend < 0
+                                ? 'text-red-600 dark:text-red-400'
+                                : 'text-slate-400'
+                          }`}
+                        >
+                          {sp.trend > 0 ? (
+                            <TrendingUp className="w-3.5 h-3.5" />
+                          ) : sp.trend < 0 ? (
+                            <TrendingDown className="w-3.5 h-3.5" />
+                          ) : (
+                            <Minus className="w-3.5 h-3.5" />
+                          )}
+                          <span>
+                            {n === 1 ? 'Pehla test' : sp.trend > 0 ? `+${sp.trend} oper` : sp.trend < 0 ? `${sp.trend} neeche` : 'Barabar'}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <svg viewBox="0 0 300 100" className="w-full h-24" role="img" aria-label={`${sp.subject} progress graph`}>
+                      {/* 50% guide line */}
+                      <line x1="10" y1="52" x2="290" y2="52" stroke="#94a3b8" strokeWidth="1" strokeDasharray="4 4" opacity="0.5" />
+                      {n > 1 && <polygon points={areaPoints} fill={stroke} opacity="0.08" />}
+                      {n > 1 && <polyline points={linePoints} fill="none" stroke={stroke} strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />}
+                      {coords.map((c, i) => (
+                        <circle key={i} cx={c.x} cy={c.y} r={i === n - 1 ? 4.5 : 2.5} fill={stroke} stroke="white" strokeWidth="1" />
+                      ))}
+                    </svg>
+
+                    <div className="flex items-center justify-between text-[10px] font-semibold text-slate-400">
+                      <span>Pehla test</span>
+                      <span>50% line</span>
+                      <span>Latest</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* Dashboard Navigation Tabs */}
