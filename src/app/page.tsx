@@ -162,32 +162,32 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-fbise-950 via-fbise-900 to-slate-950 text-white pt-16 pb-20 lg:pt-24 lg:pb-32">
+      {/* Hero Section — light/white, original FBISE ki tarah */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-fbise-50 via-white to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 text-slate-900 dark:text-white pt-16 pb-20 lg:pt-24 lg:pb-32 border-b border-slate-100 dark:border-slate-800">
         {/* Background Decorative Pattern */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:24px_24px]"></div>
+        <div className="absolute inset-0 opacity-[0.35] pointer-events-none bg-[radial-gradient(#2b7cd3_1px,transparent_1px)] [background-size:24px_24px]"></div>
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-fbise-500/10 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-10 left-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto space-y-6">
             {/* Tagline Badge */}
-            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-fbise-800/60 border border-amber-400/30 text-amber-300 text-xs sm:text-sm font-semibold backdrop-blur-sm shadow-inner">
-              <Sparkles className="w-4 h-4 text-amber-400" />
+            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-fbise-200 dark:border-slate-700 text-fbise-800 dark:text-fbise-300 text-xs sm:text-sm font-semibold shadow-sm">
+              <Sparkles className="w-4 h-4 text-amber-500" />
               <span>Federal Board Islamabad • Official Preparation Portal</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight sm:leading-none">
               Prepare Smart. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-fbise-600 via-fbise-500 to-amber-500">
                 Practice Better.
               </span>{' '}
               Achieve More.
             </h1>
 
             {/* Description */}
-            <p className="text-base sm:text-lg text-fbise-100/90 leading-relaxed font-normal max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-2xl mx-auto">
               The premier platform designed specifically for FBISE Matric & Intermediate students.
               Access authentic past papers, test your skills with daily chapter quizzes, and get your solved
               answer sheets graded by our instant AI paper assessment system.
@@ -206,9 +206,9 @@ export default function HomePage() {
                   </Link>
                   <Link
                     href="/ai-paper-check"
-                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-fbise-800/80 hover:bg-fbise-700/80 border border-fbise-600/50 backdrop-blur-sm transition-all flex items-center justify-center space-x-2 text-base"
+                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-fbise-600 hover:bg-fbise-700 shadow-md transition-all flex items-center justify-center space-x-2 text-base"
                   >
-                    <Sparkles className="w-5 h-5 text-amber-400" />
+                    <Sparkles className="w-5 h-5 text-amber-300" />
                     <span>Check a Solved Paper</span>
                   </Link>
                 </>
@@ -223,7 +223,7 @@ export default function HomePage() {
                   </Link>
                   <Link
                     href="/login"
-                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-fbise-800/80 hover:bg-fbise-700/80 border border-fbise-600/50 backdrop-blur-sm transition-all flex items-center justify-center space-x-2 text-base"
+                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-fbise-600 hover:bg-fbise-700 shadow-md transition-all flex items-center justify-center space-x-2 text-base"
                   >
                     <span>Sign In</span>
                   </Link>
@@ -233,27 +233,27 @@ export default function HomePage() {
 
             {/* Quick Metrics Bar */}
             <div className="pt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center max-w-2xl mx-auto">
-              <div className="p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                <div className="font-extrabold text-2xl text-amber-400">100%</div>
-                <div className="text-[11px] text-fbise-200 uppercase tracking-wider font-semibold">
+              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
+                <div className="font-extrabold text-2xl text-fbise-700 dark:text-fbise-300">100%</div>
+                <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
                   FBISE Syllabus
                 </div>
               </div>
-              <div className="p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                <div className="font-extrabold text-2xl text-white">4 Classes</div>
-                <div className="text-[11px] text-fbise-200 uppercase tracking-wider font-semibold">
+              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
+                <div className="font-extrabold text-2xl text-slate-900 dark:text-white">4 Classes</div>
+                <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
                   SSC 1 & 2 • HSSC 1 & 2
                 </div>
               </div>
-              <div className="p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                <div className="font-extrabold text-2xl text-amber-400">Daily</div>
-                <div className="text-[11px] text-fbise-200 uppercase tracking-wider font-semibold">
+              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
+                <div className="font-extrabold text-2xl text-fbise-700 dark:text-fbise-300">Daily</div>
+                <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
                   Chapter MCQs
                 </div>
               </div>
-              <div className="p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                <div className="font-extrabold text-2xl text-white">AI Graded</div>
-                <div className="text-[11px] text-fbise-200 uppercase tracking-wider font-semibold">
+              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
+                <div className="font-extrabold text-2xl text-slate-900 dark:text-white">AI Graded</div>
+                <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
                   Marking Scheme Rubric
                 </div>
               </div>
