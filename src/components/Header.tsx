@@ -26,6 +26,7 @@ import {
   LayoutDashboard,
   LogIn,
   UserPlus,
+  ChevronDown,
 } from 'lucide-react';
 
 export default function Header() {
@@ -33,6 +34,8 @@ export default function Header() {
   const pathname = usePathname();
   const [isDark, setIsDark] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [coursesOpen, setCoursesOpen] = useState(false);
+  const [drawerCoursesOpen, setDrawerCoursesOpen] = useState(false);
 
   useEffect(() => {
     // Check initial dark mode from document or localStorage
@@ -50,6 +53,7 @@ export default function Header() {
   // Close the drawer on route change, on Escape, and lock body scroll while open
   useEffect(() => {
     setDrawerOpen(false);
+    setCoursesOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -152,8 +156,56 @@ export default function Header() {
                 </span>
               </Link>
 
-              {/* Quick links — About & Contact always visible in the header bar */}
+              {/* Quick links — Home, Courses, About & Contact always visible in the header bar */}
               <nav className="hidden lg:flex items-center gap-1 ml-3 flex-shrink-0">
+                <Link
+                  href="/"
+                  className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
+                    pathname === '/' ? 'bg-white/20' : 'hover:bg-white/15'
+                  }`}
+                >
+                  Home
+                </Link>
+
+                {/* Courses — click opens the 4 classes below */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setCoursesOpen((v) => !v)}
+                    className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors flex items-center gap-1 ${
+                      coursesOpen || pathname.startsWith('/classes') ? 'bg-white/20' : 'hover:bg-white/15'
+                    }`}
+                    aria-expanded={coursesOpen}
+                  >
+                    <span>Courses</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${coursesOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {coursesOpen && (
+                    <>
+                      <div className="fixed inset-0 z-10" onClick={() => setCoursesOpen(false)} />
+                      <div className="absolute left-0 top-full mt-2 z-20 w-64 rounded-2xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden py-1.5">
+                        {classSections.map((cls) => (
+                          <Link
+                            key={cls.href}
+                            href={cls.href}
+                            onClick={() => setCoursesOpen(false)}
+                            className="flex items-center gap-3 px-4 py-2.5 hover:bg-fbise-50 dark:hover:bg-slate-800 transition-colors"
+                          >
+                            <GraduationCap className="w-5 h-5 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
+                            <span className="flex-1 min-w-0">
+                              <span className="block text-sm font-bold text-slate-800 dark:text-slate-100">{cls.label}</span>
+                              <span className="block text-[11px] font-medium text-slate-400">{cls.sub}</span>
+                            </span>
+                            <span className="text-[10px] bg-fbise-50 dark:bg-fbise-950 px-2 py-0.5 rounded font-mono text-fbise-800 dark:text-fbise-300 flex-shrink-0">
+                              {cls.chip}
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+
                 <Link
                   href="/about"
                   className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
@@ -168,7 +220,7 @@ export default function Header() {
                     pathname.startsWith('/contact') ? 'bg-white/20' : 'hover:bg-white/15'
                   }`}
                 >
-                    Contact
+                  Contact
                 </Link>
               </nav>
 
@@ -274,30 +326,39 @@ export default function Header() {
 
         {/* Drawer links (scrollable) */}
         <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-5">
-          {/* Classes */}
+          {/* Courses — click to open the 4 classes below */}
           <div>
-            <p className="px-3 pb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-              Classes
-            </p>
-            <div className="space-y-1">
-              {classSections.map((cls) => (
-                <Link
-                  key={cls.href}
-                  href={cls.href}
-                  onClick={() => setDrawerOpen(false)}
-                  className={drawerLinkClass(cls.href)}
-                >
-                  <GraduationCap className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
-                  <span className="flex-1 min-w-0">
-                    <span className="block truncate">{cls.label}</span>
-                    <span className="block text-[11px] font-medium text-slate-400">{cls.sub}</span>
-                  </span>
-                  <span className="text-[10px] bg-fbise-50 dark:bg-fbise-950 px-2 py-0.5 rounded font-mono text-fbise-800 dark:text-fbise-300 flex-shrink-0">
-                    {cls.chip}
-                  </span>
-                </Link>
-              ))}
-            </div>
+            <button
+              type="button"
+              onClick={() => setDrawerCoursesOpen((v) => !v)}
+              className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-left"
+              aria-expanded={drawerCoursesOpen}
+            >
+              <GraduationCap className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
+              <span className="flex-1">Courses</span>
+              <ChevronDown className={`w-4 h-4 transition-transform ${drawerCoursesOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {drawerCoursesOpen && (
+              <div className="space-y-1 mt-1 ml-4">
+                {classSections.map((cls) => (
+                  <Link
+                    key={cls.href}
+                    href={cls.href}
+                    onClick={() => setDrawerOpen(false)}
+                    className={drawerLinkClass(cls.href)}
+                  >
+                    <GraduationCap className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
+                    <span className="flex-1 min-w-0">
+                      <span className="block truncate">{cls.label}</span>
+                      <span className="block text-[11px] font-medium text-slate-400">{cls.sub}</span>
+                    </span>
+                    <span className="text-[10px] bg-fbise-50 dark:bg-fbise-950 px-2 py-0.5 rounded font-mono text-fbise-800 dark:text-fbise-300 flex-shrink-0">
+                      {cls.chip}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="border-t border-slate-100 dark:border-slate-800" />
