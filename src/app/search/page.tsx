@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, Suspense } from 'react';
+import React, { useEffect, useRef, useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import {
@@ -34,6 +34,11 @@ function SearchContent() {
   });
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
+  const [searchedTerm, setSearchedTerm] = useState('');
+  const [suggestions, setSuggestions] = useState<{ label: string; term: string; kind: string }[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [suggestLoading, setSuggestLoading] = useState(false);
+  const suggestSeq = useRef(0);
 
   // PDF Viewer Modal State
   const [pdfModalOpen, setPdfModalOpen] = useState(false);
@@ -48,6 +53,8 @@ function SearchContent() {
 
     setLoading(true);
     setSearched(true);
+    setSearchedTerm(searchTerm.trim());
+    setShowSuggestions(false);
     try {
       const res = await fetch(`/api/search?q=${encodeURIComponent(searchTerm.trim())}`);
       if (res.ok) {
@@ -70,6 +77,45 @@ function SearchContent() {
       performSearch(initialQuery);
     }
   }, [initialQuery]);
+
+  const pickSuggestion = (s: { label: string; term: string }) => {
+    setQuery(s.term);
+    performSearch(s.term);
+  };
+
+  // Live suggestions — type karte hi (300ms debounce) asal database results se
+  useEffect(() => {
+    const term = query.trim();
+    if (term.length < 2) {
+      setSuggestions([]);
+      setShowSuggestions(false);
+      return;
+    }
+    const seq = ++suggestSeq.current;
+    const t = setTimeout(async () => {
+      setSuggestLoading(true);
+      try {
+        const res = await fetch(`/api/search?q=${encodeURIComponent(term)}`);
+        if (res.ok && suggestSeq.current === seq) {
+          const data = await res.json();
+          const list: { label: string; term: string; kind: string }[] = [];
+          (data.papers || []).slice(0, 3).forEach((p: any) =>
+            list.push({ label: `${p.title} — Class ${p.classGrade} ${p.subject}`, term: p.title, kind: 'Paper' })
+          );
+          (data.quizzes || []).slice(0, 3).forEach((q: any) =>
+            list.push({ label: `${q.title} — Class ${q.classGrade} ${q.subject}`, term: q.title, kind: 'Quiz' })
+          );
+          (data.announcements || []).slice(0, 2).forEach((a: any) =>
+            list.push({ label: a.title, term: a.title, kind: 'Notice' })
+          );
+          setSuggestions(list);
+          setShowSuggestions(true);
+        }
+      } catch {}
+      if (suggestSeq.current === seq) setSuggestLoading(false);
+    }, 300);
+    return () => clearTimeout(t);
+  }, [query]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -111,19 +157,46 @@ function SearchContent() {
               <input
                 type="text"
                 autoFocus
+                onFocus={() => { if (suggestions.length > 0) setShowSuggestions(true); }}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search across all subjects, classes, topics (e.g. 'Physics', '2024', 'Mathematics')..."
+                placeholder="Search across all subjects, classes, topics (e.g. 'Physics', 'Class 10 Math', 'Model Papers')..."
                 className="w-full pl-10 pr-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700"
               />
               {query && (
                 <button
                   type="button"
-                  onClick={() => setQuery('')}
+                  onClick={() => { setQuery(''); setResults({ papers: [], quizzes: [], announcements: [] }); setSearched(false); setSuggestions([]); setShowSuggestions(false); }}
                   className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"
                 >
                   <X className="w-4 h-4" />
                 </button>
+              )}
+              {showSuggestions && query.trim().length >= 2 && (
+                <div className="absolute left-0 right-0 top-full mt-2 z-30 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl overflow-hidden">
+                  {suggestLoading ? (
+                    <div className="px-4 py-3 text-xs text-slate-500">Searching...</div>
+                  ) : suggestions.length > 0 ? (
+                    suggestions.map((s, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          pickSuggestion(s);
+                        }}
+                        className="w-full text-left px-4 py-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center justify-between gap-3"
+                      >
+                        <span className="truncate">{s.label}</span>
+                        <span className="text-[10px] font-bold text-slate-400 whitespace-nowrap">{s.kind}</span>
+                      </button>
+                    ))
+                  ) : (
+                    <div className="px-4 py-3 text-xs text-slate-500">
+                      No suggestions — press Search to see full results
+                    </div>
+                  )}
+                </div>
               )}
             </div>
 
@@ -138,7 +211,7 @@ function SearchContent() {
           {/* Quick Suggestions */}
           <div className="flex items-center space-x-2 text-[11px] text-slate-400 overflow-x-auto pt-1">
             <span>Popular:</span>
-            {['Physics 2024', 'Chemistry SLO', 'Class 9 Math', '1st Year Biology', 'Date Sheet'].map((s) => (
+            {['Physics', 'Mathematics', 'Class 9 Physics', 'Class 10', 'Model Papers', 'Biology'].map((s) => (
               <button
                 key={s}
                 type="button"
@@ -163,7 +236,7 @@ function SearchContent() {
         ) : searched ? (
           <div className="space-y-8">
             <div className="text-xs font-bold text-slate-500">
-              Found <strong className="text-slate-900 dark:text-white">{totalResults}</strong> results matching &ldquo;{query}&rdquo;
+              Found <strong className="text-slate-900 dark:text-white">{totalResults}</strong> results matching &ldquo;{searchedTerm}&rdquo;
             </div>
 
             {/* 1. Papers Results */}
