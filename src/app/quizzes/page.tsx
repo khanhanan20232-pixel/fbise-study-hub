@@ -14,6 +14,8 @@ import {
   HelpCircle,
   Award,
   Zap,
+  BookOpen,
+  Layers,
 } from 'lucide-react';
 
 export default function DailyQuizzesPage() {
@@ -55,6 +57,148 @@ export default function DailyQuizzesPage() {
     }
     router.push(`/quizzes/${quizId}`);
   };
+
+  // Group quizzes chapter-wise per class + subject; a "Full Book" quiz (if one
+  // exists for the subject) is pulled out and shown as its own big option.
+  const isFullBook = (q: any) => (q.chapter || '').toLowerCase().startsWith('full book');
+
+  type QuizGroup = {
+    classGrade: string;
+    subject: string;
+    chapterQuizzes: any[];
+    fullBook: any | null;
+  };
+
+  const groupsMap = new Map<string, QuizGroup>();
+  for (const q of quizzes) {
+    const key = `${q.classGrade}|${q.subject}`;
+    if (!groupsMap.has(key)) {
+      groupsMap.set(key, { classGrade: q.classGrade, subject: q.subject, chapterQuizzes: [], fullBook: null });
+    }
+    const g = groupsMap.get(key)!;
+    if (isFullBook(q)) {
+      if (!g.fullBook) g.fullBook = q;
+    } else {
+      g.chapterQuizzes.push(q);
+    }
+  }
+  const groups: QuizGroup[] = Array.from(groupsMap.values())
+    .sort(
+      (a, b) =>
+        Number(a.classGrade) - Number(b.classGrade) || a.subject.localeCompare(b.subject)
+    )
+    .map((g) => ({
+      ...g,
+      chapterQuizzes: [...g.chapterQuizzes].sort((a, b) =>
+        (a.chapter || '').localeCompare(b.chapter || '', undefined, { numeric: true })
+      ),
+    }));
+
+  const renderChapterCard = (quiz: any) => (
+    <div
+      key={quiz.id}
+      className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4"
+    >
+      <div className="space-y-2">
+        <div className="flex items-center justify-between">
+          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300">
+            Class {quiz.classGrade} • {quiz.subject}
+          </span>
+          {quiz.isDaily && (
+            <span className="flex items-center space-x-1 text-[10px] font-bold text-amber-500 bg-amber-50 dark:bg-amber-950/60 px-2 py-0.5 rounded-full">
+              <Zap className="w-3 h-3 fill-amber-500" />
+              <span>Today&apos;s Quiz</span>
+            </span>
+          )}
+        </div>
+
+        <h3 className="font-bold text-slate-900 dark:text-white text-base line-clamp-2">
+          {quiz.chapter}
+        </h3>
+
+        <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 line-clamp-1">
+          {quiz.title}
+        </p>
+
+        <div className="flex items-center space-x-4 text-xs text-slate-400 pt-2 border-t border-slate-100 dark:border-slate-800">
+          <span className="flex items-center space-x-1">
+            <HelpCircle className="w-3.5 h-3.5 text-teal-600" />
+            <span>{quiz.questionCount} Questions</span>
+          </span>
+          <span className="flex items-center space-x-1">
+            <Clock className="w-3.5 h-3.5 text-amber-500" />
+            <span>{Math.round(quiz.timeLimit / 60)} mins</span>
+          </span>
+        </div>
+
+        {quiz.userLatestAttempt && (
+          <div className="p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 text-xs flex items-center justify-between font-bold">
+            <span>Previous Score:</span>
+            <span>{quiz.userLatestAttempt.percentage}%</span>
+          </div>
+        )}
+      </div>
+
+      <button
+        onClick={() => handleStartQuiz(quiz.id)}
+        className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-teal-800 to-teal-700 hover:from-teal-900 hover:to-teal-800 text-white font-bold text-xs shadow-sm flex items-center justify-center space-x-1.5 transition-all"
+      >
+        <span>{quiz.userLatestAttempt ? 'Retake Quiz' : 'Start Chapter Quiz'}</span>
+        <ChevronRight className="w-4 h-4" />
+      </button>
+    </div>
+  );
+
+  const renderFullBookCard = (quiz: any) => (
+    <div
+      key={quiz.id}
+      className="p-6 rounded-2xl bg-gradient-to-r from-fbise-700 via-fbise-600 to-teal-700 text-white shadow-md flex flex-col sm:flex-row sm:items-center gap-5"
+    >
+      <div className="flex items-start gap-4 flex-1 min-w-0">
+        <span className="w-12 h-12 rounded-2xl bg-white/15 flex items-center justify-center flex-shrink-0">
+          <BookOpen className="w-6 h-6 text-amber-300" />
+        </span>
+        <div className="space-y-1.5 min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-[10px] font-black px-2 py-0.5 rounded bg-amber-400 text-slate-950 uppercase tracking-wide">
+              Full Book
+            </span>
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-white/15">
+              Class {quiz.classGrade} • {quiz.subject}
+            </span>
+          </div>
+          <h3 className="font-extrabold text-lg leading-snug">
+            Full Book Quiz — {quiz.subject} (Class {quiz.classGrade})
+          </h3>
+          <p className="text-xs text-fbise-100/90">
+            Poori book ke tamam chapters ke sawal aik hi quiz mein — final revision ke liye best.
+          </p>
+          <div className="flex items-center space-x-4 text-xs text-fbise-100 pt-1">
+            <span className="flex items-center space-x-1">
+              <HelpCircle className="w-3.5 h-3.5" />
+              <span>{quiz.questionCount} Questions</span>
+            </span>
+            <span className="flex items-center space-x-1">
+              <Clock className="w-3.5 h-3.5" />
+              <span>{Math.round(quiz.timeLimit / 60)} mins</span>
+            </span>
+            {quiz.userLatestAttempt && (
+              <span className="font-bold text-amber-300">
+                Previous Score: {quiz.userLatestAttempt.percentage}%
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+      <button
+        onClick={() => handleStartQuiz(quiz.id)}
+        className="px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs shadow-md flex items-center justify-center space-x-1.5 transition-all whitespace-nowrap flex-shrink-0"
+      >
+        <span>{quiz.userLatestAttempt ? 'Retake Full Book Quiz' : 'Start Full Book Quiz'}</span>
+        <ChevronRight className="w-4 h-4" />
+      </button>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
@@ -159,60 +303,31 @@ export default function DailyQuizzesPage() {
               <p className="text-xs text-slate-500">Loading daily quizzes...</p>
             </div>
           ) : quizzes.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {quizzes.map((quiz) => (
-                <div
-                  key={quiz.id}
-                  className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4"
-                >
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300">
-                        Class {quiz.classGrade} • {quiz.subject}
-                      </span>
-                      {quiz.isDaily && (
-                        <span className="flex items-center space-x-1 text-[10px] font-bold text-amber-500 bg-amber-50 dark:bg-amber-950/60 px-2 py-0.5 rounded-full">
-                          <Zap className="w-3 h-3 fill-amber-500" />
-                          <span>Today&apos;s Quiz</span>
-                        </span>
-                      )}
+            <div className="space-y-10">
+              {groups.map((g) => (
+                <section key={`${g.classGrade}-${g.subject}`} className="space-y-4">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-9 h-9 rounded-xl bg-fbise-600 text-white flex items-center justify-center flex-shrink-0">
+                      <Layers className="w-5 h-5" />
+                    </span>
+                    <div>
+                      <h2 className="font-extrabold text-slate-900 dark:text-white text-base leading-tight">
+                        {g.subject} — Class {g.classGrade}
+                      </h2>
+                      <p className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
+                        Chapter-wise quizzes{g.fullBook ? ' + Full Book Quiz' : ''}
+                      </p>
                     </div>
-
-                    <h3 className="font-bold text-slate-900 dark:text-white text-base line-clamp-2">
-                      {quiz.title}
-                    </h3>
-
-                    <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">
-                      {quiz.chapter}
-                    </p>
-
-                    <div className="flex items-center space-x-4 text-xs text-slate-400 pt-2 border-t border-slate-100 dark:border-slate-800">
-                      <span className="flex items-center space-x-1">
-                        <HelpCircle className="w-3.5 h-3.5 text-teal-600" />
-                        <span>{quiz.questionCount} Questions</span>
-                      </span>
-                      <span className="flex items-center space-x-1">
-                        <Clock className="w-3.5 h-3.5 text-amber-500" />
-                        <span>{Math.round(quiz.timeLimit / 60)} mins</span>
-                      </span>
-                    </div>
-
-                    {quiz.userLatestAttempt && (
-                      <div className="p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 text-xs flex items-center justify-between font-bold">
-                        <span>Previous Score:</span>
-                        <span>{quiz.userLatestAttempt.percentage}%</span>
-                      </div>
-                    )}
                   </div>
 
-                  <button
-                    onClick={() => handleStartQuiz(quiz.id)}
-                    className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-teal-800 to-teal-700 hover:from-teal-900 hover:to-teal-800 text-white font-bold text-xs shadow-sm flex items-center justify-center space-x-1.5 transition-all"
-                  >
-                    <span>{quiz.userLatestAttempt ? 'Retake Quiz' : 'Start Daily Quiz'}</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
+                  {g.fullBook && renderFullBookCard(g.fullBook)}
+
+                  {g.chapterQuizzes.length > 0 && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                      {g.chapterQuizzes.map((quiz) => renderChapterCard(quiz))}
+                    </div>
+                  )}
+                </section>
               ))}
             </div>
           ) : (
