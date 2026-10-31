@@ -18,6 +18,7 @@ import {
   Award,
   ShieldCheck,
   ChevronRight,
+  Eye,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
@@ -122,33 +123,43 @@ export default function HomePage() {
           {/* FBISE-style cards — DO chhote cards (Abdul ki pasand: Syllabus & Model Papers + Past Papers) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6 pb-2">
             <Link href="/model-papers" className="group block">
-              <div className="relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800">
+              <div className="relative rounded-lg overflow-hidden">
                 <img
                   src="/card-model-papers.webp"
                   alt="Open book with a stack of books"
-                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-44 object-cover"
                 />
-                <div className="absolute inset-x-0 bottom-0 bg-slate-950/60 py-2.5 px-4">
-                  <div className="text-white font-bold text-base text-center">Syllabus &amp; Model Papers</div>
+                <div className="absolute inset-x-0 bottom-0 bg-slate-950/60 py-3.5 px-4">
+                  <div className="text-white font-bold text-lg text-center">Syllabus &amp; Model Papers</div>
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white text-fbise-700 text-xs font-bold shadow-lg">
+                    <Eye className="w-4 h-4" /> View Detail
+                  </span>
                 </div>
               </div>
-              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-3 px-1">
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-6 px-1 text-justify">
                 Tamam grades ka syllabus online available hai. Model papers aur old question papers ki
                 maloomat har student ke liye accessible hai.
               </p>
             </Link>
             <Link href="/past-papers" className="group block">
-              <div className="relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800">
+              <div className="relative rounded-lg overflow-hidden">
                 <img
                   src="/card-past-papers.webp"
                   alt="Students writing their board examination"
-                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-44 object-cover"
                 />
-                <div className="absolute inset-x-0 bottom-0 bg-slate-950/60 py-2.5 px-4">
-                  <div className="text-white font-bold text-base text-center">Past Papers</div>
+                <div className="absolute inset-x-0 bottom-0 bg-slate-950/60 py-3.5 px-4">
+                  <div className="text-white font-bold text-lg text-center">Past Papers</div>
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white text-fbise-700 text-xs font-bold shadow-lg">
+                    <Eye className="w-4 h-4" /> View Detail
+                  </span>
                 </div>
               </div>
-              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-3 px-1">
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-6 px-1 text-justify">
                 Har subject ke asal FBISE past papers — saal aur session ke hisaab se filter karo,
                 online parho ya apne device par download karo.
               </p>
@@ -241,13 +252,13 @@ export default function HomePage() {
                   SSC 1 & 2 • HSSC 1 & 2
                 </div>
               </div>
-              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
-                <div className="font-extrabold text-2xl text-fbise-700 dark:text-fbise-300">Daily</div>
+              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700 shadow-sm">
+                <div className="font-extrabold text-2xl text-slate-900 dark:text-white">Daily</div>
                 <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
                   Chapter MCQs
                 </div>
               </div>
-              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
+              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700 shadow-sm">
                 <div className="font-extrabold text-2xl text-slate-900 dark:text-white">AI Graded</div>
                 <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
                   Marking Scheme Rubric
