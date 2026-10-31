@@ -160,6 +160,7 @@ export default function QuizEnginePage() {
         body: JSON.stringify({
           userAnswers: originalAnswers,
           timeTakenSeconds: timeTaken,
+          questionIds: displayQuestions.map((q) => q.id),
         }),
       });
 
