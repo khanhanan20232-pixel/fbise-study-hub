@@ -35,6 +35,7 @@ export default function Header() {
   const [isDark, setIsDark] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerCoursesOpen, setDrawerCoursesOpen] = useState(false);
+  const [drawerQuizzesOpen, setDrawerQuizzesOpen] = useState(false);
 
   useEffect(() => {
     // Check initial dark mode from document or localStorage
@@ -324,6 +325,41 @@ export default function Header() {
                     <span className="text-[10px] bg-fbise-50 dark:bg-fbise-950 px-2 py-0.5 rounded font-mono text-fbise-800 dark:text-fbise-300 flex-shrink-0">
                       {cls.chip}
                     </span>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="border-t border-slate-100 dark:border-slate-800" />
+
+          {/* Quizzes — dropdown: class ke hisaab se seedha quiz page (aanay walay ke liye asaani) */}
+          <div>
+            <button
+              type="button"
+              onClick={() => setDrawerQuizzesOpen((v) => !v)}
+              className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-left"
+              aria-expanded={drawerQuizzesOpen}
+            >
+              <Sparkles className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
+              <span className="flex-1">Quizzes</span>
+              <ChevronDown className={`w-4 h-4 transition-transform ${drawerQuizzesOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {drawerQuizzesOpen && (
+              <div className="space-y-1 mt-1 ml-4">
+                <Link href="/quizzes" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/quizzes')}>
+                  <Sparkles className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
+                  <span className="flex-1">All Quizzes</span>
+                </Link>
+                {['9', '10', '11', '12'].map((grade) => (
+                  <Link
+                    key={grade}
+                    href={`/quizzes?class=${grade}`}
+                    onClick={() => setDrawerOpen(false)}
+                    className={drawerLinkClass('/quizzes')}
+                  >
+                    <GraduationCap className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
+                    <span className="flex-1">Class {grade} Quizzes</span>
                   </Link>
                 ))}
               </div>
