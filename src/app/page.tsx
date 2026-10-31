@@ -119,22 +119,38 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* FBISE-style card — sirf Syllabus & Model Papers (Abdul ki pasand: bas yehi aik) */}
-          <div className="mt-6 pb-2">
+          {/* FBISE-style cards — DO chhote cards (Abdul ki pasand: Syllabus & Model Papers + Past Papers) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6 pb-2">
             <Link href="/model-papers" className="group block">
               <div className="relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800">
                 <img
                   src="/card-model-papers.webp"
                   alt="Open book with a stack of books"
-                  className="w-full h-56 sm:h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-x-0 bottom-0 bg-slate-950/60 py-3 px-4">
-                  <div className="text-white font-bold text-lg text-center">Syllabus &amp; Model Papers</div>
+                <div className="absolute inset-x-0 bottom-0 bg-slate-950/60 py-2.5 px-4">
+                  <div className="text-white font-bold text-base text-center">Syllabus &amp; Model Papers</div>
                 </div>
               </div>
               <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-3 px-1">
                 Tamam grades ka syllabus online available hai. Model papers aur old question papers ki
                 maloomat har student ke liye accessible hai.
+              </p>
+            </Link>
+            <Link href="/past-papers" className="group block">
+              <div className="relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800">
+                <img
+                  src="/card-past-papers.webp"
+                  alt="Students writing their board examination"
+                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-slate-950/60 py-2.5 px-4">
+                  <div className="text-white font-bold text-base text-center">Past Papers</div>
+                </div>
+              </div>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-3 px-1">
+                Har subject ke asal FBISE past papers — saal aur session ke hisaab se filter karo,
+                online parho ya apne device par download karo.
               </p>
             </Link>
           </div>
@@ -162,7 +178,7 @@ export default function HomePage() {
               Prepare Smart. <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-fbise-600 via-fbise-500 to-amber-500">
                 Practice Better.
-              </span>{' '} 
+              </span>{' '}
               Achieve More.
             </h1>
 
