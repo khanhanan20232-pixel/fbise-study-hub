@@ -58,26 +58,30 @@ export default function DailyQuizzesPage() {
     router.push(`/quizzes/${quizId}`);
   };
 
-  // Group quizzes chapter-wise per class + subject; a "Full Book" quiz (if one
-  // exists for the subject) is pulled out and shown as its own big option.
+  // Group quizzes chapter-wise per class + subject; "Full Book" and "Half Book"
+  // quizzes (if they exist for the subject) are pulled out as their own options.
   const isFullBook = (q: any) => (q.chapter || '').toLowerCase().startsWith('full book');
+  const isHalfBook = (q: any) => (q.chapter || '').toLowerCase().startsWith('half book');
 
   type QuizGroup = {
     classGrade: string;
     subject: string;
     chapterQuizzes: any[];
     fullBook: any | null;
+    halfBook: any | null;
   };
 
   const groupsMap = new Map<string, QuizGroup>();
   for (const q of quizzes) {
     const key = `${q.classGrade}|${q.subject}`;
     if (!groupsMap.has(key)) {
-      groupsMap.set(key, { classGrade: q.classGrade, subject: q.subject, chapterQuizzes: [], fullBook: null });
+      groupsMap.set(key, { classGrade: q.classGrade, subject: q.subject, chapterQuizzes: [], fullBook: null, halfBook: null });
     }
     const g = groupsMap.get(key)!;
     if (isFullBook(q)) {
       if (!g.fullBook) g.fullBook = q;
+    } else if (isHalfBook(q)) {
+      if (!g.halfBook) g.halfBook = q;
     } else {
       g.chapterQuizzes.push(q);
     }
@@ -171,12 +175,12 @@ export default function DailyQuizzesPage() {
             Full Book Quiz — {quiz.subject} (Class {quiz.classGrade})
           </h3>
           <p className="text-xs text-fbise-100/90">
-            Poori book ke tamam chapters ke sawal aik hi quiz mein — final revision ke liye best.
+            Har attempt mein poori book ke bank se 50 random sawal — har dafa naye sawal, final revision ke liye best.
           </p>
           <div className="flex items-center space-x-4 text-xs text-fbise-100 pt-1">
             <span className="flex items-center space-x-1">
               <HelpCircle className="w-3.5 h-3.5" />
-              <span>{quiz.questionCount} Questions</span>
+              <span>50 Questions (random)</span>
             </span>
             <span className="flex items-center space-x-1">
               <Clock className="w-3.5 h-3.5" />
@@ -195,6 +199,57 @@ export default function DailyQuizzesPage() {
         className="px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs shadow-md flex items-center justify-center space-x-1.5 transition-all whitespace-nowrap flex-shrink-0"
       >
         <span>{quiz.userLatestAttempt ? 'Retake Full Book Quiz' : 'Start Full Book Quiz'}</span>
+        <ChevronRight className="w-4 h-4" />
+      </button>
+    </div>
+  );
+
+  const renderHalfBookCard = (quiz: any) => (
+    <div
+      key={quiz.id}
+      className="p-6 rounded-2xl bg-gradient-to-r from-teal-700 via-teal-600 to-emerald-600 text-white shadow-md flex flex-col sm:flex-row sm:items-center gap-5"
+    >
+      <div className="flex items-start gap-4 flex-1 min-w-0">
+        <span className="w-12 h-12 rounded-2xl bg-white/15 flex items-center justify-center flex-shrink-0">
+          <BookOpen className="w-6 h-6 text-amber-300" />
+        </span>
+        <div className="space-y-1.5 min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-[10px] font-black px-2 py-0.5 rounded bg-white text-teal-900 uppercase tracking-wide">
+              Half Book
+            </span>
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-white/15">
+              Class {quiz.classGrade} • {quiz.subject}
+            </span>
+          </div>
+          <h3 className="font-extrabold text-lg leading-snug">
+            Half Book Quiz — {quiz.subject} (Class {quiz.classGrade})
+          </h3>
+          <p className="text-xs text-teal-50/90">
+            Har attempt mein 25 random sawal poori book se — quick practice ke liye best.
+          </p>
+          <div className="flex items-center space-x-4 text-xs text-teal-50 pt-1">
+            <span className="flex items-center space-x-1">
+              <HelpCircle className="w-3.5 h-3.5" />
+              <span>25 Questions (random)</span>
+            </span>
+            <span className="flex items-center space-x-1">
+              <Clock className="w-3.5 h-3.5" />
+              <span>{Math.round(quiz.timeLimit / 60)} mins</span>
+            </span>
+            {quiz.userLatestAttempt && (
+              <span className="font-bold text-amber-300">
+                Previous Score: {quiz.userLatestAttempt.percentage}%
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+      <button
+        onClick={() => handleStartQuiz(quiz.id)}
+        className="px-6 py-3 rounded-xl bg-white hover:bg-teal-50 text-teal-900 font-extrabold text-xs shadow-md flex items-center justify-center space-x-1.5 transition-all whitespace-nowrap flex-shrink-0"
+      >
+        <span>{quiz.userLatestAttempt ? 'Retake Half Book Quiz' : 'Start Half Book Quiz'}</span>
         <ChevronRight className="w-4 h-4" />
       </button>
     </div>
@@ -315,12 +370,14 @@ export default function DailyQuizzesPage() {
                         {g.subject} — Class {g.classGrade}
                       </h2>
                       <p className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
-                        Chapter-wise quizzes{g.fullBook ? ' + Full Book Quiz' : ''}
+                        Chapter-wise quizzes{g.halfBook ? ' + Half Book' : ''}{g.fullBook ? ' + Full Book Quiz' : ''}
                       </p>
                     </div>
                   </div>
 
                   {g.fullBook && renderFullBookCard(g.fullBook)}
+
+                  {g.halfBook && renderHalfBookCard(g.halfBook)}
 
                   {g.chapterQuizzes.length > 0 && (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
