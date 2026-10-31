@@ -119,44 +119,23 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6 pb-2">
-            <Link
-              href="/past-papers"
-              className="group relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800 block"
-            >
-              <img
-                src="/hero-exam.webp"
-                alt="Students writing their board examination"
-                className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10 transition-opacity duration-300 group-hover:opacity-0">
-                <div className="text-white font-bold text-base">Board Examinations</div>
-                <div className="text-fbise-200 text-xs">Past papers, model papers &amp; date sheets</div>
+          {/* FBISE-style card — sirf Syllabus & Model Papers (Abdul ki pasand: bas yehi aik) */}
+          <div className="mt-6 pb-2">
+            <Link href="/model-papers" className="group block">
+              <div className="relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800">
+                <img
+                  src="/card-model-papers.webp"
+                  alt="Open book with a stack of books"
+                  className="w-full h-56 sm:h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-slate-950/60 py-3 px-4">
+                  <div className="text-white font-bold text-lg text-center">Syllabus &amp; Model Papers</div>
+                </div>
               </div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-4 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-fbise-600 text-white text-xs font-bold shadow-lg">
-                  Go to Past Papers <ArrowRight className="w-3.5 h-3.5" />
-                </span>
-              </div>
-            </Link>
-            <Link
-              href="/leaderboard"
-              className="group relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800 block"
-            >
-              <img
-                src="/hero-students.webp"
-                alt="Students celebrating their board results"
-                className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10 transition-opacity duration-300 group-hover:opacity-0">
-                <div className="text-white font-bold text-base">Results &amp; Top Achievers</div>
-                <div className="text-fbise-200 text-xs">Daily quizzes, streaks &amp; leaderboard</div>
-              </div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-4 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-fbise-600 text-white text-xs font-bold shadow-lg">
-                  Go to Leaderboard <ArrowRight className="w-3.5 h-3.5" />
-                </span>
-              </div>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-3 px-1">
+                Tamam grades ka syllabus online available hai. Model papers aur old question papers ki
+                maloomat har student ke liye accessible hai.
+              </p>
             </Link>
           </div>
         </div>
@@ -183,7 +162,7 @@ export default function HomePage() {
               Prepare Smart. <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-fbise-600 via-fbise-500 to-amber-500">
                 Practice Better.
-              </span>{' '}
+              </span>{' '} 
               Achieve More.
             </h1>
 
