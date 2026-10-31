@@ -322,11 +322,20 @@ export default function StudentDashboardPage() {
                     <svg viewBox="0 0 300 100" className="w-full h-24" role="img" aria-label={`${sp.subject} progress graph`}>
                       {/* 50% guide line */}
                       <line x1="10" y1="52" x2="290" y2="52" stroke="#94a3b8" strokeWidth="1" strokeDasharray="4 4" opacity="0.5" />
+                      <text x="12" y="12" fontSize="8" fill="#94a3b8" fontWeight="600">100%</text>
+                      <text x="12" y="99" fontSize="8" fill="#94a3b8" fontWeight="600">0%</text>
                       {n > 1 && <polygon points={areaPoints} fill={stroke} opacity="0.08" />}
                       {n > 1 && <polyline points={linePoints} fill="none" stroke={stroke} strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />}
                       {coords.map((c, i) => (
-                        <circle key={i} cx={c.x} cy={c.y} r={i === n - 1 ? 4.5 : 2.5} fill={stroke} stroke="white" strokeWidth="1" />
-                      ))}
+                    <g key={i}>
+                      <title>{`${sp.subject} — Test ${i + 1}: ${c.v}%`}</title>
+                      <circle cx={c.x} cy={c.y} r="10" fill="transparent" />
+                      <circle cx={c.x} cy={c.y} r={i === n - 1 ? 4.5 : 2.5} fill={stroke} stroke="white" strokeWidth="1" />
+                    </g>
+                    ))}
+                      <text x={Math.min(coords[n - 1].x, 260)} y={Math.max(coords[n - 1].y - 8, 10)} fontSize="9" fontWeight="700" fill={stroke}>
+                        {sp.current}%
+                      </text>
                     </svg>
 
                     <div className="flex items-center justify-between text-[10px] font-semibold text-slate-400">
