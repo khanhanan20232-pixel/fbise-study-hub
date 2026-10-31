@@ -34,7 +34,6 @@ export default function Header() {
   const pathname = usePathname();
   const [isDark, setIsDark] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [coursesOpen, setCoursesOpen] = useState(false);
   const [drawerCoursesOpen, setDrawerCoursesOpen] = useState(false);
 
   useEffect(() => {
@@ -53,7 +52,6 @@ export default function Header() {
   // Close the drawer on route change, on Escape, and lock body scroll while open
   useEffect(() => {
     setDrawerOpen(false);
-    setCoursesOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -116,26 +114,26 @@ export default function Header() {
   return (
     <>
       <header className="sticky top-0 z-50 shadow-md">
-        {/* Board Name Strip — full official board name, like fbise.edu.pk */}
-        <div className="bg-fbise-900 text-white">
+        {/* Board Name Strip — halki neeli patti, original FBISE style */}
+        <div className="bg-fbise-600 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-between gap-3">
             <p className="text-[11px] sm:text-xs font-semibold tracking-wide truncate">
               Federal Board of Intermediate &amp; Secondary Education, Islamabad
             </p>
-            <p className="hidden md:block text-[11px] text-fbise-200 flex-shrink-0">
+            <p className="hidden md:block text-[11px] text-fbise-100 flex-shrink-0">
               H-8/4, Islamabad • fbise.edu.pk
             </p>
           </div>
         </div>
 
-        {/* Main Slim Header Bar */}
-        <div className="bg-fbise-600 dark:bg-fbise-900 text-white">
+        {/* Main Slim Header Bar — white, original FBISE ki tarah */}
+        <div className="bg-white dark:bg-slate-900 text-slate-800 dark:text-white border-b border-slate-200 dark:border-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-2 sm:gap-3 h-14">
               {/* Hamburger — opens the LEFT slide-in menu (all navigation lives there) */}
               <button
                 onClick={() => setDrawerOpen(true)}
-                className="p-2 -ml-2 rounded-lg hover:bg-white/15 transition-colors flex-shrink-0"
+                className="p-2 -ml-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex-shrink-0"
                 aria-label="Open navigation menu"
               >
                 <Menu className="w-6 h-6" />
@@ -143,73 +141,34 @@ export default function Header() {
 
               {/* Logo + Title (kept compact so it never overlaps anything) */}
               <Link href="/" className="flex items-center gap-2.5 min-w-0 group">
-                <span className="w-9 h-9 rounded-lg bg-white border border-white/30 flex items-center justify-center flex-shrink-0 overflow-hidden p-0.5">
+                <span className="w-9 h-9 rounded-lg bg-white border border-slate-200 dark:border-slate-700 flex items-center justify-center flex-shrink-0 overflow-hidden p-0.5">
                   <img src="/logo-symbol.png" alt="FBISE Study Hub logo" className="w-full h-full object-contain" />
                 </span>
                 <span className="min-w-0 leading-tight">
-                  <span className="block font-extrabold text-base sm:text-lg tracking-tight truncate">
-                    FBISE <span className="text-amber-300">Study Hub</span>
+                  <span className="block font-extrabold text-base sm:text-lg tracking-tight truncate text-fbise-900 dark:text-white">
+                    FBISE <span className="text-fbise-600 dark:text-fbise-300">Study Hub</span>
                   </span>
-                  <span className="hidden sm:block text-[10px] uppercase tracking-wider font-semibold text-fbise-100">
+                  <span className="hidden sm:block text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400">
                     SSC &amp; HSSC Preparation Portal
                   </span>
                 </span>
               </Link>
 
-              {/* Quick links — Home, Courses, About & Contact always visible in the header bar */}
+              {/* Quick links — Home, About & Contact always visible in the header bar */}
               <nav className="hidden lg:flex items-center gap-1 ml-3 flex-shrink-0">
                 <Link
                   href="/"
                   className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
-                    pathname === '/' ? 'bg-white/20' : 'hover:bg-white/15'
+                    pathname === '/' ? 'bg-fbise-50 dark:bg-slate-800 text-fbise-800 dark:text-fbise-300' : 'hover:bg-slate-100 dark:hover:bg-slate-800'
                   }`}
                 >
                   Home
                 </Link>
 
-                {/* Courses — click opens the 4 classes below */}
-                <div className="relative">
-                  <button
-                    type="button"
-                    onClick={() => setCoursesOpen((v) => !v)}
-                    className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors flex items-center gap-1 ${
-                      coursesOpen || pathname.startsWith('/classes') ? 'bg-white/20' : 'hover:bg-white/15'
-                    }`}
-                    aria-expanded={coursesOpen}
-                  >
-                    <span>Courses</span>
-                    <ChevronDown className={`w-4 h-4 transition-transform ${coursesOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  {coursesOpen && (
-                    <>
-                      <div className="fixed inset-0 z-10" onClick={() => setCoursesOpen(false)} />
-                      <div className="absolute left-0 top-full mt-2 z-20 w-64 rounded-2xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden py-1.5">
-                        {classSections.map((cls) => (
-                          <Link
-                            key={cls.href}
-                            href={cls.href}
-                            onClick={() => setCoursesOpen(false)}
-                            className="flex items-center gap-3 px-4 py-2.5 hover:bg-fbise-50 dark:hover:bg-slate-800 transition-colors"
-                          >
-                            <GraduationCap className="w-5 h-5 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
-                            <span className="flex-1 min-w-0">
-                              <span className="block text-sm font-bold text-slate-800 dark:text-slate-100">{cls.label}</span>
-                              <span className="block text-[11px] font-medium text-slate-400">{cls.sub}</span>
-                            </span>
-                            <span className="text-[10px] bg-fbise-50 dark:bg-fbise-950 px-2 py-0.5 rounded font-mono text-fbise-800 dark:text-fbise-300 flex-shrink-0">
-                              {cls.chip}
-                            </span>
-                          </Link>
-                        ))}
-                      </div>
-                    </>
-                  )}
-                </div>
-
                 <Link
                   href="/about"
                   className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
-                    pathname.startsWith('/about') ? 'bg-white/20' : 'hover:bg-white/15'
+                    pathname.startsWith('/about') ? 'bg-fbise-50 dark:bg-slate-800 text-fbise-800 dark:text-fbise-300' : 'hover:bg-slate-100 dark:hover:bg-slate-800'
                   }`}
                 >
                   About Us
@@ -217,7 +176,7 @@ export default function Header() {
                 <Link
                   href="/contact"
                   className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
-                    pathname.startsWith('/contact') ? 'bg-white/20' : 'hover:bg-white/15'
+                    pathname.startsWith('/contact') ? 'bg-fbise-50 dark:bg-slate-800 text-fbise-800 dark:text-fbise-300' : 'hover:bg-slate-100 dark:hover:bg-slate-800'
                   }`}
                 >
                   Contact
@@ -229,7 +188,7 @@ export default function Header() {
                 <Link
                   href="/search"
                   aria-label="Search"
-                  className="p-2 rounded-lg hover:bg-white/15 transition-colors"
+                  className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 >
                   <Search className="w-5 h-5" />
                 </Link>
@@ -237,27 +196,27 @@ export default function Header() {
                 <button
                   onClick={toggleDarkMode}
                   aria-label="Toggle Theme"
-                  className="p-2 rounded-lg hover:bg-white/15 transition-colors"
+                  className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 >
-                  {isDark ? <Sun className="w-5 h-5 text-amber-300" /> : <Moon className="w-5 h-5" />}
+                  {isDark ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5" />}
                 </button>
 
                 {user ? (
                   <Link
                     href="/dashboard"
-                    className="flex items-center gap-2 pl-1 pr-1 sm:pr-2.5 py-1 rounded-lg hover:bg-white/15 transition-colors"
+                    className="flex items-center gap-2 pl-1 pr-1 sm:pr-2.5 py-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                     title={user.name}
                   >
-                    <span className="w-8 h-8 rounded-lg bg-white text-fbise-800 flex items-center justify-center font-bold text-sm flex-shrink-0">
+                    <span className="w-8 h-8 rounded-lg bg-fbise-600 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
                       {user.name.charAt(0)}
                     </span>
                     <span className="hidden md:block text-left leading-tight">
                       <span className="block text-xs font-bold truncate max-w-[110px]">{user.name}</span>
-                      <span className="flex items-center gap-1 text-[10px] text-fbise-100 font-semibold">
+                      <span className="flex items-center gap-1 text-[10px] text-slate-500 dark:text-slate-400 font-semibold">
                         {user.role === 'ADMIN' ? 'Admin' : `Class ${user.className}`}
                         {user.streak > 0 && (
-                          <span className="flex items-center text-amber-300 font-bold">
-                            <Flame className="w-3 h-3 fill-amber-300 text-amber-300" />
+                          <span className="flex items-center text-amber-500 font-bold">
+                            <Flame className="w-3 h-3 fill-amber-500 text-amber-500" />
                             {user.streak}d
                           </span>
                         )}
@@ -268,13 +227,13 @@ export default function Header() {
                   <>
                     <Link
                       href="/login"
-                      className="inline-block px-3 py-1.5 rounded-lg text-sm font-semibold hover:bg-white/15 transition-colors"
+                      className="inline-block px-3 py-1.5 rounded-lg text-sm font-semibold text-fbise-800 dark:text-fbise-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                     >
                       Sign In
                     </Link>
                     <Link
                       href="/signup"
-                      className="hidden sm:inline-block px-3.5 py-1.5 rounded-lg text-sm font-bold text-fbise-900 bg-amber-400 hover:bg-amber-300 shadow-sm transition-colors"
+                      className="hidden sm:inline-block px-3.5 py-1.5 rounded-lg text-sm font-bold text-white bg-fbise-600 hover:bg-fbise-700 shadow-sm transition-colors"
                     >
                       Sign Up
                     </Link>
@@ -302,22 +261,22 @@ export default function Header() {
           drawerOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        {/* Drawer header */}
-        <div className="bg-fbise-700 dark:bg-fbise-950 text-white px-4 py-4 flex items-center gap-3 flex-shrink-0">
-          <span className="w-10 h-10 rounded-xl bg-white/15 border border-white/25 flex items-center justify-center flex-shrink-0">
-            <GraduationCap className="w-6 h-6 text-amber-300" />
+        {/* Drawer header — white, baqi header ki tarah */}
+        <div className="bg-white dark:bg-slate-900 text-slate-800 dark:text-white px-4 py-4 flex items-center gap-3 flex-shrink-0 border-b border-slate-200 dark:border-slate-800">
+          <span className="w-10 h-10 rounded-xl bg-fbise-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center flex-shrink-0 overflow-hidden p-0.5">
+            <img src="/logo-symbol.png" alt="FBISE Study Hub logo" className="w-full h-full object-contain" />
           </span>
           <div className="min-w-0 leading-tight">
-            <p className="font-extrabold truncate">
-              FBISE <span className="text-amber-300">Study Hub</span>
+            <p className="font-extrabold truncate text-fbise-900 dark:text-white">
+              FBISE <span className="text-fbise-600 dark:text-fbise-300">Study Hub</span>
             </p>
-            <p className="text-[10px] uppercase tracking-wider text-fbise-100 font-semibold">
+            <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
               Federal Board • Islamabad
             </p>
           </div>
           <button
             onClick={() => setDrawerOpen(false)}
-            className="ml-auto p-2 rounded-lg hover:bg-white/15 transition-colors flex-shrink-0"
+            className="ml-auto p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex-shrink-0"
             aria-label="Close navigation menu"
           >
             <X className="w-5 h-5" />
@@ -326,7 +285,17 @@ export default function Header() {
 
         {/* Drawer links (scrollable) */}
         <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-5">
-          {/* Courses — click to open the 4 classes below */}
+          {/* Home — sab se pehle (number 1) in the sidebar */}
+          <div>
+            <Link href="/" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/')}>
+              <Home className="w-4 h-4 flex-shrink-0" />
+              <span>Home</span>
+            </Link>
+          </div>
+
+          <div className="border-t border-slate-100 dark:border-slate-800" />
+
+          {/* Classes — click to open the 4 classes below */}
           <div>
             <button
               type="button"
@@ -335,7 +304,7 @@ export default function Header() {
               aria-expanded={drawerCoursesOpen}
             >
               <GraduationCap className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
-              <span className="flex-1">Courses</span>
+              <span className="flex-1">Classes</span>
               <ChevronDown className={`w-4 h-4 transition-transform ${drawerCoursesOpen ? 'rotate-180' : ''}`} />
             </button>
             {drawerCoursesOpen && (
@@ -369,7 +338,7 @@ export default function Header() {
               Study Resources
             </p>
             <div className="space-y-1">
-              {navLinks.map((item) => {
+              {navLinks.filter((item) => item.href !== '/').map((item) => {
                 const Icon = item.icon;
                 return (
                   <Link
