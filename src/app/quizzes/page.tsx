@@ -25,6 +25,11 @@ export default function DailyQuizzesPage() {
   const [quizzes, setQuizzes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [classGrade, setClassGrade] = useState<string>(user?.className || 'ALL');
+  // Sidebar ke Quizzes dropdown se ?class=9 aaye to usi class ke quizzes pehle dikhao
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search).get('class');
+    if (p && ['9', '10', '11', '12'].includes(p)) setClassGrade(p);
+  }, []);
   const [subject, setSubject] = useState<string>('ALL');
 
   useEffect(() => {
