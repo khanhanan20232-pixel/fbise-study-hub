@@ -38,7 +38,7 @@ export default function DailyQuizzesPage() {
         setParamsReady(true);
   }, []);
   const [subject, setSubject] = useState<string>('ALL');
-  useEffect() => {
+  useEffect(() => {
         if (!paramsReady) return;
     const fetchQuizzes = async () => {
       setLoading(true);
