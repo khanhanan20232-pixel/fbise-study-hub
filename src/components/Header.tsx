@@ -27,6 +27,7 @@ import {
   LogIn,
   UserPlus,
   ChevronDown,
+    Layers,
 } from 'lucide-react';
 
 export default function Header() {
@@ -85,6 +86,7 @@ export default function Header() {
     { label: 'Past Papers', href: '/past-papers', icon: BookOpen },
     { label: 'Model Papers', href: '/model-papers', icon: FileText },
     { label: 'Daily Quizzes', href: '/quizzes', icon: Sparkles },
+    { label: 'Flashcards', href: '/flashcards', icon: Layers },
     { label: 'AI Paper Checker', href: '/ai-paper-check', icon: Sparkles, highlight: true },
     { label: 'Leaderboard', href: '/leaderboard', icon: Trophy },
     { label: 'Announcements', href: '/announcements', icon: Bell },
