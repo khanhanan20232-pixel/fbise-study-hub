@@ -27,10 +27,13 @@ export default function DailyQuizzesPage() {
   const [classGrade, setClassGrade] = useState<string>(user?.className || 'ALL');
   // Sidebar ke Quizzes dropdown se ?class=9 aaye to usi class ke quizzes pehle dikhao
   useEffect(() => {
-    const p = new URLSearchParams(window.location.search).get('class');
+    const params = new URLSearchParams(window.location.search);
+    const p = params.get('class');
     if (p && ['9', '10', '11', '12'].includes(p)) setClassGrade(p);
+    const subj = params.get('subject');
+    if (subj) setSubject(subj);
   }, []);
-  const [subject, setSubject] = useState<string>('ALL'); useEffect(() => { const s = new URLSearchParams(window.location.search).get('subject'); if (s) setSubject(s); }, []);
+  const [subject, setSubject] = useState<string>('ALL');
 
   useEffect(() => {
     const fetchQuizzes = async () => {
@@ -304,7 +307,7 @@ export default function DailyQuizzesPage() {
         </div>
 
         {/* Filter Bar */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-3 w-full sm:w-auto">
             <label className="text-xs font-bold text-slate-600 dark:text-slate-400">Class:</label>
             <select
@@ -347,7 +350,7 @@ export default function DailyQuizzesPage() {
         </div>
 
         {/* Quizzes Grid */}
-        <div className="space-y-4">
+        <div className="space-y-6">
           <div className="flex items-center justify-between text-xs text-slate-500">
             <span>
               Available Quizzes: <strong className="text-slate-800 dark:text-white">{quizzes.length}</strong>
@@ -363,9 +366,9 @@ export default function DailyQuizzesPage() {
               <p className="text-xs text-slate-500">Loading daily quizzes...</p>
             </div>
           ) : quizzes.length > 0 ? (
-            <div className="space-y-8">
+            <div className="space-y-10">
               {groups.map((g) => (
-                <section key={`${g.classGrade}-${g.subject}`} className="space-y-4">
+                <section key={`${g.classGrade}-${g.subject}`} className="space-y-6">
                   <div className="flex items-center gap-2.5">
                     <span className="w-9 h-9 rounded-xl bg-fbise-600 text-white flex items-center justify-center flex-shrink-0">
                       <Layers className="w-5 h-5" />
