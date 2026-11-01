@@ -25,17 +25,21 @@ export default function DailyQuizzesPage() {
   const [quizzes, setQuizzes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [classGrade, setClassGrade] = useState<string>(user?.className || 'ALL');
-  // Sidebar ke Quizzes dropdown se ?class=9 aaye to usi class ke quizzes pehle dikhao
+    const [paramsReady, setParamsReady] = useState(false);
+  // Sidebar ke Quizzes dropdown se ?class=9 aaye to usi class ke quizzes pehle dikhao.
+    // Race fix: pehli fetch URL params apply hone ke BAAD hi chalti hai — warna
+    // link se anay par pehle default class ki ghalat list flash hoti thi.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const p = params.get('class');
     if (p && ['9', '10', '11', '12'].includes(p)) setClassGrade(p);
     const subj = params.get('subject');
     if (subj) setSubject(subj);
+        setParamsReady(true);
   }, []);
   const [subject, setSubject] = useState<string>('ALL');
-
-  useEffect(() => {
+  useEffect() => {
+        if (!paramsReady) return;
     const fetchQuizzes = async () => {
       setLoading(true);
       try {
@@ -56,7 +60,7 @@ export default function DailyQuizzesPage() {
     };
 
     fetchQuizzes();
-  }, [classGrade, subject]);
+  }, [classGrade, subject, paramsReady]);
 
   const handleStartQuiz = (quizId: string) => {
     if (!user) {
