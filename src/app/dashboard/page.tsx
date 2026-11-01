@@ -26,6 +26,7 @@ import {
   Calendar,
   AlertCircle,
   Printer,
+  Layers,
 } from 'lucide-react';
 import PdfViewerModal from '@/components/PdfViewerModal';
 
@@ -34,6 +35,7 @@ export default function StudentDashboardPage() {
   const { user, isLoading } = useAuth();
 
   const [dashboardData, setDashboardData] = useState<any>(null);
+  const [flashcardsDue, setFlashcardsDue] = useState<number>(0);
   const [loadingData, setLoadingData] = useState(true);
   const [activeTab, setActiveTab] = useState<'overview' | 'quizzes' | 'checkedPapers' | 'bookmarks'>('overview');
 
@@ -63,6 +65,14 @@ export default function StudentDashboardPage() {
         const data = await res.json();
         setDashboardData(data);
       }
+      // Flashcards (FSRS) — aaj kitne cards due hain (banner ke liye)
+      try {
+        const fcRes = await fetch('/api/flashcards/due');
+        if (fcRes.ok) {
+          const fcData = await fcRes.json();
+          setFlashcardsDue(fcData.dueCount || 0);
+        }
+      } catch {}
     } catch (err) {
       console.error('Failed to load dashboard:', err);
     } finally {
@@ -245,6 +255,32 @@ export default function StudentDashboardPage() {
             </div>
           </div>
         </div>
+
+        {/* Flashcards (FSRS) due banner */}
+        <Link
+          href="/flashcards"
+          className="flex items-center justify-between p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all group"
+        >
+          <div className="flex items-center space-x-4">
+            <div className="w-12 h-12 rounded-xl bg-fbise-50 dark:bg-fbise-950/70 text-fbise-700 dark:text-fbise-400 flex items-center justify-center flex-shrink-0">
+              <Layers className="w-6 h-6" />
+            </div>
+            <div>
+              <p className="text-sm font-extrabold text-slate-900 dark:text-white">Flashcards — Smart Review (FSRS)</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                {flashcardsDue > 0
+                  ? `${flashcardsDue} cards aaj due hain — bhoolne se pehle revise kar lein`
+                  : 'Aaj koi card due nahi — ghalat jawab walay sawal yahan khud cards ban jatay hain'}
+              </p>
+            </div>
+          </div>
+          <span className="flex items-center text-xs font-bold text-fbise-700 dark:text-fbise-400 flex-shrink-0">
+            {flashcardsDue > 0 && (
+              <span className="mr-3 px-2.5 py-1 rounded-full bg-fbise-600 text-white text-[11px] font-black">{flashcardsDue} due</span>
+            )}
+            Review <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-0.5 transition-transform" />
+          </span>
+        </Link>
 
         {/* Subject-wise Progress — har subject ka apna graph: acha test → line oper, bura test → line neeche */}
         <div className="space-y-4">
