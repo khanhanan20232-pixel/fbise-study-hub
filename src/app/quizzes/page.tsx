@@ -30,7 +30,7 @@ export default function DailyQuizzesPage() {
     const p = new URLSearchParams(window.location.search).get('class');
     if (p && ['9', '10', '11', '12'].includes(p)) setClassGrade(p);
   }, []);
-  const [subject, setSubject] = useState<string>('ALL');
+  const [subject, setSubject] = useState<string>('ALL'); useEffect(() => { const s = new URLSearchParams(window.location.search).get('subject'); if (s) setSubject(s); }, []);
 
   useEffect(() => {
     const fetchQuizzes = async () => {
@@ -363,7 +363,7 @@ export default function DailyQuizzesPage() {
               <p className="text-xs text-slate-500">Loading daily quizzes...</p>
             </div>
           ) : quizzes.length > 0 ? (
-            <div className="space-y-10">
+            <div className="space-y-8">
               {groups.map((g) => (
                 <section key={`${g.classGrade}-${g.subject}`} className="space-y-4">
                   <div className="flex items-center gap-2.5">
@@ -385,7 +385,7 @@ export default function DailyQuizzesPage() {
                   {g.halfBook && renderHalfBookCard(g.halfBook)}
 
                   {g.chapterQuizzes.length > 0 && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {g.chapterQuizzes.map((quiz) => renderChapterCard(quiz))}
                     </div>
                   )}
