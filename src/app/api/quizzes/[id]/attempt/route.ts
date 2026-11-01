@@ -76,6 +76,32 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
       },
     });
 
+    // Flashcards (FSRS): har ghalat jawab wala sawal student ka flashcard ban
+        // jata hai — lekin sirf tab jab pehle se mojood na ho (progress kabhi reset
+        // nahi hota). Ye block kabhi attempt response ko fail nahi kar sakta.
+        try {
+                const wrongIds = questionsToScore
+                  .filter((q) => {
+                              const selected = userAnswers[q.id];
+                              return !(selected && selected.toUpperCase() === q.correctOption.toUpperCase());
+                  })
+                  .map((q) => q.id);
+                if (wrongIds.length > 0) {
+                          const existingCards = await prisma.userFlashcard.findMany({
+                                      where: { userId: user.id, cardId: { in: wrongIds } },
+                                      select: { cardId: true },
+                          });
+                          const have = new Set(existingCards.map((c) => c.cardId));
+                          for (const cardId of wrongIds) {
+                                      if (!have.has(cardId)) {
+                                                    await prisma.userFlashcard.create({ data: { userId: user.id, cardId } });
+                                      }
+                          }
+                }
+        } catch (fcErr) {
+                console.error('Flashcard auto-generation failed (attempt unaffected):', fcErr);
+        }
+
     // Increment streak if not already updated today
     const now = new Date();
     const currentDbUser = await prisma.user.findUnique({ where: { id: user.id } });
