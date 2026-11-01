@@ -20,11 +20,11 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import PdfViewerModal from '@/components/PdfViewerModal';
-
+import FieldRecommendations from '@/components/FieldRecommendations';
 const classConfig: Record<
   string,
   {
-    grade: string;
+        grade: string;
     title: string;
     subtitle: string;
     badge: string;
@@ -210,6 +210,7 @@ export default function ClassSectionPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-7xl mx-auto space-y-8">
+
         {/* Class Banner */}
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-fbise-950 via-fbise-900 to-slate-900 text-white p-6 sm:p-10 shadow-xl border border-fbise-800/40">
           <div className="relative z-10 max-w-3xl space-y-3">
@@ -248,6 +249,9 @@ export default function ClassSectionPage() {
             </button>
           </div>
         )}
+
+        {/* Choose Your Field – subject recommendations by stream */}
+              <FieldRecommendations key={config.grade} classGrade={config.grade} />
 
         {/* Subjects Filter Bar */}
         <div className="space-y-3">
@@ -325,11 +329,11 @@ export default function ClassSectionPage() {
           {loading ? (
             <div className="py-12 text-center text-xs text-slate-400">Loading {selectedSubject} papers...</div>
           ) : pastPapersList.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {pastPapersList.map((paper) => (
                 <div
                   key={paper.id}
-                  className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4"
+                  className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-2">
@@ -418,11 +422,11 @@ export default function ClassSectionPage() {
           </div>
 
           {modelPapersList.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {modelPapersList.map((paper) => (
                 <div
                   key={paper.id}
-                  className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-amber-200/60 dark:border-amber-800/40 shadow-sm flex flex-col justify-between space-y-4"
+                  className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-amber-200/60 dark:border-amber-800/40 shadow-sm flex flex-col justify-between space-y-4"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-2">
@@ -485,11 +489,11 @@ export default function ClassSectionPage() {
           </div>
 
           {quizzes.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {quizzes.map((quiz) => (
                 <div
                   key={quiz.id}
-                  className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between gap-4"
+                  className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between gap-4"
                 >
                   <div className="space-y-1">
                     <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-fbise-50 dark:bg-fbise-950 text-fbise-800 dark:text-fbise-300">
