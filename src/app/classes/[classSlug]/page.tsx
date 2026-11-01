@@ -21,10 +21,11 @@ import {
 } from 'lucide-react';
 import PdfViewerModal from '@/components/PdfViewerModal';
 import FieldRecommendations from '@/components/FieldRecommendations';
+
 const classConfig: Record<
   string,
   {
-        grade: string;
+    grade: string;
     title: string;
     subtitle: string;
     badge: string;
@@ -208,9 +209,8 @@ export default function ClassSectionPage() {
   const modelPapersList = papers.filter((p) => p.paperType === 'MODEL_PAPER');
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
-      <div className="max-w-7xl mx-auto space-y-8">
-
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 transition-colors">
+    <div className="max-w-7xl mx-auto space-y-10">
         {/* Class Banner */}
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-fbise-950 via-fbise-900 to-slate-900 text-white p-6 sm:p-10 shadow-xl border border-fbise-800/40">
           <div className="relative z-10 max-w-3xl space-y-3">
@@ -250,8 +250,8 @@ export default function ClassSectionPage() {
           </div>
         )}
 
-        {/* Choose Your Field – subject recommendations by stream */}
-              <FieldRecommendations key={config.grade} classGrade={config.grade} />
+        {/* Choose Your Field — subject recommendations by stream */}
+        <FieldRecommendations key={config.grade} classGrade={config.grade} />
 
         {/* Subjects Filter Bar */}
         <div className="space-y-3">
