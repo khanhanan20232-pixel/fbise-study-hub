@@ -517,7 +517,7 @@ export default function StudentDashboardPage() {
               </div>
 
               {/* Latest Saved Papers Preview */}
-              <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+              <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="font-bold text-slate-900 dark:text-white text-sm">Saved Past Papers</h3>
                   <button
