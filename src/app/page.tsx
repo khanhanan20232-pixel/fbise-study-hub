@@ -239,26 +239,26 @@ export default function HomePage() {
             </div>
 
             {/* Quick Metrics Bar */}
-            <div className="pt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center max-w-2xl mx-auto">
-              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
+            <div className="pt-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center max-w-2xl mx-auto">
+              <div className="p-4 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
                 <div className="font-extrabold text-2xl text-fbise-700 dark:text-fbise-300">100%</div>
                 <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
                   FBISE Syllabus
                 </div>
               </div>
-              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
+              <div className="p-4 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
                 <div className="font-extrabold text-2xl text-slate-900 dark:text-white">4 Classes</div>
                 <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
                   SSC 1 & 2 • HSSC 1 & 2
                 </div>
               </div>
-              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
+              <div className="p-4 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
                 <div className="font-extrabold text-2xl text-fbise-700 dark:text-fbise-300">Daily</div>
                 <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
                   Chapter MCQs
                 </div>
               </div>
-              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
+              <div className="p-4 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
                 <div className="font-extrabold text-2xl text-slate-900 dark:text-white">AI Graded</div>
                 <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
                   Marking Scheme Rubric
@@ -280,7 +280,7 @@ export default function HomePage() {
       </section>
 
       {/* Class Sections Grid (Dedicated Section for Each Class) */}
-      <section className="py-16 lg:py-24 bg-slate-50 dark:bg-slate-950 transition-colors">
+      <section className="py-12 lg:py-24 bg-slate-50 dark:bg-slate-950 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-xs font-extrabold uppercase tracking-widest text-fbise-700 dark:text-fbise-400">
@@ -440,7 +440,7 @@ export default function HomePage() {
       </section>
 
       {/* Core Platform Highlights: 4 Major Pillars */}
-      <section className="py-16 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
+      <section className="py-12 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs font-extrabold uppercase tracking-widest text-amber-600 dark:text-amber-400">
@@ -455,7 +455,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Feature 1: Past Papers */}
             <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 space-y-3">
               <div className="w-12 h-12 rounded-xl bg-fbise-100 dark:bg-fbise-950/70 text-fbise-800 dark:text-fbise-400 flex items-center justify-center">
