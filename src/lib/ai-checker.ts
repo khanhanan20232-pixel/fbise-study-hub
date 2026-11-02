@@ -1,4 +1,4 @@
-import { fetchGeminiWithRetry } from './gemini-fetch';
+import { fetchGeminiChain, GEMINI_MODELS_QUALITY } from './gemini-fetch';
 
 export interface QuestionEvaluation {
   questionNumber: string;
@@ -45,12 +45,9 @@ export async function evaluatePaperWithAI(params: {
 
   if (apiKey) {
     try {
-      const response = await fetchGeminiWithRetry(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`,
+      const response = await fetchGeminiChain(
+        apiKey,
         {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
             contents: [
               {
                 parts: [
@@ -113,8 +110,8 @@ Instructions:
               responseMimeType: 'application/json',
               temperature: 0.2,
             },
-          }),
-        }
+          },
+GEMINI_MODELS_QUALITY
       );
 
       if (response.ok) {
