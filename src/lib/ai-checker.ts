@@ -11,6 +11,7 @@ export interface QuestionEvaluation {
 }
 
 export interface PaperEvaluationReport {
+  engine?: string;
   subject: string;
   classGrade: string;
   totalMaxMarks: number;
@@ -119,16 +120,24 @@ Instructions:
         const parts = data.candidates?.[0]?.content?.parts || []; const jsonText = parts.filter((p: any) => p && typeof p.text === 'string' && !p.thought).map((p: any) => p.text).join('');
         if (jsonText) {
           const parsed = JSON.parse(jsonText.replace(/```json|```/g, '').trim());
-          return parsed;
+          console.log('[ai-checker] Gemini evaluation succeeded');
+          return { ...parsed, engine: 'gemini' };
         }
+        console.error('[ai-checker] Gemini returned no usable text parts:', JSON.stringify(data).slice(0, 1000));
+      } else {
+        const errBody = await response.text().catch(() => '');
+        console.error(`[ai-checker] Gemini API HTTP ${response.status}:`, errBody.slice(0, 1000));
       }
     } catch (apiError) {
-      console.warn('Gemini API call failed, falling back to FBISE Rubrics Engine:', apiError);
+      console.error('Gemini API call failed, falling back to FBISE Rubrics Engine:', apiError);
     }
   }
-
+} else {
+  console.error('[ai-checker] GEMINI_API_KEY is not set in this environment');
+}
   // Built-in intelligent FBISE Rubrics Engine
-  return generateFbiseRubricEvaluation(subject, classGrade, studentAnswers, paperTitle);
+  const fallbackReport = generateFbiseRubricEvaluation(subject, classGrade, studentAnswers, paperTitle);
+  return { ...fallbackReport, engine: 'rubric' };
 }
 
 function generateFbiseRubricEvaluation(
