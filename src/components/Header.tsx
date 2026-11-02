@@ -88,6 +88,7 @@ export default function Header() {
     { label: 'Daily Quizzes', href: '/quizzes', icon: Sparkles },
     { label: 'Flashcards', href: '/flashcards', icon: Layers },
     { label: 'AI Paper Checker', href: '/ai-paper-check', icon: Sparkles, highlight: true },
+    { label: 'AI Tutor', href: '/tutor', icon: GraduationCap, highlight: true },
     { label: 'Leaderboard', href: '/leaderboard', icon: Trophy },
     { label: 'Announcements', href: '/announcements', icon: Bell },
     { label: 'Search', href: '/search', icon: Search },
