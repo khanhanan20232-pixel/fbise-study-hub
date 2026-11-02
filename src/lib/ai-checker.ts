@@ -129,10 +129,9 @@ Instructions:
         console.error(`[ai-checker] Gemini API HTTP ${response.status}:`, errBody.slice(0, 1000));
       }
     } catch (apiError) {
-      console.error('Gemini API call failed, falling back to FBISE Rubrics Engine:', apiError);
+      console.error('[ai-checker] Gemini API call failed, falling back to FBISE Rubrics Engine:', apiError);
     }
-  }
-} else {
+  } else {
   console.error('[ai-checker] GEMINI_API_KEY is not set in this environment');
 }
 
