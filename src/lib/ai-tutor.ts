@@ -1,3 +1,5 @@
+import { fetchGeminiWithRetry } from './gemini-fetch';
+
 export interface TutorHistoryItem {
   role: 'user' | 'model';
   text: string;
@@ -46,7 +48,7 @@ export async function askTutor(params: {
   });
 
   try {
-    const response = await fetch(
+    const response = await fetchGeminiWithRetry(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`,
       {
         method: 'POST',
