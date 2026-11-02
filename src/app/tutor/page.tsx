@@ -31,6 +31,22 @@ const EXAMPLES = [
   'Cell aur us ke parts ki definition FBISE style mein batao',
 ];
 
+// Models sometimes answer with LaTeX/markdown despite plain-text
+// instructions; clean the markup so students see readable plain text.
+function cleanAnswer(text: string): string {
+  const cleanLatex = (s: string) =>
+      s
+    .replace(/\\frac\{([^{}]*)\}\{([^{}]*)\}/g, '$1/$2')
+  .replace(/\\text\{([^{}]*)\}/g, '$1')
+  .replace(/\\times/g, '×')
+  .replace(/\\/g, '');
+return text
+    .replace(/\*\*([\s\S]+?)\*\*/g, '$1')
+  .replace(/\$([\s\S]+?)\$/g, (_m, inner: string) => cleanLatex(inner))
+  .replace(/\*\*/g, '')
+  .replace(/\$/g, '');
+}
+
 export default function TutorPage() {
   const router = useRouter();
   const { user, isLoading } = useAuth();
@@ -197,7 +213,7 @@ export default function TutorPage() {
                         : 'max-w-[85%] rounded-2xl rounded-bl-md bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 px-4 py-3 text-sm whitespace-pre-wrap'
                     }
                   >
-                    {m.text}
+                    {m.role === 'model' ? cleanAnswer(m.text) : m.text}
                   </div>
                 </div>
               ))}
