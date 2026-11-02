@@ -135,7 +135,8 @@ Instructions:
 } else {
   console.error('[ai-checker] GEMINI_API_KEY is not set in this environment');
 }
-  // Built-in intelligent FBISE Rubrics Engine
+
+// Built-in intelligent FBISE Rubrics Engine
   const fallbackReport = generateFbiseRubricEvaluation(subject, classGrade, studentAnswers, paperTitle);
   return { ...fallbackReport, engine: 'rubric' };
 }
