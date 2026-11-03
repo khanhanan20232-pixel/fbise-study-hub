@@ -86,7 +86,7 @@ export default function Header() {
     { label: 'Home', href: '/', icon: Home },
     { label: 'Past Papers', href: '/past-papers', icon: BookOpen },
     { label: 'Model Papers', href: '/model-papers', icon: FileText },
-    { label: 'Daily Quizzes', href: '/quizzes', icon: Sparkles }
+    { label: 'Daily Quizzes', href: '/quizzes', icon: Sparkles },
     { label: 'Flashcards', href: '/flashcards', icon: Layers },
   { label: 'Study Groups', href: '/groups', icon: Users },
     { label: 'AI Paper Checker', href: '/ai-paper-check', icon: Sparkles, highlight: true },
