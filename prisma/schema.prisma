@@ -28,6 +28,11 @@ model User {
   checkedPapers  CheckedPaper[]
   bookmarks      Bookmark[]
   flashcards     UserFlashcard[]
+  
+ownedGroups      StudyGroup[]       @relation("GroupOwner")
+  groupMemberships StudyGroupMember[]
+  groupMessages    GroupMessage[]
+  sharedToGroups   GroupSharedQuiz[]  @relation("QuizSharer")
 }
 
 model Paper {
@@ -60,9 +65,9 @@ model Quiz {
   scheduledDate DateTime?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
-
   questions     QuizQuestion[]
   attempts      QuizAttempt[]
+  sharedToGroups GroupSharedQuiz[]
 }
 
 model QuizQuestion {
@@ -167,4 +172,60 @@ model UserFlashcard {
 
   @@unique([userId, cardId])
   @@index([userId, dueDate])
+}
+// Study groups (full workspace: shared material + group chat + leaderboard).
+// Students create groups, others join with the invite code. Any member can
+// share a quiz into the group; members study it via the quiz page or the
+// group's flip-card deck. The leaderboard ranks members by their attempts
+// and scores on the group's shared quizzes.
+model StudyGroup {
+  id          String   @id @default(cuid())
+  name        String
+  description String   @default("")
+  inviteCode  String   @unique
+  ownerId     String
+  owner       User     @relation("GroupOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  members       StudyGroupMember[]
+  messages      GroupMessage[]
+  sharedQuizzes GroupSharedQuiz[]
+}
+
+model StudyGroupMember {
+  id       String     @id @default(cuid())
+  groupId  String
+  group    StudyGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  userId   String
+  user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role     String     @default("MEMBER") // "OWNER" or "MEMBER"
+  joinedAt DateTime   @default(now())
+
+  @@unique([groupId, userId])
+  @@index([userId])
+}
+
+model GroupMessage {
+  id        String     @id @default(cuid())
+  groupId   String
+  group     StudyGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  text      String
+  createdAt DateTime   @default(now())
+
+  @@index([groupId, createdAt])
+}
+
+model GroupSharedQuiz {
+  id         String     @id @default(cuid())
+  groupId    String
+  group      StudyGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  quizId     String
+  quiz       Quiz       @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  sharedById String
+  sharedBy   User       @relation("QuizSharer", fields: [sharedById], references: [id], onDelete: Cascade)
+  createdAt  DateTime   @default(now())
+
+  @@unique([groupId, quizId])
 }
