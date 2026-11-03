@@ -65,7 +65,8 @@ model Quiz {
   scheduledDate DateTime?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
-  questions     QuizQuestion[]
+
+questions     QuizQuestion[]
   attempts      QuizAttempt[]
   sharedToGroups GroupSharedQuiz[]
 }
