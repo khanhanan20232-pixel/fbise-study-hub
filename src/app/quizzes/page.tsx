@@ -20,7 +20,12 @@ import {
 
 export default function DailyQuizzesPage() {
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, isLoading: authLoading } = useAuth();
+
+  // Phase E (teacher audit): logged-in students are locked to their own
+  // class — no class dropdown, no cross-class access via URL params.
+  const isStudent = user?.role === 'STUDENT';
+  const ownClass = isStudent ? String(user.className) : null;
 
   const [quizzes, setQuizzes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -38,8 +43,16 @@ export default function DailyQuizzesPage() {
         setParamsReady(true);
   }, []);
   const [subject, setSubject] = useState<string>('ALL');
+
+  // Student lock: jaise hi login user resolve ho, class filter us ki apni
+  // class par fix kar do — ?class= param (doosri class ka) ignore ho jata
+  // hai. (Server bhi yahi override karta hai, ye sirf UI ko saaf rakhta hai.)
   useEffect(() => {
-        if (!paramsReady) return;
+    if (ownClass) setClassGrade(ownClass);
+  }, [ownClass]);
+
+  useEffect(() => {
+        if (!paramsReady || authLoading) return;
     const fetchQuizzes = async () => {
       setLoading(true);
       try {
@@ -60,7 +73,7 @@ export default function DailyQuizzesPage() {
     };
 
     fetchQuizzes();
-  }, [classGrade, subject, paramsReady]);
+  }, [classGrade, subject, paramsReady, authLoading]);
 
   const handleStartQuiz = (quizId: string) => {
     if (!user) {
@@ -314,17 +327,31 @@ export default function DailyQuizzesPage() {
         <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-3 w-full sm:w-auto">
             <label className="text-xs font-bold text-slate-600 dark:text-slate-400">Class:</label>
-            <select
-              value={classGrade}
-              onChange={(e) => setClassGrade(e.target.value)}
-              className="py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700"
-            >
-              <option value="ALL">All Classes</option>
-              <option value="9">Class 9 (SSC-I)</option>
-              <option value="10">Class 10 (SSC-II)</option>
-              <option value="11">1st Year (HSSC-I)</option>
-              <option value="12">2nd Year (HSSC-II)</option>
-            </select>
+            {isStudent ? (
+              // Student ke liye class selector nahi — sirf apni class (locked)
+              <span className="py-2 px-3 rounded-xl border border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold">
+                {ownClass === '9'
+                  ? 'Class 9 (SSC-I)'
+                  : ownClass === '10'
+                  ? 'Class 10 (SSC-II)'
+                  : ownClass === '11'
+                  ? '1st Year (HSSC-I)'
+                  : '2nd Year (HSSC-II)'}{' '}
+                — Your Class
+              </span>
+            ) : (
+              <select
+                value={classGrade}
+                onChange={(e) => setClassGrade(e.target.value)}
+                className="py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700"
+              >
+                <option value="ALL">All Classes</option>
+                <option value="9">Class 9 (SSC-I)</option>
+                <option value="10">Class 10 (SSC-II)</option>
+                <option value="11">1st Year (HSSC-I)</option>
+                <option value="12">2nd Year (HSSC-II)</option>
+              </select>
+            )}
 
             <label className="text-xs font-bold text-slate-600 dark:text-slate-400 pl-2">Subject:</label>
             <select
@@ -404,7 +431,9 @@ export default function DailyQuizzesPage() {
               <CheckCircle2 className="w-12 h-12 text-slate-300 mx-auto" />
               <h4 className="font-bold text-slate-800 dark:text-slate-200">No Quizzes for this Selection</h4>
               <p className="text-xs text-slate-500 max-w-sm mx-auto">
-                Select a different class or subject to explore active chapter quizzes.
+                {isStudent
+                  ? 'Is subject mein aap ki class ke liye abhi koi quiz available nahi hai. Doosra subject try karein.'
+                  : 'Select a different class or subject to explore active chapter quizzes.'}
               </p>
             </div>
           )}
