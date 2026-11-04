@@ -105,10 +105,10 @@ export default function ForgotPasswordPage() {
   const labelClass = 'block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1';
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-950 transition-colors">
+    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-cream-100 dark:bg-slate-950 transition-colors">
       <div className="max-w-md w-full space-y-8 bg-white dark:bg-slate-900 p-8 sm:p-10 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl text-center">
-        <div className="inline-flex w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-700 to-emerald-900 items-center justify-center text-white shadow-md border border-amber-400/40 mb-2">
-          <GraduationCap className="w-8 h-8 text-amber-400" />
+        <div className="inline-flex w-14 h-14 rounded-2xl bg-navy-900 items-center justify-center text-white shadow-md border border-accent-400/40 mb-2">
+          <GraduationCap className="w-8 h-8 text-accent-400" />
         </div>
 
         {step === 'done' ? (
@@ -158,7 +158,7 @@ export default function ForgotPasswordPage() {
                     placeholder="Enter your email address"
                     className={inputClass}
                   />
-                </div>
+                                  </div>
               </div>
 
               {error && (
@@ -170,7 +170,7 @@ export default function ForgotPasswordPage() {
               <button
                 type="submit"
                 disabled={sending}
-                className="w-full py-3 px-4 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-800 to-emerald-700 hover:from-emerald-900 hover:to-emerald-800 shadow-md shadow-emerald-900/20 focus:outline-none focus:ring-2 focus:ring-emerald-700 transition-all flex items-center justify-center space-x-2 text-sm disabled:opacity-60"
+                className="w-full py-3 px-4 rounded-xl font-bold text-navy-950 bg-accent-400 hover:bg-accent-500 shadow-md shadow-accent-500/20 focus:outline-none focus:ring-2 focus:ring-accent-500 transition-all flex items-center justify-center space-x-2 text-sm disabled:opacity-60"
               >
                 {sending ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>Send Verification Code</span>}
                 {!sending && <ArrowRight className="w-4 h-4" />}
@@ -197,7 +197,7 @@ export default function ForgotPasswordPage() {
             </p>
 
             {notice && (
-              <p className="mt-4 text-xs text-slate-500 dark:text-slate-400 leading-relaxed bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-left">
+              <p className="mt-4 text-xs text-slate-500 dark:text-slate-400 leading-relaxed bg-cream-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-left">
                 {notice}
               </p>
             )}
@@ -276,7 +276,7 @@ export default function ForgotPasswordPage() {
               <button
                 type="submit"
                 disabled={resetting}
-                className="w-full py-3 px-4 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-800 to-emerald-700 hover:from-emerald-900 hover:to-emerald-800 shadow-md shadow-emerald-900/20 focus:outline-none focus:ring-2 focus:ring-emerald-700 transition-all flex items-center justify-center space-x-2 text-sm disabled:opacity-60"
+                className="w-full py-3 px-4 rounded-xl font-bold text-navy-950 bg-accent-400 hover:bg-accent-500 shadow-md shadow-accent-500/20 focus:outline-none focus:ring-2 focus:ring-accent-500 transition-all flex items-center justify-center space-x-2 text-sm disabled:opacity-60"
               >
                 {resetting ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>Reset Password</span>}
                 {!resetting && <ArrowRight className="w-4 h-4" />}
