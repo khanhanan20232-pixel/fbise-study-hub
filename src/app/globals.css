@@ -3,11 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --primary: #2b7cd3;
-  --primary-dark: #1a4a7d;
+  --primary: #0a1830;
+  --primary-dark: #060f1f;
   --gold: #d97706;
   --gold-light: #fef3c7;
-  /* Figma "Web Design" theme tokens (Phase A, 2026-11-04) */
+  /* Figma "Web Design" theme tokens (Phase A landing, Phase F site-wide,
+     2026-11-04) */
   --accent: #84cc16;
   --accent-bright: #a3e635;
   --cream: #fff9ee;
@@ -27,10 +28,15 @@
 
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-900 transition-colors duration-200 antialiased leading-relaxed;
+    @apply bg-cream-100 text-slate-900 transition-colors duration-200 antialiased leading-relaxed;
   }
   .dark body {
     @apply bg-slate-950 text-slate-100;
+  }
+  /* Figma theme: serif display headings site-wide (Phase F). */
+  h1,
+  h2 {
+    @apply font-display;
   }
 }
 
