@@ -273,14 +273,13 @@ s = 1 * 100 = 100 meters.`
     setSelectedFile(null);
     setSelectedPaperId('');
   };
-
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
+    <div className="min-h-screen bg-cream-100 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Banner */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-fbise-950 via-slate-900 to-amber-950 text-white p-6 sm:p-10 shadow-xl border border-amber-500/30">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-navy-950 via-navy-900 to-navy-800 text-white p-6 sm:p-10 shadow-xl border border-accent-500/30">
           <div className="relative z-10 max-w-3xl space-y-3">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold bg-amber-400 text-slate-950 shadow-sm">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold bg-accent-400 text-navy-950 shadow-sm">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Federal Board AI Assessor</span>
             </div>
@@ -298,10 +297,10 @@ s = 1 * 100 = 100 meters.`
         {/* LOADING / EVALUATION PROGRESS MODAL OVERLAY */}
         {isEvaluating && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in">
-            <div className="max-w-md w-full bg-white dark:bg-slate-900 rounded-3xl p-8 text-center space-y-5 border border-amber-500/30 shadow-2xl">
+            <div className="max-w-md w-full bg-white dark:bg-slate-900 rounded-3xl p-8 text-center space-y-5 border border-accent-500/30 shadow-2xl">
               <div className="relative w-20 h-20 mx-auto">
-                <div className="w-20 h-20 border-4 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
-                <div className="absolute inset-0 flex items-center justify-center text-amber-500 font-bold">
+                <div className="w-20 h-20 border-4 border-accent-500 border-t-transparent rounded-full animate-spin"></div>
+                <div className="absolute inset-0 flex items-center justify-center text-accent-500 font-bold">
                   <Sparkles className="w-8 h-8 animate-pulse" />
                 </div>
               </div>
@@ -310,7 +309,7 @@ s = 1 * 100 = 100 meters.`
                 <h3 className="font-extrabold text-slate-900 dark:text-white text-lg">
                   AI Assessor at Work
                 </h3>
-                <p className="text-xs text-amber-600 dark:text-amber-400 font-semibold mt-1 animate-pulse">
+                <p className="text-xs text-accent-600 dark:text-accent-400 font-semibold mt-1 animate-pulse">
                   {evaluationStage}
                 </p>
               </div>
@@ -395,7 +394,7 @@ s = 1 * 100 = 100 meters.`
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-6 rounded-2xl bg-gradient-to-r from-fbise-900 to-slate-900 text-white shadow-md">
                 <div className="text-center sm:text-left space-y-1">
                   <p className="text-xs uppercase tracking-wider text-fbise-200 font-bold">Marks Awarded</p>
-                  <p className="text-3xl sm:text-4xl font-black text-amber-400">
+                  <p className="text-3xl sm:text-4xl font-black text-accent-400">
                     {report.totalObtainedMarks} <span className="text-lg text-white font-normal">/ {report.totalMaxMarks}</span>
                   </p>
                 </div>
@@ -407,12 +406,12 @@ s = 1 * 100 = 100 meters.`
 
                 <div className="text-center sm:text-right space-y-1 border-t sm:border-t-0 border-white/10 pt-3 sm:pt-0">
                   <p className="text-xs uppercase tracking-wider text-fbise-200 font-bold">FBISE Letter Grade</p>
-                  <p className="text-3xl sm:text-4xl font-black text-amber-400">{report.grade}</p>
+                  <p className="text-3xl sm:text-4xl font-black text-accent-400">{report.grade}</p>
                 </div>
               </div>
 
               {/* Assessor Remarks */}
-              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1.5">
+              <div className="p-4 rounded-2xl bg-cream-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1.5">
                 <span className="font-bold text-xs uppercase tracking-wider text-fbise-800 dark:text-fbise-400">
                   Chief Examiner Overall Remarks:
                 </span>
@@ -428,7 +427,7 @@ s = 1 * 100 = 100 meters.`
                     FBISE 4-Pillar Evaluation Rubrics
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 space-y-2">
+                    <div className="p-4 rounded-xl bg-cream-100 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 space-y-2">
                       <div className="flex justify-between text-xs font-bold">
                         <span className="text-slate-700 dark:text-slate-300">Conceptual Clarity</span>
                         <span className="text-fbise-700 dark:text-fbise-400">{report.rubricsEvaluation.conceptualClarity}/10</span>
@@ -441,7 +440,7 @@ s = 1 * 100 = 100 meters.`
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 space-y-2">
+                    <div className="p-4 rounded-xl bg-cream-100 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 space-y-2">
                       <div className="flex justify-between text-xs font-bold">
                         <span className="text-slate-700 dark:text-slate-300">Diagrams & Presentation</span>
                         <span className="text-fbise-700 dark:text-fbise-400">{report.rubricsEvaluation.presentationAndDiagrams}/10</span>
@@ -454,7 +453,7 @@ s = 1 * 100 = 100 meters.`
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 space-y-2">
+                    <div className="p-4 rounded-xl bg-cream-100 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 space-y-2">
                       <div className="flex justify-between text-xs font-bold">
                         <span className="text-slate-700 dark:text-slate-300">FBISE Keyword Adherence</span>
                         <span className="text-fbise-700 dark:text-fbise-400">{report.rubricsEvaluation.fbiseKeywordAdherence}/10</span>
@@ -467,7 +466,7 @@ s = 1 * 100 = 100 meters.`
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 space-y-2">
+                    <div className="p-4 rounded-xl bg-cream-100 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 space-y-2">
                       <div className="flex justify-between text-xs font-bold">
                         <span className="text-slate-700 dark:text-slate-300">Mathematical Steps & Structure</span>
                         <span className="text-fbise-700 dark:text-fbise-400">{report.rubricsEvaluation.timeAndStructureEfficiency}/10</span>
@@ -494,7 +493,7 @@ s = 1 * 100 = 100 meters.`
                   {report.questionBreakdown.map((q, idx) => (
                     <div
                       key={idx}
-                      className="p-5 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border border-slate-200 dark:border-slate-700 space-y-3"
+                      className="p-5 rounded-2xl bg-cream-100/50 dark:bg-slate-800/30 border border-slate-200 dark:border-slate-700 space-y-3"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
@@ -558,7 +557,6 @@ s = 1 * 100 = 100 meters.`
                     ))}
                   </ul>
                 </div>
-
                 <div className="p-5 rounded-2xl bg-red-50/50 dark:bg-red-950/20 border border-red-200 dark:border-red-800/40 space-y-2">
                   <h4 className="font-bold text-xs uppercase tracking-wider text-red-800 dark:text-red-400 flex items-center space-x-1.5">
                     <AlertCircle className="w-4 h-4 text-red-600" />
@@ -633,7 +631,7 @@ s = 1 * 100 = 100 meters.`
                   <select
                     value={classGrade}
                     onChange={(e) => setClassGrade(e.target.value)}
-                    className="w-full py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-fbise-700"
+                    className="w-full py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-fbise-700"
                   >
                     <option value="9">Class 9 (SSC Part 1)</option>
                     <option value="10">Class 10 (SSC Part 2)</option>
@@ -649,7 +647,7 @@ s = 1 * 100 = 100 meters.`
                   <select
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
-                    className="w-full py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-fbise-700"
+                    className="w-full py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-fbise-700"
                   >
                     <option value="Physics">Physics</option>
                     <option value="Chemistry">Chemistry</option>
@@ -762,7 +760,7 @@ s = 1 * 100 = 100 meters.`
                     value={typedAnswers}
                     onChange={(e) => setTypedAnswers(e.target.value)}
                     placeholder="Question 1: Define inertia and give two practical examples...&#10;Answer: Inertia is the property of a body due to which it resists any change in its state of rest or uniform motion...&#10;&#10;Question 2: Derive second equation of motion...&#10;Answer: Let initial velocity be vi..."
-                    className="w-full p-4 rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-fbise-700 font-mono leading-relaxed"
+                    className="w-full p-4 rounded-2xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-fbise-700 font-mono leading-relaxed"
                   />
                 </div>
               ) : (
@@ -771,7 +769,7 @@ s = 1 * 100 = 100 meters.`
                   <label className="block text-xs font-bold text-slate-700 dark:text-slate-300">
                     Upload Solved Answer Sheet File
                   </label>
-                  <div className="p-8 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-2xl bg-slate-50 dark:bg-slate-800/40 text-center space-y-3">
+                  <div className="p-8 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-2xl bg-cream-100 dark:bg-slate-800/40 text-center space-y-3">
                     <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-600 flex items-center justify-center mx-auto">
                       <Upload className="w-6 h-6" />
                     </div>
@@ -809,7 +807,7 @@ s = 1 * 100 = 100 meters.`
               <button
                 type="submit"
                 disabled={isEvaluating}
-                className="w-full py-4 px-6 rounded-2xl font-black text-slate-950 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-xl shadow-amber-500/20 focus:outline-none focus:ring-2 focus:ring-amber-500 disabled:opacity-50 transition-all flex items-center justify-center space-x-2 text-sm sm:text-base"
+                className="w-full py-4 px-6 rounded-2xl font-black text-slate-950 bg-gradient-to-r from-accent-400 to-accent-500 hover:from-accent-300 hover:to-accent-400 shadow-xl shadow-accent-500/20 focus:outline-none focus:ring-2 focus:ring-accent-500 disabled:opacity-50 transition-all flex items-center justify-center space-x-2 text-sm sm:text-base"
               >
                 <Sparkles className="w-5 h-5" />
                 <span>Evaluate Paper Against FBISE Marking Scheme</span>
@@ -827,7 +825,7 @@ export default function AiPaperCheckerPage() {
     <Suspense
       fallback={
         <div className="min-h-screen py-20 text-center">
-          <div className="w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+          <div className="w-8 h-8 border-4 border-accent-500 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
           <p className="text-xs text-slate-500">Loading FBISE AI Paper Checker...</p>
         </div>
       }
