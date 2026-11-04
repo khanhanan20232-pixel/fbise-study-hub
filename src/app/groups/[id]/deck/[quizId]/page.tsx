@@ -125,7 +125,7 @@ export default function GroupDeckPage({ params }: { params: { id: string; quizId
         </div>
 
         {flipped ? (
-          <div className="rounded-xl bg-slate-50 dark:bg-slate-800/60 px-4 py-3 text-sm text-slate-700 dark:text-slate-200">
+          <div className="rounded-xl bg-cream-100 dark:bg-slate-800/60 px-4 py-3 text-sm text-slate-700 dark:text-slate-200">
             <span className="font-semibold text-fbise-600 dark:text-fbise-400">Explanation: </span>
             {card.explanation}
           </div>
