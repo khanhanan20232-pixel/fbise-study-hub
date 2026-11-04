@@ -288,7 +288,7 @@ export default function QuizEnginePage() {
   // Pre-Start Screen
   if (!quizStarted) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 transition-colors flex items-center justify-center">
+      <div className="min-h-screen bg-cream-100 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 transition-colors flex items-center justify-center">
         <div className="max-w-xl w-full bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-10 shadow-xl space-y-6">
           <div className="space-y-2 text-center">
             <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300">
@@ -300,7 +300,7 @@ export default function QuizEnginePage() {
             <p className="text-xs sm:text-sm text-slate-500 font-semibold">{quiz.chapter}</p>
           </div>
 
-          <div className="grid grid-cols-3 gap-3 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 text-center">
+          <div className="grid grid-cols-3 gap-3 p-4 rounded-2xl bg-cream-100 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 text-center">
             <div>
               <p className="text-[11px] text-slate-400 font-bold uppercase">Questions</p>
               <p className="text-lg font-black text-slate-800 dark:text-white">{questions.length}</p>
@@ -332,7 +332,7 @@ export default function QuizEnginePage() {
 
           <button
             onClick={() => setQuizStarted(true)}
-            className="w-full py-3.5 px-6 rounded-2xl font-black text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center space-x-2 text-sm"
+            className="w-full py-3.5 px-6 rounded-2xl font-black text-slate-950 bg-gradient-to-r from-accent-400 to-accent-500 hover:from-accent-300 hover:to-accent-400 shadow-lg shadow-accent-500/20 transition-all flex items-center justify-center space-x-2 text-sm"
           >
             <span>Begin Quiz Now</span>
             <ArrowRight className="w-4 h-4" />
@@ -347,7 +347,7 @@ export default function QuizEnginePage() {
     const isPassing = resultData.percentage >= 50;
 
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-10 px-4 sm:px-6 lg:px-8 transition-colors">
+      <div className="min-h-screen bg-cream-100 dark:bg-slate-950 py-10 px-4 sm:px-6 lg:px-8 transition-colors">
         {/* Phase E (teacher audit): desktop par do hisse — LEFT mein score
             card sticky/fixed, RIGHT mein evaluated questions ki list jo page
             scroll ke sath behti hai (nested scroller mobile par scroll trap
@@ -377,7 +377,7 @@ export default function QuizEnginePage() {
             </div>
 
             {/* Score Metrics */}
-            <div className="grid grid-cols-3 gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700">
+            <div className="grid grid-cols-3 gap-4 p-4 rounded-2xl bg-cream-100 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700">
               <div>
                 <p className="text-[10px] text-slate-400 font-bold uppercase">Marks</p>
                 <p className="text-2xl font-black text-slate-900 dark:text-white">
@@ -409,7 +409,7 @@ export default function QuizEnginePage() {
             <div className="flex flex-col gap-3 pt-2">
               <button
                 onClick={handleRetake}
-                className="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs shadow-md transition-all flex items-center justify-center space-x-1.5"
+                className="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-accent-400 to-accent-500 hover:from-accent-300 hover:to-accent-400 text-slate-950 font-black text-xs shadow-md transition-all flex items-center justify-center space-x-1.5"
               >
                 <RotateCcw className="w-4 h-4" />
                 <span>Retake This Quiz</span>
@@ -472,7 +472,7 @@ export default function QuizEnginePage() {
                       const isStudentChoice = q.selectedOption === opt;
                       const isCorrectChoice = q.correctOption === opt;
 
-                      let optClass = 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300';
+                      let optClass = 'bg-cream-100 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300';
                       if (isCorrectChoice) {
                         optClass = 'bg-emerald-50 dark:bg-emerald-950/70 border-emerald-500 text-emerald-900 dark:text-emerald-200 font-bold';
                       } else if (isStudentChoice && !isCorrectChoice) {
@@ -518,7 +518,7 @@ export default function QuizEnginePage() {
   const isTimeLow = timeLeft < 120; // less than 2 minutes
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
+    <div className="min-h-screen bg-cream-100 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-3xl mx-auto space-y-6">
         {/* Top Control Bar with Timer & Progress */}
         <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
@@ -599,7 +599,7 @@ export default function QuizEnginePage() {
                   className={`w-full p-4 rounded-2xl border text-left flex items-center space-x-3 transition-all ${
                     isSelected
                       ? 'border-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 text-emerald-950 dark:text-emerald-100 shadow-md ring-2 ring-emerald-600/30'
-                      : 'border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 text-slate-800 dark:text-slate-200 hover:border-emerald-500/50 hover:bg-slate-50'
+                      : 'border-slate-200 dark:border-slate-800 bg-cream-100/50 dark:bg-slate-800/40 text-slate-800 dark:text-slate-200 hover:border-emerald-500/50 hover:bg-cream-100'
                   }`}
                 >
                   <div
@@ -640,7 +640,7 @@ export default function QuizEnginePage() {
               <button
                 onClick={handleSubmitQuiz}
                 disabled={submitting}
-                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-xs font-black flex items-center space-x-1 shadow-md transition-all"
+                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-400 hover:to-accent-500 text-slate-950 text-xs font-black flex items-center space-x-1 shadow-md transition-all"
               >
                 <span>{submitting ? 'Evaluating...' : 'Submit & Check Answers'}</span>
                 <CheckCircle className="w-4 h-4" />
