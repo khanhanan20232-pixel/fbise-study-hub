@@ -273,6 +273,7 @@ s = 1 * 100 = 100 meters.`
     setSelectedFile(null);
     setSelectedPaperId('');
   };
+  
   return (
     <div className="min-h-screen bg-cream-100 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-5xl mx-auto space-y-8">
@@ -557,6 +558,7 @@ s = 1 * 100 = 100 meters.`
                     ))}
                   </ul>
                 </div>
+                
                 <div className="p-5 rounded-2xl bg-red-50/50 dark:bg-red-950/20 border border-red-200 dark:border-red-800/40 space-y-2">
                   <h4 className="font-bold text-xs uppercase tracking-wider text-red-800 dark:text-red-400 flex items-center space-x-1.5">
                     <AlertCircle className="w-4 h-4 text-red-600" />
