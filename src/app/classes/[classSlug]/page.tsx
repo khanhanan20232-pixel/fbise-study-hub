@@ -209,13 +209,13 @@ export default function ClassSectionPage() {
   const modelPapersList = papers.filter((p) => p.paperType === 'MODEL_PAPER');
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 transition-colors">
+    <div className="min-h-screen bg-cream-100 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 transition-colors">
     <div className="max-w-7xl mx-auto space-y-10">
         {/* Class Banner */}
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-fbise-950 via-fbise-900 to-slate-900 text-white p-6 sm:p-10 shadow-xl border border-fbise-800/40">
           <div className="relative z-10 max-w-3xl space-y-3">
             <div className="flex items-center space-x-2">
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-400 text-slate-950 shadow-sm">
+              <span className="px-3 py-1 rounded-full text-xs font-bold bg-accent-400 text-navy-950 shadow-sm">
                 {config.badge}
               </span>
               <span className="text-xs font-semibold text-fbise-200">
@@ -284,7 +284,7 @@ export default function ClassSectionPage() {
         {/* Action Link: Run AI Checker for this Subject & Class */}
         <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-50 to-fbise-50 dark:from-amber-950/20 dark:to-fbise-950/20 border border-amber-200/60 dark:border-amber-800/40 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-3 text-center sm:text-left">
-            <div className="w-10 h-10 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold flex-shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-accent-400 text-navy-950 flex items-center justify-center font-bold flex-shrink-0">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
@@ -444,7 +444,7 @@ export default function ClassSectionPage() {
                   <div className="flex items-center space-x-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                     <button
                       onClick={() => handleOpenPdf(paper)}
-                      className="flex-1 py-1.5 px-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs flex items-center justify-center space-x-1"
+                      className="flex-1 py-1.5 px-3 rounded-lg bg-accent-400 hover:bg-accent-500 text-navy-950 font-bold text-xs flex items-center justify-center space-x-1"
                     >
                       <Eye className="w-3.5 h-3.5" />
                       <span>View Model PDF</span>
