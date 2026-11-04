@@ -369,7 +369,7 @@ export default function AdminPanelPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
+    <div className="min-h-screen bg-cream-100 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Admin Header Banner */}
         <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-fbise-950 to-slate-900 text-white shadow-xl border border-fbise-800/40 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -482,7 +482,7 @@ export default function AdminPanelPage() {
               </h3>
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-slate-50 dark:bg-slate-800 text-slate-400 uppercase font-bold">
+                  <thead className="bg-cream-100 dark:bg-slate-800 text-slate-400 uppercase font-bold">
                     <tr>
                       <th className="py-2.5 px-4">Student Name</th>
                       <th className="py-2.5 px-4">Email</th>
@@ -531,7 +531,7 @@ export default function AdminPanelPage() {
                     value={newPaper.title}
                     onChange={(e) => setNewPaper({ ...newPaper, title: e.target.value })}
                     placeholder="e.g. Physics SSC-I Annual 2024"
-                    className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-emerald-700"
+                    className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-emerald-700"
                   />
                 </div>
 
@@ -542,7 +542,7 @@ export default function AdminPanelPage() {
                   <select
                     value={newPaper.classGrade}
                     onChange={(e) => setNewPaper({ ...newPaper, classGrade: e.target.value })}
-                    className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
+                    className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
                   >
                     <option value="9">Class 9 (SSC Part 1)</option>
                     <option value="10">Class 10 (SSC Part 2)</option>
@@ -558,7 +558,7 @@ export default function AdminPanelPage() {
                   <select
                     value={newPaper.subject}
                     onChange={(e) => setNewPaper({ ...newPaper, subject: e.target.value })}
-                    className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
+                    className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
                   >
                     <option value="Physics">Physics</option>
                     <option value="Chemistry">Chemistry</option>
@@ -581,7 +581,7 @@ export default function AdminPanelPage() {
                     required
                     value={newPaper.year}
                     onChange={(e) => setNewPaper({ ...newPaper, year: e.target.value })}
-                    className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
+                    className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
                   />
                 </div>
 
@@ -592,7 +592,7 @@ export default function AdminPanelPage() {
                   <select
                     value={newPaper.session}
                     onChange={(e) => setNewPaper({ ...newPaper, session: e.target.value })}
-                    className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
+                    className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
                   >
                     <option value="Annual">Annual Exam</option>
                     <option value="Supplementary">Supplementary (2nd Annual)</option>
@@ -606,7 +606,7 @@ export default function AdminPanelPage() {
                   <select
                     value={newPaper.paperType}
                     onChange={(e) => setNewPaper({ ...newPaper, paperType: e.target.value })}
-                    className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
+                    className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
                   >
                     <option value="PAST_PAPER">Past Examination Paper</option>
                     <option value="MODEL_PAPER">SLO Model Paper</option>
@@ -648,7 +648,7 @@ export default function AdminPanelPage() {
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-slate-50 dark:bg-slate-800 text-slate-500 uppercase font-bold">
+                  <thead className="bg-cream-100 dark:bg-slate-800 text-slate-500 uppercase font-bold">
                     <tr>
                       <th className="py-2.5 px-4">Title</th>
                       <th className="py-2.5 px-4">Class</th>
@@ -660,7 +660,7 @@ export default function AdminPanelPage() {
                   </thead>
                   <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
                     {papersList.map((p) => (
-                      <tr key={p.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                      <tr key={p.id} className="hover:bg-cream-100 dark:hover:bg-slate-800/40">
                         <td className="py-3 px-4 font-bold text-slate-900 dark:text-white">{p.title}</td>
                         <td className="py-3 px-4">Class {p.classGrade}</td>
                         <td className="py-3 px-4">{p.subject}</td>
@@ -719,7 +719,7 @@ export default function AdminPanelPage() {
                       value={newQuiz.title}
                       onChange={(e) => setNewQuiz({ ...newQuiz, title: e.target.value })}
                       placeholder="e.g. Physics Class 9: Motion & Force"
-                      className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
+                      className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
                     />
                   </div>
 
@@ -730,7 +730,7 @@ export default function AdminPanelPage() {
                     <select
                       value={newQuiz.classGrade}
                       onChange={(e) => setNewQuiz({ ...newQuiz, classGrade: e.target.value })}
-                      className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
+                      className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
                     >
                       <option value="9">Class 9</option>
                       <option value="10">Class 10</option>
@@ -746,7 +746,7 @@ export default function AdminPanelPage() {
                     <select
                       value={newQuiz.subject}
                       onChange={(e) => setNewQuiz({ ...newQuiz, subject: e.target.value })}
-                      className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
+                      className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
                     >
                       <option value="Physics">Physics</option>
                       <option value="Chemistry">Chemistry</option>
@@ -769,7 +769,7 @@ export default function AdminPanelPage() {
                       value={newQuiz.chapter}
                       onChange={(e) => setNewQuiz({ ...newQuiz, chapter: e.target.value })}
                       placeholder="e.g. Chapter 2: Kinematics"
-                      className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
+                      className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
                     />
                   </div>
 
@@ -781,7 +781,7 @@ export default function AdminPanelPage() {
                       type="number"
                       value={newQuiz.timeLimit}
                       onChange={(e) => setNewQuiz({ ...newQuiz, timeLimit: parseInt(e.target.value) || 600 })}
-                      className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
+                      className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
                     />
                   </div>
                 </div>
@@ -805,7 +805,7 @@ export default function AdminPanelPage() {
                   {quizQuestions.map((q, qIdx) => (
                     <div
                       key={qIdx}
-                      className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-3"
+                      className="p-4 rounded-2xl bg-cream-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-3"
                     >
                       <div className="flex justify-between items-center text-xs font-bold text-slate-500">
                         <span>Question {qIdx + 1}</span>
@@ -947,7 +947,7 @@ export default function AdminPanelPage() {
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-slate-50 dark:bg-slate-800 text-slate-500 uppercase font-bold">
+                  <thead className="bg-cream-100 dark:bg-slate-800 text-slate-500 uppercase font-bold">
                     <tr>
                       <th className="py-2.5 px-4">Title</th>
                       <th className="py-2.5 px-4">Class</th>
@@ -995,14 +995,14 @@ export default function AdminPanelPage() {
                   placeholder="Filter students by name or email..."
                   value={studentSearch}
                   onChange={(e) => setStudentSearch(e.target.value)}
-                  className="w-full py-1.5 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs bg-slate-50 dark:bg-slate-800"
+                  className="w-full py-1.5 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs bg-cream-100 dark:bg-slate-800"
                 />
               </div>
             </div>
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50 dark:bg-slate-800 text-slate-500 uppercase font-bold">
+                <thead className="bg-cream-100 dark:bg-slate-800 text-slate-500 uppercase font-bold">
                   <tr>
                     <th className="py-2.5 px-4">Name</th>
                     <th className="py-2.5 px-4">Email</th>
@@ -1080,7 +1080,7 @@ export default function AdminPanelPage() {
                       value={newAnnouncement.title}
                       onChange={(e) => setNewAnnouncement({ ...newAnnouncement, title: e.target.value })}
                       placeholder="e.g. FBISE SSC-I Date Sheet 2025 Announced"
-                      className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
+                      className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
                     />
                   </div>
 
@@ -1091,7 +1091,7 @@ export default function AdminPanelPage() {
                     <select
                       value={newAnnouncement.category}
                       onChange={(e) => setNewAnnouncement({ ...newAnnouncement, category: e.target.value })}
-                      className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
+                      className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
                     >
                       <option value="DATE_SHEET">Date Sheet</option>
                       <option value="RESULT">Exam Result</option>
@@ -1111,7 +1111,7 @@ export default function AdminPanelPage() {
                     value={newAnnouncement.content}
                     onChange={(e) => setNewAnnouncement({ ...newAnnouncement, content: e.target.value })}
                     placeholder="Enter detailed notification statement for students..."
-                    className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
+                    className="w-full py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
                   />
                 </div>
 
@@ -1131,7 +1131,7 @@ export default function AdminPanelPage() {
                 <button
                   type="submit"
                   disabled={postingNotice}
-                  className="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs shadow-sm transition-colors"
+                  className="px-6 py-2.5 rounded-xl bg-accent-400 hover:bg-accent-500 text-navy-950 font-bold text-xs shadow-sm transition-colors"
                 >
                   {postingNotice ? 'Publishing...' : 'Publish Announcement'}
                 </button>
