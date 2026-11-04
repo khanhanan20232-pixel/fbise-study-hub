@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getSessionUser } from '@/lib/auth';
+import { canStudentAccessQuiz } from '@/lib/quiz-access';
 
 export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
   try {
@@ -17,22 +18,43 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
       return NextResponse.json({ error: 'Answers must be provided' }, { status: 400 });
     }
 
+    // Phase E speed: when the client sends the ids it was actually served
+    // (Full/Half Book random subsets), filter IN the query instead of loading
+    // the whole 100+ question pool and discarding most of it in memory.
+    const hasServedIds = Array.isArray(questionIds) && questionIds.length > 0;
     const quiz = await prisma.quiz.findUnique({
       where: { id: quizId },
-      include: { questions: true },
+      include: {
+        questions: hasServedIds
+          ? { where: { id: { in: questionIds } } }
+          : true,
+      },
     });
 
     if (!quiz) {
       return NextResponse.json({ error: 'Quiz not found' }, { status: 404 });
     }
 
+    // Phase E (teacher audit): a student cannot submit an attempt for another
+    // class's quiz (exception: shared into one of their study groups).
+    if (!(await canStudentAccessQuiz(user, quizId, quiz.classGrade))) {
+      return NextResponse.json(
+        {
+          error: `This quiz is for Class ${quiz.classGrade} students. Your account is Class ${user.className}, so you can only take Class ${user.className} quizzes.`,
+        },
+        { status: 403 }
+      );
+    }
+
     // For Full/Half Book quizzes the student only saw a random subset of the
-    // pool — score only the questions that were actually served.
+    // pool — score only the questions that were actually served. If none of
+    // the sent ids matched this quiz (stale/foreign ids), fall back to the
+    // full question set, exactly as the previous in-memory filter did.
     let questionsToScore = quiz.questions;
-    if (Array.isArray(questionIds) && questionIds.length > 0) {
-      const servedIds = new Set(questionIds);
-      const filtered = quiz.questions.filter((q) => servedIds.has(q.id));
-      if (filtered.length > 0) questionsToScore = filtered;
+    if (hasServedIds && questionsToScore.length === 0) {
+      questionsToScore = await prisma.quizQuestion.findMany({
+        where: { quizId },
+      });
     }
 
     let score = 0;
@@ -92,10 +114,17 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
                                       select: { cardId: true },
                           });
                           const have = new Set(existingCards.map((c) => c.cardId));
-                          for (const cardId of wrongIds) {
-                                      if (!have.has(cardId)) {
-                                                    await prisma.userFlashcard.create({ data: { userId: user.id, cardId } });
-                                      }
+                          // Phase E speed: pehle har naye card ke liye alag
+                          // sequential create call jati thi (Full Book par 50
+                          // tak round-trips). Ab saare creates aik hi
+                          // transaction mein batch ho jate hain.
+                          const newCardIds = wrongIds.filter((cardId) => !have.has(cardId));
+                          if (newCardIds.length > 0) {
+                                      await prisma.$transaction(
+                                                    newCardIds.map((cardId) =>
+                                                                  prisma.userFlashcard.create({ data: { userId: user.id, cardId } })
+                                                    )
+                                      );
                           }
                 }
         } catch (fcErr) {
@@ -103,17 +132,15 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
         }
 
     // Increment streak if not already updated today
-    const now = new Date();
-    const currentDbUser = await prisma.user.findUnique({ where: { id: user.id } });
-    if (currentDbUser) {
-      await prisma.user.update({
-        where: { id: user.id },
-        data: {
-          lastActiveDate: now,
-          streak: { increment: 1 },
-        },
-      });
-    }
+    // Phase E speed: pehle findUnique + update do alag queries thin; ab aik
+    // hi updateMany hai (user mojood na ho to count 0, koi throw nahi).
+    await prisma.user.updateMany({
+      where: { id: user.id },
+      data: {
+        lastActiveDate: new Date(),
+        streak: { increment: 1 },
+      },
+    });
 
     return NextResponse.json({
       success: true,
