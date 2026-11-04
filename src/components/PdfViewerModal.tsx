@@ -63,7 +63,7 @@ export default function PdfViewerModal({
             {subject && classGrade && (
               <Link
                 href={`/ai-paper-check?subject=${encodeURIComponent(subject)}&classGrade=${classGrade}&paperId=${paperId || ''}`}
-                className="hidden sm:inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs shadow-sm transition-colors"
+                className="hidden sm:inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-accent-400 hover:bg-accent-500 text-navy-950 font-bold text-xs shadow-sm transition-colors"
                 onClick={onClose}
               >
                 <SparklesIcon className="w-3.5 h-3.5" />
