@@ -35,6 +35,7 @@ export default function Header() {
   const { user, logout } = useAuth();
   const pathname = usePathname();
   const [isDark, setIsDark] = useState(false);
+  const [guestMenuOpen, setGuestMenuOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerCoursesOpen, setDrawerCoursesOpen] = useState(false);
   const [drawerQuizzesOpen, setDrawerQuizzesOpen] = useState(false);
@@ -88,7 +89,7 @@ export default function Header() {
     { label: 'Model Papers', href: '/model-papers', icon: FileText },
     { label: 'Daily Quizzes', href: '/quizzes', icon: Sparkles },
     { label: 'Flashcards', href: '/flashcards', icon: Layers },
-  { label: 'Study Groups', href: '/groups', icon: Users },
+    { label: 'Study Groups', href: '/groups', icon: Users },
     { label: 'AI Paper Checker', href: '/ai-paper-check', icon: Sparkles, highlight: true },
     { label: 'AI Tutor', href: '/tutor', icon: GraduationCap, highlight: true },
     { label: 'Leaderboard', href: '/leaderboard', icon: Trophy },
@@ -116,6 +117,103 @@ export default function Header() {
         : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-fbise-800 dark:hover:text-fbise-300'
     }`;
   };
+
+  // Guest / landing view — Figma "Web Design" floating pill navbar (Phase A,
+  // 2026-11-04). Logged-in users keep the existing header + drawer below,
+  // completely unchanged. (Auth resolves async; until a user loads, the guest
+  // chrome shows — the same pattern the old header already had with its
+  // Sign In / Sign Up buttons.)
+  if (!user) {
+    const guestLinks = [
+      { label: 'Features', href: '/#features' },
+      { label: 'How it works', href: '/#how-it-works' },
+      { label: 'Classes', href: '/#classes' },
+      { label: 'Board Notices', href: '/announcements' },
+      { label: 'About', href: '/about' },
+    ];
+    return (
+      <div className="sticky top-0 z-50 bg-cream-100 dark:bg-slate-950 px-3 sm:px-6 pt-3 sm:pt-4 pb-1">
+        <header className="max-w-7xl mx-auto bg-white dark:bg-slate-900 rounded-full shadow-lg shadow-slate-900/5 border border-slate-100 dark:border-slate-800 pl-3 pr-2 sm:pl-4 sm:pr-2.5 py-2">
+          <div className="flex items-center gap-3">
+            {/* Logo — lime rounded square + serif wordmark */}
+            <Link href="/" className="flex items-center gap-2.5 min-w-0 flex-shrink-0">
+              <span className="w-10 h-10 rounded-xl bg-accent-400 flex items-center justify-center flex-shrink-0 overflow-hidden p-1.5">
+                <img src="/logo-symbol.png" alt="FBISE Study Hub logo" className="w-full h-full object-contain" />
+              </span>
+              <span className="leading-tight min-w-0">
+                <span className="block font-display font-bold text-lg text-navy-900 dark:text-white truncate">
+                  FBISE Study Hub
+                </span>
+                <span className="hidden sm:block text-[10px] font-semibold tracking-wide text-slate-500 dark:text-slate-400">
+                  SSC &amp; HSSC Preparation
+                </span>
+              </span>
+            </Link>
+
+            {/* Centre links */}
+            <nav className="hidden lg:flex items-center gap-1 mx-auto">
+              {guestLinks.map((l) => (
+                <Link
+                  key={l.label}
+                  href={l.href}
+                  className="px-3.5 py-2 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-cream-100 dark:hover:bg-slate-800 hover:text-navy-900 dark:hover:text-white transition-colors"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Right actions */}
+            <div className="ml-auto lg:ml-0 flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+              <button
+                onClick={toggleDarkMode}
+                aria-label="Toggle Theme"
+                className="hidden sm:block p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              >
+                {isDark ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5" />}
+              </button>
+              <Link
+                href="/login"
+                className="px-4 sm:px-5 py-2 rounded-full text-sm font-bold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+              >
+                Sign in
+              </Link>
+              <Link
+                href="/signup"
+                className="px-4 sm:px-5 py-2 rounded-full text-sm font-bold text-navy-950 bg-accent-400 hover:bg-accent-500 shadow-sm transition-colors"
+              >
+                Sign up free
+              </Link>
+              <button
+                onClick={() => setGuestMenuOpen((v) => !v)}
+                className="lg:hidden p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                aria-label="Open menu"
+                aria-expanded={guestMenuOpen}
+              >
+                {guestMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile centre-links row */}
+          {guestMenuOpen && (
+            <nav className="lg:hidden border-t border-slate-100 dark:border-slate-800 mt-2 pt-2 pb-1 px-2 flex flex-wrap gap-1">
+              {guestLinks.map((l) => (
+                <Link
+                  key={l.label}
+                  href={l.href}
+                  onClick={() => setGuestMenuOpen(false)}
+                  className="px-3.5 py-2 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-cream-100 dark:hover:bg-slate-800 transition-colors"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </nav>
+          )}
+        </header>
+      </div>
+    );
+  }
 
   return (
     <>
