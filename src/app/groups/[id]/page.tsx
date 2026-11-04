@@ -263,6 +263,7 @@ export default function GroupDetailPage({ params }: { params: { id: string } }) 
       </div>
     );
   }
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-24 text-slate-500">
