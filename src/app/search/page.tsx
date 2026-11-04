@@ -136,7 +136,7 @@ function SearchContent() {
   const totalResults = results.papers.length + results.quizzes.length + results.announcements.length;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
+    <div className="min-h-screen bg-cream-100 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Search Input Box */}
         <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
@@ -161,7 +161,7 @@ function SearchContent() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search across all subjects, classes, topics (e.g. 'Physics', 'Class 10 Math', 'Model Papers')..."
-                className="w-full pl-10 pr-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700"
+                className="w-full pl-10 pr-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700"
               />
               {query && (
                 <button
@@ -185,7 +185,7 @@ function SearchContent() {
                           e.preventDefault();
                           pickSuggestion(s);
                         }}
-                        className="w-full text-left px-4 py-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center justify-between gap-3"
+                        className="w-full text-left px-4 py-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:bg-cream-100 dark:hover:bg-slate-800 flex items-center justify-between gap-3"
                       >
                         <span className="truncate">{s.label}</span>
                         <span className="text-[10px] font-bold text-slate-400 whitespace-nowrap">{s.kind}</span>
