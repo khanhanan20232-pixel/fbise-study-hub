@@ -263,7 +263,6 @@ export default function GroupDetailPage({ params }: { params: { id: string } }) 
       </div>
     );
   }
-
   if (loading) {
     return (
       <div className="flex items-center justify-center py-24 text-slate-500">
@@ -469,7 +468,7 @@ export default function GroupDetailPage({ params }: { params: { id: string } }) 
                   <li
                     key={row.userId}
                     className={`flex items-center justify-between rounded-xl px-3 py-2 text-sm ${
-                      row.isMe ? 'bg-fbise-50 dark:bg-slate-800 border border-fbise-200 dark:border-slate-700' : 'bg-slate-50 dark:bg-slate-800/50'
+                      row.isMe ? 'bg-fbise-50 dark:bg-slate-800 border border-fbise-200 dark:border-slate-700' : 'bg-cream-100 dark:bg-slate-800/50'
                     }`}
                   >
                     <span className="flex items-center gap-2">
