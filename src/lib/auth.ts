@@ -67,6 +67,7 @@ export async function getSessionUser(request?: NextRequest) {
         email: true,
         role: true,
         className: true,
+        stream: true,
         phone: true,
         streak: true,
         isBlocked: true,
