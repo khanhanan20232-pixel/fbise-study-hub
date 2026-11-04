@@ -1,8 +1,15 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { GraduationCap, Heart, ExternalLink, Mail, Phone, MapPin, Sparkles, BookOpen } from 'lucide-react';
 
 export default function Footer() {
+  const pathname = usePathname();
+  // The landing page carries its own Figma footer; hide the global footer there.
+  if (pathname === '/') return null;
+
   return (
     <footer className="bg-fbise-950 text-fbise-100 border-t-4 border-amber-400 relative overflow-hidden">
       {/* Decorative Top Accent Line */}
