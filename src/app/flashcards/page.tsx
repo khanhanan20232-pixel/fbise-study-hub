@@ -151,7 +151,7 @@ export default function FlashcardsPage() {
   const deckSubjects = decks.filter((d) => d.classGrade === deckClass);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 transition-colors">
+    <div className="min-h-screen bg-cream-100 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Heading */}
         <div className="flex flex-wrap items-center justify-between gap-4">
@@ -196,100 +196,96 @@ export default function FlashcardsPage() {
             }`}
           >
             <BookOpen className="w-4 h-4 inline mr-1.5 -mt-0.5" />
-            Deck (Cram) Mode
+            Deck Mode (Cram)
           </button>
         </div>
 
         {/* Deck picker */}
         {mode === 'deck' && (
-          <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <select
-              value={deckClass}
-              onChange={(e) => {
-                setDeckClass(e.target.value);
-                setDeckSubject('');
-              }}
-              className="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm font-semibold text-slate-700 dark:text-slate-200"
-            >
-              <option value="">Select Class</option>
-              {['9', '10', '11', '12'].map((g) => (
-                <option key={g} value={g}>
-                  Class {g}
-                </option>
-              ))}
-            </select>
-            <select
-              value={deckSubject}
-              onChange={(e) => setDeckSubject(e.target.value)}
-              className="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm font-semibold text-slate-700 dark:text-slate-200"
-            >
-              <option value="">Select Subject</option>
-              {deckSubjects.map((d) => (
-                <option key={d.subject} value={d.subject}>
-                  {d.subject} ({d.count} cards)
-                </option>
-              ))}
-            </select>
+          <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-wrap items-end gap-3">
+            <div>
+              <label className="block text-[11px] font-bold text-slate-500 mb-1">Class</label>
+              <select
+                value={deckClass}
+                onChange={(e) => {
+                  setDeckClass(e.target.value);
+                  setDeckSubject('');
+                }}
+                className="py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-fbise-600"
+              >
+                <option value="">Select class…</option>
+                {[...new Set(decks.map((d) => d.classGrade))].sort().map((c) => (
+                  <option key={c} value={c}>
+                    Class {c}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-[11px] font-bold text-slate-500 mb-1">Subject</label>
+              <select
+                value={deckSubject}
+                onChange={(e) => setDeckSubject(e.target.value)}
+                className="py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-fbise-600"
+              >
+                <option value="">Select subject…</option>
+                {deckSubjects.map((d) => (
+                  <option key={d.subject} value={d.subject}>
+                    {d.subject} ({d.count} cards)
+                  </option>
+                ))}
+              </select>
+            </div>
             <button
               onClick={startDeck}
               disabled={!deckClass || !deckSubject}
-              className="px-5 py-2.5 rounded-xl bg-fbise-600 hover:bg-fbise-700 disabled:opacity-40 text-white text-sm font-bold transition-all"
+              className="px-5 py-2 rounded-xl bg-accent-400 hover:bg-accent-500 disabled:opacity-50 text-navy-950 font-bold text-xs shadow-sm transition-colors"
             >
               Start Deck
             </button>
-            <p className="text-[11px] text-slate-400 sm:ml-auto">
-              Exam qareeb hai? Poora deck abhi practice karein — FSRS schedule apni jagah rahega.
-            </p>
           </div>
         )}
 
         {/* Card area */}
         {loadingCards ? (
-          <div className="p-10 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+          <div className="py-24 text-center">
             <div className="w-8 h-8 border-4 border-fbise-600 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
-            <p className="text-xs text-slate-500">Loading flashcards...</p>
+            <p className="text-xs text-slate-500">Loading cards…</p>
           </div>
-        ) : sessionDone || !card ? (
-          <div className="p-10 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm text-center space-y-4">
-            <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
-            <h2 className="text-lg font-extrabold text-slate-900 dark:text-white">
-              {mode === 'review' ? 'No cards due — great job! 🎉' : 'Deck complete — well done! 🎉'}
-            </h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto">
-              {mode === 'review'
-                ? 'Aaj ke liye koi card baqi nahi. Quiz mein ghalat honay walay naye sawal yahan khud aa jayenge.'
-                : 'Is deck ke saaray cards review ho gaye. Ratings FSRS mein save ho gayi hain.'}
+        ) : sessionDone ? (
+          <div className="p-10 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3">
+            <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
+            <h3 className="font-extrabold text-slate-900 dark:text-white text-lg">Session Complete!</h3>
+            <p className="text-xs sm:text-sm text-slate-500 max-w-sm mx-auto">
+              Aaj ke saaray due cards review ho gaye. FSRS inhein sahi waqt par dobara dikhayega.
             </p>
-            <div className="flex items-center justify-center gap-3">
-              {mode === 'review' ? (
-                <button
-                  onClick={() => setMode('deck')}
-                  className="px-5 py-2.5 rounded-xl bg-fbise-600 hover:bg-fbise-700 text-white text-sm font-bold inline-flex items-center"
-                >
-                  Deck Mode try karein <ChevronRight className="w-4 h-4 ml-1" />
-                </button>
-              ) : (
-                <button
-                  onClick={() => {
-                    setMode('review');
-                    loadDue();
-                  }}
-                  className="px-5 py-2.5 rounded-xl bg-fbise-600 hover:bg-fbise-700 text-white text-sm font-bold inline-flex items-center"
-                >
-                  Due Review par wapas <RotateCcw className="w-4 h-4 ml-1" />
-                </button>
-              )}
-              <Link
-                href="/quizzes"
-                className="px-5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-700 dark:text-slate-200"
-              >
-                Quizzes dein
-              </Link>
-            </div>
+            <button
+              onClick={loadDue}
+              className="px-5 py-2.5 rounded-xl bg-fbise-600 hover:bg-fbise-700 text-white font-bold text-xs inline-flex items-center gap-1.5"
+            >
+              <RotateCcw className="w-3.5 h-3.5" /> Check Again
+            </button>
+          </div>
+        ) : !card ? (
+          <div className="p-10 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3">
+            <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
+            <h3 className="font-extrabold text-slate-900 dark:text-white text-lg">No Cards Due</h3>
+            <p className="text-xs sm:text-sm text-slate-500 max-w-sm mx-auto">
+              {mode === 'deck'
+                ? 'Is class + subject ke liye abhi koi flashcard nahi hai. Quiz mein jo sawal ghalat hoga, us ka card yahan ban jayega.'
+                : 'Abhi koi card due nahi hai. Quiz mein jo sawal ghalat hoga, us ka card yahan ban jayega aur FSRS usay sahi waqt par review karwayega.'}
+            </p>
+            <Link
+              href="/quizzes"
+              className="px-5 py-2.5 rounded-xl bg-accent-400 hover:bg-accent-500 text-navy-950 font-bold text-xs inline-flex items-center gap-1.5"
+            >
+              Take a Quiz <ChevronRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         ) : (
           <div className="space-y-5">
-            <div className="flex items-center justify-between text-xs font-semibold text-slate-500">
+            {/* Progress */}
+            <div className="flex items-center justify-between text-xs font-bold text-slate-500">
               <span>
                 Card {idx + 1} of {cards.length}
               </span>
@@ -297,62 +293,73 @@ export default function FlashcardsPage() {
                 Class {card.classGrade} • {card.subject} • {card.chapter}
               </span>
             </div>
+            <div className="h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+              <div
+                className="h-full bg-fbise-600 transition-all"
+                style={{ width: `${((idx + 1) / cards.length) * 100}%` }}
+              />
+            </div>
 
+            {/* The card */}
             <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-5">
-              <p className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-relaxed">{card.front}</p>
-              <div className="grid sm:grid-cols-2 gap-2.5">
-                {(['A', 'B', 'C', 'D'] as const).map((opt) => (
-                  <div
-                    key={opt}
-                    className={`px-3.5 py-2.5 rounded-xl border text-sm ${
-                      flipped && card.correctOption === opt
-                        ? 'border-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 font-bold'
-                        : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'
-                    }`}
-                  >
-                    <span className="font-bold mr-1.5">{opt}.</span>
-                    {card.options[opt]}
-                  </div>
-                ))}
+              <p className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-relaxed">
+                {card.front}
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {(Object.keys(card.options) as ('A' | 'B' | 'C' | 'D')[]).map((k) => {
+                  const isCorrect = flipped && k === card.correctOption;
+                  const cls = isCorrect
+                    ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/50 text-emerald-900 dark:text-emerald-200 font-bold'
+                    : 'border-slate-200 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200';
+                  return (
+                    <div key={k} className={`px-4 py-3 rounded-xl border text-sm ${cls}`}>
+                      <span className="font-black mr-2">{k}.</span>
+                      {card.options[k]}
+                    </div>
+                  );
+                })}
               </div>
 
               {flipped && (
                 <div className="p-4 rounded-2xl bg-fbise-50 dark:bg-fbise-950/40 border border-fbise-100 dark:border-fbise-900 space-y-1.5">
-                  <p className="text-sm font-bold text-fbise-900 dark:text-fbise-200">
+                  <p className="text-sm font-bold text-fbise-800 dark:text-fbise-200">
                     Correct Answer: {card.correctOption}. {card.back}
                   </p>
                   {card.explanation && (
-                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{card.explanation}</p>
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">{card.explanation}</p>
                   )}
                 </div>
               )}
-            </div>
 
-            {!flipped ? (
-              <button
-                onClick={() => setFlipped(true)}
-                className="w-full py-3.5 rounded-2xl bg-fbise-600 hover:bg-fbise-700 text-white text-sm font-bold transition-all inline-flex items-center justify-center"
-              >
-                <Eye className="w-4 h-4 mr-2" /> Show Answer
-              </button>
-            ) : (
-              <div className="space-y-2">
-                <p className="text-center text-xs font-semibold text-slate-500">Kitna yaad tha? Sachi rating dein — FSRS usi hisab se agla review rakhega.</p>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                  {card.previews.map((p) => (
-                    <button
-                      key={p.rating}
-                      onClick={() => rate(p.rating)}
-                      disabled={ratingBusy}
-                      className={`py-3 rounded-2xl text-sm font-bold transition-all disabled:opacity-50 ${RATING_STYLES[p.rating]}`}
-                    >
-                      {p.label}
-                      <span className="block text-[11px] font-semibold opacity-80 mt-0.5">{p.interval}</span>
-                    </button>
-                  ))}
+              {!flipped ? (
+                <button
+                  onClick={() => setFlipped(true)}
+                  className="w-full py-3 rounded-xl bg-fbise-600 hover:bg-fbise-700 text-white font-bold text-sm flex items-center justify-center gap-2 transition-colors"
+                >
+                  <Eye className="w-4 h-4" /> Show Answer
+                </button>
+              ) : (
+                <div className="space-y-2">
+                  <p className="text-[11px] font-bold text-slate-400 text-center">
+                    Kitna yaad tha? Rating do — FSRS agli review isi se tay karega.
+                  </p>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {card.previews.map((p) => (
+                      <button
+                        key={p.rating}
+                        onClick={() => rate(p.rating)}
+                        disabled={ratingBusy}
+                        className={`py-2.5 rounded-xl font-bold text-xs disabled:opacity-60 ${RATING_STYLES[p.rating]}`}
+                      >
+                        {p.label}
+                        <span className="block text-[10px] font-semibold opacity-80">{p.interval}</span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         )}
       </div>
