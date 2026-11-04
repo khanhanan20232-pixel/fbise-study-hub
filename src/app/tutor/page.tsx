@@ -121,14 +121,14 @@ export default function TutorPage() {
 
   if (isLoading || !user) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4 transition-colors">
+      <div className="min-h-screen bg-cream-100 dark:bg-slate-950 py-12 px-4 transition-colors">
         <div className="w-10 h-10 border-4 border-fbise-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 transition-colors">
+    <div className="min-h-screen bg-cream-100 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
         <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-6">
@@ -152,7 +152,7 @@ export default function TutorPage() {
               <select
                 value={classGrade}
                 onChange={(e) => setClassGrade(e.target.value)}
-                className="w-full py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-fbise-700"
+                className="w-full py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-fbise-700"
               >
                 <option value="9">Class 9</option>
                 <option value="10">Class 10</option>
@@ -167,7 +167,7 @@ export default function TutorPage() {
               <select
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
-                className="w-full py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-fbise-700"
+                className="w-full py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-fbise-700"
               >
                 {SUBJECTS.map((s) => (
                   <option key={s} value={s}>
@@ -241,7 +241,7 @@ export default function TutorPage() {
               }}
               rows={2}
               placeholder="Apna sawal yahan likho... (Enter = bhejo)"
-              className="flex-1 py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-fbise-700 resize-none"
+              className="flex-1 py-2.5 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-fbise-700 resize-none"
             />
             <button
               onClick={() => send()}
