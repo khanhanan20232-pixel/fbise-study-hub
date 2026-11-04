@@ -32,13 +32,15 @@ function LoginForm() {
     }
   };
 
+  // Demo accounts are the seeded users in prisma/seed.js — the passwords
+  // below must stay in sync with the credentials hashed there.
   const handleFillDemo = (type: 'student' | 'admin') => {
     if (type === 'admin') {
       setEmail('admin@fbise.edu.pk');
-      setPassword('AdminPassword123!');
+      setPassword('iNA4VM9iWsefjPszdQ');
     } else {
       setEmail('khan.hanan@student.fbise.edu.pk');
-      setPassword('StudentPassword123!');
+      setPassword('iMYUECAGdirypTjFba');
     }
   };
 
@@ -99,10 +101,12 @@ function LoginForm() {
               </div>
               <input
                 type="email"
+                name="email"
+                autoComplete="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="name@student.fbise.edu.pk"
+                placeholder="Enter your email address"
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700"
               />
             </div>
@@ -126,6 +130,8 @@ function LoginForm() {
               </div>
               <input
                 type="password"
+                name="password"
+                autoComplete="current-password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
