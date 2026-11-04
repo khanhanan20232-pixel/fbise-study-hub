@@ -22,7 +22,7 @@ export default function FieldRecommendations({ classGrade }: { classGrade: strin
     <Link
       key={subject}
       href={subjectLink(subject)}
-      className="flex items-center justify-between gap-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 hover:border-fbise-600 transition-colors"
+      className="flex items-center justify-between gap-3 p-4 rounded-xl bg-cream-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 hover:border-fbise-600 transition-colors"
     >
       <span className="flex items-center space-x-2.5">
         <BookOpen className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
