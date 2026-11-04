@@ -17,6 +17,7 @@ model User {
   password       String
   role           String         @default("STUDENT") // "STUDENT" or "ADMIN"
   className      String         @default("9") // "9", "10", "11", "12"
+  stream         String? // Study group/stream chosen at signup, e.g. "Pre-Medical" (see src/data/streams.ts)
   phone          String?
   streak         Int            @default(1)
   lastActiveDate DateTime?      @default(now())
@@ -28,8 +29,8 @@ model User {
   checkedPapers  CheckedPaper[]
   bookmarks      Bookmark[]
   flashcards     UserFlashcard[]
-  
-ownedGroups      StudyGroup[]       @relation("GroupOwner")
+
+  ownedGroups      StudyGroup[]       @relation("GroupOwner")
   groupMemberships StudyGroupMember[]
   groupMessages    GroupMessage[]
   sharedToGroups   GroupSharedQuiz[]  @relation("QuizSharer")
@@ -66,7 +67,7 @@ model Quiz {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 
-questions     QuizQuestion[]
+  questions     QuizQuestion[]
   attempts      QuizAttempt[]
   sharedToGroups GroupSharedQuiz[]
 }
