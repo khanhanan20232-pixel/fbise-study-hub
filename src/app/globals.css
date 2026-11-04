@@ -7,6 +7,22 @@
   --primary-dark: #1a4a7d;
   --gold: #d97706;
   --gold-light: #fef3c7;
+  /* Figma "Web Design" theme tokens (Phase A, 2026-11-04) */
+  --accent: #84cc16;
+  --accent-bright: #a3e635;
+  --cream: #fff9ee;
+  --navy: #0a1830;
+}
+
+/* Lime diagonal stripes — Figma hero / CTA decoration (CSS only, no image) */
+.lime-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #a3e635 0px,
+    #a3e635 14px,
+    transparent 14px,
+    transparent 30px
+  );
 }
 
 @layer base {
