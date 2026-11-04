@@ -1,615 +1,540 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
-  GraduationCap,
   BookOpen,
   Sparkles,
-  Trophy,
-  CheckCircle,
-  ArrowRight,
   Flame,
   FileText,
-  Search,
-  Bell,
-  Star,
-  Users,
-  Award,
-  ShieldCheck,
-  ChevronRight,
-  Eye,
+  Trophy,
+  LayoutDashboard,
+  CheckCircle2,
+  ArrowRight,
+  GraduationCap,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
+/*
+ * Landing page rebuilt to the Figma "Web Design" Landing frame (Phase A,
+ * 2026-11-04): cream hero + stacked cards, 6 feature cards, How-it-works with
+ * class selector, dark navy CTA with sign-up card, spec footer.
+ * HARD RULES from the spec: NO photographs on the landing, and never a large
+ * circular photo (the skipped pic #2). The old announcements ticker is not
+ * part of this design — notices live under "Board Notices" (/announcements).
+ */
+
+const FEATURES = [
+  {
+    icon: BookOpen,
+    tint: 'bg-sky-100 text-sky-700',
+    title: 'Past papers library',
+    text: 'Real FBISE past papers for every subject — filter by class, subject, year and session, read online or download.',
+    href: '/past-papers',
+    link: 'Browse past papers',
+    featured: false,
+  },
+  {
+    icon: Sparkles,
+    tint: 'bg-accent-100 text-accent-700',
+    title: 'AI paper checker',
+    text: 'Upload a photo of your solved paper and get it marked against the official FBISE scheme — marks, mistakes and a grade in minutes.',
+    href: '/ai-paper-check',
+    link: 'Check a paper',
+    featured: true,
+  },
+  {
+    icon: Flame,
+    tint: 'bg-orange-100 text-orange-600',
+    title: 'Daily chapter quizzes',
+    text: 'A fresh chapter-wise quiz every day for your class. Instant results, textbook explanations and a streak that keeps you going.',
+    href: '/quizzes',
+    link: "Start today's quiz",
+    featured: false,
+  },
+  {
+    icon: FileText,
+    tint: 'bg-lime-100 text-lime-700',
+    title: 'SLO model papers',
+    text: 'Official SLO-based model papers with marking rubrics and sample answers, so you know exactly how the board exam looks.',
+    href: '/model-papers',
+    link: 'View model papers',
+    featured: false,
+  },
+  {
+    icon: Trophy,
+    tint: 'bg-amber-100 text-amber-600',
+    title: 'Student leaderboard',
+    text: 'Earn XP for daily practice and accuracy, climb your class ranking and see where you stand among FBISE students.',
+    href: '/leaderboard',
+    link: 'See the leaderboard',
+    featured: false,
+  },
+  {
+    icon: LayoutDashboard,
+    tint: 'bg-violet-100 text-violet-700',
+    title: 'Your personal dashboard',
+    text: 'Your progress graphs, quiz history, saved papers and flashcards — everything you are studying, in one place.',
+    href: '/dashboard',
+    link: 'Open your dashboard',
+    featured: false,
+  },
+];
+
+const CLASS_ROWS = [
+  { slug: 'class-9', label: 'Class 9', sub: 'SSC Part 1' },
+  { slug: 'class-10', label: 'Class 10', sub: 'SSC Part 2' },
+  { slug: 'class-11', label: 'Class 11 · 1st Year', sub: 'HSSC Part 1' },
+  { slug: 'class-12', label: 'Class 12 · 2nd Year', sub: 'HSSC Part 2' },
+];
+
+const HERO_CHECKS = ['Free for students', '100% FBISE syllabus', 'Class 9 to 12'];
+const CTA_CHECKS = [
+  'Free for every FBISE student',
+  'Past papers & SLO model papers, Class 9–12',
+  'Daily quizzes with instant results',
+  'AI paper checking in minutes',
+];
+
 export default function HomePage() {
   const { user } = useAuth();
-  const [announcements, setAnnouncements] = useState<any[]>([]);
-  const [activeAnnouncementIdx, setActiveAnnouncementIdx] = useState(0);
-
-  useEffect(() => {
-    fetch('/api/announcements')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.announcements) setAnnouncements(data.announcements);
-      })
-      .catch(() => {});
-  }, []);
-
-  const classesList = [
-    {
-      slug: 'class-9',
-      grade: '9',
-      name: 'Class 9',
-      sub: 'SSC Part 1',
-      desc: 'Physics, Chemistry, Biology, Mathematics, Computer Science, English, Urdu & Pak Studies.',
-      color: 'from-fbise-700 to-fbise-900',
-      badge: 'Matric Part 1',
-    },
-    {
-      slug: 'class-10',
-      grade: '10',
-      name: 'Class 10',
-      sub: 'SSC Part 2',
-      desc: 'SLO-aligned board papers, model examinations, and chapter-wise daily quizzes.',
-      color: 'from-fbise-700 to-fbise-900',
-      badge: 'Matric Part 2',
-    },
-    {
-      slug: 'class-11',
-      grade: '11',
-      name: '1st Year',
-      sub: 'HSSC Part 1 (Class 11)',
-      desc: 'Pre-Medical, Pre-Engineering, and ICS comprehensive preparation & AI grading.',
-      color: 'from-fbise-800 to-fbise-950',
-      badge: 'Intermediate Part 1',
-    },
-    {
-      slug: 'class-12',
-      grade: '12',
-      name: '2nd Year',
-      sub: 'HSSC Part 2 (Class 12)',
-      desc: 'Final board examination papers, model marking schemes, and high-yield numerical quizzes.',
-      color: 'from-fbise-900 to-slate-900',
-      badge: 'Intermediate Part 2',
-    },
-  ];
+  const router = useRouter();
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Top Ticker: Latest Official Board Announcements */}
-      {announcements.length > 0 && (
-        <div className="bg-amber-50 dark:bg-amber-950/40 border-b border-amber-200 dark:border-amber-800/40 py-2.5 px-4 text-xs">
-          <div className="max-w-7xl mx-auto flex items-center justify-between">
-            <div className="flex items-center space-x-2 truncate pr-4">
-              <span className="flex items-center space-x-1 px-2 py-0.5 rounded-full bg-amber-500 text-slate-950 font-bold text-[10px] tracking-wide uppercase flex-shrink-0">
-                <Bell className="w-3 h-3" />
-                <span>Notice</span>
+    <div className="bg-cream-100 text-navy-900">
+      {/* ============ HERO (cream, stacked cards right) ============ */}
+      <section className="relative overflow-hidden">
+        {/* Lime diagonal stripes, top-right — Figma decoration */}
+        <div
+          aria-hidden="true"
+          className="lime-stripes absolute -top-10 right-0 w-72 sm:w-96 h-44 rotate-6 opacity-70 pointer-events-none"
+        />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 lg:pt-20 lg:pb-24 relative">
+          <div className="grid lg:grid-cols-2 gap-14 items-center">
+            {/* Left copy */}
+            <div>
+              <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white border border-cream-300 shadow-sm text-xs font-bold tracking-wide text-navy-900">
+                Federal Board, Islamabad · SSC &amp; HSSC
               </span>
-              <span className="font-semibold text-slate-800 dark:text-slate-200 truncate">
-                {announcements[0]?.title}
-              </span>
-            </div>
-            <Link
-              href="/announcements"
-              className="text-amber-700 dark:text-amber-400 font-bold hover:underline flex items-center space-x-1 flex-shrink-0"
-            >
-              <span>View All</span>
-              <ChevronRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-        </div>
-      )}
 
-      {/* Photo Banner — FBISE-style homepage pictures */}
-      <section className="bg-slate-50 dark:bg-slate-950 pt-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-800">
-            <img
-              src="/hero-building.webp"
-              alt="Federal Board of Intermediate and Secondary Education, Islamabad"
-              className="w-full h-56 sm:h-72 lg:h-96 object-cover"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-fbise-950/90 via-fbise-950/40 to-transparent px-5 pb-4 pt-14">
-              <div className="text-white font-extrabold text-lg sm:text-2xl leading-tight">
-                Federal Board of Intermediate &amp; Secondary Education
-              </div>
-              <div className="text-amber-300 text-xs sm:text-sm font-semibold">
-                H-8/4, Islamabad • SSC &amp; HSSC Annual Examinations
-              </div>
-            </div>
-          </div>
+              <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] mt-6">
+                Every FBISE paper, a daily quiz and an AI check.{' '}
+                <span className="text-accent-500">Free</span>
+              </h1>
 
-          {/* FBISE-style cards — DO chhote cards (Abdul ki pasand: Syllabus & Model Papers + Past Papers) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-8 pb-2">
-            <Link href="/model-papers" className="group block">
-              <div className="relative rounded-lg overflow-hidden">
-                <img
-                  src="/card-model-papers.webp"
-                  alt="Open book with a stack of books"
-                  className="w-full h-44 object-cover"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-slate-950/60 py-3.5 px-4">
-                  <div className="text-white font-bold text-lg text-center">Syllabus &amp; Model Papers</div>
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white text-fbise-700 text-xs font-bold shadow-lg">
-                    <Eye className="w-4 h-4" /> View Detail
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed mt-5 max-w-xl">
+                Past papers, SLO model papers, daily chapter quizzes and instant AI paper
+                checking for Class 9 to 12 — everything an FBISE student needs, in one place.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-3.5 mt-8">
+                {user ? (
+                  <>
+                    <Link
+                      href="/dashboard"
+                      className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-accent-400 hover:bg-accent-500 text-navy-950 font-bold shadow-md shadow-accent-500/20 transition-colors"
+                    >
+                      Go to my dashboard <ArrowRight className="w-5 h-5" />
+                    </Link>
+                    <Link
+                      href="/ai-paper-check"
+                      className="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-white hover:bg-cream-200 text-navy-900 font-bold border border-slate-300 transition-colors"
+                    >
+                      Check a paper
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      href="/signup"
+                      className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-accent-400 hover:bg-accent-500 text-navy-950 font-bold shadow-md shadow-accent-500/20 transition-colors"
+                    >
+                      Create free account <ArrowRight className="w-4 h-4" />
+                    </Link>
+                    <Link
+                      href="/login"
+                      className="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-white hover:bg-cream-200 text-navy-900 font-bold border border-slate-300 transition-colors"
+                    >
+                      Sign in
+                    </Link>
+                  </>
+                )}
+              </div>
+
+              <ul className="flex flex-wrap gap-x-6 gap-y-2 mt-8">
+                {HERO_CHECKS.map((c) => (
+                  <li key={c} className="flex items-center gap-2 text-sm font-semibold text-navy-900">
+                    <CheckCircle2 className="w-5 h-5 text-accent-500 flex-shrink-0" />
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Right — three stacked overlapping cards */}
+            <div className="relative max-w-md w-full mx-auto lg:ml-auto">
+              {/* Card 1 — lime Today's quiz */}
+              <div className="relative z-10 bg-accent-400 rounded-[1.75rem] shadow-xl shadow-accent-600/20 p-6 -rotate-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-extrabold uppercase tracking-widest text-navy-900/70">
+                    Today&apos;s quiz
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-navy-900 text-white text-[11px] font-bold">
+                    Class 10
                   </span>
                 </div>
-              </div>
-              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-6 px-1 text-justify">
-                Tamam grades ka syllabus online available hai. Model papers aur old question papers ki
-                maloomat har student ke liye accessible hai.
-              </p>
-            </Link>
-            <Link href="/past-papers" className="group block">
-              <div className="relative rounded-lg overflow-hidden">
-                <img
-                  src="/card-past-papers.webp"
-                  alt="Students writing their board examination"
-                  className="w-full h-44 object-cover"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-slate-950/60 py-3.5 px-4">
-                  <div className="text-white font-bold text-lg text-center">Past Papers</div>
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white text-fbise-700 text-xs font-bold shadow-lg">
-                    <Eye className="w-4 h-4" /> View Detail
+                <h3 className="font-display font-bold text-2xl text-navy-950 mt-2">
+                  Physics — Chapter 4
+                </h3>
+                <div className="flex flex-wrap gap-2 mt-4">
+                  <span className="px-3 py-1 rounded-full bg-white/80 text-navy-900 text-xs font-bold">
+                    15 MCQs
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-white/80 text-navy-900 text-xs font-bold">
+                    20 mins
+                  </span>
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/80 text-navy-900 text-xs font-bold">
+                    <Flame className="w-3.5 h-3.5 text-orange-500" /> Streak 12 days
                   </span>
                 </div>
-              </div>
-              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-6 px-1 text-justify">
-                Har subject ke asal FBISE past papers — saal aur session ke hisaab se filter karo,
-                online parho ya apne device par download karo.
-              </p>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Hero Section — light/white, original FBISE ki tarah */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-fbise-50 via-white to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 text-slate-900 dark:text-white pt-16 pb-20 lg:pt-24 lg:pb-32 border-b border-slate-100 dark:border-slate-800">
-        {/* Background Decorative Pattern */}
-        <div className="absolute inset-0 opacity-[0.35] pointer-events-none bg-[radial-gradient(#2b7cd3_1px,transparent_1px)] [background-size:24px_24px]"></div>
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-fbise-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute bottom-10 left-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
-          <div className="text-center lg:text-left space-y-6">
-            {/* Tagline Badge */}
-            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-fbise-200 dark:border-slate-700 text-fbise-800 dark:text-fbise-300 text-xs sm:text-sm font-semibold shadow-sm">
-              <Sparkles className="w-4 h-4 text-amber-500" />
-              <span>Federal Board Islamabad • Official Preparation Portal</span>
-            </div>
-
-            {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight sm:leading-none">
-              Prepare Smart. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-fbise-600 via-fbise-500 to-amber-500">
-                Practice Better.
-              </span>{' '}
-              Achieve More.
-            </h1>
-
-            {/* Description */}
-            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-2xl mx-auto">
-              The premier platform designed specifically for FBISE Matric & Intermediate students.
-              Access authentic past papers, test your skills with daily chapter quizzes, and get your solved
-              answer sheets graded by our instant AI paper assessment system.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              {user ? (
-                <>
+                <div className="flex gap-2.5 mt-6">
                   <Link
-                    href="/dashboard"
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center space-x-2 text-base"
+                    href="/quizzes"
+                    className="px-4 py-2 rounded-full bg-white text-navy-900 text-sm font-bold hover:bg-cream-100 transition-colors"
                   >
-                    <span>Go to My Dashboard</span>
-                    <ArrowRight className="w-5 h-5" />
+                    View chapter
                   </Link>
                   <Link
-                    href="/ai-paper-check"
-                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-fbise-600 hover:bg-fbise-700 shadow-md transition-all flex items-center justify-center space-x-2 text-base"
+                    href="/quizzes"
+                    className="px-4 py-2 rounded-full bg-navy-900 text-white text-sm font-bold hover:bg-navy-800 transition-colors"
                   >
-                    <Sparkles className="w-5 h-5 text-amber-300" />
-                    <span>Check a Solved Paper</span>
+                    Start quiz
                   </Link>
-                </>
-              ) : (
-                <>
-                  <Link
-                    href="/signup"
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center space-x-2 text-base"
-                  >
-                    <span>Create Free Student Account</span>
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
-                  <Link
-                    href="/login"
-                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-fbise-600 hover:bg-fbise-700 shadow-md transition-all flex items-center justify-center space-x-2 text-base"
-                  >
-                    <span>Sign In</span>
-                  </Link>
-                </>
-              )}
-            </div>
-
-            {/* Quick Metrics Bar */}
-            <div className="pt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center max-w-2xl mx-auto">
-              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
-                <div className="font-extrabold text-2xl text-fbise-700 dark:text-fbise-300">100%</div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
-                  FBISE Syllabus
                 </div>
               </div>
-              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
-                <div className="font-extrabold text-2xl text-slate-900 dark:text-white">4 Classes</div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
-                  SSC 1 & 2 • HSSC 1 & 2
-                </div>
-              </div>
-              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
-                <div className="font-extrabold text-2xl text-fbise-700 dark:text-fbise-300">Daily</div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
-                  Chapter MCQs
-                </div>
-              </div>
-              <div className="p-3 rounded-xl bg-white dark:bg-slate-800/60 border border-fbise-100 dark:border-slate-700 shadow-sm">
-                <div className="font-extrabold text-2xl text-slate-900 dark:text-white">AI Graded</div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
-                  Marking Scheme Rubric
-                </div>
-              </div>
-            </div>
-          </div>
 
-          {/* Books image — original FBISE style (Abdul ki pasand: Sample 2) */}
-          <div className="relative">
-            <img
-              src="/hero-books.webp"
-              alt="Graduation cap on a stack of books"
-              className="w-full h-72 sm:h-96 lg:h-[28rem] object-cover rounded-3xl shadow-xl border border-fbise-100 dark:border-slate-800"
-            />
-          </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Class Sections Grid (Dedicated Section for Each Class) */}
-      <section className="py-20 lg:py-28 bg-slate-50 dark:bg-slate-950 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-fbise-700 dark:text-fbise-400">
-              Select Your Academic Level
-            </span>
-            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
-              Dedicated Class Portals
-            </h2>
-            <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
-              Each class section is curated with that grade&apos;s specific FBISE subjects, past papers,
-              SLO-based model papers, and daily quizzes.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {classesList.map((cls) => (
-              <Link
-                key={cls.slug}
-                href={`/classes/${cls.slug}`}
-                className="group relative rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between overflow-hidden"
-              >
-                {/* Header gradient banner */}
-                <div className={`h-2 w-full absolute top-0 left-0 bg-gradient-to-r ${cls.color}`} />
-
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-fbise-50 dark:bg-fbise-950/60 text-fbise-800 dark:text-fbise-400 border border-fbise-200/50 dark:border-fbise-800/40">
-                      {cls.badge}
-                    </span>
-                    <span className="text-xs font-mono font-bold text-slate-400">
-                      Grade {cls.grade}
-                    </span>
+              {/* Card 2 — white Leaderboard */}
+              <div className="relative z-20 bg-white rounded-[1.75rem] shadow-xl shadow-slate-900/10 border border-slate-100 p-5 mt-[-0.75rem] ml-8 sm:ml-16 rotate-1">
+                <div className="flex items-center gap-3.5">
+                  <span className="w-11 h-11 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center flex-shrink-0">
+                    <Trophy className="w-6 h-6" />
+                  </span>
+                  <div className="min-w-0">
+                    <div className="text-[11px] font-extrabold uppercase tracking-widest text-slate-400">
+                      Leaderboard
+                    </div>
+                    <div className="font-bold text-navy-900 truncate">
+                      You&apos;re #3 in Class 10{' '}
+                      <span className="text-accent-600 whitespace-nowrap">· +120 XP</span>
+                    </div>
                   </div>
-
-                  <h3 className="text-2xl font-black text-slate-900 dark:text-white group-hover:text-fbise-700 dark:group-hover:text-fbise-400 transition-colors">
-                    {cls.name}
-                  </h3>
-                  <p className="text-xs font-semibold text-amber-600 dark:text-amber-400 mb-3">
-                    {cls.sub}
-                  </p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                    {cls.desc}
-                  </p>
+                  <Link
+                    href="/leaderboard"
+                    className="ml-auto text-accent-600 font-bold text-lg flex-shrink-0"
+                    aria-label="View leaderboard"
+                  >
+                    →
+                  </Link>
                 </div>
+              </div>
 
-                <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-fbise-700 dark:text-fbise-400 group-hover:opacity-0 transition-opacity">
-                  <span>Enter Class Portal</span>
-                  <ArrowRight className="w-4 h-4" />
-                </div>
-
-                {/* Hover reveal — "Go to Class" pill rises at the bottom center, like the original FBISE cards */}
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-5 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                  <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-fbise-600 text-white text-xs font-bold shadow-lg">
-                    Go to Class <ArrowRight className="w-3.5 h-3.5" />
+              {/* Card 3 — dark navy AI paper check */}
+              <div className="relative z-30 bg-navy-900 text-white rounded-[1.75rem] shadow-xl shadow-navy-950/30 p-6 mt-[-0.5rem] mr-4 sm:mr-10 -rotate-1">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <div className="text-[11px] font-extrabold uppercase tracking-widest text-accent-300">
+                      AI paper check · Chemistry
+                    </div>
+                    <div className="font-display font-bold text-4xl mt-2">
+                      42<span className="text-slate-400 text-2xl">/50</span>
+                    </div>
+                    <div className="text-sm font-semibold text-accent-300 mt-1">
+                      Score 84% · Grade A
+                    </div>
+                    <div className="text-xs text-slate-300 mt-1">3 mistakes to review</div>
+                  </div>
+                  <span className="w-11 h-11 rounded-2xl bg-white/10 text-accent-300 flex items-center justify-center flex-shrink-0">
+                    <Sparkles className="w-6 h-6" />
                   </span>
                 </div>
-              </Link>
-            ))}
+                <Link
+                  href="/ai-paper-check"
+                  className="inline-flex items-center gap-1.5 mt-4 text-sm font-bold text-accent-300 hover:text-accent-200 transition-colors"
+                >
+                  Check your paper <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Explore Tiles — every picture is a button to its section */}
-      <section className="bg-slate-50 dark:bg-slate-950 pb-16">
+      {/* ============ FEATURES ============ */}
+      <section id="features" className="bg-white py-20 lg:py-24 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-fbise-700 dark:text-fbise-400">
-              Tap a Picture to Explore
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-accent-600">
+              What you can do here
             </span>
-            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
-              Explore Study Hub
+            <h2 className="font-display font-bold text-3xl sm:text-4xl text-navy-900 mt-3">
+              Everything an FBISE student needs, in one place
             </h2>
-            <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
-              Har picture aik button hai — jis section mein jana hai, us ki picture ko touch karo.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Link
-              href="/past-papers"
-              className="group relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800 block"
-            >
-              <img
-                src="/tile-papers.webp"
-                alt="Stacks of board exam past papers"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10 transition-opacity duration-300 group-hover:opacity-0">
-                <div className="text-white font-bold text-base">Past Papers</div>
-                <div className="text-fbise-200 text-xs">Har subject ke asal FBISE papers</div>
-              </div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-4 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-fbise-600 text-white text-xs font-bold shadow-lg">
-                  Go to Past Papers <ArrowRight className="w-3.5 h-3.5" />
-                </span>
-              </div>
-            </Link>
-            <Link
-              href="/quizzes"
-              className="group relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800 block"
-            >
-              <img
-                src="/tile-quiz.webp"
-                alt="Students taking a daily quiz"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10 transition-opacity duration-300 group-hover:opacity-0">
-                <div className="text-white font-bold text-base">Daily Quizzes</div>
-                <div className="text-fbise-200 text-xs">Roz naye MCQs — touch karo, quiz shuru</div>
-              </div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-4 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-fbise-600 text-white text-xs font-bold shadow-lg">
-                  Go to Daily Quizzes <ArrowRight className="w-3.5 h-3.5" />
-                </span>
-              </div>
-            </Link>
-            <Link
-              href="/ai-paper-check"
-              className="group relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800 block"
-            >
-              <img
-                src="/tile-checking.webp"
-                alt="A paper being checked with a red pen"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10 transition-opacity duration-300 group-hover:opacity-0">
-                <div className="text-white font-bold text-base">AI Paper Checker</div>
-                <div className="text-fbise-200 text-xs">Apna solved paper check karwao</div>
-              </div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-4 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-fbise-600 text-white text-xs font-bold shadow-lg">
-                  Go to AI Paper Checker <ArrowRight className="w-3.5 h-3.5" />
-                </span>
-              </div>
-            </Link>
-            <Link
-              href="/leaderboard"
-              className="group relative rounded-2xl overflow-hidden shadow border border-slate-200 dark:border-slate-800 block"
-            >
-              <img
-                src="/tile-trophy.webp"
-                alt="Students celebrating with a trophy"
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 to-transparent px-4 pb-3 pt-10 transition-opacity duration-300 group-hover:opacity-0">
-                <div className="text-white font-bold text-base">Leaderboard</div>
-                <div className="text-fbise-200 text-xs">Top students ki list dekho</div>
-              </div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-4 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-fbise-600 text-white text-xs font-bold shadow-lg">
-                  Go to Leaderboard <ArrowRight className="w-3.5 h-3.5" />
-                </span>
-              </div>
-            </Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {FEATURES.map((f) => {
+              const Icon = f.icon;
+              return (
+                <div
+                  key={f.title}
+                  className={`relative rounded-[1.75rem] p-7 border transition-shadow hover:shadow-lg ${
+                    f.featured
+                      ? 'bg-accent-50 border-2 border-accent-400 shadow-md'
+                      : 'bg-white border-slate-200 shadow-sm'
+                  }`}
+                >
+                  {f.featured && (
+                    <span className="absolute top-5 right-5 px-3 py-1 rounded-full bg-navy-900 text-white text-[10px] font-extrabold uppercase tracking-wider">
+                      Exclusive
+                    </span>
+                  )}
+                  <span className={`w-12 h-12 rounded-2xl flex items-center justify-center ${f.tint}`}>
+                    <Icon className="w-6 h-6" />
+                  </span>
+                  <h3 className="font-display font-bold text-xl text-navy-900 mt-4">{f.title}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed mt-2">{f.text}</p>
+                  <Link
+                    href={f.href}
+                    className="inline-flex items-center gap-1.5 mt-4 text-sm font-bold text-accent-600 hover:text-accent-700 transition-colors"
+                  >
+                    {f.link} <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Core Platform Highlights: 4 Major Pillars */}
-      <section className="py-20 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
+      {/* ============ HOW IT WORKS + SELECT YOUR CLASS ============ */}
+      <section id="how-it-works" className="bg-cream-100 py-20 lg:py-24 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-amber-600 dark:text-amber-400">
-              Complete Preparation Ecosystem
-            </span>
-            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
-              Everything an FBISE Student Needs
-            </h2>
-            <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
-              No more searching through scattered groups or outdated PDFs. Study Hub centralizes
-              all resources under authentic Federal Board standards.
-            </p>
-          </div>
+          <div className="grid lg:grid-cols-2 gap-14 items-center">
+            <div>
+              <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-accent-600">
+                How it works
+              </span>
+              <h2 className="font-display font-bold text-3xl sm:text-4xl text-navy-900 mt-3">
+                Board-ready in three simple steps
+              </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Feature 1: Past Papers */}
-            <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-fbise-100 dark:bg-fbise-950/70 text-fbise-800 dark:text-fbise-400 flex items-center justify-center">
-                <BookOpen className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                Comprehensive Past Papers Library
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Filter by Class, Subject, Year (2021-2024), and Session (Annual & Supplementary).
-                Read papers online using our built-in PDF viewer or download them directly to your device.
-              </p>
-              <Link
-                href="/past-papers"
-                className="inline-flex items-center space-x-1.5 text-xs font-bold text-fbise-700 dark:text-fbise-400 hover:underline pt-2"
-              >
-                <span>Browse Past Papers</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
+              <ol className="mt-10 space-y-8">
+                <li className="flex gap-4">
+                  <span className="w-11 h-11 rounded-full bg-accent-400 text-navy-950 font-display font-bold text-lg flex items-center justify-center flex-shrink-0 shadow-sm">
+                    1
+                  </span>
+                  <div>
+                    <h3 className="font-display font-bold text-lg text-navy-900">Pick your class</h3>
+                    <p className="text-sm text-slate-600 leading-relaxed mt-1 max-w-md">
+                      Choose Class 9, 10, 11 or 12 — your papers, quizzes and dashboard are set
+                      for your class from day one.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex gap-4">
+                  <span className="w-11 h-11 rounded-full bg-accent-400 text-navy-950 font-display font-bold text-lg flex items-center justify-center flex-shrink-0 shadow-sm">
+                    2
+                  </span>
+                  <div>
+                    <h3 className="font-display font-bold text-lg text-navy-900">Practice every day</h3>
+                    <p className="text-sm text-slate-600 leading-relaxed mt-1 max-w-md">
+                      Solve the daily chapter quiz, keep your streak alive and review every
+                      mistake as a flashcard until it sticks.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex gap-4">
+                  <span className="w-11 h-11 rounded-full bg-accent-400 text-navy-950 font-display font-bold text-lg flex items-center justify-center flex-shrink-0 shadow-sm">
+                    3
+                  </span>
+                  <div>
+                    <h3 className="font-display font-bold text-lg text-navy-900">
+                      Get your paper checked
+                    </h3>
+                    <p className="text-sm text-slate-600 leading-relaxed mt-1 max-w-md">
+                      Upload a solved paper and let the AI mark it on the official FBISE scheme —
+                      marks, grade and exactly what to fix.
+                    </p>
+                  </div>
+                </li>
+              </ol>
             </div>
 
-            {/* Feature 2: AI Paper Checker */}
-            <div className="p-6 rounded-2xl bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-800/40 space-y-3 relative overflow-hidden">
-              <div className="w-12 h-12 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold">
-                <Sparkles className="w-6 h-6" />
-              </div>
-              <div className="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-200 uppercase tracking-wide">
-                Exclusive AI Feature
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                Automated AI Paper Checking
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Upload photos/PDF of your solved answer sheets or type your responses. Our AI grades
-                your work according to official FBISE marking schemes with question-wise marks and mistake analysis.
+            {/* Select your class card */}
+            <div id="classes" className="bg-white rounded-[1.75rem] shadow-xl shadow-slate-900/5 border border-slate-100 p-6 sm:p-8 max-w-lg w-full mx-auto lg:ml-auto scroll-mt-28">
+              <h3 className="font-display font-bold text-2xl text-navy-900">Select your class</h3>
+              <p className="text-sm text-slate-500 mt-1">
+                Har class ka apna portal hai — papers, quizzes aur dashboard usi class ke.
               </p>
-              <Link
-                href="/ai-paper-check"
-                className="inline-flex items-center space-x-1.5 text-xs font-bold text-amber-700 dark:text-amber-400 hover:underline pt-2"
-              >
-                <span>Try AI Paper Checker</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-
-            {/* Feature 3: Daily Quizzes */}
-            <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-fbise-100 dark:bg-fbise-950/70 text-fbise-800 dark:text-fbise-400 flex items-center justify-center">
-                <Flame className="w-6 h-6" />
+              <div className="mt-5 space-y-3">
+                {CLASS_ROWS.map((row) => {
+                  const selected = row.slug === 'class-10';
+                  return (
+                    <Link
+                      key={row.slug}
+                      href={`/classes/${row.slug}`}
+                      className={`flex items-center gap-3.5 rounded-2xl border-2 px-4 py-3.5 transition-colors ${
+                        selected
+                          ? 'border-accent-400 bg-accent-50'
+                          : 'border-slate-200 hover:border-accent-300 hover:bg-cream-50'
+                      }`}
+                    >
+                      <span
+                        className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+                          selected ? 'border-accent-500' : 'border-slate-300'
+                        }`}
+                      >
+                        {selected && <span className="w-2.5 h-2.5 rounded-full bg-accent-500" />}
+                      </span>
+                      <GraduationCap
+                        className={`w-5 h-5 flex-shrink-0 ${selected ? 'text-accent-600' : 'text-slate-400'}`}
+                      />
+                      <span className="font-bold text-navy-900">{row.label}</span>
+                      <span className="ml-auto text-xs font-semibold text-slate-400">{row.sub}</span>
+                    </Link>
+                  );
+                })}
               </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                Daily Chapter MCQs & Streaks
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                A new quiz every single day for your class. Solve timed questions one-by-one, maintain
-                your daily streak, view complete textbook explanations, and compete on the leaderboard.
-              </p>
               <Link
-                href="/quizzes"
-                className="inline-flex items-center space-x-1.5 text-xs font-bold text-fbise-700 dark:text-fbise-400 hover:underline pt-2"
+                href="/classes/class-10"
+                className="inline-flex items-center gap-1.5 mt-6 font-bold text-accent-600 hover:text-accent-700 transition-colors"
               >
-                <span>Take Today&apos;s Quiz</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-
-            {/* Feature 4: Model Papers */}
-            <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-fbise-100 dark:bg-fbise-950/70 text-fbise-800 dark:text-fbise-400 flex items-center justify-center">
-                <FileText className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                SLO Model Papers & Marking Rubrics
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Master the Student Learning Outcomes (SLO) conceptual examination model with verified
-                FBISE specimen papers, mark distribution rules, and sample answers.
-              </p>
-              <Link
-                href="/model-papers"
-                className="inline-flex items-center space-x-1.5 text-xs font-bold text-fbise-700 dark:text-fbise-400 hover:underline pt-2"
-              >
-                <span>Explore Model Papers</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-
-            {/* Feature 5: Leaderboard */}
-            <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-fbise-100 dark:bg-fbise-950/70 text-fbise-800 dark:text-fbise-400 flex items-center justify-center">
-                <Trophy className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                Federal Board Student Leaderboard
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Rank among the top scholars across Islamabad and Federal Board institutions.
-                Earn points for daily practice, high accuracy, and continuous study streaks.
-              </p>
-              <Link
-                href="/leaderboard"
-                className="inline-flex items-center space-x-1.5 text-xs font-bold text-fbise-700 dark:text-fbise-400 hover:underline pt-2"
-              >
-                <span>View Leaderboard</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-
-            {/* Feature 6: Dashboard */}
-            <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-fbise-100 dark:bg-fbise-950/70 text-fbise-800 dark:text-fbise-400 flex items-center justify-center">
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                Personalized Student Dashboard
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Track your progress, view your quiz scores, revisit AI-checked papers with printable
-                diagnostic reports, and access all bookmarked past papers in one place.
-              </p>
-              <Link
-                href="/dashboard"
-                className="inline-flex items-center space-x-1.5 text-xs font-bold text-fbise-700 dark:text-fbise-400 hover:underline pt-2"
-              >
-                <span>Open Dashboard</span>
-                <ChevronRight className="w-3.5 h-3.5" />
+                Enter class portal <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Banner / Developer Credit callout */}
-      <section className="py-12 bg-gradient-to-r from-fbise-900 via-fbise-800 to-fbise-950 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-1 text-center md:text-left">
-            <div className="text-xs font-bold tracking-widest text-amber-400 uppercase">
-              Federal Board Community Initiative
+      {/* ============ CTA — dark navy panel + sign-up card ============ */}
+      <section className="bg-cream-100 pb-20 lg:pb-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative overflow-hidden bg-navy-900 rounded-[2.5rem] px-6 py-12 sm:px-10 lg:px-14 lg:py-16">
+            <div
+              aria-hidden="true"
+              className="lime-stripes absolute -top-8 right-10 w-56 h-32 rotate-6 opacity-40 pointer-events-none"
+            />
+            <div className="grid lg:grid-cols-2 gap-12 items-center relative">
+              <div>
+                <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-accent-300">
+                  Join Study Hub
+                </span>
+                <h2 className="font-display font-bold text-3xl sm:text-4xl text-white mt-3">
+                  Your board prep starts today.
+                </h2>
+                <ul className="mt-7 space-y-3">
+                  {CTA_CHECKS.map((c) => (
+                    <li key={c} className="flex items-center gap-2.5 text-sm font-semibold text-white">
+                      <CheckCircle2 className="w-5 h-5 text-accent-400 flex-shrink-0" />
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* White sign-up card — decorative fields; the action routes to /signup */}
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  router.push('/signup');
+                }}
+                className="bg-white rounded-[1.75rem] shadow-2xl p-6 sm:p-8 max-w-md w-full mx-auto lg:ml-auto"
+              >
+                <h3 className="font-display font-bold text-2xl text-navy-900">
+                  Create your free account
+                </h3>
+                <label className="block mt-5">
+                  <span className="text-xs font-bold uppercase tracking-wide text-slate-500">Email</span>
+                  <input
+                    type="email"
+                    name="email"
+                    autoComplete="email"
+                    placeholder="you@example.com"
+                    className="mt-1.5 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-navy-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:border-accent-400"
+                  />
+                </label>
+                <label className="block mt-4">
+                  <span className="text-xs font-bold uppercase tracking-wide text-slate-500">Password</span>
+                  <input
+                    type="password"
+                    name="password"
+                    autoComplete="new-password"
+                    placeholder="••••••••"
+                    className="mt-1.5 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-navy-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:border-accent-400"
+                  />
+                </label>
+                <p className="text-[11px] text-slate-400 leading-relaxed mt-3">
+                  By signing up you agree to the Study Hub terms. Free for students — no card required.
+                </p>
+                <button
+                  type="submit"
+                  className="w-full mt-4 py-3.5 rounded-full bg-accent-400 hover:bg-accent-500 text-navy-950 font-bold shadow-md shadow-accent-500/20 transition-colors"
+                >
+                  Agree &amp; sign up
+                </button>
+                <div className="flex items-center gap-3 my-4">
+                  <span className="flex-1 h-px bg-slate-200" />
+                  <span className="text-[11px] font-bold text-slate-400">OR</span>
+                  <span className="flex-1 h-px bg-slate-200" />
+                </div>
+                <Link
+                  href="/signup"
+                  className="block w-full py-3.5 rounded-full bg-white border border-slate-300 text-navy-900 font-bold text-center hover:bg-cream-100 transition-colors"
+                >
+                  Sign up with Google
+                </Link>
+              </form>
             </div>
-            <h3 className="text-2xl font-black">
-              Built specifically for Pakistan&apos;s FBISE scholars.
-            </h3>
-            <p className="text-xs text-fbise-200">
-              Developed by Team Khan Hanan — empowering the next generation of top board achievers.
-            </p>
           </div>
-          <Link
-            href="/signup"
-            className="px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-sm shadow-md transition-colors flex-shrink-0"
-          >
-            Join Study Hub Today
+        </div>
+      </section>
+
+      {/* ============ LANDING FOOTER (per Figma spec) ============ */}
+      <footer className="bg-white border-t border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center gap-5 md:gap-8">
+          <Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
+            <span className="w-9 h-9 rounded-lg bg-accent-400 flex items-center justify-center overflow-hidden p-1.5">
+              <img src="/logo-symbol.png" alt="FBISE Study Hub logo" className="w-full h-full object-contain" />
+            </span>
+            <span className="font-display font-bold text-lg text-navy-900">FBISE Study Hub</span>
           </Link>
+
+          <p className="text-sm text-slate-500 text-center md:text-left">
+            © 2026 · Developed by Team Khan Hanan
+          </p>
+
+          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:ml-auto text-sm font-semibold">
+            <Link href="/about" className="text-slate-600 hover:text-accent-600 transition-colors">
+              About
+            </Link>
+            <Link href="/contact" className="text-slate-600 hover:text-accent-600 transition-colors">
+              Contact
+            </Link>
+            <Link href="/contact" className="text-slate-600 hover:text-accent-600 transition-colors">
+              Help desk
+            </Link>
+            <a
+              href="https://www.fbise.edu.pk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-600 hover:text-accent-600 transition-colors"
+            >
+              Official FBISE portal
+            </a>
+          </nav>
         </div>
-      </section>
+      </footer>
     </div>
   );
 }
