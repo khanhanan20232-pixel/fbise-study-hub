@@ -78,7 +78,7 @@ export default function Header() {
   const drawerLinkClass = (href: string, highlight?: boolean) => {
     const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
     if (highlight) {
-      return 'flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 hover:bg-amber-100 dark:hover:bg-amber-950/50 transition-colors';
+      return 'flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-accent-700 dark:text-accent-400 bg-accent-50 dark:bg-accent-950/30 hover:bg-accent-100 dark:hover:bg-accent-950/50 transition-colors';
     }
     return `flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
       isActive
@@ -214,12 +214,12 @@ export default function Header() {
 
               {/* Logo + Title (kept compact so it never overlaps anything) */}
               <Link href="/" className="flex items-center gap-2.5 min-w-0 group">
-                <span className="w-9 h-9 rounded-lg bg-white border border-slate-200 dark:border-slate-700 flex items-center justify-center flex-shrink-0 overflow-hidden p-0.5">
+                <span className="w-9 h-9 rounded-lg bg-accent-400 flex items-center justify-center flex-shrink-0 overflow-hidden p-1">
                   <img src="/logo-symbol.png" alt="FBISE Study Hub logo" className="w-full h-full object-contain" />
                 </span>
                 <span className="min-w-0 leading-tight">
-                  <span className="block font-extrabold text-base sm:text-lg tracking-tight truncate text-fbise-900 dark:text-white">
-                    FBISE <span className="text-fbise-600 dark:text-fbise-300">Study Hub</span>
+                  <span className="block font-display font-bold text-base sm:text-lg tracking-tight truncate text-navy-900 dark:text-white">
+                    FBISE <span className="text-accent-600 dark:text-accent-400">Study Hub</span>
                   </span>
                   <span className="hidden sm:block text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400">
                     SSC &amp; HSSC Preparation Portal
@@ -255,7 +255,7 @@ export default function Header() {
                   Contact
                 </Link>
               </nav>
-              
+
               {/* Right-side actions */}
               <div className="ml-auto flex items-center gap-1 sm:gap-2 flex-shrink-0">
                 <Link
@@ -306,7 +306,7 @@ export default function Header() {
                     </Link>
                     <Link
                       href="/signup"
-                      className="hidden sm:inline-block px-3.5 py-1.5 rounded-lg text-sm font-bold text-white bg-fbise-600 hover:bg-fbise-700 shadow-sm transition-colors"
+                      className="hidden sm:inline-block px-3.5 py-1.5 rounded-full text-sm font-bold text-navy-950 bg-accent-400 hover:bg-accent-500 shadow-sm transition-colors"
                     >
                       Sign Up
                     </Link>
@@ -336,12 +336,12 @@ export default function Header() {
       >
         {/* Drawer header — white, baqi header ki tarah */}
         <div className="bg-white dark:bg-slate-900 text-slate-800 dark:text-white px-4 py-4 flex items-center gap-3 flex-shrink-0 border-b border-slate-200 dark:border-slate-800">
-          <span className="w-10 h-10 rounded-xl bg-fbise-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center flex-shrink-0 overflow-hidden p-0.5">
+          <span className="w-10 h-10 rounded-xl bg-accent-400 flex items-center justify-center flex-shrink-0 overflow-hidden p-1.5">
             <img src="/logo-symbol.png" alt="FBISE Study Hub logo" className="w-full h-full object-contain" />
           </span>
           <div className="min-w-0 leading-tight">
-            <p className="font-extrabold truncate text-fbise-900 dark:text-white">
-              FBISE <span className="text-fbise-600 dark:text-fbise-300">Study Hub</span>
+            <p className="font-display font-bold truncate text-navy-900 dark:text-white">
+              FBISE <span className="text-accent-600 dark:text-accent-400">Study Hub</span>
             </p>
             <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
               Federal Board • Islamabad
