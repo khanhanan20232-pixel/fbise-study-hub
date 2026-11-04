@@ -1,14 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { hashPassword, signToken } from '@/lib/auth';
+import { getStreamData } from '@/data/streams';
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, email, password, className, phone } = body;
+    const { name, email, password, className, phone, stream } = body;
 
     if (!name || !email || !password || !className) {
       return NextResponse.json({ error: 'Please provide all required fields' }, { status: 400 });
+    }
+
+    // Optional study group/stream: when provided it must be one of the
+    // streams defined for the student's class level (src/data/streams.ts).
+    let normalizedStream: string | null = null;
+    if (stream !== undefined && stream !== null && String(stream).trim() !== '') {
+      const candidate = String(stream).trim();
+      const validStreams = getStreamData(String(className)).streams.map((s) => s.name);
+      if (!validStreams.includes(candidate)) {
+        return NextResponse.json(
+          { error: 'Please select a valid study group for your class.' },
+          { status: 400 }
+        );
+      }
+      normalizedStream = candidate;
     }
 
     const normalizedEmail = email.toLowerCase().trim();
@@ -33,6 +49,7 @@ export async function POST(req: NextRequest) {
         email: normalizedEmail,
         password: hashedPassword,
         className: String(className),
+        stream: normalizedStream,
         phone: phone ? phone.trim() : null,
         role: 'STUDENT',
         streak: 1,
@@ -43,6 +60,7 @@ export async function POST(req: NextRequest) {
         email: true,
         role: true,
         className: true,
+        stream: true,
         phone: true,
         streak: true,
       },
