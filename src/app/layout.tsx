@@ -41,7 +41,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-emerald-700 selection:text-white">
+      <body className="min-h-screen flex flex-col bg-cream-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-accent-400 selection:text-navy-950">
         <AuthProvider>
           <AnalyticsTracker />
           <Header />
