@@ -40,6 +40,10 @@ export default function QuizEnginePage() {
   const quizId = params?.id as string;
 
   const [quiz, setQuiz] = useState<any>(null);
+  // Phase E: server 403 de to (student doosri class ka quiz khol raha hai,
+  // aur quiz us ke kisi study group mein shared bhi nahi) ye state blocked
+  // screen dikhati hai.
+  const [blockedInfo, setBlockedInfo] = useState<{ quizClass: string; userClass: string; message: string } | null>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
   // Options are shuffled for every attempt (Abdul's requirement: the correct
   // answer must not sit on the same letter every time). displayQuestions holds
@@ -65,10 +69,53 @@ export default function QuizEnginePage() {
     }
   }, [user, isLoading, quizId, router]);
 
+  // Shuffle each question's 4 options (Fisher-Yates). Returns the shuffled
+  // display copies plus the display→original letter map used at submission.
+  // Retake par dobara call ho kar fresh shuffle milta hai.
+  const buildShuffled = (rawQuestions: Question[]) => {
+    const shuffled: Question[] = [];
+    const map: Record<string, Record<string, string>> = {};
+    for (const q of rawQuestions) {
+      const originals = ['A', 'B', 'C', 'D'] as const;
+      const order = [...originals];
+      for (let i = order.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [order[i], order[j]] = [order[j], order[i]];
+      }
+      const textOf = (letter: string) =>
+        letter === 'A' ? q.optionA : letter === 'B' ? q.optionB : letter === 'C' ? q.optionC : q.optionD;
+      const displayLetters = ['A', 'B', 'C', 'D'];
+      const perQuestion: Record<string, string> = {};
+      displayLetters.forEach((displayLetter, idx) => {
+        perQuestion[displayLetter] = order[idx];
+      });
+      map[q.id] = perQuestion;
+      shuffled.push({
+        ...q,
+        optionA: textOf(order[0]),
+        optionB: textOf(order[1]),
+        optionC: textOf(order[2]),
+        optionD: textOf(order[3]),
+        correctOption: displayLetters[order.indexOf(q.correctOption as (typeof originals)[number])] || q.correctOption,
+      });
+    }
+    return { shuffled, map };
+  };
+
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
         const res = await fetch(`/api/quizzes/${quizId}`);
+        if (res.status === 403) {
+          // Phase E: student apni class se bahir ka quiz khol raha hai
+          const data = await res.json().catch(() => ({}));
+          setBlockedInfo({
+            quizClass: data.quizClass || '',
+            userClass: data.userClass || user?.className || '',
+            message: data.error || 'This quiz is not for your class.',
+          });
+          return;
+        }
         if (res.ok) {
           const data = await res.json();
           setQuiz(data.quiz);
@@ -76,33 +123,7 @@ export default function QuizEnginePage() {
           setQuestions(rawQuestions);
           setTimeLeft(data.quiz.timeLimit || 600);
 
-          // Shuffle each question's 4 options (Fisher-Yates)
-          const shuffled: Question[] = [];
-          const map: Record<string, Record<string, string>> = {};
-          for (const q of rawQuestions) {
-            const originals = ['A', 'B', 'C', 'D'] as const;
-            const order = [...originals];
-            for (let i = order.length - 1; i > 0; i--) {
-              const j = Math.floor(Math.random() * (i + 1));
-              [order[i], order[j]] = [order[j], order[i]];
-            }
-            const textOf = (letter: string) =>
-              letter === 'A' ? q.optionA : letter === 'B' ? q.optionB : letter === 'C' ? q.optionC : q.optionD;
-            const displayLetters = ['A', 'B', 'C', 'D'];
-            const perQuestion: Record<string, string> = {};
-            displayLetters.forEach((displayLetter, idx) => {
-              perQuestion[displayLetter] = order[idx];
-            });
-            map[q.id] = perQuestion;
-            shuffled.push({
-              ...q,
-              optionA: textOf(order[0]),
-              optionB: textOf(order[1]),
-              optionC: textOf(order[2]),
-              optionD: textOf(order[3]),
-              correctOption: displayLetters[order.indexOf(q.correctOption as (typeof originals)[number])] || q.correctOption,
-            });
-          }
+          const { shuffled, map } = buildShuffled(rawQuestions);
           setDisplayQuestions(shuffled);
           setAnswerMap(map);
         }
@@ -114,6 +135,7 @@ export default function QuizEnginePage() {
     };
 
     if (quizId) fetchQuiz();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quizId]);
 
   // Timer countdown
@@ -187,12 +209,59 @@ export default function QuizEnginePage() {
     }
   };
 
+  // Retake: saare jawab saaf, timer reset, options ka fresh shuffle —
+  // phir seedha quiz dobara shuru.
+  const handleRetake = () => {
+    const { shuffled, map } = buildShuffled(questions);
+    setDisplayQuestions(shuffled);
+    setAnswerMap(map);
+    setSelectedAnswers({});
+    setCurrentIndex(0);
+    setResultData(null);
+    setQuizSubmitted(false);
+    setTimeLeft(quiz?.timeLimit || 600);
+    setQuizStarted(true);
+  };
+
   if (loading || isLoading) {
     return (
       <div className="min-h-[75vh] flex items-center justify-center">
         <div className="text-center space-y-3">
           <div className="w-10 h-10 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
           <p className="text-xs font-semibold text-slate-500">Loading FBISE Quiz Engine...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Phase E blocked screen: quiz kisi aur class ka hai — wazeh message +
+  // apni class ke quizzes ki taraf link.
+  if (blockedInfo) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center p-4">
+        <div className="max-w-md w-full text-center space-y-4 bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800">
+          <AlertTriangle className="w-12 h-12 text-amber-500 mx-auto" />
+          <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100">
+            This Quiz Is Not for Your Class
+          </h3>
+          <p className="text-xs text-slate-500 leading-relaxed">
+            Yeh quiz Class {blockedInfo.quizClass} ke students ke liye hai. Aap ka account Class{' '}
+            {blockedInfo.userClass} ka hai — har student sirf apni class ke quizzes de sakta hai.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 pt-1">
+            <Link
+              href={`/quizzes?class=${blockedInfo.userClass}`}
+              className="px-5 py-2.5 rounded-xl bg-emerald-800 text-white font-bold text-xs"
+            >
+              Go to Class {blockedInfo.userClass} Quizzes
+            </Link>
+            <Link
+              href="/dashboard"
+              className="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs"
+            >
+              My Dashboard
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -279,9 +348,14 @@ export default function QuizEnginePage() {
 
     return (
       <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-10 px-4 sm:px-6 lg:px-8 transition-colors">
-        <div className="max-w-3xl mx-auto space-y-8">
-          {/* Result Card */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl text-center space-y-6">
+        {/* Phase E (teacher audit): desktop par do hisse — LEFT mein score
+            card sticky/fixed, RIGHT mein evaluated questions ki list jo page
+            scroll ke sath behti hai (nested scroller mobile par scroll trap
+            ban jata, is liye sticky card + page scroll rakha). Mobile par
+            aik column: pehle score card, phir review list. */}
+        <div className="max-w-6xl mx-auto space-y-8 lg:space-y-0 lg:grid lg:grid-cols-[360px_minmax(0,1fr)] lg:gap-8 lg:items-start">
+          {/* LEFT: Score Card (sticky on desktop) */}
+          <div className="lg:sticky lg:top-6 p-8 sm:p-10 lg:p-7 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl text-center space-y-6">
             <div
               className={`w-20 h-20 rounded-full mx-auto flex items-center justify-center text-3xl font-black shadow-lg ${
                 isPassing
@@ -303,7 +377,7 @@ export default function QuizEnginePage() {
             </div>
 
             {/* Score Metrics */}
-            <div className="grid grid-cols-3 gap-4 max-w-md mx-auto p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700">
+            <div className="grid grid-cols-3 gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700">
               <div>
                 <p className="text-[10px] text-slate-400 font-bold uppercase">Marks</p>
                 <p className="text-2xl font-black text-slate-900 dark:text-white">
@@ -332,24 +406,31 @@ export default function QuizEnginePage() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+            <div className="flex flex-col gap-3 pt-2">
+              <button
+                onClick={handleRetake}
+                className="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs shadow-md transition-all flex items-center justify-center space-x-1.5"
+              >
+                <RotateCcw className="w-4 h-4" />
+                <span>Retake This Quiz</span>
+              </button>
               <Link
                 href="/dashboard"
-                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-emerald-800 text-white font-bold text-xs hover:bg-emerald-900 transition-colors"
+                className="w-full px-6 py-3 rounded-xl bg-emerald-800 text-white font-bold text-xs hover:bg-emerald-900 transition-colors text-center"
               >
                 View in Dashboard
               </Link>
               <Link
-                href="/quizzes"
-                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs hover:bg-slate-200 transition-colors"
+                href={user?.role === 'STUDENT' ? `/quizzes?class=${user.className}` : '/quizzes'}
+                className="w-full px-6 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs hover:bg-slate-200 transition-colors text-center"
               >
                 Take Another Quiz
               </Link>
             </div>
           </div>
 
-          {/* Detailed Question Review with Explanations */}
-          <div className="space-y-4">
+          {/* RIGHT: Detailed Question Review with Explanations */}
+          <div className="space-y-4 min-w-0">
             <h3 className="font-extrabold text-xl text-slate-900 dark:text-white flex items-center space-x-2">
               <BookOpen className="w-5 h-5 text-emerald-700" />
               <span>Question Review & FBISE Explanations</span>
