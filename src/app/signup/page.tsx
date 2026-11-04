@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
-import { GraduationCap, Mail, Lock, User, Phone, BookOpen, ArrowRight, AlertCircle, CheckCircle } from 'lucide-react';
+import { getStreamData } from '@/data/streams';
+import { GraduationCap, Mail, Lock, User, Phone, BookOpen, Users, ArrowRight, AlertCircle, CheckCircle } from 'lucide-react';
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -15,11 +16,16 @@ export default function SignUpPage() {
     email: '',
     password: '',
     className: '9',
+    stream: '',
     phone: '',
   });
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  // Study groups adapt to the chosen class level (SSC vs HSSC streams).
+  const streamOptions = getStreamData(formData.className).streams;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,6 +33,11 @@ export default function SignUpPage() {
 
     if (formData.password.length < 6) {
       setError('Password must be at least 6 characters long');
+      return;
+    }
+
+    if (formData.password !== confirmPassword) {
+      setError('Passwords do not match. Please re-enter the same password in both fields.');
       return;
     }
 
@@ -75,6 +86,8 @@ export default function SignUpPage() {
               </div>
               <input
                 type="text"
+                name="name"
+                autoComplete="name"
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -95,10 +108,12 @@ export default function SignUpPage() {
               </div>
               <input
                 type="email"
+                name="email"
+                autoComplete="email"
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                placeholder="ali@student.fbise.edu.pk"
+                placeholder="Enter your email address"
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700"
               />
             </div>
@@ -115,8 +130,13 @@ export default function SignUpPage() {
               </div>
               <select
                 required
+                name="className"
                 value={formData.className}
-                onChange={(e) => setFormData({ ...formData, className: e.target.value })}
+                onChange={(e) =>
+                  // Reset the stream when the class changes — the valid
+                  // study groups differ between SSC and HSSC.
+                  setFormData({ ...formData, className: e.target.value, stream: '' })
+                }
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700"
               >
                 <option value="9">Class 9 (SSC Part 1 - Matric)</option>
@@ -125,6 +145,39 @@ export default function SignUpPage() {
                 <option value="12">2nd Year — Class 12 (HSSC Part 2 - Inter)</option>
               </select>
             </div>
+          </div>
+
+          {/* Study Group / Stream Selection */}
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+              Study Group / Stream *
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <Users className="w-4 h-4" />
+              </div>
+              <select
+                required
+                name="stream"
+                value={formData.stream}
+                onChange={(e) => setFormData({ ...formData, stream: e.target.value })}
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700"
+              >
+                <option value="" disabled>
+                  Select your study group
+                </option>
+                {streamOptions.map((s) => (
+                  <option key={s.id} value={s.name}>
+                    {s.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {formData.stream && (
+              <p className="mt-1 text-[11px] text-slate-500 dark:text-slate-400">
+                {streamOptions.find((s) => s.name === formData.stream)?.description}
+              </p>
+            )}
           </div>
 
           {/* Phone Number (Optional) */}
@@ -138,6 +191,8 @@ export default function SignUpPage() {
               </div>
               <input
                 type="tel"
+                name="phone"
+                autoComplete="tel"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 placeholder="+92 300 1234567"
@@ -157,6 +212,8 @@ export default function SignUpPage() {
               </div>
               <input
                 type="password"
+                name="password"
+                autoComplete="new-password"
                 required
                 minLength={6}
                 value={formData.password}
@@ -165,6 +222,39 @@ export default function SignUpPage() {
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700"
               />
             </div>
+          </div>
+
+          {/* Confirm Password */}
+          <div>
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+              Confirm Password *
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <Lock className="w-4 h-4" />
+              </div>
+              <input
+                type="password"
+                name="confirmPassword"
+                autoComplete="new-password"
+                required
+                minLength={6}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Re-enter your password"
+                className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700"
+              />
+              {confirmPassword.length > 0 && confirmPassword === formData.password && (
+                <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-emerald-600">
+                  <CheckCircle className="w-4 h-4" />
+                </div>
+              )}
+            </div>
+            {confirmPassword.length > 0 && confirmPassword !== formData.password && (
+              <p className="mt-1 text-[11px] font-semibold text-red-600 dark:text-red-400">
+                Passwords do not match yet.
+              </p>
+            )}
           </div>
 
           <div className="pt-2">
