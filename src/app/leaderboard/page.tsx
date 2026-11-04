@@ -41,18 +41,18 @@ export default function LeaderboardPage() {
   const remaining = leaderboard.slice(3);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
+    <div className="min-h-screen bg-cream-100 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Banner */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-purple-950 via-emerald-950 to-slate-900 text-white p-6 sm:p-10 shadow-xl border border-purple-800/40 text-center space-y-3">
-          <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-400 text-slate-950 shadow-sm">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-navy-950 via-navy-900 to-navy-800 text-white p-6 sm:p-10 shadow-xl border border-navy-700/40 text-center space-y-3">
+          <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-bold bg-accent-400 text-navy-950 shadow-sm">
             <Trophy className="w-3.5 h-3.5" />
             <span>Federal Board Roll of Honor</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
             FBISE Student Leaderboard
           </h1>
-          <p className="text-xs sm:text-sm text-purple-200/90 max-w-xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-fbise-100/90 max-w-xl mx-auto leading-relaxed">
             Recognizing the top academic performers across Federal Board Islamabad.
             Earn ranking points through daily chapter quiz mastery, continuous streaks, and accuracy.
           </p>
@@ -69,7 +69,7 @@ export default function LeaderboardPage() {
                   onClick={() => setClassGrade(c)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                     classGrade === c
-                      ? 'bg-purple-800 text-white shadow-sm'
+                      ? 'bg-navy-800 text-white shadow-sm'
                       : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
                   }`}
                 >
@@ -126,12 +126,12 @@ export default function LeaderboardPage() {
             {/* Rank 1 (Gold - Elevated) */}
             {top3[0] && (
               <div className="order-1 md:order-2 p-8 rounded-3xl bg-gradient-to-b from-amber-500/10 via-white to-white dark:from-amber-500/10 dark:via-slate-900 dark:to-slate-900 border-2 border-amber-400/80 shadow-xl text-center space-y-3 relative overflow-hidden md:-translate-y-2 flex flex-col justify-between">
-                <div className="h-2 w-full absolute top-0 left-0 bg-gradient-to-r from-amber-400 to-amber-500"></div>
+                <div className="h-2 w-full absolute top-0 left-0 bg-gradient-to-r from-accent-400 to-accent-500"></div>
                 <div>
-                  <div className="w-18 h-18 rounded-full bg-amber-400 text-slate-950 font-black text-3xl flex items-center justify-center mx-auto shadow-lg border-2 border-white">
+                  <div className="w-18 h-18 rounded-full bg-accent-400 text-navy-950 font-black text-3xl flex items-center justify-center mx-auto shadow-lg border-2 border-white">
                     🥇
                   </div>
-                  <div className="inline-block px-3 py-0.5 rounded-full bg-amber-400 text-slate-950 font-black text-[10px] uppercase tracking-wider mt-2 shadow-sm">
+                  <div className="inline-block px-3 py-0.5 rounded-full bg-accent-400 text-navy-950 font-black text-[10px] uppercase tracking-wider mt-2 shadow-sm">
                     Federal Board Top Scholar
                   </div>
                   <h3 className="font-black text-slate-900 dark:text-white text-lg mt-1 truncate">
@@ -196,7 +196,7 @@ export default function LeaderboardPage() {
         <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-500 uppercase tracking-wider font-bold">
+              <thead className="bg-cream-100 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-500 uppercase tracking-wider font-bold">
                 <tr>
                   <th className="py-3.5 px-4 w-16 text-center">Rank</th>
                   <th className="py-3.5 px-4">Student Name</th>
@@ -211,7 +211,7 @@ export default function LeaderboardPage() {
                 {leaderboard.map((student) => (
                   <tr
                     key={student.id}
-                    className={`hover:bg-slate-50 dark:hover:bg-slate-800/40 ${
+                    className={`hover:bg-cream-100 dark:hover:bg-slate-800/40 ${
                       student.rank <= 3 ? 'bg-amber-50/20 dark:bg-amber-950/10' : ''
                     }`}
                   >
