@@ -53,11 +53,11 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-[90vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-950 transition-colors">
+    <div className="min-h-[90vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-cream-100 dark:bg-slate-950 transition-colors">
       <div className="max-w-lg w-full space-y-8 bg-white dark:bg-slate-900 p-8 sm:p-10 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl">
         <div className="text-center">
-          <div className="inline-flex w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-700 to-emerald-900 items-center justify-center text-white shadow-md border border-amber-400/40 mb-3">
-            <GraduationCap className="w-8 h-8 text-amber-400" />
+          <div className="inline-flex w-14 h-14 rounded-2xl bg-navy-900 items-center justify-center text-white shadow-md border border-accent-400/40 mb-3">
+            <GraduationCap className="w-8 h-8 text-accent-400" />
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
             Create Student Account
@@ -147,7 +147,7 @@ export default function SignUpPage() {
             </div>
           </div>
 
-          {/* Study Group / Stream Selection */}
+                    {/* Study Group / Stream Selection */}
           <div>
             <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
               Study Group / Stream *
@@ -261,7 +261,7 @@ export default function SignUpPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 px-4 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-800 to-emerald-700 hover:from-emerald-900 hover:to-emerald-800 shadow-md shadow-emerald-900/20 focus:outline-none focus:ring-2 focus:ring-emerald-700 disabled:opacity-50 transition-all flex items-center justify-center space-x-2 text-sm"
+              className="w-full py-3 px-4 rounded-xl font-bold text-navy-950 bg-accent-400 hover:bg-accent-500 shadow-md shadow-accent-500/20 focus:outline-none focus:ring-2 focus:ring-accent-500 disabled:opacity-50 transition-all flex items-center justify-center space-x-2 text-sm"
             >
               {loading ? (
                 <span>Creating Account...</span>
