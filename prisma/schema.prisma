@@ -169,6 +169,8 @@ model Announcement {
 }
 
 
+// FSRS spaced-repetition state per student per quiz question (cardId = QuizQuestion.id).
+// Auto-created when a student answers a question incorrectly; scheduled by ts-fsrs.
 model UserFlashcard {
   id            String    @id @default(uuid())
   userId        String
@@ -187,7 +189,11 @@ model UserFlashcard {
   @@unique([userId, cardId])
   @@index([userId, dueDate])
 }
-
+// Study groups (full workspace: shared material + group chat + leaderboard).
+// Students create groups, others join with the invite code. Any member can
+// share a quiz into the group; members study it via the quiz page or the
+// group's flip-card deck. The leaderboard ranks members by their attempts
+// and scores on the group's shared quizzes.
 model StudyGroup {
   id          String   @id @default(cuid())
   name        String
