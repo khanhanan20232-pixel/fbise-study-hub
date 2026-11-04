@@ -181,7 +181,7 @@ export default function DailyQuizzesPage() {
   const renderFullBookCard = (quiz: any) => (
     <div
       key={quiz.id}
-      className="p-6 rounded-2xl bg-gradient-to-r from-fbise-700 via-fbise-600 to-teal-700 text-white shadow-md flex flex-col sm:flex-row sm:items-center gap-5"
+      className="p-6 rounded-2xl bg-gradient-to-r from-navy-800 via-navy-700 to-accent-700 text-white shadow-md flex flex-col sm:flex-row sm:items-center gap-5"
     >
       <div className="flex items-start gap-4 flex-1 min-w-0">
         <span className="w-12 h-12 rounded-2xl bg-white/15 flex items-center justify-center flex-shrink-0">
@@ -189,7 +189,7 @@ export default function DailyQuizzesPage() {
         </span>
         <div className="space-y-1.5 min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[10px] font-black px-2 py-0.5 rounded bg-amber-400 text-slate-950 uppercase tracking-wide">
+            <span className="text-[10px] font-black px-2 py-0.5 rounded bg-accent-400 text-navy-950 uppercase tracking-wide">
               Full Book
             </span>
             <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-white/15">
@@ -221,7 +221,7 @@ export default function DailyQuizzesPage() {
       </div>
       <button
         onClick={() => handleStartQuiz(quiz.id)}
-        className="px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs shadow-md flex items-center justify-center space-x-1.5 transition-all whitespace-nowrap flex-shrink-0"
+        className="px-6 py-3 rounded-xl bg-accent-400 hover:bg-accent-300 text-navy-950 font-extrabold text-xs shadow-md flex items-center justify-center space-x-1.5 transition-all whitespace-nowrap flex-shrink-0"
       >
         <span>{quiz.userLatestAttempt ? 'Retake Full Book Quiz' : 'Start Full Book Quiz'}</span>
         <ChevronRight className="w-4 h-4" />
@@ -281,13 +281,13 @@ export default function DailyQuizzesPage() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
+    <div className="min-h-screen bg-cream-100 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Banner with Streak Focus */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-950 via-teal-900 to-slate-900 text-white p-6 sm:p-10 shadow-xl border border-teal-700/40">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-navy-950 via-navy-900 to-navy-800 text-white p-6 sm:p-10 shadow-xl border border-navy-700/40">
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="max-w-2xl space-y-3">
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold bg-amber-400 text-slate-950 shadow-sm">
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold bg-accent-400 text-navy-950 shadow-sm">
                 <Flame className="w-4 h-4 fill-slate-950" />
                 <span>Daily Knowledge Drill</span>
               </div>
@@ -315,7 +315,7 @@ export default function DailyQuizzesPage() {
             ) : (
               <Link
                 href="/login?redirect=/quizzes"
-                className="px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow-md transition-all whitespace-nowrap"
+                className="px-6 py-3.5 rounded-xl bg-accent-400 hover:bg-accent-300 text-navy-950 font-bold text-xs shadow-md transition-all whitespace-nowrap"
               >
                 Sign In to Track Streaks
               </Link>
@@ -343,7 +343,7 @@ export default function DailyQuizzesPage() {
               <select
                 value={classGrade}
                 onChange={(e) => setClassGrade(e.target.value)}
-                className="py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700"
+                className="py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700"
               >
                 <option value="ALL">All Classes</option>
                 <option value="9">Class 9 (SSC-I)</option>
@@ -357,7 +357,7 @@ export default function DailyQuizzesPage() {
             <select
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700"
+              className="py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-cream-100 dark:bg-slate-800 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700"
             >
               <option value="ALL">All Subjects</option>
               <option value="Physics">Physics</option>
@@ -373,9 +373,9 @@ export default function DailyQuizzesPage() {
 
           <Link
             href="/leaderboard"
-            className="w-full sm:w-auto px-4 py-2 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800/40 font-bold text-xs flex items-center justify-center space-x-1.5 hover:bg-purple-100 transition-colors"
+            className="w-full sm:w-auto px-4 py-2 rounded-xl bg-fbise-50 dark:bg-fbise-950/60 text-fbise-700 dark:text-fbise-300 border border-fbise-200 dark:border-fbise-800/40 font-bold text-xs flex items-center justify-center space-x-1.5 hover:bg-fbise-100 transition-colors"
           >
-            <Trophy className="w-4 h-4 text-purple-600" />
+            <Trophy className="w-4 h-4 text-fbise-600" />
             <span>View Student Leaderboard</span>
           </Link>
         </div>
