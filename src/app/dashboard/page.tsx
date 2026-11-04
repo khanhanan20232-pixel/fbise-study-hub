@@ -27,8 +27,10 @@ import {
   AlertCircle,
   Printer,
   Layers,
+  ChevronRight,
 } from 'lucide-react';
 import PdfViewerModal from '@/components/PdfViewerModal';
+import { getStreamData } from '@/data/streams';
 
 export default function StudentDashboardPage() {
   const router = useRouter();
@@ -115,6 +117,31 @@ export default function StudentDashboardPage() {
   }
 
   const { stats, quizAttempts, checkedPapers, bookmarks } = dashboardData;
+  const classPapers: any[] = dashboardData.classPapers || [];
+
+  // ---- My Subjects (teacher audit, Phase C) ----
+  // Aik hi subjects section: student ki apni class ke compulsory subjects +
+  // us ke study group/stream ke field subjects. Stream set na ho (purane
+  // accounts) to class ke tamam elective subjects dikhaye jate hain.
+  // Dashboard API pehle hi tamam lists (attempts / checked papers /
+  // bookmarks) ko student ki apni class tak mehdood kar deta hai.
+  const dashUser = dashboardData.user || {};
+  const isAdminUser = (dashUser.role || user?.role) === 'ADMIN';
+  const myClass = String(dashUser.className || user?.className || '9');
+  const myStreamName: string | null = dashUser.stream ?? user?.stream ?? null;
+  const streamData = getStreamData(myClass);
+  const myStream = myStreamName
+    ? streamData.streams.find((s) => s.name === myStreamName)
+    : undefined;
+  const electiveSubjects = (
+    myStream
+      ? myStream.subjects
+      : Array.from(new Set(streamData.streams.flatMap((s) => s.subjects)))
+  ).filter((s) => !streamData.compulsory.includes(s));
+
+  // Dashboard se bahir jane walay links bhi student ki apni class par scoped
+  const quizzesHref = isAdminUser ? '/quizzes' : `/quizzes?class=${myClass}`;
+  const papersHref = isAdminUser ? '/past-papers' : `/past-papers?classGrade=${myClass}`;
 
   // ---- Subject-wise Progress algorithm ----
   // Har subject ke attempts purane → naye ki taraf lagao. Progress line aik
@@ -282,6 +309,97 @@ export default function StudentDashboardPage() {
           </span>
         </Link>
 
+        {/* My Subjects — aik hi section: apni class ke compulsory + stream subjects */}
+        {!isAdminUser && (
+          <section className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+            <div className="space-y-1">
+              <h2 className="text-lg font-extrabold text-slate-900 dark:text-white flex items-center space-x-2">
+                <BookOpen className="w-5 h-5 text-fbise-700 dark:text-fbise-400" />
+                <span>
+                  My Subjects —{' '}
+                  {myClass === '9'
+                    ? 'Class 9'
+                    : myClass === '10'
+                      ? 'Class 10'
+                      : myClass === '11'
+                        ? '1st Year (Class 11)'
+                        : '2nd Year (Class 12)'}
+                </span>
+                {myStream && (
+                  <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-fbise-50 dark:bg-fbise-950/50 border border-fbise-200 dark:border-fbise-800/40 text-fbise-800 dark:text-fbise-300">
+                    {myStream.name}
+                  </span>
+                )}
+              </h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Sirf aap ki class ke subjects — har subject ke quizzes aik click par khul jayenge.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Compulsory subjects for this class */}
+              <div className="space-y-3">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center space-x-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-fbise-600" />
+                  <span>Compulsory Subjects</span>
+                </h3>
+                <div className="space-y-3">
+                  {streamData.compulsory.map((subject) => (
+                    <Link
+                      key={subject}
+                      href={`/quizzes?class=${myClass}&subject=${encodeURIComponent(subject)}`}
+                      className="flex items-center justify-between gap-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 hover:border-fbise-600 transition-colors"
+                    >
+                      <span className="flex items-center space-x-2.5">
+                        <BookOpen className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
+                        <span className="font-bold text-slate-900 dark:text-white text-sm">{subject}</span>
+                      </span>
+                      <span className="flex items-center space-x-1 text-xs font-bold text-fbise-700 dark:text-fbise-400 whitespace-nowrap">
+                        <span>Quizzes</span>
+                        <ChevronRight className="w-3.5 h-3.5" />
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* The student's own stream subjects (or all electives if no stream set) */}
+              <div className="space-y-3">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center space-x-1.5">
+                  <BookOpen className="w-4 h-4 text-fbise-600" />
+                  <span>{myStream ? `Your Field Subjects – ${myStream.name}` : 'Elective Subjects'}</span>
+                </h3>
+                <div className="space-y-3">
+                  {electiveSubjects.map((subject) => (
+                    <Link
+                      key={subject}
+                      href={`/quizzes?class=${myClass}&subject=${encodeURIComponent(subject)}`}
+                      className="flex items-center justify-between gap-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 hover:border-fbise-600 transition-colors"
+                    >
+                      <span className="flex items-center space-x-2.5">
+                        <BookOpen className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
+                        <span className="font-bold text-slate-900 dark:text-white text-sm">{subject}</span>
+                      </span>
+                      <span className="flex items-center space-x-1 text-xs font-bold text-fbise-700 dark:text-fbise-400 whitespace-nowrap">
+                        <span>Quizzes</span>
+                        <ChevronRight className="w-3.5 h-3.5" />
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {!myStream && (
+              <p className="text-[11px] text-slate-400">
+                Aap ke profile mein study group set nahi hai, is liye is class ke tamam elective subjects
+                dikhaye ja rahe hain.
+              </p>
+            )}
+            {streamData.note && <p className="text-[11px] text-slate-400">{streamData.note}</p>}
+          </section>
+        )}
+
         {/* Subject-wise Progress — har subject ka apna graph: acha test → line oper, bura test → line neeche */}
         <div className="space-y-4">
           <div>
@@ -399,7 +517,6 @@ export default function StudentDashboardPage() {
             <BarChart3 className="w-4 h-4" />
             <span>Progress & Analytics</span>
           </button>
-
           <button
             onClick={() => setActiveTab('quizzes')}
             className={`pb-3 px-3 text-sm font-bold border-b-2 transition-all flex items-center space-x-2 whitespace-nowrap ${
@@ -587,6 +704,52 @@ export default function StudentDashboardPage() {
                   <p className="text-xs text-slate-400">No bookmarked papers yet.</p>
                 )}
               </div>
+
+              {/* Latest Papers — sirf student ki apni class (stream subjects pehle) */}
+              <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-bold text-slate-900 dark:text-white text-sm">
+                    {isAdminUser ? 'Latest Papers' : `Papers for Your Class (${myClass === '11' ? '1st Year' : myClass === '12' ? '2nd Year' : `Class ${myClass}`})`}
+                  </h3>
+                  <Link
+                    href={papersHref}
+                    className="text-xs text-emerald-700 dark:text-emerald-400 font-semibold hover:underline"
+                  >
+                    View All
+                  </Link>
+                </div>
+
+                {classPapers.length > 0 ? (
+                  <div className="space-y-2">
+                    {classPapers.map((p: any) => (
+                      <div
+                        key={p.id}
+                        className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 flex items-center justify-between text-xs"
+                      >
+                        <span className="min-w-0 pr-2">
+                          <span className="block font-semibold text-slate-800 dark:text-slate-200 truncate">
+                            {p.title}
+                          </span>
+                          <span className="block text-[10px] text-slate-400 font-semibold mt-0.5">
+                            {p.subject} • {p.session} {p.year}
+                            {isAdminUser ? ` • Class ${p.classGrade}` : ''}
+                          </span>
+                        </span>
+                        <button
+                          onClick={() => handleOpenPdf(p)}
+                          className="text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 font-bold flex-shrink-0"
+                        >
+                          View
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-xs text-slate-400">
+                    {isAdminUser ? 'No papers in the library yet.' : 'Abhi aap ki class ke papers available nahi hain.'}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         )}
@@ -600,7 +763,7 @@ export default function StudentDashboardPage() {
                 <p className="text-xs text-slate-500">Record of all daily chapter quizzes completed</p>
               </div>
               <Link
-                href="/quizzes"
+                href={quizzesHref}
                 className="px-4 py-2 rounded-xl bg-emerald-800 text-white font-bold text-xs hover:bg-emerald-900 transition-colors"
               >
                 Take New Quiz
@@ -674,7 +837,7 @@ export default function StudentDashboardPage() {
                   Test your FBISE chapter understanding with a daily quiz and track your score progression.
                 </p>
                 <Link
-                  href="/quizzes"
+                  href={quizzesHref}
                   className="mt-4 inline-block px-5 py-2.5 rounded-xl bg-emerald-800 text-white font-bold text-xs"
                 >
                   Start First Quiz
@@ -776,7 +939,7 @@ export default function StudentDashboardPage() {
                 </p>
               </div>
               <Link
-                href="/past-papers"
+                href={papersHref}
                 className="px-4 py-2 rounded-xl bg-emerald-800 text-white font-bold text-xs hover:bg-emerald-900 transition-colors"
               >
                 Browse Library
@@ -837,7 +1000,7 @@ export default function StudentDashboardPage() {
                   Click the bookmark ribbon on any past paper in the library to save it here for fast revision.
                 </p>
                 <Link
-                  href="/past-papers"
+                  href={papersHref}
                   className="mt-4 inline-block px-5 py-2.5 rounded-xl bg-emerald-800 text-white font-bold text-xs"
                 >
                   Browse Past Papers
