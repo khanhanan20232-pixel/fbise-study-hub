@@ -4,7 +4,7 @@ import { GraduationCap, Award, BookOpen, Sparkles, Heart, Shield, CheckCircle2, 
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 transition-colors">
+    <div className="min-h-screen bg-cream-100 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-4xl mx-auto space-y-12">
         {/* Top Header */}
         <div className="text-center space-y-3">
@@ -85,8 +85,8 @@ export default function AboutPage() {
         </div>
 
         {/* Team Khan Hanan Feature Tribute Card */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-950 via-emerald-900 to-slate-900 text-white p-8 sm:p-12 shadow-2xl border-2 border-amber-400/50 text-center space-y-4">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-navy-950 via-navy-900 to-navy-800 text-white p-8 sm:p-12 shadow-2xl border-2 border-accent-400/50 text-center space-y-4">
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-accent-400 text-navy-950 font-black text-xs uppercase tracking-wider shadow-md">
             <Award className="w-4 h-4" />
             <span>Architect & Engineering Team</span>
           </div>
