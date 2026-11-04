@@ -16,14 +16,34 @@ export async function GET(req: NextRequest) {
     if (classGrade && classGrade !== 'ALL') {
       where.classGrade = classGrade;
     }
+    // Phase E (teacher audit): a logged-in STUDENT only ever sees their own
+    // class's quizzes — any ?classGrade= for another class is overridden
+    // server-side, so cross-class lists cannot be reached via URL or menu.
+    // Admins and guests keep the requested filter unchanged.
+    if (currentUser && currentUser.role === 'STUDENT') {
+      where.classGrade = currentUser.className;
+    }
     if (subject && subject !== 'ALL') {
       where.subject = subject;
     }
 
+    // Phase E speed: `select` only the fields the list consumers actually
+    // render (quizzes page, class pages, admin table, group share picker).
+    // Previously `include` returned every Quiz column (incl. scheduledDate /
+    // updatedAt) plus a duplicate raw `attempts` array and `_count` object on
+    // every row; the formatted fields below are the only extras consumers use.
     const quizzes = await prisma.quiz.findMany({
       where,
       orderBy: { createdAt: 'desc' },
-      include: {
+      select: {
+        id: true,
+        title: true,
+        classGrade: true,
+        subject: true,
+        chapter: true,
+        timeLimit: true,
+        isDaily: true,
+        createdAt: true,
         _count: {
           select: { questions: true, attempts: true },
         },
@@ -44,12 +64,15 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    const formatted = quizzes.map((q) => ({
-      ...q,
-      questionCount: q._count.questions,
-      totalAttemptsCount: q._count.attempts,
-      userLatestAttempt: q.attempts && q.attempts.length > 0 ? q.attempts[0] : null,
-    }));
+    const formatted = quizzes.map((q) => {
+      const { _count, attempts, ...fields } = q as any;
+      return {
+        ...fields,
+        questionCount: _count.questions,
+        totalAttemptsCount: _count.attempts,
+        userLatestAttempt: attempts && attempts.length > 0 ? attempts[0] : null,
+      };
+    });
 
     return NextResponse.json({ quizzes: formatted });
   } catch (err: any) {
