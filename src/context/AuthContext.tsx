@@ -9,6 +9,7 @@ export interface User {
   email: string;
   role: 'STUDENT' | 'ADMIN';
   className: string;
+  stream?: string | null;
   phone?: string | null;
   streak: number;
 }
@@ -22,6 +23,7 @@ interface AuthContextType {
     email: string;
     password: string;
     className: string;
+    stream?: string;
     phone?: string;
   }) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
@@ -78,6 +80,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     email: string;
     password: string;
     className: string;
+    stream?: string;
     phone?: string;
   }) => {
     try {
