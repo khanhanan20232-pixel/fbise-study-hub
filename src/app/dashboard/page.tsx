@@ -191,15 +191,15 @@ export default function StudentDashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 transition-colors">
+    <div className="min-h-screen bg-cream-100 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 transition-colors">
       <div className="max-w-7xl mx-auto space-y-10">
         {/* Profile Card & Streak Banner */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-900 via-emerald-800 to-slate-900 text-white p-6 sm:p-8 shadow-xl border border-emerald-700/30">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-navy-900 via-navy-800 to-navy-950 text-white p-6 sm:p-8 shadow-xl border border-navy-700/30">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-accent-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="flex items-center space-x-4">
-              <div className="w-16 h-16 rounded-2xl bg-amber-400 text-slate-950 font-black text-2xl flex items-center justify-center shadow-lg border-2 border-white/20">
+              <div className="w-16 h-16 rounded-2xl bg-accent-400 text-navy-950 font-black text-2xl flex items-center justify-center shadow-lg border-2 border-white/20">
                 {user?.name.charAt(0)}
               </div>
               <div>
@@ -263,7 +263,7 @@ export default function StudentDashboardPage() {
           </div>
 
           <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center space-x-4">
-            <div className="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-950/70 text-purple-700 dark:text-purple-400 flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-fbise-50 dark:bg-fbise-950/70 text-fbise-700 dark:text-fbise-300 flex items-center justify-center flex-shrink-0">
               <Sparkles className="w-6 h-6" />
             </div>
             <div>
@@ -273,7 +273,7 @@ export default function StudentDashboardPage() {
           </div>
 
           <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center space-x-4">
-            <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-400 flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center flex-shrink-0">
               <Bookmark className="w-6 h-6" />
             </div>
             <div>
@@ -348,7 +348,7 @@ export default function StudentDashboardPage() {
                     <Link
                       key={subject}
                       href={`/quizzes?class=${myClass}&subject=${encodeURIComponent(subject)}`}
-                      className="flex items-center justify-between gap-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 hover:border-fbise-600 transition-colors"
+                      className="flex items-center justify-between gap-3 p-4 rounded-xl bg-cream-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 hover:border-fbise-600 transition-colors"
                     >
                       <span className="flex items-center space-x-2.5">
                         <BookOpen className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
@@ -374,7 +374,7 @@ export default function StudentDashboardPage() {
                     <Link
                       key={subject}
                       href={`/quizzes?class=${myClass}&subject=${encodeURIComponent(subject)}`}
-                      className="flex items-center justify-between gap-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 hover:border-fbise-600 transition-colors"
+                      className="flex items-center justify-between gap-3 p-4 rounded-xl bg-cream-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 hover:border-fbise-600 transition-colors"
                     >
                       <span className="flex items-center space-x-2.5">
                         <BookOpen className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
@@ -525,10 +525,9 @@ export default function StudentDashboardPage() {
                 : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-300'
             }`}
           >
-            <CheckCircle2 className="w-4 h-4" />
-            <span>Quiz History ({quizAttempts.length})</span>
+            <Award className="w-4 h-4" />
+            <span>Quiz Attempts ({quizAttempts.length})</span>
           </button>
-
           <button
             onClick={() => setActiveTab('checkedPapers')}
             className={`pb-3 px-3 text-sm font-bold border-b-2 transition-all flex items-center space-x-2 whitespace-nowrap ${
@@ -537,10 +536,9 @@ export default function StudentDashboardPage() {
                 : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-300'
             }`}
           >
-            <Sparkles className="w-4 h-4 text-amber-500" />
-            <span>AI Checked Papers ({checkedPapers.length})</span>
+            <Sparkles className="w-4 h-4" />
+            <span>AI Papers Checked ({checkedPapers.length})</span>
           </button>
-
           <button
             onClick={() => setActiveTab('bookmarks')}
             className={`pb-3 px-3 text-sm font-bold border-b-2 transition-all flex items-center space-x-2 whitespace-nowrap ${
@@ -554,213 +552,180 @@ export default function StudentDashboardPage() {
           </button>
         </div>
 
-        {/* TAB 1: OVERVIEW & PROGRESS CHARTS */}
+        {/* TAB 1: OVERVIEW / PROGRESS ANALYTICS */}
         {activeTab === 'overview' && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left 2 Cols: Performance Chart & Recent Activity */}
-            <div className="lg:col-span-2 space-y-6">
-              {/* Performance Trend Box */}
-              <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="font-bold text-slate-900 dark:text-white text-base">
-                      Quiz Score Progression
-                    </h3>
-                    <p className="text-xs text-slate-500">Chronological accuracy across recent attempts</p>
-                  </div>
-                  <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-1 rounded-full">
-                    Target: 85%+ Distinction
-                  </span>
-                </div>
-
-                {/* SVG Visual Performance Chart */}
-                <div className="h-44 w-full flex items-end justify-between pt-6 px-2 gap-2 border-b border-slate-100 dark:border-slate-800">
-                  {quizAttempts.length > 0 ? (
-                    quizAttempts.slice(0, 7).reverse().map((attempt: any, idx: number) => {
-                      const heightPercent = Math.max(15, attempt.percentage);
-                      return (
-                        <div key={idx} className="flex-1 flex flex-col items-center h-full justify-end group">
-                          <span className="text-[10px] font-bold text-slate-500 group-hover:text-emerald-700 mb-1">
-                            {attempt.percentage}%
-                          </span>
-                          <div
-                            className="w-full max-w-[48px] rounded-t-lg bg-gradient-to-t from-emerald-800 to-emerald-500 group-hover:from-amber-500 group-hover:to-amber-400 transition-all duration-300 shadow-sm"
-                            style={{ height: `${heightPercent}%` }}
-                          ></div>
-                          <span className="text-[10px] text-slate-400 mt-2 truncate max-w-[60px]">
-                            {attempt.subject}
-                          </span>
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-xs text-slate-400">
-                      No quiz attempts yet. Take a daily quiz to see your progress chart!
-                    </div>
-                  )}
-                </div>
+            {/* Papers for Your Class — sirf student ki apni class ke papers */}
+            <div className="lg:col-span-2 p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+                <h3 className="font-extrabold text-slate-900 dark:text-white flex items-center space-x-2">
+                  <FileText className="w-5 h-5 text-emerald-700" />
+                  <span>Papers for Your Class{isAdminUser ? '' : ` — Class ${myClass}`}</span>
+                </h3>
+                <Link href={papersHref} className="text-xs font-bold text-emerald-700 dark:text-emerald-400 flex items-center hover:underline">
+                  View All Papers <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                </Link>
               </div>
 
-              {/* Quick Action Shortcuts */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Link
-                  href={`/classes/class-${user?.className || '9'}`}
-                  className="p-5 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/40 dark:to-teal-950/20 border border-emerald-200 dark:border-emerald-800/40 flex items-center justify-between group"
-                >
-                  <div>
-                    <h4 className="font-bold text-slate-900 dark:text-white text-sm group-hover:text-emerald-700 transition-colors">
-                      My Class Section ({user?.className === '9' ? 'Class 9' : user?.className === '10' ? 'Class 10' : user?.className === '11' ? '1st Year' : '2nd Year'})
-                    </h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                      View all subjects, syllabus papers & model quizzes
-                    </p>
-                  </div>
-                  <ArrowRight className="w-5 h-5 text-emerald-700 dark:text-emerald-400 group-hover:translate-x-1 transition-transform" />
-                </Link>
+              {classPapers.length === 0 ? (
+                <p className="text-sm text-slate-500 text-center py-4">Is class ke liye abhi koi paper available nahi hai.</p>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {classPapers.map((paper) => (
+                    <div
+                      key={paper.id}
+                      onClick={() => handleOpenPdf(paper)}
+                      className="p-4 rounded-xl bg-cream-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 hover:border-emerald-600 hover:shadow-sm transition-all cursor-pointer space-y-3"
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <h4 className="font-bold text-sm text-slate-900 dark:text-white line-clamp-2">{paper.title}</h4>
+                        <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 flex-shrink-0">
+                          {paper.paperType === 'MODEL_PAPER' ? 'Model Paper' : 'Past Paper'}
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-2 text-[11px] text-slate-500 font-semibold">
+                        <span>Class {paper.classGrade}</span>
+                        <span>•</span>
+                        <span>{paper.subject}</span>
+                      </div>
+                      <div className="flex items-center space-x-2 pt-1">
+                        <span className="flex items-center text-xs font-bold text-emerald-700 dark:text-emerald-400">
+                          <Eye className="w-3.5 h-3.5 mr-1" /> View PDF
+                        </span>
+                        <a
+                          href={paper.fileUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex items-center text-xs font-bold text-slate-500 hover:text-emerald-700"
+                        >
+                          <Download className="w-3.5 h-3.5 mr-1" /> PDF
+                        </a>
+                        <Link
+                          href={`/ai-paper-check?subject=${encodeURIComponent(paper.subject)}&classGrade=${paper.classGrade}&paperId=${paper.id}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex items-center text-xs font-bold text-slate-500 hover:text-emerald-700"
+                        >
+                          <Sparkles className="w-3.5 h-3.5 mr-1" /> AI Check
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
 
-                <Link
-                  href="/ai-paper-check"
-                  className="p-5 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-950/40 dark:to-yellow-950/20 border border-amber-200 dark:border-amber-800/40 flex items-center justify-between group"
-                >
-                  <div>
-                    <h4 className="font-bold text-slate-900 dark:text-white text-sm group-hover:text-amber-700 transition-colors">
-                      AI Paper Assessment
-                    </h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                      Upload or type your answers for instant FBISE grading
-                    </p>
+              <div className="pt-2">
+                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+                  <h3 className="font-extrabad text-slate-900 dark:text-white flex items-center space-x-2">
+                    <Award className="w-5 h-5 text-emerald-700" />
+                    <span>Recent Quiz Attempts</span>
+                  </h3>
+                </div>
+
+                {quizAttempts.length === 0 ? (
+                  <p className="text-sm text-slate-500 py-4">Abhi tak koi quiz attempt nahi hua. Apni pehli daily quiz start karen!</p>
+                ) : (
+                  <div className="divide-y divide-slate-100 dark:divide-slate-800">
+                    {quizAttempts.slice(0, 5).map((attempt) => (
+                      <div key={attempt.id} className="py-3 flex items-center justify-between">
+                        <div>
+                          <h4 className="font-bold text-sm text-slate-900 dark:text-white">{attempt.quizTitle}</h4>
+                          <p className="text-[11px] text-slate-400 font-semibold">
+                            {attempt.subject} • Class {attempt.classGrade} • {new Date(attempt.completedAt).toLocaleDateString()}
+                          </p>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <span className={`px-2 py-0.5 rounded text-xs font-bold ${
+                            attempt.percentage >= 80
+                              ? 'bg-emerald-50 text-emerald-800'
+                              : attempt.percentage >= 50
+                              ? 'bg-amber-50 text-amber-800'
+                              : 'bg-red-50 text-red-800'
+                          }`}>
+                            {attempt.score}/{attempt.totalQuestions} ({attempt.percentage}%)
+                          </span>
+                          <span className="px-2 py-0.5 rounded text-xs font-black bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+                            {attempt.grade}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <Sparkles className="w-5 h-5 text-amber-600 dark:text-amber-400 group-hover:rotate-12 transition-transform" />
-                </Link>
+                )}
               </div>
             </div>
 
-            {/* Right 1 Col: Quick Profile Summary & FBISE Target */}
+            {/* Quick Actions Panel */}
             <div className="space-y-6">
               <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-                <h3 className="font-bold text-slate-900 dark:text-white text-sm">
-                  FBISE Board Examination Target
-                </h3>
+                <h3 className="font-extrabold text-slate-900 dark:text-white">Quick Actions</h3>
                 <div className="space-y-3">
-                  <div>
-                    <div className="flex justify-between text-xs font-semibold mb-1">
-                      <span className="text-slate-600 dark:text-slate-400">Matric/Inter Readiness</span>
-                      <span className="text-emerald-700 dark:text-emerald-400 font-bold">
-                        {Math.min(100, (stats.totalQuizzes * 10) + (stats.totalCheckedPapers * 20))}%
-                      </span>
-                    </div>
-                    <div className="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-emerald-600 rounded-full transition-all"
-                        style={{
-                          width: `${Math.min(100, (stats.totalQuizzes * 10) + (stats.totalCheckedPapers * 20))}%`,
-                        }}
-                      ></div>
-                    </div>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 text-xs text-slate-600 dark:text-slate-400 space-y-1">
-                    <span className="font-bold text-slate-800 dark:text-slate-200 block">
-                      Recommended Strategy:
-                    </span>
-                    <p>• Attempt 1 daily quiz every morning to maintain your streak.</p>
-                    <p>• Check at least 1 full-length model paper using the AI tool before final exams.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Latest Saved Papers Preview */}
-              <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
-                <div className="flex items-center justify-between">
-                  <h3 className="font-bold text-slate-900 dark:text-white text-sm">Saved Past Papers</h3>
-                  <button
-                    onClick={() => setActiveTab('bookmarks')}
-                    className="text-xs text-emerald-700 dark:text-emerald-400 font-semibold hover:underline"
+                  <Link
+                    href={quizzesHref}
+                    className="flex items-center justify-between p-3.5 rounded-xl bg-emerald-800 text-white hover:bg-emerald-900 transition-all group"
                   >
-                    View All
-                  </button>
-                </div>
-
-                {bookmarks.length > 0 ? (
-                  <div className="space-y-2">
-                    {bookmarks.slice(0, 3).map((b: any) => (
-                      <div
-                        key={b.id}
-                        className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 flex items-center justify-between text-xs"
-                      >
-                        <span className="font-semibold text-slate-800 dark:text-slate-200 truncate pr-2">
-                          {b.paper.title}
-                        </span>
-                        <button
-                          onClick={() => handleOpenPdf(b.paper)}
-                          className="text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 font-bold flex-shrink-0"
-                        >
-                          View
-                        </button>
+                    <div className="flex items-center space-x-3">
+                      <Award className="w-5 h-5 text-accent-400" />
+                      <div>
+                        <p className="text-xs font-bold">Daily Quiz Attempt</p>
+                        <p className="text-[10px] text-emerald-200">Test your preparation today</p>
                       </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-xs text-slate-400">No bookmarked papers yet.</p>
-                )}
-              </div>
+                    </div>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                  </Link>
 
-              {/* Latest Papers — sirf student ki apni class (stream subjects pehle) */}
-              <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
-                <div className="flex items-center justify-between">
-                  <h3 className="font-bold text-slate-900 dark:text-white text-sm">
-                    {isAdminUser ? 'Latest Papers' : `Papers for Your Class (${myClass === '11' ? '1st Year' : myClass === '12' ? '2nd Year' : `Class ${myClass}`})`}
-                  </h3>
+                  <Link
+                    href="/ai-paper-check"
+                    className="flex items-center justify-between p-3.5 rounded-xl bg-cream-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-emerald-600 transition-all group"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <Sparkles className="w-5 h-5 text-emerald-700" />
+                      <div>
+                        <p className="text-xs font-bold text-slate-900 dark:text-white">AI Paper Checker</p>
+                        <p className="text-[10px] text-slate-500">Check a solved past paper</p>
+                      </div>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
+                  </Link>
+
                   <Link
                     href={papersHref}
-                    className="text-xs text-emerald-700 dark:text-emerald-400 font-semibold hover:underline"
+                    className="flex items-center justify-between p-3.5 rounded-xl bg-cream-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-emerald-600 transition-all group"
                   >
-                    View All
+                    <div className="flex items-center space-x-3">
+                      <FileText className="w-5 h-5 text-emerald-700" />
+                      <div>
+                        <p className="text-xs font-bold text-slate-900 dark:text-white">Browse Past Papers</p>
+                        <p className="text-[10px] text-slate-500">View FBISE board exams</p>
+                      </div>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
                   </Link>
                 </div>
+              </div>
 
-                {classPapers.length > 0 ? (
-                  <div className="space-y-2">
-                    {classPapers.map((p: any) => (
-                      <div
-                        key={p.id}
-                        className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 flex items-center justify-between text-xs"
-                      >
-                        <span className="min-w-0 pr-2">
-                          <span className="block font-semibold text-slate-800 dark:text-slate-200 truncate">
-                            {p.title}
-                          </span>
-                          <span className="block text-[10px] text-slate-400 font-semibold mt-0.5">
-                            {p.subject} • {p.session} {p.year}
-                            {isAdminUser ? ` • Class ${p.classGrade}` : ''}
-                          </span>
-                        </span>
-                        <button
-                          onClick={() => handleOpenPdf(p)}
-                          className="text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 font-bold flex-shrink-0"
-                        >
-                          View
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-xs text-slate-400">
-                    {isAdminUser ? 'No papers in the library yet.' : 'Abhi aap ki class ke papers available nahi hain.'}
-                  </p>
-                )}
+              {/* Tips Panel */}
+              <div className="p-6 rounded-2xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/50 space-y-3">
+                <h3 className="font-extrabold text-slate-900 dark:text-white flex items-center space-x-2">
+                  <span>🎯</span> <span>Board Exam Strategy Tip</span>
+                </h3>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  FBISE checking mein step-wise marking hoti hai. Har numerical ke liye formula, data aur units
+                  lazmi likhein — agar final answer ghalat bhi ho to formula ke marks mil jate hain. Attempt
+                  paper chronologically, aur long questions mein diagrams lazmi banayein.
+                </p>
               </div>
             </div>
           </div>
         )}
 
-        {/* TAB 2: QUIZ HISTORY */}
+        {/* TAB 2: QUIZ ATTEMPTS LOG */}
         {activeTab === 'quizzes' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-lg">My Quiz Attempts</h3>
-                <p className="text-xs text-slate-500">Record of all daily chapter quizzes completed</p>
+                <h3 className="font-extrabold text-lg text-slate-900 dark:text-white">Quiz Attempts History</h3>
+                <p className="text-xs text-slate-500">Total {quizAttempts.length} attempts recorded under your FBISE student profile.</p>
               </div>
               <Link
                 href={quizzesHref}
@@ -774,55 +739,35 @@ export default function StudentDashboardPage() {
               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs">
-                    <thead className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-500 uppercase tracking-wider font-bold">
+                    <thead className="bg-cream-100 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-500 uppercase tracking-wider font-bold">
                       <tr>
-                        <th className="py-3 px-4">Quiz Title & Subject</th>
-                        <th className="py-3 px-4">Score</th>
-                        <th className="py-3 px-4">Accuracy</th>
-                        <th className="py-3 px-4">Time Taken</th>
-                        <th className="py-3 px-4">Completed On</th>
-                        <th className="py-3 px-4 text-right">Action</th>
+                        <th className="py-3 px-4">Quiz Title</th>
+                        <th className="py-3 px-4">Subject / Class</th>
+                        <th className="py-3 px-4">Marks Obtained</th>
+                        <th className="py-3 px-4">Score %</th>
+                        <th className="py-3 px-4">FBISE Grade</th>
+                        <th className="py-3 px-4">Date Completed</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
-                      {quizAttempts.map((attempt: any) => (
-                        <tr key={attempt.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                          <td className="py-3.5 px-4 font-semibold text-slate-900 dark:text-white">
-                            <div>{attempt.quizTitle}</div>
-                            <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-medium">
-                              {attempt.subject} • {attempt.chapter}
-                            </span>
-                          </td>
-                          <td className="py-3.5 px-4 font-bold">
-                            {attempt.score} / {attempt.totalQuestions}
-                          </td>
+                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium text-slate-700 dark:text-slate-300">
+                      {quizAttempts.map((attempt) => (
+                        <tr key={attempt.id} className="hover:bg-cream-100 dark:hover:bg-slate-800/40">
+                          <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">{attempt.quizTitle}</td>
+                          <td className="py-3.5 px-4">{attempt.subject} • Class {attempt.classGrade}</td>
+                          <td className="py-3.5 px-4">{attempt.score} / {attempt.totalQuestions}</td>
                           <td className="py-3.5 px-4">
-                            <span
-                              className={`px-2 py-0.5 rounded font-bold ${
-                                attempt.percentage >= 80
-                                  ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300'
-                                  : attempt.percentage >= 60
-                                  ? 'bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300'
-                                  : 'bg-red-100 dark:bg-red-950 text-red-800 dark:text-red-300'
-                              }`}
-                            >
+                            <span className={`px-2 py-0.5 rounded font-bold ${
+                              attempt.percentage >= 80
+                                ? 'bg-emerald-50 text-emerald-800'
+                                : attempt.percentage >= 50
+                                ? 'bg-amber-50 text-amber-800'
+                                : 'bg-red-50 text-red-800'
+                            }`}>
                               {attempt.percentage}%
                             </span>
                           </td>
-                          <td className="py-3.5 px-4 text-slate-500">
-                            {Math.floor(attempt.timeTakenSeconds / 60)}m {attempt.timeTakenSeconds % 60}s
-                          </td>
-                          <td className="py-3.5 px-4 text-slate-500">
-                            {new Date(attempt.completedAt).toLocaleDateString()}
-                          </td>
-                          <td className="py-3.5 px-4 text-right">
-                            <Link
-                              href={`/quizzes/${attempt.quizId}`}
-                              className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline"
-                            >
-                              Retake / View
-                            </Link>
-                          </td>
+                          <td className="py-3.5 px-4 font-black text-slate-900 dark:text-white">{attempt.grade}</td>
+                          <td className="py-3.5 px-4 text-slate-400">{new Date(attempt.completedAt).toLocaleDateString()}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -830,185 +775,120 @@ export default function StudentDashboardPage() {
                 </div>
               </div>
             ) : (
-              <div className="p-12 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
-                <CheckCircle2 className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-                <h4 className="font-bold text-slate-800 dark:text-slate-200">No Quizzes Solved Yet</h4>
-                <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
-                  Test your FBISE chapter understanding with a daily quiz and track your score progression.
-                </p>
-                <Link
-                  href={quizzesHref}
-                  className="mt-4 inline-block px-5 py-2.5 rounded-xl bg-emerald-800 text-white font-bold text-xs"
-                >
-                  Start First Quiz
-                </Link>
+              <div className="p-10 text-center rounded-2xl bg-white dark:bg-slate-900 border border-slate-200">
+                <p className="text-sm text-slate-500">No quiz attempts logged yet.</p>
               </div>
             )}
           </div>
         )}
 
-        {/* TAB 3: AI CHECKED PAPERS & PRINTABLE REPORTS */}
+        {/* TAB 3: AI CHECKED PAPERS HISTORY */}
         {activeTab === 'checkedPapers' && (
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-lg">
-                  AI Evaluated Papers & Diagnostic Reports
-                </h3>
-                <p className="text-xs text-slate-500">
-                  Detailed question-by-question FBISE marking scheme breakdown
-                </p>
-              </div>
-              <Link
-                href="/ai-paper-check"
-                className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs transition-colors flex items-center space-x-1.5 shadow-sm"
-              >
-                <Sparkles className="w-4 h-4" />
-                <span>Check Another Paper</span>
-              </Link>
+            <div>
+              <h3 className="font-extrabold text-lg text-slate-900 dark:text-white">AI Paper Evaluations History</h3>
+              <p className="text-xs text-slate-500">Saare reports jo AI ne check kiye — kisi bhi row par click karke poori report dubara dekho.</p>
             </div>
 
             {checkedPapers.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {checkedPapers.map((paper: any) => (
+                {checkedPapers.map((paper) => (
                   <div
                     key={paper.id}
-                    className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-4"
+                    onClick={() => setSelectedReport(paper)}
+                    className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-emerald-600 hover:shadow-md transition-all cursor-pointer space-y-3"
                   >
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300">
-                          {paper.subject} • Class {paper.classGrade}
-                        </span>
-                        <span className="text-xs font-bold text-amber-500 bg-amber-50 dark:bg-amber-950/60 px-2 py-0.5 rounded-md">
-                          Grade {paper.grade}
-                        </span>
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <h4 className="font-bold text-slate-900 dark:text-white text-sm line-clamp-1">
+                          {paper.paperTitle || `${paper.subject} Examination`}
+                        </h4>
+                        <p className="text-[11px] text-slate-400 font-semibold mt-0.5">
+                          {paper.subject} • Class {paper.classGrade} • {new Date(paper.createdAt).toLocaleDateString()}
+                        </p>
                       </div>
-                      <h4 className="font-bold text-slate-900 dark:text-white text-base">
-                        {paper.paperTitle || `${paper.subject} Board Submission`}
-                      </h4>
-                      <p className="text-xs text-slate-500 mt-1">
-                        Checked on {new Date(paper.createdAt).toLocaleDateString()}
-                      </p>
+                      <span className="px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-black text-xs whitespace-nowrap">
+                        {paper.score}/{paper.totalMarks} ({paper.percentage}%)
+                      </span>
                     </div>
-
-                    <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800 text-xs">
-                      <div className="font-bold text-slate-800 dark:text-slate-200">
-                        Score: <span className="text-emerald-700 dark:text-emerald-400">{paper.obtainedMarks}</span> / {paper.totalMarks} ({paper.percentage}%)
-                      </div>
-
-                      <Link
-                        href={`/ai-paper-check?reportId=${paper.id}`}
-                        className="px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold hover:bg-emerald-100 transition-colors flex items-center space-x-1"
-                      >
-                        <Printer className="w-3.5 h-3.5" />
-                        <span>View / Print Report</span>
-                      </Link>
+                    <div className="flex items-center justify-between pt-1">
+                      <span className="text-xs font-bold text-slate-500">Grade: <span className="text-slate-900 dark:text-white font-black">{paper.grade}</span></span>
+                      <span className="flex items-center text-xs font-bold text-emerald-700 dark:text-emerald-400">
+                        View Full Report <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                      </span>
                     </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="p-12 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
-                <Sparkles className="w-12 h-12 text-amber-400 mx-auto mb-3" />
-                <h4 className="font-bold text-slate-800 dark:text-slate-200">No Checked Papers Yet</h4>
-                <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
-                  Submit your solved paper answers to get an instant question-wise breakdown of marks and FBISE mistake diagnosis.
-                </p>
-                <Link
-                  href="/ai-paper-check"
-                  className="mt-4 inline-block px-5 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs"
-                >
-                  Submit Paper to AI
-                </Link>
+              <div className="p-10 text-center rounded-2xl bg-white dark:bg-slate-900 border border-slate-200">
+                <Sparkles className="w-10 h-10 text-slate-300 mx-auto mb-2" />
+                <p className="text-sm text-slate-500">No papers checked by AI yet. Use the AI Paper Checker to submit answers.</p>
               </div>
             )}
           </div>
         )}
 
-        {/* TAB 4: BOOKMARKED PAPERS */}
+        {/* TAB 4: SAVED / BOOKMARKED PAPERS */}
         {activeTab === 'bookmarks' && (
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-lg">
-                  Saved / Bookmarked Papers
-                </h3>
-                <p className="text-xs text-slate-500">
-                  Quick access to all past and model papers you have pinned for study
-                </p>
-              </div>
-              <Link
-                href={papersHref}
-                className="px-4 py-2 rounded-xl bg-emerald-800 text-white font-bold text-xs hover:bg-emerald-900 transition-colors"
-              >
-                Browse Library
-              </Link>
+            <div>
+              <h3 className="font-extrabold text-lg text-slate-900 dark:text-white">My Saved Papers</h3>
+              <p className="text-xs text-slate-500">Bookmarked FBISE past & model papers for offline revision.</p>
             </div>
 
             {bookmarks.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {bookmarks.map((b: any) => (
+                {bookmarks.map((bookmark) => (
                   <div
-                    key={b.id}
-                    className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-4"
+                    key={bookmark.id}
+                    className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4"
                   >
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300">
-                          Class {b.paper.classGrade} • {b.paper.session} {b.paper.year}
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-cream-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                          Class {bookmark.paper.classGrade} • {bookmark.paper.subject}
                         </span>
-                        <button
-                          onClick={() => handleRemoveBookmark(b.paper.id)}
-                          className="text-slate-400 hover:text-red-500 p-1"
-                          title="Remove bookmark"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
+                        <h4 className="font-bold text-slate-900 dark:text-white text-sm mt-2 line-clamp-2">{bookmark.paper.title}</h4>
                       </div>
-                      <h4 className="font-bold text-slate-900 dark:text-white text-sm">
-                        {b.paper.title}
-                      </h4>
-                      <p className="text-xs text-slate-500 mt-1">{b.paper.subject}</p>
-                    </div>
-
-                    <div className="flex items-center space-x-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                       <button
-                        onClick={() => handleOpenPdf(b.paper)}
-                        className="flex-1 py-1.5 px-3 rounded-lg bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs flex items-center justify-center space-x-1"
+                        onClick={() => handleRemoveBookmark(bookmark.paper.id)}
+                        className="p-1.5 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-950/40"
+                        title="Remove Bookmark"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                    <div className="flex items-center space-x-2 pt-1">
+                      <button
+                        onClick={() => handleOpenPdf(bookmark.paper)}
+                        className="flex-1 py-2 rounded-lg bg-emerald-800 text-white text-xs font-bold hover:bg-emerald-900 flex items-center justify-center space-x-1.5"
                       >
                         <Eye className="w-3.5 h-3.5" />
                         <span>View PDF</span>
                       </button>
-                      <Link
-                        href={`/ai-paper-check?subject=${encodeURIComponent(b.paper.subject)}&classGrade=${b.paper.classGrade}&paperId=${b.paper.id}`}
-                        className="py-1.5 px-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs flex items-center space-x-1"
-                        title="Solve & AI Check"
+                      <a
+                        href={bookmark.paper.fileUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex-1 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-slate-200 flex items-center justify-center space-x-1.5"
                       >
-                        <Sparkles className="w-3.5 h-3.5" />
-                        <span>Solve</span>
-                      </Link>
+                        <Download className="w-3.5 h-3.5" />
+                        <span>Download</span>
+                      </a>
                     </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="p-12 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
-                <Bookmark className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-                <h4 className="font-bold text-slate-800 dark:text-slate-200">No Saved Papers</h4>
-                <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
-                  Click the bookmark ribbon on any past paper in the library to save it here for fast revision.
-                </p>
-                <Link
-                  href={papersHref}
-                  className="mt-4 inline-block px-5 py-2.5 rounded-xl bg-emerald-800 text-white font-bold text-xs"
-                >
-                  Browse Past Papers
-                </Link>
+              <div className="p-10 text-center rounded-2xl bg-white dark:bg-slate-900 border border-slate-200">
+                <Bookmark className="w-10 h-10 text-slate-300 mx-auto mb-2" />
+                <p className="text-sm text-slate-500">No saved papers yet. Bookmark papers from Past Papers page.</p>
               </div>
             )}
           </div>
         )}
+
       </div>
 
       {/* PDF Viewer Modal */}
@@ -1022,6 +902,78 @@ export default function StudentDashboardPage() {
           subject={selectedPdf.subject}
           classGrade={selectedPdf.classGrade}
         />
+      )}
+
+      {/* Selected Evaluation Report Modal — quick view only (question-wise
+          breakdown ke liye har report ka apna link /ai-paper-check?reportId=) */}
+      {selectedReport && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+          <div className="max-w-2xl w-full max-h-[85vh] overflow-y-auto bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl border border-slate-200 dark:border-slate-800">
+            <div className="flex items-start justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+              <div>
+                <span className="text-[10px] uppercase tracking-widest font-extrabold text-emerald-700 dark:text-emerald-400">
+                  FBISE AI Assessment Report (Saved)
+                </span>
+                <h3 className="text-xl font-black text-slate-900 dark:text-white mt-1">
+                  {selectedReport.paperTitle || `${selectedReport.subject} Examination`}
+                </h3>
+                <p className="text-xs text-slate-400 font-semibold mt-0.5">
+                  {selectedReport.subject} • Class {selectedReport.classGrade} • Checked on{' '}
+                  {new Date(selectedReport.createdAt).toLocaleDateString()}
+                </p>
+              </div>
+              <button
+                onClick={() => setSelectedReport(null)}
+                className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4 p-5 rounded-2xl bg-gradient-to-r from-emerald-950 to-slate-900 text-white text-center">
+              <div>
+                <p className="text-[10px] uppercase tracking-wider text-emerald-300 font-bold">Marks</p>
+                <p className="text-2xl font-black text-accent-400">
+                  {selectedReport.score} <span className="text-sm font-normal text-white">/ {selectedReport.totalMarks}</span>
+                </p>
+              </div>
+              <div>
+                <p className="text-[10px] uppercase tracking-wider text-emerald-300 font-bold">Percentage</p>
+                <p className="text-2xl font-black">{selectedReport.percentage}%</p>
+              </div>
+              <div>
+                <p className="text-[10px] uppercase tracking-wider text-emerald-300 font-bold">Grade</p>
+                <p className="text-2xl font-black text-accent-400">{selectedReport.grade}</p>
+              </div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-cream-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1.5">
+              <span className="font-bold text-xs uppercase tracking-wider text-emerald-800 dark:text-emerald-400">
+                Chief Examiner Remarks:
+              </span>
+              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                {selectedReport.feedbackSummary}
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <button
+                onClick={() => window.print()}
+                className="flex-1 py-3 rounded-xl bg-emerald-800 text-white font-bold text-xs hover:bg-emerald-900 flex items-center justify-center space-x-2"
+              >
+                <Printer className="w-4 h-4" />
+                <span>Print Report</span>
+              </button>
+              <Link
+                href={`/ai-paper-check?reportId=${selectedReport.id}`}
+                className="flex-1 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs hover:bg-slate-200 flex items-center justify-center space-x-2"
+              >
+                <Eye className="w-4 h-4" />
+                <span>Detailed Breakdown</span>
+              </Link>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
