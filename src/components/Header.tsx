@@ -94,11 +94,13 @@ export default function Header() {
   // Sign In / Sign Up buttons.)
   if (!user) {
     const guestLinks = [
+      { label: 'Home', href: '/' },
       { label: 'Features', href: '/#features' },
       { label: 'How it works', href: '/#how-it-works' },
       { label: 'Classes', href: '/#classes' },
       { label: 'Board Notices', href: '/announcements' },
       { label: 'About', href: '/about' },
+      { label: 'Contact', href: '/contact' },
     ];
     return (
       <div className="sticky top-0 z-50 bg-cream-100 dark:bg-slate-950 px-3 sm:px-6 pt-3 sm:pt-4 pb-1">
@@ -237,7 +239,7 @@ export default function Header() {
                 >
                   Home
                 </Link>
-
+                
                 <Link
                   href="/about"
                   className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
@@ -255,7 +257,7 @@ export default function Header() {
                   Contact
                 </Link>
               </nav>
-
+              
               {/* Right-side actions */}
               <div className="ml-auto flex items-center gap-1 sm:gap-2 flex-shrink-0">
                 <Link
