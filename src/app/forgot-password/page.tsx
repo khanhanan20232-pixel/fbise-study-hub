@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { GraduationCap, Mail, ArrowRight, CheckCircle, ArrowLeft, KeyRound, Lock, Loader2 } from 'lucide-react';
+import { GraduationCap, Mail, ArrowRight, CheckCircle, ArrowLeft, KeyRound, Lock, Eye, EyeOff, Loader2 } from 'lucide-react';
 
 type Step = 'email' | 'reset' | 'done';
 
@@ -12,6 +12,8 @@ export default function ForgotPasswordPage() {
   const [otp, setOtp] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
   const [sending, setSending] = useState(false);
@@ -158,7 +160,7 @@ export default function ForgotPasswordPage() {
                     placeholder="Enter your email address"
                     className={inputClass}
                   />
-                                  </div>
+                </div>
               </div>
 
               {error && (
@@ -178,7 +180,7 @@ export default function ForgotPasswordPage() {
             </form>
 
             <div className="mt-6 text-center">
-              <Link
+                            <Link
                 href="/login"
                 className="inline-flex items-center space-x-1.5 text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors"
               >
@@ -231,15 +233,23 @@ export default function ForgotPasswordPage() {
                     <Lock className="w-4 h-4" />
                   </div>
                   <input
-                    type="password"
+                    type={showNewPassword ? 'text' : 'password'}
                     name="newPassword"
                     autoComplete="new-password"
                     required
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     placeholder="Enter your new password"
-                    className={inputClass}
+                    className={`${inputClass} pr-11`}
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowNewPassword((v) => !v)}
+                    aria-label={showNewPassword ? 'Hide password' : 'Show password'}
+                    className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                  >
+                    {showNewPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
                 </div>
               </div>
 
@@ -250,15 +260,23 @@ export default function ForgotPasswordPage() {
                     <Lock className="w-4 h-4" />
                   </div>
                   <input
-                    type="password"
+                    type={showConfirmPassword ? 'text' : 'password'}
                     name="confirmPassword"
                     autoComplete="new-password"
                     required
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Re-enter your new password"
-                    className={inputClass}
+                    className={`${inputClass} pr-11`}
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword((v) => !v)}
+                    aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                    className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                  >
+                    {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
                 </div>
                 {confirmPassword.length > 0 && (
                   <p className={`mt-1 text-[11px] font-semibold ${newPassword === confirmPassword ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-500'}`}>
