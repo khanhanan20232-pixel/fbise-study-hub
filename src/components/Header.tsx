@@ -14,6 +14,7 @@ import {
   Moon,
   Menu,
   X,
+  User as UserIcon,
   LogOut,
   Shield,
   Search,
@@ -21,8 +22,13 @@ import {
   FileText,
   LayoutDashboard,
   LogIn,
+  UserPlus,
   Layers,
   Users,
+  ChevronDown,
+  Phone,
+  Info,
+  Home,
 } from 'lucide-react';
 
 export default function Header() {
@@ -31,6 +37,8 @@ export default function Header() {
   const [isDark, setIsDark] = useState(false);
   const [guestMenuOpen, setGuestMenuOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerCoursesOpen, setDrawerCoursesOpen] = useState(false);
+  const [drawerQuizzesOpen, setDrawerQuizzesOpen] = useState(false);
 
   useEffect(() => {
     // Check initial dark mode from document or localStorage
@@ -75,6 +83,29 @@ export default function Header() {
     }
   };
 
+  const navLinks = [
+    { label: 'Home', href: '/', icon: Home },
+    { label: 'Past Papers', href: '/past-papers', icon: BookOpen },
+    { label: 'Model Papers', href: '/model-papers', icon: FileText },
+    { label: 'Daily Quizzes', href: '/quizzes', icon: Sparkles },
+    { label: 'Flashcards', href: '/flashcards', icon: Layers },
+    { label: 'Study Groups', href: '/groups', icon: Users },
+    { label: 'AI Paper Checker', href: '/ai-paper-check', icon: Sparkles, highlight: true },
+    { label: 'AI Tutor', href: '/tutor', icon: GraduationCap, highlight: true },
+    { label: 'Leaderboard', href: '/leaderboard', icon: Trophy },
+    { label: 'Announcements', href: '/announcements', icon: Bell },
+    { label: 'Search', href: '/search', icon: Search },
+    { label: 'About', href: '/about', icon: Info },
+    { label: 'Contact', href: '/contact', icon: Phone },
+  ];
+
+  const classSections = [
+    { label: 'Class 9', sub: 'SSC Part 1', href: '/classes/class-9', chip: 'Part 1' },
+    { label: 'Class 10', sub: 'SSC Part 2', href: '/classes/class-10', chip: 'Part 2' },
+    { label: '1st Year — Class 11', sub: 'HSSC Part 1', href: '/classes/class-11', chip: 'Part 1' },
+    { label: '2nd Year — Class 12', sub: 'HSSC Part 2', href: '/classes/class-12', chip: 'Part 2' },
+  ];
+
   const drawerLinkClass = (href: string, highlight?: boolean) => {
     const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
     if (highlight) {
@@ -95,10 +126,6 @@ export default function Header() {
   if (!user) {
     const guestLinks = [
       { label: 'Home', href: '/' },
-      { label: 'Features', href: '/#features' },
-      { label: 'How it works', href: '/#how-it-works' },
-      { label: 'Classes', href: '/#classes' },
-      { label: 'Board Notices', href: '/announcements' },
       { label: 'About', href: '/about' },
       { label: 'Contact', href: '/contact' },
     ];
@@ -239,7 +266,7 @@ export default function Header() {
                 >
                   Home
                 </Link>
-                
+
                 <Link
                   href="/about"
                   className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
@@ -338,12 +365,12 @@ export default function Header() {
       >
         {/* Drawer header — white, baqi header ki tarah */}
         <div className="bg-white dark:bg-slate-900 text-slate-800 dark:text-white px-4 py-4 flex items-center gap-3 flex-shrink-0 border-b border-slate-200 dark:border-slate-800">
-          <span className="w-10 h-10 rounded-xl bg-accent-400 flex items-center justify-center flex-shrink-0 overflow-hidden p-1.5">
+          <span className="w-10 h-10 rounded-xl bg-fbise-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center flex-shrink-0 overflow-hidden p-0.5">
             <img src="/logo-symbol.png" alt="FBISE Study Hub logo" className="w-full h-full object-contain" />
           </span>
           <div className="min-w-0 leading-tight">
-            <p className="font-display font-bold truncate text-navy-900 dark:text-white">
-              FBISE <span className="text-accent-600 dark:text-accent-400">Study Hub</span>
+            <p className="font-extrabold truncate text-fbise-900 dark:text-white">
+              FBISE <span className="text-fbise-600 dark:text-fbise-300">Study Hub</span>
             </p>
             <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
               Federal Board • Islamabad
@@ -360,113 +387,174 @@ export default function Header() {
 
         {/* Drawer links (scrollable) */}
         <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-5">
-          {/* Main navigation — teacher-audit order (Phase D, 2026-11-04):
-              Dashboard → Papers → Daily Quizzes → AI Paper Checker →
-              Leaderboard → Announcements. The Classes/Quizzes dropdowns and
-              the Search/About/Contact links were removed from the drawer. */}
+          {/* Home — sab se pehle (number 1) in the sidebar */}
           <div>
+            <Link href="/" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/')}>
+              <Home className="w-4 h-4 flex-shrink-0" />
+              <span>Home</span>
+            </Link>
+          </div>
+
+          <div className="border-t border-slate-100 dark:border-slate-800" />
+
+          {/* Classes — click to open the 4 classes below */}
+          <div>
+            <button
+              type="button"
+              onClick={() => setDrawerCoursesOpen((v) => !v)}
+              className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-left"
+              aria-expanded={drawerCoursesOpen}
+            >
+              <GraduationCap className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
+              <span className="flex-1">Classes</span>
+              <ChevronDown className={`w-4 h-4 transition-transform ${drawerCoursesOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {drawerCoursesOpen && (
+              <div className="space-y-1 mt-1 ml-4">
+                {classSections.map((cls) => (
+                  <Link
+                    key={cls.href}
+                    href={cls.href}
+                    onClick={() => setDrawerOpen(false)}
+                    className={drawerLinkClass(cls.href)}
+                  >
+                    <GraduationCap className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
+                    <span className="flex-1 min-w-0">
+                      <span className="block truncate">{cls.label}</span>
+                      <span className="block text-[11px] font-medium text-slate-400">{cls.sub}</span>
+                    </span>
+                    <span className="text-[10px] bg-fbise-50 dark:bg-fbise-950 px-2 py-0.5 rounded font-mono text-fbise-800 dark:text-fbise-300 flex-shrink-0">
+                      {cls.chip}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="border-t border-slate-100 dark:border-slate-800" />
+
+          {/* Quizzes — dropdown: class ke hisaab se seedha quiz page (aanay walay ke liye asaani) */}
+          <div>
+            <button
+              type="button"
+              onClick={() => setDrawerQuizzesOpen((v) => !v)}
+              className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-left"
+              aria-expanded={drawerQuizzesOpen}
+            >
+              <Sparkles className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
+              <span className="flex-1">Quizzes</span>
+              <ChevronDown className={`w-4 h-4 transition-transform ${drawerQuizzesOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {drawerQuizzesOpen && (
+              <div className="space-y-1 mt-1 ml-4">
+                <Link href="/quizzes" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/quizzes')}>
+                  <Sparkles className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
+                  <span className="flex-1">All Quizzes</span>
+                </Link>
+                {['9', '10', '11', '12'].map((grade) => (
+                  <Link
+                    key={grade}
+                    href={`/quizzes?class=${grade}`}
+                    onClick={() => setDrawerOpen(false)}
+                    className={drawerLinkClass('/quizzes')}
+                  >
+                    <GraduationCap className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
+                    <span className="flex-1">Class {grade} Quizzes</span>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="border-t border-slate-100 dark:border-slate-800" />
+
+          {/* Study resources / main navigation */}
+          <div>
+            <p className="px-3 pb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+              Study Resources
+            </p>
             <div className="space-y-1">
-              <Link href="/dashboard" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/dashboard')}>
-                <LayoutDashboard className="w-4 h-4 flex-shrink-0" />
-                <span>Dashboard</span>
-              </Link>
-              <Link href="/past-papers" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/past-papers')}>
-                <BookOpen className="w-4 h-4 flex-shrink-0" />
-                <span>Papers</span>
-              </Link>
-              <Link href="/quizzes" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/quizzes')}>
-                <Sparkles className="w-4 h-4 flex-shrink-0" />
-                <span>Daily Quizzes</span>
-              </Link>
-              <Link href="/ai-paper-check" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/ai-paper-check', true)}>
-                <Sparkles className="w-4 h-4 flex-shrink-0" />
-                <span>AI Paper Checker</span>
-              </Link>
-              <Link href="/leaderboard" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/leaderboard')}>
-                <Trophy className="w-4 h-4 flex-shrink-0" />
-                <span>Leaderboard</span>
-              </Link>
-              <Link href="/announcements" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/announcements')}>
-                <Bell className="w-4 h-4 flex-shrink-0" />
-                <span>Announcements</span>
-              </Link>
+              {navLinks.filter((item) => item.href !== '/').map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.href + item.label}
+                    href={item.href}
+                    onClick={() => setDrawerOpen(false)}
+                    className={drawerLinkClass(item.href, item.highlight)}
+                  >
+                    <Icon className="w-4 h-4 flex-shrink-0" />
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
           <div className="border-t border-slate-100 dark:border-slate-800" />
 
-          {/* More Tools — features built in earlier phases, kept reachable
-              below the six audit items (Phase D, 2026-11-04) */}
+          {/* Account */}
           <div>
             <p className="px-3 pb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-              More Tools
+              My Account
             </p>
-            <div className="space-y-1">
-              <Link href="/model-papers" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/model-papers')}>
-                <FileText className="w-4 h-4 flex-shrink-0" />
-                <span>Model Papers</span>
-              </Link>
-              <Link href="/flashcards" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/flashcards')}>
-                <Layers className="w-4 h-4 flex-shrink-0" />
-                <span>Flashcards</span>
-              </Link>
-              <Link href="/groups" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/groups')}>
-                <Users className="w-4 h-4 flex-shrink-0" />
-                <span>Study Groups</span>
-              </Link>
-              <Link href="/tutor" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/tutor', true)}>
-                <GraduationCap className="w-4 h-4 flex-shrink-0" />
-                <span>AI Tutor</span>
-              </Link>
-              {user.role === 'ADMIN' && (
-                <Link href="/admin" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/admin')}>
-                  <Shield className="w-4 h-4 flex-shrink-0" />
-                  <span>Admin Control Panel</span>
+            {user ? (
+              <div className="space-y-1">
+                <div className="px-3 py-2">
+                  <p className="font-bold text-sm text-slate-800 dark:text-slate-100 truncate">{user.name}</p>
+                  <p className="text-xs text-slate-500 truncate">{user.email}</p>
+                  <span className="inline-block mt-1 bg-fbise-100 dark:bg-fbise-950 text-fbise-800 dark:text-fbise-300 text-[10px] font-bold px-2 py-0.5 rounded">
+                    {user.role === 'ADMIN' ? 'Administrator' : `Class ${user.className} Student`}
+                  </span>
+                </div>
+                <Link href="/dashboard" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/dashboard')}>
+                  <LayoutDashboard className="w-4 h-4 flex-shrink-0" />
+                  <span>Student Dashboard</span>
                 </Link>
-              )}
-            </div>
+                {user.role === 'ADMIN' && (
+                  <Link href="/admin" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/admin')}>
+                    <Shield className="w-4 h-4 flex-shrink-0" />
+                    <span>Admin Control Panel</span>
+                  </Link>
+                )}
+                <button
+                  onClick={() => {
+                    setDrawerOpen(false);
+                    logout();
+                  }}
+                  className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors text-left"
+                >
+                  <LogOut className="w-4 h-4 flex-shrink-0" />
+                  <span>Sign Out</span>
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-2 px-1">
+                <Link
+                  href="/login"
+                  onClick={() => setDrawerOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl border border-fbise-700 text-fbise-800 dark:text-fbise-300 dark:border-fbise-500 font-bold text-sm hover:bg-fbise-50 dark:hover:bg-fbise-950/50 transition-colors"
+                >
+                  <LogIn className="w-4 h-4" />
+                  <span>Sign In</span>
+                </Link>
+                <Link
+                  href="/signup"
+                  onClick={() => setDrawerOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-fbise-600 hover:bg-fbise-700 text-white font-bold text-sm shadow-sm transition-colors"
+                >
+                  <UserPlus className="w-4 h-4" />
+                  <span>Create Free Account</span>
+                </Link>
+                <p className="flex items-center gap-1.5 px-2 pt-1 text-[11px] text-slate-400">
+                  <UserIcon className="w-3.5 h-3.5" />
+                  <span>Login ke baad dashboard, bookmarks aur AI reports milti hain.</span>
+                </p>
+              </div>
+            )}
           </div>
-
         </nav>
-
-        {/* Bottom account block — ONE row: avatar initial, name, email/class,
-            logout icon button at the end (Phase D, 2026-11-04) */}
-        <div className="px-3 py-3 border-t border-slate-100 dark:border-slate-800 flex-shrink-0">
-          {user ? (
-            <div className="flex items-center gap-3 px-2 py-1.5">
-              <span className="w-10 h-10 rounded-full bg-fbise-600 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
-                {user.name.charAt(0)}
-              </span>
-              <span className="flex-1 min-w-0 leading-tight">
-                <span className="block font-bold text-sm text-slate-800 dark:text-slate-100 truncate">{user.name}</span>
-                <span className="block text-xs text-slate-500 dark:text-slate-400 truncate">
-                  {user.email}
-                  {user.role !== 'ADMIN' && user.className ? ` • Class ${user.className}` : ''}
-                </span>
-              </span>
-              <button
-                onClick={() => {
-                  setDrawerOpen(false);
-                  logout();
-                }}
-                aria-label="Sign out"
-                title="Sign out"
-                className="p-2 rounded-lg text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors flex-shrink-0"
-              >
-                <LogOut className="w-5 h-5" />
-              </button>
-            </div>
-          ) : (
-            <Link
-              href="/login"
-              onClick={() => setDrawerOpen(false)}
-              className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold text-fbise-800 dark:text-fbise-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-            >
-              <LogIn className="w-4 h-4 flex-shrink-0" />
-              <span>Sign In</span>
-            </Link>
-          )}
-        </div>
 
         {/* Drawer footer */}
         <div className="px-4 py-3 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-400 flex-shrink-0">
