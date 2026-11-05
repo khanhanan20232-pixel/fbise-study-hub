@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {
@@ -13,6 +13,8 @@ import {
   CheckCircle2,
   ArrowRight,
   GraduationCap,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
@@ -100,6 +102,7 @@ const CTA_CHECKS = [
 export default function HomePage() {
   const { user } = useAuth();
   const router = useRouter();
+  const [showCtaPassword, setShowCtaPassword] = useState(false);
 
   return (
     <div className="bg-cream-100 text-navy-900">
@@ -198,7 +201,7 @@ export default function HomePage() {
                     <Flame className="w-3.5 h-3.5 text-orange-500" /> Streak 12 days
                   </span>
                 </div>
-                <div className="flex gap-2.5 mt-6">
+                                <div className="flex gap-2.5 mt-6">
                   <Link
                     href="/quizzes"
                     className="px-4 py-2 rounded-full bg-white text-navy-900 text-sm font-bold hover:bg-cream-100 transition-colors"
@@ -298,6 +301,7 @@ export default function HomePage() {
           ))}
         </div>
       </div>
+
       {/* ============ FEATURES ============ */}
       <section id="features" className="bg-white py-20 lg:py-24 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -383,7 +387,7 @@ export default function HomePage() {
                     </p>
                   </div>
                 </li>
-                <li className="flex gap-4">
+                                <li className="flex gap-4">
                   <span className="w-11 h-11 rounded-full bg-accent-400 text-navy-950 font-display font-bold text-lg flex items-center justify-center flex-shrink-0 shadow-sm">
                     3
                   </span>
@@ -495,13 +499,23 @@ export default function HomePage() {
                 </label>
                 <label className="block mt-4">
                   <span className="text-xs font-bold uppercase tracking-wide text-slate-500">Password</span>
-                  <input
-                    type="password"
-                    name="password"
-                    autoComplete="new-password"
-                    placeholder="••••••••"
-                    className="mt-1.5 w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-navy-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:border-accent-400"
-                  />
+                  <div className="relative mt-1.5">
+                    <input
+                      type={showCtaPassword ? 'text' : 'password'}
+                      name="password"
+                      autoComplete="new-password"
+                      placeholder="••••••••"
+                      className="w-full rounded-xl border border-slate-300 px-4 py-3 pr-12 text-sm text-navy-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:border-accent-400"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowCtaPassword((v) => !v)}
+                      aria-label={showCtaPassword ? 'Hide password' : 'Show password'}
+                      className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600 transition-colors"
+                    >
+                      {showCtaPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    </button>
+                  </div>
                 </label>
                 <p className="text-[11px] text-slate-400 leading-relaxed mt-3">
                   By signing up you agree to the Study Hub terms. Free for students — no card required.
