@@ -113,7 +113,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 lg:pt-20 lg:pb-24 relative">
           <div className="grid lg:grid-cols-2 gap-14 items-center">
             {/* Left copy */}
-            <div>
+            <div className="animate-fade-up">
               <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white border border-cream-300 shadow-sm text-xs font-bold tracking-wide text-navy-900">
                 Federal Board, Islamabad · SSC &amp; HSSC
               </span>
@@ -173,7 +173,7 @@ export default function HomePage() {
             </div>
 
             {/* Right — three stacked overlapping cards */}
-            <div className="relative max-w-md w-full mx-auto lg:ml-auto">
+            <div className="relative max-w-md w-full mx-auto lg:ml-auto animate-float">
               {/* Card 1 — lime Today's quiz */}
               <div className="relative z-10 bg-accent-400 rounded-[1.75rem] shadow-xl shadow-accent-600/20 p-6 -rotate-1">
                 <div className="flex items-center justify-between">
@@ -270,6 +270,34 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ============ SUBJECTS MARQUEE (black strip, slow scroll) ============ */}
+      <div className="bg-navy-900 py-3.5 overflow-hidden" aria-hidden="true">
+        <div className="flex w-max animate-marquee">
+          {[0, 1].map((copy) => (
+            <div key={copy} className="flex shrink-0 items-center">
+              {[
+                'Physics',
+                'Chemistry',
+                'Biology',
+                'Mathematics',
+                'Computer Science',
+                'English',
+                'Urdu',
+                'Pakistan Studies',
+                'Islamiat',
+                'Class 9',
+                'Class 10',
+                'Class 11',
+                'Class 12',
+              ].map((s) => (
+                <span key={s} className="mx-5 text-sm font-bold tracking-wide text-white whitespace-nowrap">
+                  {s} <span className="text-accent-400 ml-10">✦</span>
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
       {/* ============ FEATURES ============ */}
       <section id="features" className="bg-white py-20 lg:py-24 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -283,12 +311,13 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {FEATURES.map((f) => {
+            {FEATURES.map((f, i) => {
               const Icon = f.icon;
               return (
                 <div
                   key={f.title}
-                  className={`relative rounded-[1.75rem] p-7 border transition-shadow hover:shadow-lg ${
+                  style={{ animationDelay: `${i * 90}ms` }}
+                  className={`animate-fade-up relative rounded-[1.75rem] p-7 border transition-all hover:shadow-lg hover:-translate-y-1 ${
                     f.featured
                       ? 'bg-accent-50 border-2 border-accent-400 shadow-md'
                       : 'bg-white border-slate-200 shadow-sm'
