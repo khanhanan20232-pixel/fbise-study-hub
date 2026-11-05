@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { getStreamData } from '@/data/streams';
-import { GraduationCap, Mail, Lock, User, Phone, BookOpen, Users, ArrowRight, AlertCircle, CheckCircle } from 'lucide-react';
+import { GraduationCap, Mail, Lock, Eye, EyeOff, User, Phone, BookOpen, Users, ArrowRight, AlertCircle, CheckCircle } from 'lucide-react';
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -20,6 +20,8 @@ export default function SignUpPage() {
     phone: '',
   });
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -147,8 +149,8 @@ export default function SignUpPage() {
             </div>
           </div>
 
-                    {/* Study Group / Stream Selection */}
-          <div>
+          {/* Study Group / Stream Selection */}
+                    <div>
             <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
               Study Group / Stream *
             </label>
@@ -211,7 +213,7 @@ export default function SignUpPage() {
                 <Lock className="w-4 h-4" />
               </div>
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 name="password"
                 autoComplete="new-password"
                 required
@@ -219,8 +221,16 @@ export default function SignUpPage() {
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 placeholder="Minimum 6 characters"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700"
+                className="w-full pl-10 pr-11 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700"
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+              >
+                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
             </div>
           </div>
 
@@ -234,7 +244,7 @@ export default function SignUpPage() {
                 <Lock className="w-4 h-4" />
               </div>
               <input
-                type="password"
+                type={showConfirmPassword ? 'text' : 'password'}
                 name="confirmPassword"
                 autoComplete="new-password"
                 required
@@ -244,8 +254,16 @@ export default function SignUpPage() {
                 placeholder="Re-enter your password"
                 className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700"
               />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword((v) => !v)}
+                aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+              >
+                {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
               {confirmPassword.length > 0 && confirmPassword === formData.password && (
-                <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-emerald-600">
+                <div className="absolute inset-y-0 right-0 pr-11 flex items-center pointer-events-none text-emerald-600">
                   <CheckCircle className="w-4 h-4" />
                 </div>
               )}
