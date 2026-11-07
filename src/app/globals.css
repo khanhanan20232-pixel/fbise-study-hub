@@ -27,6 +27,13 @@
 }
 
 @layer base {
+  /* Mobile fit guard: page kabhi screen se chauri na ho — koi bhi hissa
+     sideways scroll ya cut-off ka sabab na bane (2026-11-07). */
+  html,
+  body {
+    overflow-x: clip;
+    max-width: 100%;
+  }
   body {
     @apply bg-cream-100 text-slate-900 transition-colors duration-200 antialiased leading-relaxed;
   }
