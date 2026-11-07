@@ -134,12 +134,12 @@ export default function Header() {
         <header className="max-w-7xl mx-auto bg-white dark:bg-slate-900 rounded-full shadow-lg shadow-slate-900/5 border border-slate-100 dark:border-slate-800 pl-3 pr-2 sm:pl-4 sm:pr-2.5 py-2">
           <div className="flex items-center gap-3">
             {/* Logo — lime rounded square + serif wordmark */}
-            <Link href="/" className="flex items-center gap-2.5 min-w-0 flex-shrink-0">
+            <Link href="/" className="flex items-center gap-2.5 min-w-0">
               <span className="w-10 h-10 rounded-xl bg-accent-400 flex items-center justify-center flex-shrink-0 overflow-hidden p-1.5">
                 <img src="/logo-symbol.png" alt="FBISE Study Hub logo" className="w-full h-full object-contain" />
               </span>
               <span className="leading-tight min-w-0">
-                <span className="block font-display font-bold text-lg text-navy-900 dark:text-white truncate">
+                <span className="block font-display font-bold text-base sm:text-lg text-navy-900 dark:text-white truncate">
                   FBISE Study Hub
                 </span>
                 <span className="hidden sm:block text-[10px] font-semibold tracking-wide text-slate-500 dark:text-slate-400">
@@ -172,13 +172,13 @@ export default function Header() {
               </button>
               <Link
                 href="/login"
-                className="px-4 sm:px-5 py-2 rounded-full text-sm font-bold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                className="px-3 sm:px-5 py-2 rounded-full text-sm font-bold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
               >
                 Sign in
               </Link>
               <Link
                 href="/signup"
-                className="px-4 sm:px-5 py-2 rounded-full text-sm font-bold text-navy-950 bg-accent-400 hover:bg-accent-500 shadow-sm transition-colors"
+                className="px-3 sm:px-5 py-2 rounded-full text-sm font-bold text-navy-950 bg-accent-400 hover:bg-accent-500 shadow-sm transition-colors"
               >
                 Sign up free
               </Link>
@@ -201,7 +201,7 @@ export default function Header() {
                   key={l.label}
                   href={l.href}
                   onClick={() => setGuestMenuOpen(false)}
-                  className="px-3.5 py-2 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-cream-100 dark:hover:bg-slate-800 transition-colors"
+                  className="px-3.5 py-2 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-cream-100 dark:hover:bg-slate-800 hover:text-navy-900 dark:hover:text-white transition-colors"
                 >
                   {l.label}
                 </Link>
@@ -284,7 +284,7 @@ export default function Header() {
                   Contact
                 </Link>
               </nav>
-              
+
               {/* Right-side actions */}
               <div className="ml-auto flex items-center gap-1 sm:gap-2 flex-shrink-0">
                 <Link
@@ -449,7 +449,7 @@ export default function Header() {
             {drawerQuizzesOpen && (
               <div className="space-y-1 mt-1 ml-4">
                 <Link href="/quizzes" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/quizzes')}>
-                  <Sparkles className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
+                  <Sparkles className="w-4 h-4 flex-shrink-0" />
                   <span className="flex-1">All Quizzes</span>
                 </Link>
                 {['9', '10', '11', '12'].map((grade) => (
@@ -459,7 +459,7 @@ export default function Header() {
                     onClick={() => setDrawerOpen(false)}
                     className={drawerLinkClass('/quizzes')}
                   >
-                    <GraduationCap className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
+                    <GraduationCap className="w-4 h-4 flex-shrink-0" />
                     <span className="flex-1">Class {grade} Quizzes</span>
                   </Link>
                 ))}
