@@ -201,7 +201,7 @@ export default function Header() {
                   key={l.label}
                   href={l.href}
                   onClick={() => setGuestMenuOpen(false)}
-                  className="px-3.5 py-2 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-cream-100 dark:hover:bg-slate-800 hover:text-navy-900 dark:hover:text-white transition-colors"
+                  className="px-3.5 py-2 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-cream-100 dark:hover:bg-slate-800 transition-colors"
                 >
                   {l.label}
                 </Link>
@@ -449,7 +449,7 @@ export default function Header() {
             {drawerQuizzesOpen && (
               <div className="space-y-1 mt-1 ml-4">
                 <Link href="/quizzes" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/quizzes')}>
-                  <Sparkles className="w-4 h-4 flex-shrink-0" />
+                  <Sparkles className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
                   <span className="flex-1">All Quizzes</span>
                 </Link>
                 {['9', '10', '11', '12'].map((grade) => (
@@ -459,7 +459,7 @@ export default function Header() {
                     onClick={() => setDrawerOpen(false)}
                     className={drawerLinkClass('/quizzes')}
                   >
-                    <GraduationCap className="w-4 h-4 flex-shrink-0" />
+                    <GraduationCap className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
                     <span className="flex-1">Class {grade} Quizzes</span>
                   </Link>
                 ))}
