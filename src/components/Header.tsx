@@ -35,7 +35,6 @@ export default function Header() {
   const { user, logout } = useAuth();
   const pathname = usePathname();
   const [isDark, setIsDark] = useState(false);
-  const [guestMenuOpen, setGuestMenuOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerCoursesOpen, setDrawerCoursesOpen] = useState(false);
   const [drawerQuizzesOpen, setDrawerQuizzesOpen] = useState(false);
@@ -118,235 +117,8 @@ export default function Header() {
     }`;
   };
 
-  // Guest / landing view — Figma "Web Design" floating pill navbar (Phase A,
-  // 2026-11-04). Logged-in users keep the existing header + drawer below,
-  // completely unchanged. (Auth resolves async; until a user loads, the guest
-  // chrome shows — the same pattern the old header already had with its
-  // Sign In / Sign Up buttons.)
-  if (!user) {
-    const guestLinks = [
-      { label: 'Home', href: '/' },
-      { label: 'About', href: '/about' },
-      { label: 'Contact', href: '/contact' },
-    ];
-    return (
-      <div className="sticky top-0 z-50 bg-cream-100 dark:bg-slate-950 px-3 sm:px-6 pt-3 sm:pt-4 pb-1">
-        <header className="max-w-7xl mx-auto bg-white dark:bg-slate-900 rounded-full shadow-lg shadow-slate-900/5 border border-slate-100 dark:border-slate-800 pl-3 pr-2 sm:pl-4 sm:pr-2.5 py-2">
-          <div className="flex items-center gap-3">
-            {/* Logo — lime rounded square + serif wordmark */}
-            <Link href="/" className="flex items-center gap-2.5 min-w-0">
-              <span className="w-10 h-10 rounded-xl bg-accent-400 flex items-center justify-center flex-shrink-0 overflow-hidden p-1.5">
-                <img src="/logo-symbol.png" alt="FBISE Study Hub logo" className="w-full h-full object-contain" />
-              </span>
-              <span className="leading-tight min-w-0">
-                <span className="block font-display font-bold text-base sm:text-lg text-navy-900 dark:text-white truncate">
-                  FBISE Study Hub
-                </span>
-                <span className="hidden sm:block text-[10px] font-semibold tracking-wide text-slate-500 dark:text-slate-400">
-                  SSC &amp; HSSC Preparation
-                </span>
-              </span>
-            </Link>
-
-            {/* Centre links */}
-            <nav className="hidden lg:flex items-center gap-1 mx-auto">
-              {guestLinks.map((l) => (
-                <Link
-                  key={l.label}
-                  href={l.href}
-                  className="px-3.5 py-2 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-cream-100 dark:hover:bg-slate-800 hover:text-navy-900 dark:hover:text-white transition-colors"
-                >
-                  {l.label}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Right actions */}
-            <div className="ml-auto lg:ml-0 flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-              <button
-                onClick={toggleDarkMode}
-                aria-label="Toggle Theme"
-                className="hidden sm:block p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              >
-                {isDark ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5" />}
-              </button>
-              <Link
-                href="/login"
-                className="px-3 sm:px-5 py-2 rounded-full text-sm font-bold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-              >
-                Sign in
-              </Link>
-              <Link
-                href="/signup"
-                className="px-3 sm:px-5 py-2 rounded-full text-sm font-bold text-navy-950 bg-accent-400 hover:bg-accent-500 shadow-sm transition-colors"
-              >
-                Sign up free
-              </Link>
-              <button
-                onClick={() => setGuestMenuOpen((v) => !v)}
-                className="lg:hidden p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                aria-label="Open menu"
-                aria-expanded={guestMenuOpen}
-              >
-                {guestMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile centre-links row */}
-          {guestMenuOpen && (
-            <nav className="lg:hidden border-t border-slate-100 dark:border-slate-800 mt-2 pt-2 pb-1 px-2 flex flex-wrap gap-1">
-              {guestLinks.map((l) => (
-                <Link
-                  key={l.label}
-                  href={l.href}
-                  onClick={() => setGuestMenuOpen(false)}
-                  className="px-3.5 py-2 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-cream-100 dark:hover:bg-slate-800 transition-colors"
-                >
-                  {l.label}
-                </Link>
-              ))}
-            </nav>
-          )}
-        </header>
-      </div>
-    );
-  }
-
-  return (
+  const drawer = (
     <>
-      <header className="sticky top-0 z-50 shadow-md">
-        {/* Board Name Strip — halki neeli patti, original FBISE style */}
-        <div className="bg-fbise-600 text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-between gap-3">
-            <p className="text-[11px] sm:text-xs font-semibold tracking-wide truncate">
-              Federal Board of Intermediate &amp; Secondary Education, Islamabad
-            </p>
-            <p className="hidden md:block text-[11px] text-fbise-100 flex-shrink-0">
-              H-8/4, Islamabad • fbise.edu.pk
-            </p>
-          </div>
-        </div>
-
-        {/* Main Slim Header Bar — white, original FBISE ki tarah */}
-        <div className="bg-white dark:bg-slate-900 text-slate-800 dark:text-white border-b border-slate-200 dark:border-slate-800">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-2 sm:gap-3 h-14">
-              {/* Hamburger — opens the LEFT slide-in menu (all navigation lives there) */}
-              <button
-                onClick={() => setDrawerOpen(true)}
-                className="p-2 -ml-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex-shrink-0"
-                aria-label="Open navigation menu"
-              >
-                <Menu className="w-6 h-6" />
-              </button>
-
-              {/* Logo + Title (kept compact so it never overlaps anything) */}
-              <Link href="/" className="flex items-center gap-2.5 min-w-0 group">
-                <span className="w-9 h-9 rounded-lg bg-accent-400 flex items-center justify-center flex-shrink-0 overflow-hidden p-1">
-                  <img src="/logo-symbol.png" alt="FBISE Study Hub logo" className="w-full h-full object-contain" />
-                </span>
-                <span className="min-w-0 leading-tight">
-                  <span className="block font-display font-bold text-base sm:text-lg tracking-tight truncate text-navy-900 dark:text-white">
-                    FBISE <span className="text-accent-600 dark:text-accent-400">Study Hub</span>
-                  </span>
-                  <span className="hidden sm:block text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400">
-                    SSC &amp; HSSC Preparation Portal
-                  </span>
-                </span>
-              </Link>
-
-              {/* Quick links — Home, About & Contact always visible in the header bar */}
-              <nav className="hidden lg:flex items-center gap-1 ml-3 flex-shrink-0">
-                <Link
-                  href="/"
-                  className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
-                    pathname === '/' ? 'bg-fbise-50 dark:bg-slate-800 text-fbise-800 dark:text-fbise-300' : 'hover:bg-slate-100 dark:hover:bg-slate-800'
-                  }`}
-                >
-                  Home
-                </Link>
-
-                <Link
-                  href="/about"
-                  className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
-                    pathname.startsWith('/about') ? 'bg-fbise-50 dark:bg-slate-800 text-fbise-800 dark:text-fbise-300' : 'hover:bg-slate-100 dark:hover:bg-slate-800'
-                  }`}
-                >
-                  About Us
-                </Link>
-                <Link
-                  href="/contact"
-                  className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
-                    pathname.startsWith('/contact') ? 'bg-fbise-50 dark:bg-slate-800 text-fbise-800 dark:text-fbise-300' : 'hover:bg-slate-100 dark:hover:bg-slate-800'
-                  }`}
-                >
-                  Contact
-                </Link>
-              </nav>
-
-              {/* Right-side actions */}
-              <div className="ml-auto flex items-center gap-1 sm:gap-2 flex-shrink-0">
-                <Link
-                  href="/search"
-                  aria-label="Search"
-                  className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                >
-                  <Search className="w-5 h-5" />
-                </Link>
-
-                <button
-                  onClick={toggleDarkMode}
-                  aria-label="Toggle Theme"
-                  className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                >
-                  {isDark ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5" />}
-                </button>
-
-                {user ? (
-                  <Link
-                    href="/dashboard"
-                    className="flex items-center gap-2 pl-1 pr-1 sm:pr-2.5 py-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                    title={user.name}
-                  >
-                    <span className="w-8 h-8 rounded-lg bg-fbise-600 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
-                      {user.name.charAt(0)}
-                    </span>
-                    <span className="hidden md:block text-left leading-tight">
-                      <span className="block text-xs font-bold truncate max-w-[110px]">{user.name}</span>
-                      <span className="flex items-center gap-1 text-[10px] text-slate-500 dark:text-slate-400 font-semibold">
-                        {user.role === 'ADMIN' ? 'Admin' : `Class ${user.className}`}
-                        {user.streak > 0 && (
-                          <span className="flex items-center text-amber-500 font-bold">
-                            <Flame className="w-3 h-3 fill-amber-500 text-amber-500" />
-                            {user.streak}d
-                          </span>
-                        )}
-                      </span>
-                    </span>
-                  </Link>
-                ) : (
-                  <>
-                    <Link
-                      href="/login"
-                      className="inline-block px-3 py-1.5 rounded-lg text-sm font-semibold text-fbise-800 dark:text-fbise-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                    >
-                      Sign In
-                    </Link>
-                    <Link
-                      href="/signup"
-                      className="hidden sm:inline-block px-3.5 py-1.5 rounded-full text-sm font-bold text-navy-950 bg-accent-400 hover:bg-accent-500 shadow-sm transition-colors"
-                    >
-                      Sign Up
-                    </Link>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* LEFT Slide-in Drawer — contains ALL navigation */}
       {/* Backdrop */}
       <div
@@ -372,10 +144,6 @@ export default function Header() {
             <p className="font-extrabold truncate text-fbise-900 dark:text-white">
               FBISE <span className="text-fbise-600 dark:text-fbise-300">Study Hub</span>
             </p>
-            <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
-              Federal Board • Islamabad
-            </p>
-          </div>
           <button
             onClick={() => setDrawerOpen(false)}
             className="ml-auto p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex-shrink-0"
@@ -561,6 +329,227 @@ export default function Header() {
           Developed by <span className="font-bold text-fbise-700 dark:text-fbise-400">Team Khan Hanan</span>
         </div>
       </aside>
+    </>
+  );
+
+  // Guest / landing view — Figma "Web Design" floating pill navbar (Phase A,
+  // 2026-11-04). Logged-in users keep the existing header + drawer below,
+  // completely unchanged. (Auth resolves async; until a user loads, the guest
+  // chrome shows — the same pattern the old header already had with its
+  // Sign In / Sign Up buttons.)
+  if (!user) {
+    const guestLinks = [
+      { label: 'Home', href: '/' },
+      { label: 'About', href: '/about' },
+      { label: 'Contact', href: '/contact' },
+    ];
+    return (
+      <>
+      <div className="sticky top-0 z-50 bg-cream-100 dark:bg-slate-950 px-3 sm:px-6 pt-3 sm:pt-4 pb-1">
+        <header className="max-w-7xl mx-auto bg-white dark:bg-slate-900 rounded-full shadow-lg shadow-slate-900/5 border border-slate-100 dark:border-slate-800 pl-3 pr-2 sm:pl-4 sm:pr-2.5 py-2">
+          <div className="flex items-center gap-3">
+            {/* Logo — lime rounded square + serif wordmark */}
+            <Link href="/" className="flex items-center gap-2.5 min-w-0">
+              <span className="w-10 h-10 rounded-xl bg-accent-400 flex items-center justify-center flex-shrink-0 overflow-hidden p-1.5">
+                <img src="/logo-symbol.png" alt="FBISE Study Hub logo" className="w-full h-full object-contain" />
+              </span>
+              <span className="leading-tight min-w-0">
+                <span className="block font-display font-bold text-base sm:text-lg text-navy-900 dark:text-white truncate">
+                  FBISE Study Hub
+                </span>
+                <span className="hidden sm:block text-[10px] font-semibold tracking-wide text-slate-500 dark:text-slate-400">
+                  SSC &amp; HSSC Preparation
+                </span>
+              </span>
+            </Link>
+
+            {/* Centre links */}
+            <nav className="hidden lg:flex items-center gap-1 mx-auto">
+              {guestLinks.map((l) => (
+                <Link
+                  key={l.label}
+                  href={l.href}
+                  className="px-3.5 py-2 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-cream-100 dark:hover:bg-slate-800 hover:text-navy-900 dark:hover:text-white transition-colors"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Right actions */}
+            <div className="ml-auto lg:ml-0 flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+              <button
+                onClick={toggleDarkMode}
+                aria-label="Toggle Theme"
+                className="hidden sm:block p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              >
+                {isDark ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5" />}
+              </button>
+              <Link
+                href="/login"
+                className="px-3 sm:px-5 py-2 rounded-full text-sm font-bold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+              >
+                Sign in
+              </Link>
+              <Link
+                href="/signup"
+                className="px-3 sm:px-5 py-2 rounded-full text-sm font-bold text-navy-950 bg-accent-400 hover:bg-accent-500 shadow-sm transition-colors"
+              >
+                Sign up free
+              </Link>
+              <button
+                onClick={() => setDrawerOpen(true)}
+                className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                aria-label="Open navigation menu"
+                aria-expanded={drawerOpen}
+              >
+                <Menu className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+        </header>
+      </div>
+      {drawer}
+      </>
+    );
+  }
+
+  return (
+    <>
+      <header className="sticky top-0 z-50 shadow-md">
+        {/* Board Name Strip — halki neeli patti, original FBISE style */}
+        <div className="bg-fbise-600 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-between gap-3">
+            <p className="text-[11px] sm:text-xs font-semibold tracking-wide truncate">
+              Federal Board of Intermediate &amp; Secondary Education, Islamabad
+            </p>
+            <p className="hidden md:block text-[11px] text-fbise-100 flex-shrink-0">
+              H-8/4, Islamabad • fbise.edu.pk
+            </p>
+          </div>
+        </div>
+
+        {/* Main Slim Header Bar — white, original FBISE ki tarah */}
+        <div className="bg-white dark:bg-slate-900 text-slate-800 dark:text-white border-b border-slate-200 dark:border-slate-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center gap-2 sm:gap-3 h-14">
+              {/* Hamburger — opens the LEFT slide-in menu (all navigation lives there) */}
+              <button
+                onClick={() => setDrawerOpen(true)}
+                className="p-2 -ml-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex-shrink-0"
+                aria-label="Open navigation menu"
+              >
+                <Menu className="w-6 h-6" />
+              </button>
+
+              {/* Logo + Title (kept compact so it never overlaps anything) */}
+              <Link href="/" className="flex items-center gap-2.5 min-w-0 group">
+                <span className="w-9 h-9 rounded-lg bg-accent-400 flex items-center justify-center flex-shrink-0 overflow-hidden p-1">
+                  <img src="/logo-symbol.png" alt="FBISE Study Hub logo" className="w-full h-full object-contain" />
+                </span>
+                <span className="min-w-0 leading-tight">
+                  <span className="block font-display font-bold text-base sm:text-lg tracking-tight truncate text-navy-900 dark:text-white">
+                    FBISE <span className="text-accent-600 dark:text-accent-400">Study Hub</span>
+                  </span>
+                  <span className="hidden sm:block text-[10px] uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400">
+                    SSC &amp; HSSC Preparation Portal
+                  </span>
+                </span>
+              </Link>
+
+              {/* Quick links — Home, About & Contact always visible in the header bar */}
+              <nav className="hidden lg:flex items-center gap-1 ml-3 flex-shrink-0">
+                <Link
+                  href="/"
+                  className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
+                    pathname === '/' ? 'bg-fbise-50 dark:bg-slate-800 text-fbise-800 dark:text-fbise-300' : 'hover:bg-slate-100 dark:hover:bg-slate-800'
+                  }`}
+                >
+                  Home
+                </Link>
+
+                <Link
+                  href="/about"
+                  className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
+                    pathname.startsWith('/about') ? 'bg-fbise-50 dark:bg-slate-800 text-fbise-800 dark:text-fbise-300' : 'hover:bg-slate-100 dark:hover:bg-slate-800'
+                  }`}
+                >
+                  About Us
+                </Link>
+                <Link
+                  href="/contact"
+                  className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
+                    pathname.startsWith('/contact') ? 'bg-fbise-50 dark:bg-slate-800 text-fbise-800 dark:text-fbise-300' : 'hover:bg-slate-100 dark:hover:bg-slate-800'
+                  }`}
+                >
+                  Contact
+                </Link>
+              </nav>
+              
+              {/* Right-side actions */}
+              <div className="ml-auto flex items-center gap-1 sm:gap-2 flex-shrink-0">
+                <Link
+                  href="/search"
+                  aria-label="Search"
+                  className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                >
+                  <Search className="w-5 h-5" />
+                </Link>
+
+                <button
+                  onClick={toggleDarkMode}
+                  aria-label="Toggle Theme"
+                  className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                >
+                  {isDark ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5" />}
+                </button>
+
+                {user ? (
+                  <Link
+                    href="/dashboard"
+                    className="flex items-center gap-2 pl-1 pr-1 sm:pr-2.5 py-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    title={user.name}
+                  >
+                    <span className="w-8 h-8 rounded-lg bg-fbise-600 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                      {user.name.charAt(0)}
+                    </span>
+                    <span className="hidden md:block text-left leading-tight">
+                      <span className="block text-xs font-bold truncate max-w-[110px]">{user.name}</span>
+                      <span className="flex items-center gap-1 text-[10px] text-slate-500 dark:text-slate-400 font-semibold">
+                        {user.role === 'ADMIN' ? 'Admin' : `Class ${user.className}`}
+                        {user.streak > 0 && (
+                          <span className="flex items-center text-amber-500 font-bold">
+                            <Flame className="w-3 h-3 fill-amber-500 text-amber-500" />
+                            {user.streak}d
+                          </span>
+                        )}
+                      </span>
+                    </span>
+                  </Link>
+                ) : (
+                  <>
+                    <Link
+                      href="/login"
+                      className="inline-block px-3 py-1.5 rounded-lg text-sm font-semibold text-fbise-800 dark:text-fbise-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    >
+                      Sign In
+                    </Link>
+                    <Link
+                      href="/signup"
+                      className="hidden sm:inline-block px-3.5 py-1.5 rounded-full text-sm font-bold text-navy-950 bg-accent-400 hover:bg-accent-500 shadow-sm transition-colors"
+                    >
+                      Sign Up
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {drawer}
     </>
   );
 }
