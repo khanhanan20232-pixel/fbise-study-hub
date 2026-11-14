@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -224,7 +224,7 @@ model StudyGroupMember {
 model GroupMessage {
   id        String     @id @default(cuid())
   groupId   String
-  group    StudyGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  group     StudyGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
   userId    String
   user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   text      String
@@ -241,7 +241,7 @@ model GroupSharedQuiz {
   quiz       Quiz       @relation(fields: [quizId], references: [id], onDelete: Cascade)
   sharedById String
   sharedBy   User       @relation("QuizSharer", fields: [sharedById], references: [id], onDelete: Cascade)
-  createdAt  DateTime   @default(now())
+  createdAt  DateTime @default(now())
 
   @@unique([groupId, quizId])
 }
