@@ -11,7 +11,8 @@
     "lint": "next lint",
     "db:push": "prisma db push",
     "db:seed": "node prisma/seed.js",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "vercel-build": "prisma generate && prisma db push && node scripts/vercel-seed.mjs && next build"
   },
   "dependencies": {
     "@prisma/client": "^5.21.1",
@@ -21,7 +22,6 @@
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.447.0",
     "next": "^14.2.35",
-    "pdf-lib": "^1.17.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwind-merge": "^2.5.4",
