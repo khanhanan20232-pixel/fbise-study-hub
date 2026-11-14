@@ -144,6 +144,10 @@ export default function Header() {
             <p className="font-extrabold truncate text-fbise-900 dark:text-white">
               FBISE <span className="text-fbise-600 dark:text-fbise-300">Study Hub</span>
             </p>
+            <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">            
+            Federal Board • Islamabad
+            </p>
+          </div>
           <button
             onClick={() => setDrawerOpen(false)}
             className="ml-auto p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex-shrink-0"
