@@ -131,16 +131,10 @@ export default function Header() {
       {/* Drawer panel — floating glassy card, kinaron se hati hui */}
       <aside
         aria-hidden={!drawerOpen}
-        className={`fixed inset-y-3 left-3 w-80 max-w-[85vw] rounded-[1.75rem] overflow-hidden border border-white/60 dark:border-slate-700/60 shadow-2xl z-[60] transform transition-transform duration-300 ease-out ${
+        className={`fixed inset-y-3 left-3 w-80 max-w-[85vw] rounded-[1.75rem] overflow-hidden bg-gradient-to-b from-white via-cream-100 to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 border border-white/60 dark:border-slate-700/60 shadow-2xl z-[60] transform transition-transform duration-300 ease-out ${
           drawerOpen ? 'translate-x-0' : '-translate-x-[110%]'
         }`}
       >
-        {/* Halki real photo background + apni theme ki wash, taake text hamesha saaf parha jaye */}
-        <div aria-hidden="true" className="absolute inset-0">
-          <img src="/hero-building.webp" alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-cream-100/85 to-white/90 dark:from-slate-950/90 dark:via-slate-900/90 dark:to-slate-950/90" />
-        </div>
-
         <div className="relative flex flex-col h-full">
         {/* Drawer header */}
         <div className="text-slate-800 dark:text-white px-5 py-4 flex items-center gap-3 flex-shrink-0 border-b border-slate-900/5 dark:border-white/10">
