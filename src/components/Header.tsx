@@ -108,12 +108,12 @@ export default function Header() {
   const drawerLinkClass = (href: string, highlight?: boolean) => {
     const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
     if (highlight) {
-      return 'flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-accent-700 dark:text-accent-400 bg-accent-50 dark:bg-accent-950/30 hover:bg-accent-100 dark:hover:bg-accent-950/50 transition-colors';
+      return 'flex items-center space-x-3 px-4 py-2.5 rounded-full text-sm font-semibold text-accent-800 dark:text-accent-300 bg-accent-100/70 dark:bg-accent-950/40 hover:bg-accent-100 dark:hover:bg-accent-950/60 transition-colors';
     }
-    return `flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
+    return `flex items-center space-x-3 px-4 py-2.5 rounded-full text-sm font-semibold transition-all ${
       isActive
-        ? 'text-fbise-800 dark:text-fbise-300 bg-fbise-50 dark:bg-fbise-950/50'
-        : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-fbise-800 dark:hover:text-fbise-300'
+        ? 'bg-accent-400 text-navy-950 shadow-md shadow-accent-400/40'
+        : 'text-slate-700 dark:text-slate-200 hover:bg-white/80 dark:hover:bg-slate-800/80 hover:text-navy-900 dark:hover:text-white'
     }`;
   };
 
@@ -128,15 +128,22 @@ export default function Header() {
           drawerOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       />
-      {/* Drawer panel */}
+      {/* Drawer panel — floating glassy card, kinaron se hati hui */}
       <aside
         aria-hidden={!drawerOpen}
-        className={`fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-white dark:bg-slate-900 shadow-2xl z-[60] flex flex-col transform transition-transform duration-300 ease-out ${
-          drawerOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed inset-y-3 left-3 w-80 max-w-[85vw] rounded-[1.75rem] overflow-hidden border border-white/60 dark:border-slate-700/60 shadow-2xl z-[60] transform transition-transform duration-300 ease-out ${
+          drawerOpen ? 'translate-x-0' : '-translate-x-[110%]'
         }`}
       >
-        {/* Drawer header — white, baqi header ki tarah */}
-        <div className="bg-white dark:bg-slate-900 text-slate-800 dark:text-white px-4 py-4 flex items-center gap-3 flex-shrink-0 border-b border-slate-200 dark:border-slate-800">
+        {/* Halki real photo background + apni theme ki wash, taake text hamesha saaf parha jaye */}
+        <div aria-hidden="true" className="absolute inset-0">
+          <img src="/hero-building.webp" alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-cream-100/85 to-white/90 dark:from-slate-950/90 dark:via-slate-900/90 dark:to-slate-950/90" />
+        </div>
+
+        <div className="relative flex flex-col h-full">
+        {/* Drawer header */}
+        <div className="text-slate-800 dark:text-white px-5 py-4 flex items-center gap-3 flex-shrink-0 border-b border-slate-900/5 dark:border-white/10">
           <span className="w-10 h-10 rounded-xl bg-fbise-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center flex-shrink-0 overflow-hidden p-0.5">
             <img src="/logo-symbol.png" alt="FBISE Study Hub logo" className="w-full h-full object-contain" />
           </span>
@@ -144,8 +151,8 @@ export default function Header() {
             <p className="font-extrabold truncate text-fbise-900 dark:text-white">
               FBISE <span className="text-fbise-600 dark:text-fbise-300">Study Hub</span>
             </p>
-            <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">            
-            Federal Board • Islamabad
+            <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
+              Federal Board • Islamabad
             </p>
           </div>
           <button
@@ -167,14 +174,14 @@ export default function Header() {
             </Link>
           </div>
 
-          <div className="border-t border-slate-100 dark:border-slate-800" />
+          <div className="border-t border-slate-900/5 dark:border-white/10" />
 
           {/* Classes — click to open the 4 classes below */}
           <div>
             <button
               type="button"
               onClick={() => setDrawerCoursesOpen((v) => !v)}
-              className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-left"
+              className="w-full flex items-center space-x-3 px-4 py-2.5 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all text-left"
               aria-expanded={drawerCoursesOpen}
             >
               <GraduationCap className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
@@ -204,14 +211,14 @@ export default function Header() {
             )}
           </div>
 
-          <div className="border-t border-slate-100 dark:border-slate-800" />
+          <div className="border-t border-slate-900/5 dark:border-white/10" />
 
           {/* Quizzes — dropdown: class ke hisaab se seedha quiz page (aanay walay ke liye asaani) */}
           <div>
             <button
               type="button"
               onClick={() => setDrawerQuizzesOpen((v) => !v)}
-              className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-left"
+              className="w-full flex items-center space-x-3 px-4 py-2.5 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all text-left"
               aria-expanded={drawerQuizzesOpen}
             >
               <Sparkles className="w-4 h-4 text-fbise-700 dark:text-fbise-400 flex-shrink-0" />
@@ -239,7 +246,7 @@ export default function Header() {
             )}
           </div>
 
-          <div className="border-t border-slate-100 dark:border-slate-800" />
+          <div className="border-t border-slate-900/5 dark:border-white/10" />
 
           {/* Study resources / main navigation */}
           <div>
@@ -264,49 +271,55 @@ export default function Header() {
             </div>
           </div>
 
-          <div className="border-t border-slate-100 dark:border-slate-800" />
+        </nav>
 
-          {/* Account */}
-          <div>
-            <p className="px-3 pb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-              My Account
-            </p>
+        {/* Account — neeche wala profile card (floating panel style) */}
+        <div className="flex-shrink-0 px-3 pb-3 pt-1">
+          <div className="rounded-3xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-white/70 dark:border-slate-700/60 shadow-lg shadow-slate-900/10 p-3">
             {user ? (
-              <div className="space-y-1">
-                <div className="px-3 py-2">
-                  <p className="font-bold text-sm text-slate-800 dark:text-slate-100 truncate">{user.name}</p>
-                  <p className="text-xs text-slate-500 truncate">{user.email}</p>
-                  <span className="inline-block mt-1 bg-fbise-100 dark:bg-fbise-950 text-fbise-800 dark:text-fbise-300 text-[10px] font-bold px-2 py-0.5 rounded">
-                    {user.role === 'ADMIN' ? 'Administrator' : `Class ${user.className} Student`}
+              <div>
+                <div className="flex items-center gap-3 px-1">
+                  <span className="w-10 h-10 rounded-full bg-fbise-600 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                    {user.name.charAt(0)}
                   </span>
+                  <div className="min-w-0 leading-tight flex-1">
+                    <p className="font-bold text-sm text-slate-800 dark:text-slate-100 truncate">{user.name}</p>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">{user.email}</p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setDrawerOpen(false);
+                      logout();
+                    }}
+                    aria-label="Sign Out"
+                    title="Sign Out"
+                    className="p-2 rounded-full text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors flex-shrink-0"
+                  >
+                    <LogOut className="w-4 h-4" />
+                  </button>
                 </div>
-                <Link href="/dashboard" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/dashboard')}>
-                  <LayoutDashboard className="w-4 h-4 flex-shrink-0" />
-                  <span>Student Dashboard</span>
-                </Link>
-                {user.role === 'ADMIN' && (
-                  <Link href="/admin" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/admin')}>
-                    <Shield className="w-4 h-4 flex-shrink-0" />
-                    <span>Admin Control Panel</span>
+                <span className="inline-block mt-2 ml-1 bg-fbise-100 dark:bg-fbise-950 text-fbise-800 dark:text-fbise-300 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                  {user.role === 'ADMIN' ? 'Administrator' : `Class ${user.className} Student`}
+                </span>
+                <div className="space-y-1 mt-2">
+                  <Link href="/dashboard" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/dashboard')}>
+                    <LayoutDashboard className="w-4 h-4 flex-shrink-0" />
+                    <span>Student Dashboard</span>
                   </Link>
-                )}
-                <button
-                  onClick={() => {
-                    setDrawerOpen(false);
-                    logout();
-                  }}
-                  className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors text-left"
-                >
-                  <LogOut className="w-4 h-4 flex-shrink-0" />
-                  <span>Sign Out</span>
-                </button>
+                  {user.role === 'ADMIN' && (
+                    <Link href="/admin" onClick={() => setDrawerOpen(false)} className={drawerLinkClass('/admin')}>
+                      <Shield className="w-4 h-4 flex-shrink-0" />
+                      <span>Admin Control Panel</span>
+                    </Link>
+                  )}
+                </div>
               </div>
             ) : (
-              <div className="space-y-2 px-1">
+              <div className="space-y-2">
                 <Link
                   href="/login"
                   onClick={() => setDrawerOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl border border-fbise-700 text-fbise-800 dark:text-fbise-300 dark:border-fbise-500 font-bold text-sm hover:bg-fbise-50 dark:hover:bg-fbise-950/50 transition-colors"
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-full border border-fbise-700 text-fbise-800 dark:text-fbise-300 dark:border-fbise-500 font-bold text-sm hover:bg-fbise-50 dark:hover:bg-fbise-950/50 transition-colors"
                 >
                   <LogIn className="w-4 h-4" />
                   <span>Sign In</span>
@@ -314,23 +327,22 @@ export default function Header() {
                 <Link
                   href="/signup"
                   onClick={() => setDrawerOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-fbise-600 hover:bg-fbise-700 text-white font-bold text-sm shadow-sm transition-colors"
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-full bg-accent-400 hover:bg-accent-500 text-navy-950 font-bold text-sm shadow-md shadow-accent-400/40 transition-colors"
                 >
                   <UserPlus className="w-4 h-4" />
                   <span>Create Free Account</span>
                 </Link>
-                <p className="flex items-center gap-1.5 px-2 pt-1 text-[11px] text-slate-400">
-                  <UserIcon className="w-3.5 h-3.5" />
+                <p className="flex items-center gap-1.5 px-2 pt-0.5 text-[11px] text-slate-500 dark:text-slate-400">
+                  <UserIcon className="w-3.5 h-3.5 flex-shrink-0" />
                   <span>Login ke baad dashboard, bookmarks aur AI reports milti hain.</span>
                 </p>
               </div>
             )}
+            <p className="pt-2.5 mt-1 border-t border-slate-900/5 dark:border-white/10 text-center text-[10px] text-slate-400">
+              Developed by <span className="font-bold text-fbise-700 dark:text-fbise-400">Team Khan Hanan</span>
+            </p>
           </div>
-        </nav>
-
-        {/* Drawer footer */}
-        <div className="px-4 py-3 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-400 flex-shrink-0">
-          Developed by <span className="font-bold text-fbise-700 dark:text-fbise-400">Team Khan Hanan</span>
+        </div>
         </div>
       </aside>
     </>
