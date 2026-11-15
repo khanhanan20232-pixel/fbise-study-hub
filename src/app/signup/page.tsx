@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import AuthShell from '@/components/AuthShell';
 import { getStreamData } from '@/data/streams';
 import { GraduationCap, Mail, Lock, Eye, EyeOff, User, Phone, BookOpen, Users, ArrowRight, AlertCircle, CheckCircle } from 'lucide-react';
 
@@ -55,8 +56,12 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-[90vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-cream-100 dark:bg-slate-950 transition-colors">
-      <div className="max-w-lg w-full space-y-8 bg-white dark:bg-slate-900 p-8 sm:p-10 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl">
+        <AuthShell
+      image="/hero-books.webp"
+      tagline="Your FBISE journey begins here."
+      subtext="Free account banao aur apni class ke quizzes, model papers aur study groups tak foran rasai hasil karo."
+    >
+            <div className="space-y-6">
         <div className="text-center">
           <div className="inline-flex w-14 h-14 rounded-2xl bg-navy-900 items-center justify-center text-white shadow-md border border-accent-400/40 mb-3">
             <GraduationCap className="w-8 h-8 text-accent-400" />
@@ -305,6 +310,6 @@ export default function SignUpPage() {
           </p>
         </div>
       </div>
-    </div>
-  );
+    </AuthShell>
+  \);
 }
