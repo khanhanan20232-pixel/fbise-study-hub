@@ -4,6 +4,7 @@ import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import AuthShell from '@/components/AuthShell';
 import { GraduationCap, Mail, Lock, Eye, EyeOff, ArrowRight, AlertCircle, Shield, User } from 'lucide-react';
 
 function LoginForm() {
@@ -46,8 +47,12 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-cream-100 dark:bg-slate-950 transition-colors">
-      <div className="max-w-md w-full space-y-8 bg-white dark:bg-slate-900 p-8 sm:p-10 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl">
+        <AuthShell
+      image="/hero-students.webp"
+      tagline="Study smart. Score high."
+      subtext="3,400+ MCQs, past papers, flashcards aur AI paper checking — sab kuch aik hi jagah, bilkul free."
+    >
+            <div className="space-y-6">
         <div className="text-center">
           <div className="inline-flex w-14 h-14 rounded-2xl bg-navy-900 items-center justify-center text-white shadow-md border border-accent-400/40 mb-3">
             <GraduationCap className="w-8 h-8 text-accent-400" />
@@ -178,8 +183,8 @@ function LoginForm() {
           </p>
         </div>
       </div>
-    </div>
-  );
+    </AuthShell>
+  \);
 }
 
 export default function LoginPage() {
