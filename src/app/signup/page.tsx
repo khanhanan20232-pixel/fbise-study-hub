@@ -56,12 +56,12 @@ export default function SignUpPage() {
   };
 
   return (
-        <AuthShell
+    <AuthShell
       image="/hero-books.webp"
       tagline="Your FBISE journey begins here."
       subtext="Free account banao aur apni class ke quizzes, model papers aur study groups tak foran rasai hasil karo."
     >
-            <div className="space-y-6">
+      <div className="space-y-6">
         <div className="text-center">
           <div className="inline-flex w-14 h-14 rounded-2xl bg-navy-900 items-center justify-center text-white shadow-md border border-accent-400/40 mb-3">
             <GraduationCap className="w-8 h-8 text-accent-400" />
@@ -311,5 +311,5 @@ export default function SignUpPage() {
         </div>
       </div>
     </AuthShell>
-  \);
+  );
 }
