@@ -47,12 +47,12 @@ function LoginForm() {
   };
 
   return (
-        <AuthShell
+    <AuthShell
       image="/hero-students.webp"
       tagline="Study smart. Score high."
       subtext="3,400+ MCQs, past papers, flashcards aur AI paper checking — sab kuch aik hi jagah, bilkul free."
     >
-            <div className="space-y-6">
+      <div className="space-y-6">
         <div className="text-center">
           <div className="inline-flex w-14 h-14 rounded-2xl bg-navy-900 items-center justify-center text-white shadow-md border border-accent-400/40 mb-3">
             <GraduationCap className="w-8 h-8 text-accent-400" />
@@ -184,7 +184,7 @@ function LoginForm() {
         </div>
       </div>
     </AuthShell>
-  \);
+  );
 }
 
 export default function LoginPage() {
